@@ -1,0 +1,59 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_cmd_fsm/dut
+=== Design Unit: vhdl_work.cmd_fsm(rtl)
+=================================================================================
+FSM Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    FSM States                       4         4         0   100.00%
+    FSM Transitions                  6         5         1    83.33%
+
+================================FSM Details================================
+
+FSM Coverage for instance /tb_cmd_fsm/dut --
+
+FSM_ID: state
+    Current State Object : state
+    ----------------------
+    State Value MapInfo :
+    ---------------------
+Line          State Name               Value
+----          ----------               -----
+  60             ST_IDLE                   0
+  61             ST_EXEC                   1
+  62             ST_WAIT                   2
+  63             ST_DONE                   3
+    Covered States :
+    ----------------
+                   State           Hit_count
+                   -----           ---------
+                 ST_IDLE                  26          
+                 ST_EXEC                  32          
+                 ST_WAIT                  10          
+                 ST_DONE                   3          
+    Covered Transitions :
+    ---------------------
+Line            Trans_ID           Hit_count          Transition          
+----            --------           ---------          ----------          
+  60                   0                   4          ST_IDLE -> ST_EXEC            
+  61                   1                   4          ST_EXEC -> ST_WAIT            
+  62                   3                   1          ST_WAIT -> ST_DONE            
+  74                   4                   2          ST_WAIT -> ST_IDLE            
+  63                   5                   1          ST_DONE -> ST_IDLE            
+    Uncovered Transitions :
+    -----------------------
+Line            Trans_ID          Transition          
+----            --------          ----------          
+  74                   2          ST_EXEC -> ST_IDLE  
+
+
+    Summary                       Bins      Hits    Misses  Coverage
+    -------                       ----      ----    ------  --------
+        FSM States                   4         4         0   100.00%
+        FSM Transitions              6         5         1    83.33%
+
+
+Total Coverage By Instance (filtered view): 91.66%
+

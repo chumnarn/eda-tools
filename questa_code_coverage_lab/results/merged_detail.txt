@@ -1,0 +1,225 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_cmd_fsm/dut
+=== Design Unit: work.cmd_fsm
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        25        25         0   100.00%
+
+================================Branch Details================================
+
+Branch Coverage for instance /tb_cmd_fsm/dut
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File rtl/cmd_fsm.v
+------------------------------------CASE Branch------------------------------------
+    47                                        37     Count coming in to CASE
+    48              1                          9     
+    49              1                         19     
+    50              1                          3     
+    51              1                          3     
+    52              1                          3     
+Branch totals: 5 hits of 5 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    48                                         9     Count coming in to IF
+    48              2                          4     
+                                               5     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    49                                        19     Count coming in to IF
+    49              2                          3     
+                                              16     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    50                                         3     Count coming in to IF
+    50              2                          2     
+                                               1     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    51                                         3     Count coming in to IF
+    51              2                          2     
+                                               1     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    60                                        59     Count coming in to IF
+    60              1                         13     
+    61              1                         46     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    75                                        23     Count coming in to IF
+    75              1                         16     
+                                               7     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    76                                        16     Count coming in to CASE
+    77              1                          3     
+    78              1                          1     
+    79              1                          1     
+    80              1                          1     
+    81              1                         10     
+Branch totals: 5 hits of 5 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    92                                        23     Count coming in to IF
+    92              1                          8     
+    93              1                          3     
+    94              1                         12     
+Branch totals: 3 hits of 3 branches = 100.00%
+
+
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                       5         5         0   100.00%
+
+================================Condition Details================================
+
+Condition Coverage for instance /tb_cmd_fsm/dut --
+
+  File rtl/cmd_fsm.v
+----------------Focused Condition View-------------------
+Line       50 Item    1  (a == b)
+Condition totals: 1 of 1 input term covered = 100.00%
+
+----------------Focused Condition View-------------------
+Line       92 Item    1  (en && (a > b))
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+----------------Focused Condition View-------------------
+Line       93 Item    1  (en && (a == b))
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+
+Expression Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Expressions                      5         5         0   100.00%
+
+================================Expression Details================================
+
+Expression Coverage for instance /tb_cmd_fsm/dut --
+
+  File rtl/cmd_fsm.v
+----------------Focused Expression View-----------------
+Line       65 Item    1  (state == 3)
+Expression totals: 1 of 1 input term covered = 100.00%
+
+-----------Focused Expression View (Bimodal)------------
+Line       102 Item    1  ((a[0] ^ b[0]) & (a[1] | b[1]))
+Expression totals: 4 of 4 input terms covered = 100.00%
+
+
+FSM Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    FSM States                       4         4         0   100.00%
+    FSM Transitions                  6         6         0   100.00%
+
+================================FSM Details================================
+
+FSM Coverage for instance /tb_cmd_fsm/dut --
+
+FSM_ID: state
+    Current State Object : state
+    ----------------------
+    State Value MapInfo :
+    ---------------------
+Line          State Name               Value
+----          ----------               -----
+  48             ST_IDLE                   0
+  49             ST_EXEC                   1
+  50             ST_WAIT                   2
+  51             ST_DONE                   3
+    Covered States :
+    ----------------
+                   State           Hit_count
+                   -----           ---------
+                 ST_IDLE                  17          
+                 ST_EXEC                  33          
+                 ST_WAIT                   6          
+                 ST_DONE                   3          
+    Covered Transitions :
+    ---------------------
+Line            Trans_ID           Hit_count          Transition          
+----            --------           ---------          ----------          
+  48                   0                   4          ST_IDLE -> ST_EXEC            
+  49                   1                   3          ST_EXEC -> ST_WAIT            
+  60                   2                   1          ST_EXEC -> ST_IDLE            
+  50                   3                   1          ST_WAIT -> ST_DONE            
+  60                   4                   1          ST_WAIT -> ST_IDLE            
+  51                   5                   1          ST_DONE -> ST_IDLE            
+
+
+    Summary                       Bins      Hits    Misses  Coverage
+    -------                       ----      ----    ------  --------
+        FSM States                   4         4         0   100.00%
+        FSM Transitions              6         6         0   100.00%
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      25        25         0   100.00%
+
+================================Statement Details================================
+
+Statement Coverage for instance /tb_cmd_fsm/dut --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File rtl/cmd_fsm.v
+    45              1                         37     
+    46              1                         37     
+    48              1                          4     
+    49              1                          3     
+    50              1                          2     
+    51              1                          2     
+    52              1                          3     
+    59              1                         59     
+    60              1                         13     
+    61              1                         46     
+    65              1                         17     
+    73              1                         23     
+    74              1                         23     
+    77              1                          3     
+    78              1                          1     
+    79              1                          1     
+    80              1                          1     
+    81              1                         10     
+    90              1                         23     
+    91              1                         23     
+    92              1                          8     
+    93              1                          3     
+    94              1                         12     
+    101             1                         20     
+    102             1                         20     
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                         56        56         0   100.00%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_cmd_fsm/dut --
+
+                                              Node      1H->0L      0L->1H  "Coverage"
+                                              ---------------------------------------
+
+Total Node Count     =         28 
+Toggled Node Count   =         28 
+Untoggled Node Count =          0 
+
+Toggle Coverage      =     100.00% (56 of 56 bins)
+
+
+Total Coverage By Instance (filtered view): 100.00%
+
