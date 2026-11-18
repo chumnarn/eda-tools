@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>คู่มือ Siemens Precision Synthesis Quick Start (ฉบับเต็ม)</title>
+<style>
+:root{
+  --fg:#1a1d21; --muted:#5b6470; --bg:#ffffff; --panel:#f6f8fa;
+  --line:#e3e7ec; --accent:#0b5cad; --accent-soft:#e8f1fb; --code-bg:#f4f6f8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font-family:"Leelawadee UI","Sarabun","Noto Sans Thai","IBM Plex Sans Thai",
+              "Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.85;
+}
+.layout{display:flex; max-width:1400px; margin:0 auto;}
+/* ---------- สารบัญ ---------- */
+#toc{
+  width:300px; flex:0 0 300px; border-right:1px solid var(--line);
+  padding:28px 18px 60px; height:100vh; overflow-y:auto;
+  position:sticky; top:0; background:var(--panel);
+}
+#toc h2{font-size:15px; margin:0 0 12px; letter-spacing:.02em; color:var(--muted);
+  text-transform:uppercase; font-weight:700}
+#toc ol{list-style:none; margin:0; padding:0; counter-reset:c}
+#toc ol li{margin:0 0 2px}
+#toc a{
+  display:block; padding:5px 8px; border-radius:6px; color:var(--fg);
+  text-decoration:none; font-size:14px; line-height:1.5;
+  border-left:3px solid transparent;
+}
+#toc a:hover{background:var(--accent-soft); color:var(--accent)}
+#toc a.lv1{font-weight:700; margin-top:10px; border-left-color:var(--accent)}
+#toc a.lv2{padding-left:20px; color:var(--muted); font-size:13.5px}
+#toc a.lv3{padding-left:32px; color:var(--muted); font-size:13px}
+/* ---------- เนื้อหา ---------- */
+main{flex:1 1 auto; min-width:0; padding:40px 52px 120px;}
+main h2{font-size:30px; line-height:1.4; margin:64px 0 18px; padding-bottom:12px;
+  border-bottom:2px solid var(--accent);}
+main h2:first-child{margin-top:0}
+main h3{font-size:23px; margin:38px 0 12px; color:#12395e}
+main h4{font-size:19px; margin:28px 0 10px; color:#24506f}
+.cover{
+  background:linear-gradient(180deg,var(--panel) 0%,#ffffff 100%);
+  border:1px solid var(--line); border-left:5px solid var(--accent);
+  border-radius:10px; padding:34px 38px; margin:0 0 46px;
+}
+.cover h1{
+  font-size:34px; line-height:1.35; margin:0 0 16px; color:var(--accent);
+  font-weight:700; letter-spacing:-.01em;
+}
+.cover p{margin:0 0 10px; color:var(--muted); font-size:15.5px; max-width:70ch}
+.cover p:last-child{margin-bottom:0}
+main p{margin:0 0 16px}
+main ul,main ol{margin:0 0 18px; padding-left:26px}
+main li{margin:0 0 8px}
+main li>ul,main li>ol{margin-top:8px}
+main strong{font-weight:700}
+code{
+  font-family:"Cascadia Mono","JetBrains Mono",Consolas,"Courier New",monospace;
+  background:var(--code-bg); border:1px solid var(--line); border-radius:4px;
+  padding:1px 5px; font-size:.88em; color:#0a3d62;
+}
+pre.code{
+  background:#1b1f24; color:#e6edf3; border-radius:8px; padding:16px 18px;
+  overflow-x:auto; font-size:13.5px; line-height:1.65; margin:0 0 20px;
+}
+pre.code code{background:none; border:none; color:inherit; padding:0; font-size:inherit}
+.table-wrap{overflow-x:auto; margin:0 0 22px}
+table{border-collapse:collapse; width:100%; font-size:14.5px}
+th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top}
+th{background:var(--accent-soft); font-weight:700}
+tbody tr:nth-child(even){background:#fafbfc}
+blockquote{
+  margin:0 0 18px; padding:12px 18px; background:var(--panel);
+  border-left:4px solid var(--accent); color:var(--muted); border-radius:0 6px 6px 0;
+}
+hr{border:none; border-top:1px solid var(--line); margin:34px 0}
+a{color:var(--accent)}
+.srcfile{font-size:12px; color:var(--muted); border-top:1px dashed var(--line);
+  padding-top:6px; margin-top:28px}
+/* ---------- พิมพ์เป็น PDF ---------- */
+@media print{
+  #toc{display:none}
+  body{font-size:11pt; line-height:1.6}
+  main{padding:0}
+  main h2{page-break-before:always; font-size:20pt}
+  main h2:first-child{page-break-before:auto}
+  main h3,main h4{page-break-after:avoid}
+  .cover{border:1px solid #ccc; border-left:5px solid #333; background:none;
+         page-break-after:always}
+  .cover h1{font-size:22pt}
+  .cover p{color:#333}
+  pre.code{background:#f2f2f2; color:#111; border:1px solid #ccc; font-size:9pt;
+           white-space:pre-wrap; word-wrap:break-word}
+  pre.code code{color:#111}
+  table{page-break-inside:avoid; font-size:9.5pt}
+  a{color:#111; text-decoration:none}
+}
+</style>
+</head>
+<body>
+<div class="layout">
+<nav id="toc">
+<h2>สารบัญ</h2>
+<ol><li><a class="lv1" href="#readme-คมอ-siemens-precision-synthesis-quick-start-ฉบบเตม-ภาษาไทย">คู่มือ Siemens Precision Synthesis Quick Start (ฉบับเต็ม, ภาษาไทย)</a></li><li><a class="lv2" href="#readme-1-กลมผอานและสงทตองรมากอน">1. กลุ่มผู้อ่านและสิ่งที่ต้องรู้มาก่อน</a></li><li><a class="lv2" href="#readme-2-แผนทจากคมอ-ps20181-สคมอฉบบน">2. แผนที่จากคู่มือ PS2018.1 สู่คู่มือฉบับนี้</a></li><li><a class="lv2" href="#readme-3-โครงสรางคมอ">3. โครงสร้างคู่มือ</a></li><li><a class="lv2" href="#readme-4-แผนการสอน-3-วน-ปรบตามเวลาจรงได">4. แผนการสอน 3 วัน (ปรับตามเวลาจริงได้)</a></li><li><a class="lv2" href="#readme-5-วธใชคมอน">5. วิธีใช้คู่มือนี้</a></li><li><a class="lv2" href="#readme-6-สงทควรรกอนเรม">6. สิ่งที่ควรรู้ก่อนเริ่ม</a></li><li><a class="lv1" href="#ch00-บทท-0-ภาพรวมของ-precision-synthesis-และเตรยมสภาพแวดลอม">บทที่ 0 — ภาพรวมของ Precision Synthesis และเตรียมสภาพแวดล้อม</a></li><li><a class="lv2" href="#ch00-01-precision-synthesis-คออะไร">0.1 Precision Synthesis คืออะไร</a></li><li><a class="lv2" href="#ch00-02-ภาพรวมลาดบงานตาม-ps20181">0.2 ภาพรวมลำดับงานตาม PS2018.1</a></li><li><a class="lv2" href="#ch00-03-เตรยมสภาพแวดลอม">0.3 เตรียมสภาพแวดล้อม</a></li><li><a class="lv2" href="#ch00-04-แบบฝกหดบทท-0">0.4 แบบฝึกหัดบทที่ 0</a></li><li><a class="lv2" href="#ch00-05-สรปบท">0.5 สรุปบท</a></li><li><a class="lv1" href="#ch01-บทท-1-สรางและตรวจ-rtl-ดวย-vhdl-และ-testbench-แบบตรวจตวเอง">บทที่ 1 — สร้างและตรวจ RTL ด้วย VHDL และ testbench แบบตรวจตัวเอง</a></li><li><a class="lv2" href="#ch01-11-หลกการเขยน-rtl-ท-precision-synthesis-รองรบ">1.1 หลักการเขียน RTL ที่ Precision Synthesis รองรับ</a></li><li><a class="lv2" href="#ch01-12-โมดล-rtl-ทใชตลอดคมอ">1.2 โมดูล RTL ที่ใช้ตลอดคู่มือ</a></li><li><a class="lv2" href="#ch01-13-testbench-แบบตรวจตวเอง-self-checking-testbench">1.3 testbench แบบตรวจตัวเอง (self-checking testbench)</a></li><li><a class="lv2" href="#ch01-14-วธรน-testbench">1.4 วิธีรัน testbench</a></li><li><a class="lv2" href="#ch01-15-แบบฝกหดบทท-1">1.5 แบบฝึกหัดบทที่ 1</a></li><li><a class="lv2" href="#ch01-16-สรปบท">1.6 สรุปบท</a></li><li><a class="lv1" href="#ch02-บทท-2-ตงคาโปรเจกต-precision-และสงเคราะห">บทที่ 2 — ตั้งค่าโปรเจกต์ Precision และสังเคราะห์</a></li><li><a class="lv2" href="#ch02-21-ขนท-1a-create-project">2.1 ขั้นที่ 1a — Create project</a></li><li><a class="lv2" href="#ch02-22-ขนท-1b-add-design-source-files">2.2 ขั้นที่ 1b — Add design source files</a></li><li><a class="lv2" href="#ch02-23-ขนท-1c-select-device">2.3 ขั้นที่ 1c — Select device</a></li><li><a class="lv2" href="#ch02-24-ขนท-1d-set-frequency">2.4 ขั้นที่ 1d — Set Frequency</a></li><li><a class="lv2" href="#ch02-25-ขนท-2a-compile">2.5 ขั้นที่ 2a — Compile</a></li><li><a class="lv2" href="#ch02-26-ขนท-2b-synthesize">2.6 ขั้นที่ 2b — Synthesize</a></li><li><a class="lv2" href="#ch02-27-การทางานแบบสครปต-tcl">2.7 การทำงานแบบสคริปต์ (Tcl)</a></li><li><a class="lv2" href="#ch02-28-แบบฝกหดบทท-2">2.8 แบบฝึกหัดบทที่ 2</a></li><li><a class="lv2" href="#ch02-29-สรปบท">2.9 สรุปบท</a></li><li><a class="lv1" href="#ch03-บทท-3-วเคราะหผลสงเคราะห-อาน-slackutilization-และยอน-critical-path-กลบไป-hdl">บทที่ 3 — วิเคราะห์ผลสังเคราะห์ อ่าน slack/utilization และย้อน critical path กลับไป HDL</a></li><li><a class="lv2" href="#ch03-31-สรางความเขาใจเรอง-slack-กอน">3.1 สร้างความเข้าใจเรื่อง slack ก่อน</a></li><li><a class="lv2" href="#ch03-32-การอานรายงานเวลา">3.2 การอ่านรายงานเวลา</a></li><li><a class="lv2" href="#ch03-33-การอานรายงานการใชทรพยากร-utilization">3.3 การอ่านรายงานการใช้ทรัพยากร (utilization)</a></li><li><a class="lv2" href="#ch03-34-เสนทางทไมถกจากด-unconstrained-paths">3.4 เส้นทางที่ไม่ถูกจำกัด (unconstrained paths)</a></li><li><a class="lv2" href="#ch03-35-ยอนจาก-critical-path-ใน-schematic-กลบไป-hdl">3.5 ย้อนจาก critical path ใน schematic กลับไป HDL</a></li><li><a class="lv2" href="#ch03-36-ตารางสรปการวเคราะห-qor">3.6 ตารางสรุปการวิเคราะห์ QoR</a></li><li><a class="lv2" href="#ch03-37-แบบฝกหดบทท-3">3.7 แบบฝึกหัดบทที่ 3</a></li><li><a class="lv2" href="#ch03-38-สรปบท">3.8 สรุปบท</a></li><li><a class="lv1" href="#ch04-บทท-4-สงตอไปยง-vivado-ดวย-edif-xdc-และ-tcl">บทที่ 4 — ส่งต่อไปยัง Vivado ด้วย EDIF, XDC และ Tcl</a></li><li><a class="lv2" href="#ch04-41-ทาไมตองสงตอ">4.1 ทำไมต้องส่งต่อ</a></li><li><a class="lv2" href="#ch04-42-สงทตองสงตออะไรบาง">4.2 สิ่งที่ต้องส่งต่ออะไรบ้าง</a></li><li><a class="lv2" href="#ch04-43-ขนตอนสงตอ">4.3 ขั้นตอนส่งต่อ</a></li><li><a class="lv2" href="#ch04-44-เกณฑตรวจรบงาน-sign-off-gate-กอนสราง-bitstream">4.4 เกณฑ์ตรวจรับงาน (sign-off gate) ก่อนสร้าง bitstream</a></li><li><a class="lv2" href="#ch04-45-ตรวจ-hold-violation-และแก">4.5 ตรวจ hold violation และแก้</a></li><li><a class="lv2" href="#ch04-46-ทดสอบบนฮารดแวรจรง">4.6 ทดสอบบนฮาร์ดแวร์จริง</a></li><li><a class="lv2" href="#ch04-47-แนวทางสารองเมอ-edif-ใชไมได">4.7 แนวทางสำรองเมื่อ EDIF ใช้ไม่ได้</a></li><li><a class="lv2" href="#ch04-48-แบบฝกหดบทท-4">4.8 แบบฝึกหัดบทที่ 4</a></li><li><a class="lv2" href="#ch04-49-สรปบท">4.9 สรุปบท</a></li><li><a class="lv1" href="#ch05-บทท-5-ทดลองเปรยบเทยบ-qor-เปาหมายสงเคราะห-10-ns-กบ-8-ns">บทที่ 5 — ทดลองเปรียบเทียบ QoR: เป้าหมายสังเคราะห์ 10 ns กับ 8 ns</a></li><li><a class="lv2" href="#ch05-51-ปญหาทกาลงศกษา">5.1 ปัญหาที่กำลังศึกษา</a></li><li><a class="lv2" href="#ch05-52-ทฤษฎ-การบบเวลาทาอะไรกบตวสงเคราะห">5.2 ทฤษฎี: การบีบเวลาทำอะไรกับตัวสังเคราะห์</a></li><li><a class="lv2" href="#ch05-53-วธทาการทดลอง">5.3 วิธีทำการทดลอง</a></li><li><a class="lv2" href="#ch05-54-ผลตวอยางและการวเคราะห">5.4 ผลตัวอย่างและการวิเคราะห์</a></li><li><a class="lv2" href="#ch05-55-วธตความเมอผลออกมาตางจากทคาด">5.5 วิธีตีความเมื่อผลออกมาต่างจากที่คาด</a></li><li><a class="lv2" href="#ch05-56-แนวทางแกปญหาเฉพาะของบทน">5.6 แนวทางแก้ปัญหาเฉพาะของบทนี้</a></li><li><a class="lv2" href="#ch05-57-แบบฝกหดบทท-5">5.7 แบบฝึกหัดบทที่ 5</a></li><li><a class="lv2" href="#ch05-58-สรปบท">5.8 สรุปบท</a></li><li><a class="lv1" href="#ch06-บทท-6-แนวทางแกปญหาและรายการตรวจสอบ">บทที่ 6 — แนวทางแก้ปัญหาและรายการตรวจสอบ</a></li><li><a class="lv2" href="#ch06-61-แนวทางวเคราะหปญหาแบบเปนขนตอน">6.1 แนวทางวิเคราะห์ปัญหาแบบเป็นขั้นตอน</a></li><li><a class="lv2" href="#ch06-62-ปญหาระดบ-rtl-และการจาลอง">6.2 ปัญหาระดับ RTL และการจำลอง</a></li><li><a class="lv2" href="#ch06-63-ปญหาระดบโปรเจกต-precision">6.3 ปัญหาระดับโปรเจกต์ Precision</a></li><li><a class="lv2" href="#ch06-64-ปญหาระดบการสงตอและ-place-route">6.4 ปัญหาระดับการส่งต่อและ Place &amp; Route</a></li><li><a class="lv2" href="#ch06-65-ปญหาการเปรยบเทยบ-qor-บทท-5">6.5 ปัญหาการเปรียบเทียบ QoR (บทที่ 5)</a></li><li><a class="lv2" href="#ch06-66-รายการตรวจสอบกอนสงงาน-checklist">6.6 รายการตรวจสอบก่อนส่งงาน (checklist)</a></li><li><a class="lv2" href="#ch06-67-แบบฝกหดบทท-6">6.7 แบบฝึกหัดบทที่ 6</a></li><li><a class="lv2" href="#ch06-68-สรปบท">6.8 สรุปบท</a></li><li><a class="lv1" href="#appa-ภาคผนวก-ก-คลงคาสง-tcl-และคาสง-sdc">ภาคผนวก ก — คลังคำสั่ง Tcl และคำสั่ง SDC</a></li><li><a class="lv2" href="#appa-ก1-คาสง-precision-synthesis-ตามรปแบบ-ps20181">ก.1 คำสั่ง Precision Synthesis (ตามรูปแบบ PS2018.1)</a></li><li><a class="lv2" href="#appa-ก2-คาสง-sdc-xdc-ทใชในคมอน">ก.2 คำสั่ง SDC / XDC ที่ใช้ในคู่มือนี้</a></li><li><a class="lv2" href="#appa-ก3-คาสง-vivado-สาหรบ-place-route">ก.3 คำสั่ง Vivado สำหรับ Place &amp; Route</a></li><li><a class="lv2" href="#appa-ก4-สครปตเกณฑ-sign-off-ฉบบสมบรณ">ก.4 สคริปต์เกณฑ์ sign-off ฉบับสมบูรณ์</a></li><li><a class="lv2" href="#appa-ก5-คาสงทใชบอยในการจาลอง-modelsimquestasim">ก.5 คำสั่งที่ใช้บ่อยในการจำลอง (ModelSim/QuestaSim)</a></li><li><a class="lv2" href="#appa-ก6-คาสง-ghdl">ก.6 คำสั่ง GHDL</a></li><li><a class="lv2" href="#appa-ก7-คาสงโปรแกรมบอรด">ก.7 คำสั่งโปรแกรมบอร์ด</a></li><li><a class="lv2" href="#appa-ก8-พนสาคญของ-nexys-a7-100t-ทใชในคมอน">ก.8 พินสำคัญของ Nexys A7-100T ที่ใช้ในคู่มือนี้</a></li><li><a class="lv1" href="#appb-ภาคผนวก-ข-ประจาศพทไทยองกฤษ-glossary">ภาคผนวก ข — ประจำศัพท์ไทย–อังกฤษ (Glossary)</a></li><li><a class="lv2" href="#appb-a">A</a></li><li><a class="lv2" href="#appb-b">B</a></li><li><a class="lv2" href="#appb-c">C</a></li><li><a class="lv2" href="#appb-d">D</a></li><li><a class="lv2" href="#appb-e">E</a></li><li><a class="lv2" href="#appb-f">F</a></li><li><a class="lv2" href="#appb-g">G</a></li><li><a class="lv2" href="#appb-h">H</a></li><li><a class="lv2" href="#appb-i">I</a></li><li><a class="lv2" href="#appb-l">L</a></li><li><a class="lv2" href="#appb-m">M</a></li><li><a class="lv2" href="#appb-n">N</a></li><li><a class="lv2" href="#appb-o">O</a></li><li><a class="lv2" href="#appb-p">P</a></li><li><a class="lv2" href="#appb-q">Q</a></li><li><a class="lv2" href="#appb-r">R</a></li><li><a class="lv2" href="#appb-s">S</a></li><li><a class="lv2" href="#appb-t">T</a></li><li><a class="lv2" href="#appb-u">U</a></li><li><a class="lv2" href="#appb-v">V</a></li><li><a class="lv2" href="#appb-w">W</a></li><li><a class="lv2" href="#appb-x">X</a></li><li><a class="lv2" href="#appb-ศพทเฉพาะของบอรด-nexys-a7-100t">ศัพท์เฉพาะของบอร์ด Nexys A7-100T</a></li><li><a class="lv2" href="#appb-คายอทใชบอยในคมอน">คำย่อที่ใช้บ่อยในคู่มือนี้</a></li></ol>
+</nav>
+<main>
+<div class="cover"><h1>คู่มือ Siemens Precision Synthesis Quick Start (ฉบับเต็ม)</h1><p>เอกสารประกอบการอบรม ภาษาไทย · ยึดลำดับงานจาก Precision Synthesis Quick Start Guide รุ่น PS2018.1 และขยายเป็นแบบฝึกหัดบนบอร์ด Digilent Nexys A7-100T ตั้งแต่สร้าง RTL จนถึงสร้าง bitstream</p><p>สร้างเมื่อ 2026-11-18 · รวม 52,306 หน่วยข้อความ · 10 บท + ภาคผนวก</p><p>เอกสารฉบับรวมอยู่ในโฟลเดอร์ <code>Precision-Synthesis-QuickStart-TH/</code> (รูปแบบ Markdown แก้ได้)</p></div><h2 id="readme-คมอ-siemens-precision-synthesis-quick-start-ฉบบเตม-ภาษาไทย">คู่มือ Siemens Precision Synthesis Quick Start (ฉบับเต็ม, ภาษาไทย)</h2>
+<p>เอกสารประกอบการอบรม <strong>Siemens Precision Synthesis (PS)</strong> สำหรับวิศวกรและนักศึกษาสายอิเล็กทรอนิกส์ โดยยึดลำดับงานจาก <strong>Precision Synthesis Quick Start Guide รุ่น PS2018.1</strong> และขยายเป็นแบบฝึกหัด (Lab) บนบอร์ด <strong>Digilent Nexys A7-100T</strong> ตั้งแต่สร้าง RTL จนได้ bitstream</p>
+<blockquote>คู่มือฉบับนี้เขียนสำหรับ <strong>การอบรมในห้องเรียน</strong> ทุกบทมีแบบฝึกหัดที่ทำต่อเนื่องกันได้ โดยใช้ RTL ชุดเดียวกันตลอดคู่มือ ผู้เรียนจึงเห็นวงจรจริงตั้งแต่โค้ดจนถึงชิป</blockquote>
+<hr>
+<h3 id="readme-1-กลมผอานและสงทตองรมากอน">1. กลุ่มผู้อ่านและสิ่งที่ต้องรู้มาก่อน</h3>
+<div class="table-wrap"><table><thead><tr><th>กลุ่ม</th><th>ต้องมีพื้นฐาน</th></tr></thead><tbody><tr><td>นักศึกษาปี 3–4 สาย EE/CE</td><td>ดิจิทัลและตรรกะ, Verilog ระดับพื้นฐาน, พื้นฐาน MOSFET</td></tr><tr><td>นักศึกษาปี 5–7 / ผู้สนใจทำดีไซน์ชิป</td><td>ผ่านบทที่ 1–2 มาก่อน หรือเคยทำโปรเจกต์ FPGA มาแล้ว</td></tr><tr><td>ผู้สอน / ผู้ช่วยสอน</td><td>ใช้เป็นลำดับหัวข้อและ checklist การจัดปฏิบัติการ</td></tr></tbody></table></div>
+<p><strong>เครื่องมือที่ต้องใช้</strong></p>
+<div class="table-wrap"><table><thead><tr><th>ขั้นตอน</th><th>เครื่องมือ</th><th>หมายเหตุ</th></tr></thead><tbody><tr><td>เขียน/ตรวจ RTL</td><td>Precision Synthesis (Siemens EDA)</td><td>เป็นเครื่องมือหลักของคู่มือนี้</td></tr><tr><td>จำลอง RTL</td><td>QuestaSim หรือ ModelSim (Siemens)</td><td>ต้องใช้ VHDL-2008</td></tr><tr><td>จำลองแบบเสริม</td><td>GHDL (โอเพนซอร์ส)</td><td>ใช้ตรวจ testbench ได้ฟรี ดูบทที่ 1</td></tr><tr><td>วางวาง/เดินสาย/สร้าง bitstream</td><td>AMD Vivado (เวอร์ชันที่รองรับ Artix-7)</td><td>ใช้รับเน็ตลิสต์ EDIF จาก Precision</td></tr><tr><td>โปรแกรมลงบอร์ด</td><td>Vivado Hardware Manager / openFPGALoader</td><td>ทดสอบบนฮาร์ดแวร์จริง</td></tr></tbody></table></div>
+<blockquote><strong>หมายเหตุเรื่องตัวเลขในคู่มือ</strong> ตัวเลขผลลัพธ์ของเครื่องมือในคู่มือเป็น <strong>ตัวอย่างประกอบการอธิบาย</strong> ไม่ใช่ผลจากการรันจริง เพราะตัวเลขขึ้นกับรุ่นของซอฟต์แวร์ ค่าคอนฟิก และเวอร์ชันไลบรารี ผู้เรียนต้องรันเองแล้วเทียบกับผลของตัวเองในตารางบันทึกผล (labs/results/) คำสั่งที่ขึ้นกับรุ่นจะกำกับไว้ด้วยคำว่า <em>(ตรวจสอบกับเอกสารของรุ่นที่ใช้)</em></blockquote>
+<hr>
+<h3 id="readme-2-แผนทจากคมอ-ps20181-สคมอฉบบน">2. แผนที่จากคู่มือ PS2018.1 สู่คู่มือฉบับนี้</h3>
+<p>คู่มือต้นฉบับของซีเมนส์แบ่งการทำงานไว้ 3 ขั้นตอนหลัก คู่มือฉบับนี้ยึดโครงเดียวกันทุกจุด เพิ่มรายละเอียดระดับที่ทำตามได้จริง และเพิ่มแล็บที่ตรวจสอบผลได้</p>
+<div class="table-wrap"><table><thead><tr><th>ขั้นที่ใน PS2018.1</th><th>รายละเอียดในคู่มือต้นฉบับ</th><th>บทในคู่มือฉบับนี้</th><th>ผลลัพธ์ที่ต้องได้</th></tr></thead><tbody><tr><td><strong>1. Set-Up Precision</strong></td><td>a. Create project</td><td>บทที่ 2</td><td>โปรเจกต์ Precision ที่มี RTL และ SDC ครบ</td></tr><tr><td></td><td>b. Add design source files (VHDL, Verilog, EDIF, SDC)</td><td>บทที่ 1–2</td><td>RTL + testbench ที่ผ่านการจำลองแล้ว</td></tr><tr><td></td><td>c. Select device</td><td>บทที่ 2</td><td>เลือก XC7A100T-1CSG324 พร้อมไลบรารีของอุปกรณ์</td></tr><tr><td></td><td>d. Set Frequency</td><td>บทที่ 2</td><td>SDC ที่มี <code>create_clock</code> 10 ns และหน่วง I/O ครบ</td></tr><tr><td><strong>2. Run Synthesis</strong></td><td>a. Compile</td><td>บทที่ 2</td><td>ผ่านการตรวจ syntax และการเชื่อมต่อโมดูล</td></tr><tr><td></td><td>b. Synthesize</td><td>บทที่ 2</td><td>เน็ตลิสต์ + รายงานเวลา/พื้นที่</td></tr><tr><td><strong>3. Analyze and Place &amp; Route</strong></td><td>a. Report timing / View critical path schematics / Trace components from schematics to HDL sources</td><td>บทที่ 3</td><td>อ่าน slack, utilization, unconstrained และย้อนกลับไป HDL ได้</td></tr><tr><td></td><td>b. Run integrated Place and Route in Precision and review reports</td><td>บทที่ 4</td><td>ส่งต่อ Vivado ด้วย EDIF/XDC/Tcl และผ่านเกณฑ์ sign-off</td></tr></tbody></table></div>
+<hr>
+<h3 id="readme-3-โครงสรางคมอ">3. โครงสร้างคู่มือ</h3>
+<pre class="code"><code class="lang-text">Precision-Synthesis-QuickStart-TH/
+├── README.md                                ← ไฟล์นี้ (สารบัญและวิธีใช้)
+├── 00-orientation-and-toolchain.md          ← บทที่ 0: ภาพรวมและเครื่องมือ
+├── 01-vhdl-rtl-and-verification.md          ← บทที่ 1: RTL และการตรวจสอบ
+├── 02-precision-project-setup.md            ← บทที่ 2: ตั้งค่าโปรเจกต์และสังเคราะห์
+├── 03-qor-analysis-and-critical-path.md    ← บทที่ 3: วิเคราะห์ QoR และย้อน critical path
+├── 04-vivado-handoff.md                     ← บทที่ 4: ส่งต่อ Vivado และเกณฑ์ sign-off
+├── 05-qor-comparison-10ns-vs-8ns.md         ← บทที่ 5: ทดลองเปรียบเทียบ QoR
+├── 06-troubleshooting-and-checklists.md     ← บทที่ 6: แนวทางแก้ปัญหาและ checklist
+├── appendix-a-tcl-command-reference.md       ← ภาคผนวก ก: คลังคำสั่ง Tcl
+├── appendix-b-glossary-th-en.md              ← ภาคผนวก ข: ประจำศัพท์ไทย–อังกฤษ
+├── tools/
+│   └── build_manual.py                      ← รวมเอกสารเป็นไฟล์เดียว (HTML + Markdown)
+├── labs/                                    ← ไฟล์สำหรับแบบฝึกหัด (ผ่านการรันจริงแล้ว)
+│   ├── rtl/     alu8.vhd, hex2seg.vhd, sync_fifo.vhd, int8_mac.vhd, top_alu8.vhd
+│   ├── tb/      alu_ref_pkg.vhd + testbench 4 ตัว
+│   ├── sdc/     top_alu8.sdc (10 ns), top_alu8_8ns.sdc (8 ns)
+│   ├── precision/ ps_build.tcl, ps_qor_10ns.tcl, ps_qor_8ns.tcl
+│   ├── vivado/  nexys_a7_100t.xdc, run_pnr.tcl, check_signoff.tcl
+│   └── results/ qor_results_template.md
+└── deploy/                                   ← ชุดไฟล์สำหรับเผยแพร่เป็นเว็บ</code></pre>
+<hr>
+<h3 id="readme-4-แผนการสอน-3-วน-ปรบตามเวลาจรงได">4. แผนการสอน 3 วัน (ปรับตามเวลาจริงได้)</h3>
+<div class="table-wrap"><table><thead><tr><th>วัน</th><th>เวลา</th><th>หัวข้อ</th><th>แบบฝึกหัด</th></tr></thead><tbody><tr><td>1</td><td>เช้า</td><td>บทที่ 0–1: เครื่องมือ, RTL, testbench แบบตรวจตัวเอง</td><td>Lab 1.1–1.3</td></tr><tr><td>1</td><td>บ่าย</td><td>บทที่ 2: สร้างโปรเจกต์ Precision, เลือก part, SDC, Compile, Synthesize</td><td>Lab 2.1–2.4</td></tr><tr><td>2</td><td>เช้า</td><td>บทที่ 3: รายงานเวลา, slack, utilization, unconstrained paths, ย้อน critical path</td><td>Lab 3.1–3.4</td></tr><tr><td>2</td><td>บ่าย</td><td>บทที่ 4: ส่งต่อ Vivado, P&amp;R, เกณฑ์ sign-off, สร้าง bitstream</td><td>Lab 4.1–4.5</td></tr><tr><td>3</td><td>เช้า</td><td>บทที่ 5: ทดลองเปรียบเทียบ 10 ns กับ 8 ns และวิเคราะห์ผล</td><td>Lab 5.1–5.3</td></tr><tr><td>3</td><td>บ่าย</td><td>บทที่ 6: แก้ปัญหา, ทบทวน, ประเมินผลการเรียน</td><td>ทบทวน + ส่งงาน</td></tr></tbody></table></div>
+<hr>
+<h3 id="readme-5-วธใชคมอน">5. วิธีใช้คู่มือนี้</h3>
+<ol>
+<li><strong>อ่านตามลำดับบท</strong> แต่ละบทจบด้วยแบบฝึกหัดที่ต้องผ่านก่อนไปบทถัดไป</li>
+<li><strong>ทำแล็บต่อเนื่องกัน</strong> ใช้ RTL ชุดเดียวกันตลอด เพื่อให้เห็นผลของการเปลี่ยนแต่ละขั้น</li>
+<li><strong>บันทึกผลทุกครั้ง</strong> ลงในตาราง <code>labs/results/qor_results_template.md</code> เพราะบทที่ 5 ต้องใช้ตัวเลขของตัวเอง</li>
+<li><strong>เขียนข้อสรุปของแต่ละรอบ</strong> ว่า "ได้ผลอย่างไร เพราะอะไร" ไม่ใช่แค่กรอกตัวเลข</li>
+</ol>
+<h4 id="readme-ขอตกลงเรอง-ตวเลขในคมอ">ข้อตกลงเรื่อง "ตัวเลขในคู่มือ"</h4>
+<p>ตัวเลขผลลัพธ์ของเครื่องมือในคู่มือเป็น <strong>ตัวอย่างประกอบการอธิบาย</strong> ไม่ใช่ผลจากการรันจริง เพราะตัวเลขขึ้นกับรุ่นของซอฟต์แวร์และค่าคอนฟิก ผู้เรียนต้องรันเองแล้วเทียบกับตัวเอง คำสั่งที่ขึ้นกับรุ่นจะกำกับไว้ด้วยว่า <em>(ตรวจสอบกับเอกสารของรุ่นที่ใช้)</em></p>
+<hr>
+<h3 id="readme-6-สงทควรรกอนเรม">6. สิ่งที่ควรรู้ก่อนเริ่ม</h3>
+<ol>
+<li><strong>Precision เป็นเครื่องมือที่ต้องมีใบอนุญาต</strong> หากโรงเรียนไม่มีสิทธิ์ใช้</li>
+</ol>
+<p>ให้ทำแล็บในบทที่ 1 และอ่านบทที่ 2–5 ในเชิง "ทำตามแล้วนำผลมาเทียบกัน" โดยใช้ตัวอย่างรายงานที่แนบไว้ในบท แล้วทำต่อใน Vivado จริง</p>
+<ol>
+<li><strong>ชื่อเมนูและคำสั่งเปลี่ยนตามรุ่น</strong> เอกสารอ้างอิง PS2018.1</li>
+</ol>
+<p>หากใช้รุ่นอื่นให้เทียบเมนูกับ Command Reference ของรุ่นนั้น</p>
+<ol>
+<li><strong>สิ่งที่ไม่ควรทำ</strong> อย่าเริ่มจากการกด Synthesize ทันทีที่ยังไม่ได้ตรวจ RTL</li>
+</ol>
+<p>และอย่าเชื่อตัวเลขเวลาจากขั้นสังเคราะห์ว่าเป็นคำตัด เพราะค่านี้ยังไม่รวมความหน่วงการเดินสาย</p>
+<p class="srcfile">แหล่งไฟล์: README.md</p>
+<h2 id="ch00-บทท-0-ภาพรวมของ-precision-synthesis-และเตรยมสภาพแวดลอม">บทที่ 0 — ภาพรวมของ Precision Synthesis และเตรียมสภาพแวดล้อม</h2>
+<h3 id="ch00-01-precision-synthesis-คออะไร">0.1 Precision Synthesis คืออะไร</h3>
+<p><strong>Siemens Precision Synthesis (PS)</strong> คือเครื่องมือสังเคราะห์ตรรกะระดับอุตสาหกรรมที่ทำงานในสองบทบาทเดียวกัน</p>
+<ol>
+<li><strong>ตัวสังเคราะห์ RTL (RTL Synthesis)</strong> — รับ RTL (VHDL/Verilog) แล้วแปลงเป็นเน็ตลิสต์</li>
+</ol>
+<p>พร้อมประเมินเวลาและพื้นที่โดยใช้ไลบรารีเซลล์จริงของอุปกรณ์เป้าหมาย</p>
+<ol>
+<li><strong>ตัวเชื่อมโยงระหว่างเครื่องมือ (Cross-tool Platform)</strong> — เป็นฐานข้อมูลกลางของทั้งระบบ</li>
+</ol>
+<p>ทำให้มองเห็นแบบเรียบง่ายของทั้ง RTL และเน็ตลิสต์ในที่เดียว และย้อนกลับไปหาโค้ดต้นทางได้</p>
+<p>ความสามารถที่โดดเด่นของ PS ที่เกี่ยวข้องกับคู่มือนี้</p>
+<div class="table-wrap"><table><thead><tr><th>ความสามารถ</th><th>ความหมายในทางปฏิบัติ</th></tr></thead><tbody><tr><td>ฐานข้อมูลกลางของ RTL และการสังเคราะห์</td><td>เปิด schematic ของเน็ตลิสต์แล้วเจาะลงไปที่โค้ด HDL ต้นทางได้ในจุดเดียว ไม่ต้องเดาเองว่าเซลล์ไหนมาจากโค้ดไหน</td></tr><tr><td>การวิเคราะห์เวลาในตัว</td><td>ดู setup/hold slack ของเส้นทางวิกฤตได้ทันทีหลังสังเคราะห์ โดยไม่ต้องรอ Vivado</td></tr><tr><td>การแยกส่วนที่วิกฤต</td><td>เก็บส่วนที่เสียเวลามากที่สุดไว้แยก แล้วปรับปรุงเฉพาะจุดนั้น โดยไม่กระทบส่วนอื่น</td></tr><tr><td>การปรับปรุงอัตโนมัติ</td><td>เรียกอัลกอริทึมปรับปรุงขั้นสูงได้โดยไม่ต้องเขียนสคริปต์เอง</td></tr></tbody></table></div>
+<h4 id="ch00-จดยนของ-ps-เมอเทยบกบ-vivado">จุดยืนของ PS เมื่อเทียบกับ Vivado</h4>
+<p>PS ไม่ได้แทนที่ Vivado สำหรับงาน FPGA แต่ทำงาน <strong>ก่อนหน้า</strong> Vivado ในลำดับดังนี้</p>
+<pre class="code"><code class="lang-text">RTL (VHDL/Verilog)
+      │
+      ▼
+┌─────────────────────────┐
+│  Precision Synthesis    │  ตั้งเป้าหมายเวลา, เลือก part, สังเคราะห์,
+│  (PS2018.1)             │  วิเคราะห์ QoR, ส่งต่อเน็ตลิสต์ EDIF
+└─────────────────────────┘
+      │  EDIF + XDC/Tcl
+      ▼
+┌─────────────────────────┐
+│  AMD Vivado             │  วางวาง (place), ปรับแต่ง (phys_opt),
+│                         │  เดินสาย (route), ตรวจ DRC, สร้าง bitstream
+└─────────────────────────┘
+      │
+      ▼
+   bitstream → บอร์ด Nexys A7-100T</code></pre>
+<p><strong>ข้อควรเข้าใจสำคัญ</strong>: ตัวเลขเวลาที่ PS รายงานหลังสังเคราะห์ <strong>ยังไม่ใช่คำตัด</strong> เพราะยังไม่มีข้อมูลการวางวางและการเดินสายจริง คำตัดของงาน FPGA มาจาก Vivado หลัง route เสร็จ บทที่ 5 ของคู่มือนี้จะให้เห็นผลของความต่างนี้อย่างชัดเจน</p>
+<hr>
+<h3 id="ch00-02-ภาพรวมลาดบงานตาม-ps20181">0.2 ภาพรวมลำดับงานตาม PS2018.1</h3>
+<p>คู่มือต้นฉบับแบ่งงานเป็น 3 ขั้นตอน ดังนี้</p>
+<h4 id="ch00-ขนท-1-set-up-precision">ขั้นที่ 1 — Set-Up Precision</h4>
+<div class="table-wrap"><table><thead><tr><th>ขั้น</th><th>รายละเอียดจากคู่มือต้นฉบับ</th><th>ผลลัพธ์ที่ต้องการ</th></tr></thead><tbody><tr><td>1a</td><td>Create project</td><td>โปรเจกต์ที่มีชื่อและโฟลเดอร์ชัดเจน</td></tr><tr><td>1b</td><td>Add design source files — อ่านได้ทั้ง <strong>VHDL, Verilog, EDIF, SDC</strong></td><td>รู้จักไฟล์ต้นทางทั้งหมดและไฟล์เงื่อนไขเวลา</td></tr><tr><td>1c</td><td>Select device</td><td>ไลบรารีเซลล์และค่า delay ตรงกับชิปจริง</td></tr><tr><td>1d</td><td>Set Frequency</td><td>ทุกเส้นทางที่สนใจมีนาฬิกากำกับ ไม่มีเส้นทางค้างไม่ถูกจำกัด</td></tr></tbody></table></div>
+<h4 id="ch00-ขนท-2-run-synthesis">ขั้นที่ 2 — Run Synthesis</h4>
+<div class="table-wrap"><table><thead><tr><th>ขั้น</th><th>รายละเอียดจากคู่มือต้นฉบับ</th><th>ผลลัพธ์ที่ต้องการ</th></tr></thead><tbody><tr><td>2a</td><td>Compile</td><td>อ่าน RTL สำเร็จ รู้จักโมดูลระดับบนสุด ไม่มี error</td></tr><tr><td>2b</td><td>Synthesize</td><td>ได้เน็ตลิสต์ + รายงานเวลา/พื้นที่</td></tr></tbody></table></div>
+<h4 id="ch00-ขนท-3-analyze-and-place-route">ขั้นที่ 3 — Analyze and Place &amp; Route</h4>
+<div class="table-wrap"><table><thead><tr><th>ขั้น</th><th>รายละเอียดจากคู่มือต้นฉบับ</th><th>ผลลัพธ์ที่ต้องการ</th></tr></thead><tbody><tr><td>3a</td><td>Report timing / View critical path schematics / Trace components from schematics to HDL sources</td><td>เข้าใจว่าเส้นทางวิกฤตเกิดจากโค้ดส่วนไหน และแก้ได้</td></tr><tr><td>3b</td><td>Run integrated Place and Route in Precision and review reports</td><td>รายงานการวางวาง/เดินสาย (สำหรับ ASIC) และรายงานของเครื่องมือปลายทาง</td></tr></tbody></table></div>
+<blockquote><strong>หมายเหตุสำคัญเรื่อง 3b</strong>: Precision มี Place &amp; Route แบบผสมผสานสำหรับ <strong>ASIC</strong> แต่สำหรับ <strong>FPGA ของ Xilinx</strong> เส้นทางมาตรฐานคือส่งต่อเป็น EDIF ไปยัง Vivado คู่มือนี้จึงทำหั้งสองทาง: บทที่ 4 อธิบายทั้งทาง ASIC (เชิงหลักการ) และทาง FPGA ที่ใช้จริงในแล็บ</blockquote>
+<hr>
+<h3 id="ch00-03-เตรยมสภาพแวดลอม">0.3 เตรียมสภาพแวดล้อม</h3>
+<h4 id="ch00-031-สงทตองตดตง">0.3.1 สิ่งที่ต้องติดตั้ง</h4>
+<div class="table-wrap"><table><thead><tr><th>รายการ</th><th>หมายเหตุ</th></tr></thead><tbody><tr><td>Siemens Precision Synthesis</td><td>ต้องมีใบอนุญาต (สถาบันการศึกษาที่มีสัญญากับซีเมนส์)</td></tr><tr><td>QuestaSim หรือ ModelSim</td><td>รุ่นที่รองรับ VHDL-2008 (ModelSim 10.5b ขึ้นไป)</td></tr><tr><td>AMD Vivado</td><td>เวอร์ชันที่รองรับ Artix-7 และมี board file ของ Nexys A7-100T</td></tr><tr><td>GHDL (ทางเลือก)</td><td>ใช้ตรวจ testbench ได้ฟรี ไม่ต้องมีใบอนุญาต</td></tr></tbody></table></div>
+<h4 id="ch00-032-โครงสรางโฟลเดอรของแลบ">0.3.2 โครงสร้างโฟลเดอร์ของแล็บ</h4>
+<pre class="code"><code class="lang-text">labs/
+├── rtl/       ไฟล์ออกแบบที่สังเคราะห์ได้ (VHDL-2008)
+├── tb/        testbench แบบตรวจตัวเอง + แพ็กเกจแบบจำลองอ้างอิง
+├── sdc/       เงื่อนไขเวลา (10 ns และ 8 ns)
+├── precision/ สคริปต์ Tcl ของ Precision
+├── vivado/    ไฟล์ XDC และสคริปต์ Tcl ของ Vivado
+└── results/   ตารางบันทึกผล QoR</code></pre>
+<h4 id="ch00-033-ขอควรระวงเรองชอพาธบน-windows">0.3.3 ข้อควรระวังเรื่องชื่อพาธบน Windows</h4>
+<p><strong>บั๊ก/ข้อจำกัดที่พบจริงระหว่างทำแล็บนเครื่อง Windows</strong></p>
+<p>GHDL เก็บชื่อไฟล์ต้นทางไว้ใน work library (ไฟล์ <code>work-obj08.cf</code>) และไฟล์นี้เก็บ path แบบ absolute ทำให้ <strong>พาธที่มีอักษรไทยทำให้ GHDL ล้มเหลว</strong> พร้อมข้อความประมาณว่า</p>
+<pre class="code"><code class="lang-text">work-obj08.cf:2:35:error: invalid character not allowed, even in a string
+file &quot;C:\Users\...\งานเขียน\...\alu_ref_pkg.vhd&quot; ...</code></pre>
+<p><strong>ทางแก้</strong> คัดลอกโฟลเดอร์แล็บไปไว้ในพาธที่เป็น ASCII ล้วน แล้วรันจากตรงนั้น</p>
+<pre class="code"><code class="lang-powershell"># PowerShell
+$src = &quot;C:\Users\&lt;ชื่อผู้ใช้&gt;\OneDrive\งานเขียน\training\ASIC book\Precision-Synthesis-QuickStart-TH\labs&quot;
+$dst = &quot;C:\ps_labs&quot;
+New-Item -ItemType Directory -Force -Path &quot;$dst\rtl&quot;,&quot;$dst\tb&quot; | Out-Null
+Copy-Item &quot;$src\rtl\*.vhd&quot; &quot;$dst\rtl\&quot; -Force
+Copy-Item &quot;$src\tb\*.vhd&quot;  &quot;$dst\tb\&quot;  -Force
+Set-Location $dst</code></pre>
+<p>ข้อสังเกต: ModelSim/QuestaSim <strong>ไม่มี</strong>ข้อจำกัดนี้ ใช้ได้ตามปกติในพาธภาษาไทย</p>
+<blockquote>บทเรียน: เมื่อเครื่องมือรายงานข้อผิดพลาดเกี่ยวกับ "อักขระไม่อนุญาต" ในไฟล์ที่ดูปกติ ให้สงสัยเรื่อง <strong>encoding และพาธ</strong> ก่อนสงสัยว่าโค้ดผิด</blockquote>
+<hr>
+<h3 id="ch00-04-แบบฝกหดบทท-0">0.4 แบบฝึกหัดบทที่ 0</h3>
+<h4 id="ch00-lab-01-ตรวจสอบสภาพแวดลอม">Lab 0.1 — ตรวจสอบสภาพแวดล้อม</h4>
+<p><strong>เป้าหมาย</strong>: ยืนยันว่าเครื่องมือทุกตัวทำงานได้ก่อนเริ่มงานจริง</p>
+<ol>
+<li>เปิด Precision Synthesis ตรวจว่าเปิดโปรเจกต์ได้ และดูเลขรุ่น (Help &gt; About)</li>
+<li>เปิด QuestaSim/ModelSim แล้วสร้าง library ทดสอบ:</li>
+</ol>
+<p>``<code>text File &gt; New &gt; Project Add Existing File... labs/tb/alu_ref_pkg.vhd Compile Order &gt; Compile All </code>``</p>
+<ol>
+<li>ตรวจว่า Vivado เปิดได้ และมีบอร์ดในรายการ:</li>
+</ol>
+<p>``<code>text Tools &gt; Settings &gt; Product &gt; Board   (หรือสร้าง project แล้วเลือก Board Part) ค้นหา: digilentinc.com/nexys-a7-100T Part: xc7a100tcsg324-1 </code>``</p>
+<ol>
+<li>ถ้ามี GHDL ให้ทดสอบตามบทที่ 1 ทันที เพื่อยืนยันว่าพาธที่ใช้เป็น ASCII</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: ทั้งสามเครื่องมือเปิดได้ และเห็นบอร์ด Nexys A7-100T ในรายการ</p>
+<h4 id="ch00-lab-02-อานคมอ-ps20181-แบบเจาะจง">Lab 0.2 — อ่านคู่มือ PS2018.1 แบบเจาะจง</h4>
+<p><strong>เป้าหมาย</strong>: สร้างความคุ้นเคยกับโครงสร้างของคู่มือต้นฉบับ</p>
+<ol>
+<li>อ่านหน้า 3–6 ของคู่มือต้นฉบับ (มี 6 หน้า) ทีละหน้า</li>
+<li>จดเขียนโครงสร้าง 3 ขั้นตอนและรายการย่อย a–d ในแต่ละขั้น</li>
+<li>ทำแผนที่จับคู่กับบทของคู่มือฉบับนี้ตามตารางในหัวข้อ 2 ของ <code>README.md</code></li>
+<li>เขียนคำตอบสั้น ๆ ว่า "ถ้ามีเวลา 30 นาที คุณจะทำขั้นตอนใดบ้าง และข้ามอะไร"</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: สามารถระบุได้ว่างานแต่ละขั้นของ PS2018.1 สอดคล้องกับบทใดในคู่มือนี้</p>
+<hr>
+<h3 id="ch00-05-สรปบท">0.5 สรุปบท</h3>
+<ul>
+<li>PS ทำหน้าที่สังเคราะห์ RTL และเป็นฐานข้อมูลกลางที่ย้อนกลับไปหา HDL ได้</li>
+<li>ลำดับงาน 3 ขั้นของ PS2018.1 คือ Set-Up → Run Synthesis → Analyze and Place &amp; Route</li>
+<li>เวลาที่ PS รายงานหลังสังเคราะห์เป็นค่าประมาณ คำตัดจริงมาจาก Vivado หลัง route</li>
+<li>บน Windows ต้องระวังเรื่องพาธภาษาไทยกับ GHDL (ใช้พาธ ASCII)</li>
+</ul>
+<p><strong>เตรียมตัวก่อนบทถัดไป</strong>: ติดตั้ง Vivado และสร้างไดเรกทอรีงานตามโครงสร้างในหัวข้อ 0.3.2</p>
+<p class="srcfile">แหล่งไฟล์: 00-orientation-and-toolchain.md</p>
+<h2 id="ch01-บทท-1-สรางและตรวจ-rtl-ดวย-vhdl-และ-testbench-แบบตรวจตวเอง">บทที่ 1 — สร้างและตรวจ RTL ด้วย VHDL และ testbench แบบตรวจตัวเอง</h2>
+<blockquote><strong>จุดยืนของบทนี้</strong>: ตามคู่มือ PS2018.1 ขั้นที่ 1b ("Add design source files") คือการนำ RTL เข้าโปรเจกต์ การสังเคราะห์จะไม่มีความหมายเลยถ้า RTL ยังไม่ผ่านการตรวจ บทนี้จึงใช้เวลากับคุณภาพของ RTL ก่อนแตะเครื่องมือสังเคราะห์</blockquote>
+<hr>
+<h3 id="ch01-11-หลกการเขยน-rtl-ท-precision-synthesis-รองรบ">1.1 หลักการเขียน RTL ที่ Precision Synthesis รองรับ</h3>
+<h4 id="ch01-111-มาตรฐานภาษา">1.1.1 มาตรฐานภาษา</h4>
+<p>Precision Synthesis รองรับ VHDL-93, VHDL-2002 และ VHDL-2008 และใช้แพ็กเกจมาตรฐาน <code>ieee.std_logic_1164</code> กับ <code>ieee.numeric_std</code></p>
+<div class="table-wrap"><table><thead><tr><th>ข้อควรระวัง</th><th>รายละเอียด</th></tr></thead><tbody><tr><td>ระบุมาตรฐานในไฟล์</td><td>เพิ่ม <code>library ieee;</code> และ <code>use ieee.std_logic_1164.all;</code> <code>use ieee.numeric_std.all;</code></td></tr><tr><td>ไม่ใช้ <code>std_logic_arith</code></td><td>แพ็กเกจนี้เป็นของ Synopsafe และมีพฤติกรรมกับ signed/unsigned กำกวม ให้ใช้ <code>numeric_std</code> แทน</td></tr><tr><td>ตั้งชื่อไฟล์ให้สื่อความหมาย</td><td>เช่น <code>alu8.vhd</code>, <code>top_alu8.vhd</code></td></tr></tbody></table></div>
+<h4 id="ch01-112-สงททาไดและไมควรทา">1.1.2 สิ่งที่ทำได้และไม่ควรทำ</h4>
+<div class="table-wrap"><table><thead><tr><th>ทำได้</th><th>ไม่ควรทำ (สังเคราะห์ไม่ผ่านหรือผลลัพธ์เพี้ยน)</th></tr></thead><tbody><tr><td><code>process (all)</code> พร้อมกำหนดค่าเริ่มต้นให้ครบทุกเอาต์พุต</td><td>ใช้ <code>wait</code>/<code>after</code> ในโค้ดที่สังเคราะห์</td></tr><tr><td>ฟังก์ชันคงที่ที่คำนวณค่าตอนเอลาโบเรต เช่น <code>clog2</code></td><td>ใช้ตัวแปรที่ไม่ใช่ค่าคงที่เป็นความยาวบิต</td></tr><tr><td><code>numeric_std</code> เต็มรูปแบบ</td><td>ใช้ <code>'+'</code> ระหว่าง <code>signed</code> กับ <code>integer</code> โดยไม่แปลงชนิด</td></tr><tr><td><code>generate</code> และ <code>for generate</code></td><td>ใช้ <code>real</code>, <code>time</code> ในตรรกะเชิงวิเคราะห์</td></tr><tr><td><code>shared variable</code> ไม่แนะนำ</td><td>ใช้ shared variable (PS รองรับบางกรณีแต่ตรวจสอบยาก)</td></tr></tbody></table></div>
+<h4 id="ch01-113-กฎขอท-1-ไมใหเกด-latch">1.1.3 กฎข้อที่ 1 — ไม่ให้เกิด latch</h4>
+<p>ใน VHDL ถ้า signal ถูก assign ใน process แล้วไม่ได้ assign ทุก branch จะกลายเป็น latch ซึ่ง Precision จะสังเคราะห์ออกมาได้ แต่ผลลัพธ์ที่ได้มักไม่ตรงกับความคาดหมาย</p>
+<pre class="code"><code class="lang-vhdl">-- ผิด: ไม่ได้กำหนดค่าให้ y ในทุกกรณี
+process (op)
+begin
+  if op = &quot;000&quot; then
+    y &lt;= a + b;
+  end if;
+end process;
+
+-- ถูก: กำหนดค่าเริ่มต้นก่อน แล้วค่อยแก้เฉพาะกรณีที่ต้องการ
+process (all)
+  variable y_v : signed(W-1 downto 0);
+begin
+  y_v := (others =&gt; &#x27;0&#x27;);
+  case op is
+    when &quot;000&quot; =&gt; y_v := a + b;
+    when &quot;001&quot; =&gt; y_v := a - b;
+    when others =&gt; y_v := (others =&gt; &#x27;0&#x27;);
+  end case;
+  y &lt;= y_v;
+end process;</code></pre>
+<blockquote>ในโค้ดของคู่มือนี้ใช้รูปแบบที่สองทั้งหมด เพื่อให้ผลของการสังเคราะห์ตรงกับผลของการจำลองเสมอ</blockquote>
+<h4 id="ch01-114-กฎขอท-2-process-ทไวตอนาฬกาตองม-rising_edgeclk-เสมอ">1.1.4 กฎข้อที่ 2 — process ที่ไวต่อนาฬิกาต้องมี <code>rising_edge(clk)</code> เสมอ</h4>
+<p>นี่คือบั๊กที่พบจริงระหว่างทำแล็บนี้ และเป็นบั๊กที่ทำให้ผลจำลองกับผลสังเคราะห์ <strong>คนละกันอย่างเงียบ ๆ</strong> ซึ่งเป็นอันตรายที่สุด</p>
+<pre class="code"><code class="lang-vhdl">-- ผิด: process จะทำงานทั้งขอบขึ้นและขอบลง
+--       ตัวชี้จึงเดินสองครั้งต่อหนึ่งรอบนาฬิกา
+process (clk, rst_n)
+begin
+  if rst_n = &#x27;0&#x27; then
+    cnt &lt;= (others =&gt; &#x27;0&#x27;);
+  else
+    cnt &lt;= cnt + 1;
+  end if;
+end process;
+
+-- ถูก
+process (clk, rst_n)
+begin
+  if rst_n = &#x27;0&#x27; then
+    cnt &lt;= (others =&gt; &#x27;0&#x27;);
+  elsif rising_edge(clk) then
+    cnt &lt;= cnt + 1;
+  end if;
+end process;</code></pre>
+<p><strong>อาการที่พบ</strong>: FIFO ขนาด 8 ช่อง "เต็ม" หลังเขียนเพียง 4 ค่า และตัวสะสม INT8 MAC ให้ผลเป็น <strong>สองเท่า</strong> ของที่ถูกต้อง การจำลองด้วย testbench ที่ไม่ตรวจกรณีนี้จะผ่านทั้งที่การทดสอบบนฮาร์ดแวร์จะพัง</p>
+<blockquote>ให้เพิ่มการตรวจ "นับรอบนาฬิกาจริง" ลงใน testbench เสมอ เช่น ตรวจว่าตัวนับเพิ่มขึ้น 1 ในทุกรอบ</blockquote>
+<h4 id="ch01-115-กฎขอท-3-ระวงเรองการตอสญญาณ">1.1.5 กฎข้อที่ 3 — ระวังเรื่องการต่อสัญญาณ</h4>
+<p>ใน VHDL การต่อสัญญาณ <code>A &amp; B</code> หมายถึง <strong>A อยู่บิตสูงกว่า</strong> B ซึ่งตรงข้ามกับความเข้าใจทั่วไปของคนที่มาจาก Verilog</p>
+<pre class="code"><code class="lang-vhdl">-- ต้องการให้ SW[7:0] = a และ SW[15:8] = b
+-- ต้องเขียน b ก่อนแล้วค่อย a
+sw &lt;= std_logic_vector(byte_of(b) &amp; byte_of(a));</code></pre>
+<p>บั๊กนี้ทำให้ผลบวกถูก (เพราะสลับตัวก็ได้ผลเท่ากัน) แต่ผลลบผิด ทำให้ testbench ที่ทดสอบเฉพาะคำสั่ง ADD จะผ่านทั้งที่โค้ดผิด</p>
+<blockquote><strong>เคสในคู่มือนี้</strong>: <code>tb_top_alu8.vhd</code> ใช้การทดสอบทุกคำสั่ง จึงจับบั๊กนี้ได้ สอนให้ผู้เรียนใช้ <strong>ตารางคำสั่งที่ครอบคลุมทุกโหมด</strong> ไม่ใช่แค่โหมดเดียว</blockquote>
+<hr>
+<h3 id="ch01-12-โมดล-rtl-ทใชตลอดคมอ">1.2 โมดูล RTL ที่ใช้ตลอดคู่มือ</h3>
+<div class="table-wrap"><table><thead><tr><th>ไฟล์</th><th>หน้าที่</th><th>ใช้สอนเรื่อง</th></tr></thead><tbody><tr><td><code>rtl/alu8.vhd</code></td><td>หน่วยคำนวณ 8 บิตแบบมีเครื่องหมาย มีแฟล็ก zero/overflow</td><td>การเขียน combinational logic, การขยายสัญญาณ, การตรวจ overflow</td></tr><tr><td><code>rtl/hex2seg.vhd</code></td><td>ถอดเลขฐาน 16 เป็นรูปแบบจอ 7 ส่วน</td><td>ตารางความจริงแบบ lookup</td></tr><tr><td><code>rtl/sync_fifo.vhd</code></td><td>FIFO แบบตรง 8 ช่อง × 32 บิต ตัวชี้แบบ Gray code</td><td>ตัวชี้ Gray code, backpressure, การสังเคราะห์เป็น FF/LUTRAM</td></tr><tr><td><code>rtl/int8_mac.vhd</code></td><td>หน่วยคูณสะสม INT8 แบบไปป์ไลน์ 2 ขั้น</td><td>ไปป์ไลน์, AXI-Stream handshake, การสังเคราะห์เป็น DSP48</td></tr><tr><td><code>rtl/top_alu8.vhd</code></td><td>โมดูลบนสุดสำหรับบอร์ด Nexys A7-100T</td><td>เส้นทางเวลา I/O → register → I/O, รีเซ็ต, แบ่งภาพจอ</td></tr></tbody></table></div>
+<h4 id="ch01-121-จดทตองสงเกตใน-alu8vhd">1.2.1 จุดที่ต้องสังเกตใน <code>alu8.vhd</code></h4>
+<p><strong>(1) ความกว้างของค่าเลื่อน</strong></p>
+<pre class="code"><code class="lang-vhdl">constant SHW : positive := clog2(W);
+sh_u := unsigned(b(SHW-1 downto 0));
+sh_n := to_integer(sh_u);</code></pre>
+<p>ต้อง mask ค่าเลื่อนให้เหลือเท่าจำนวนบิตที่ใช้เลื่อนจริง ถ้าไม่ mask แล้วเลื่อนเกินความกว้างข้อมูล ผลจะเป็นศูนย์ทั้งหมด (นี่คือบั๊กจริงที่เคยพบในเวอร์ชัน Verilogของคู่มือ ASIC ก่อนหน้านี้)</p>
+<p><strong>(2) การขยายสัญญาณแบบมีเครื่องหมาย</strong></p>
+<pre class="code"><code class="lang-vhdl">a_ext := resize(a, W+1);
+b_ext := resize(b, W+1);
+...
+if s_v(W) /= s_v(W-1) then
+  ov_v := &#x27;1&#x27;;
+end if;</code></pre>
+<p>ใช้ <code>resize()</code> เสมอ อย่าต่อบิตด้วยมือ เพราะการต่อบิตด้วยมือจะผิดเมื่อค่าเป็นลบ</p>
+<p><strong>(3) การเลื่อนขวาเชิงอารีเมติก</strong></p>
+<p><code>shift_right</code> ของ <code>numeric_std</code> ทำการเลื่อนระดับบิต จึงเท่ากับการหารแบบตัดเศษลง (floor) ต่างจากการหารของเลขจำนวนเต็มใน VHDL ที่ตัดเศษเข้าหาศูนย์ แบบจำลองอ้างอิงใน testbench จึงต้องมีฟังก์ชัน <code>fdiv</code> พิเศษ</p>
+<h4 id="ch01-122-จดทตองสงเกตใน-top_alu8vhd">1.2.2 จุดที่ต้องสังเกตใน <code>top_alu8.vhd</code></h4>
+<p>โมดูลบนสุดนี้สร้าง <strong>เส้นทางเวลา 2 เส้น</strong> ที่จะเห็นในรายงานของ Precision และ Vivado</p>
+<pre class="code"><code class="lang-text"> SW[15:0] / BTN[2:0]  ──►  [ ALU แบบ combinational ]  ──►  รีจิสเตอร์  ──►  LED / จอ 7 ส่วน
+   (อินพุต)                    (ตรรกะ)                  (FF)          (เอาต์พุต)
+        └── set_input_delay ──────────┘                    └── set_output_delay ──┘</code></pre>
+<p>การลงทะเบียนผลลัพธ์มีผลสำคัญสองข้อ</p>
+<ol>
+<li>LED ไม่กะพริบเมื่อผู้ใช้โยกสวิตช์ (ค่าคงที่ในวงจรจริง)</li>
+<li>มีเส้นทางรีจิสเตอร์ → เอาต์พุต ที่ต้องถูกจำกัดเวลาและตรวจ hold หลัง routing</li>
+</ol>
+<p>รีเซ็ตเป็นแบบ <strong>synchronous</strong> (<code>if CPU_RESETN = '0'</code> ภายใน <code>rising_edge</code>) จึงมีเส้นทางจากรีเซ็ตไปยังจุดตั้งค่าเริ่มต้นของรีจิสเตอร์ ต้องตัดออกจากการวิเคราะห์เวลาด้วย <code>set_false_path</code> ใน SDC/XDC</p>
+<hr>
+<h3 id="ch01-13-testbench-แบบตรวจตวเอง-self-checking-testbench">1.3 testbench แบบตรวจตัวเอง (self-checking testbench)</h3>
+<h4 id="ch01-131-หลกการ-5-ขอ">1.3.1 หลักการ 5 ข้อ</h4>
+<ol>
+<li><strong>ตรวจตัวเองได้</strong> — testbench ต้องตัดสินใจเองว่าผ่านหรือไม่ผ่าน และรายงานผล</li>
+<li><strong>ใช้แบบจำลองอ้างอิงคนละวิธี</strong> — ถ้าใช้ตรรกะเดียวกับ RTL บั๊กทั้งสองฝั่งจะหายไปพร้อมกัน</li>
+<li><strong>นับจำนวนข้อผิดพลาด</strong> — ไม่ใช่ "หยุดที่ข้อผิดพลาดแรก" เพราะจะได้ข้อมูลแค่จุดเดียว</li>
+<li><strong>ปิดท้ายด้วยผลลัพธ์ชัดเจน</strong> — <code>PASS</code> พร้อมจำนวนเคส หรือ <code>FAIL</code> พร้อมรายละเอียด</li>
+<li><strong>กระตุ้นแบบครอบคลุม</strong> — ทดสอบทุกโหมดของตัวออกแบบ ไม่ใช่แค่เส้นทางหลัก</li>
+</ol>
+<h4 id="ch01-132-แบบจาลองอางองท-คนละวธ">1.3.2 แบบจำลองอ้างอิงที่ "คนละวิธี"</h4>
+<p>ในคู่มือนี้ RTL ใช้ <code>numeric_std</code> บนสัญญาณแบบ signed แต่แบบจำลองอ้างอิงใน <code>tb/alu_ref_pkg.vhd</code> ใช้ <strong>เลขจำนวนเต็ม (integer)</strong> ซึ่งเป็น arithmetic อิสระจาก RTL</p>
+<pre class="code"><code class="lang-vhdl">-- ในแพ็กเกจอ้างอิง
+procedure ref_alu(a_i, b_i : integer; op_i : std_logic_vector(2 downto 0);
+                   y_o : out std_logic_vector(7 downto 0);
+                   ovf_o : out std_logic; zero_o : out std_logic);
+
+-- แบบจำลองการบวก: คำนวณก่อนตัดที่ 8 บิต จึงเห็น overflow ได้
+when &quot;000&quot; =&gt;
+  full := a_i + b_i;
+  if (full &gt; 127) or (full &lt; -128) then
+    ovf_o := &#x27;1&#x27;;
+  end if;
+  y_o := byte_of(full);</code></pre>
+<p>ข้อดีของการคำนวณก่อนตัด: เมื่อผลลัพธ์เต็ม 8 บิตทั้งที่ยังไม่เกินช่วง ค่าจริงยังถูกต้อง แต่เมื่อเกินช่วงจะเห็นได้ทันที</p>
+<h4 id="ch01-133-ขอจากดของภาษา-vhdl-ทพบจรง">1.3.3 ข้อจำกัดของภาษา VHDL ที่พบจริง</h4>
+<p><strong>ข้อควรรู้ 1 — อักษรไทยใช้ใน string literal ไม่ได้</strong></p>
+<pre class="code"><code class="lang-vhdl">-- ผิด: GHDL และ ModelSim จะรายงานว่า
+--       &quot;invalid character not allowed, even in a string&quot;
+report &quot;ผิดพลาด: a=&quot; &amp; integer&#x27;image(a_v);
+
+-- ถูก: ใช้ภาษาอังกฤษในข้อความ แล้วใส่คำอธิบายไทยไว้ใน comment
+report &quot;MISMATCH y: a=&quot; &amp; integer&#x27;image(a_v);</code></pre>
+<p>คำอธิบายภาษาไทยใน <strong>comment</strong> ไม่มีปัญหา เพราะ comment ไม่ได้อยู่ในข้อกำหนดของภาษา</p>
+<p><strong>ข้อควรรู้ 2 — <code>others</code> ใช้ใน expression ไม่ได้</strong></p>
+<pre class="code"><code class="lang-vhdl">-- ผิด: &quot;others&#x27; choice not allowed for an aggregate in this context&quot;
+if y_v = (others =&gt; &#x27;0&#x27;) then
+
+-- ถูก: ใช้ constant
+constant ZERO_VAL : signed(W-1 downto 0) := (others =&gt; &#x27;0&#x27;);
+if y_v = ZERO_VAL then</code></pre>
+<p><strong>ข้อควรรู้ 3 — การสุ่มต้องทำซ้ำได้</strong></p>
+<p>ใช้ LFSR (linear feedback shift register) แทนฟังก์ชันสุ่มของระบบ เพื่อให้ผลการทดสอบเหมือนเดิมทุกครั้ง และเก็บ seed ไว้ในรายงาน</p>
+<hr>
+<h3 id="ch01-14-วธรน-testbench">1.4 วิธีรัน testbench</h3>
+<h4 id="ch01-141-ดวย-questasim-modelsim">1.4.1 ด้วย QuestaSim / ModelSim</h4>
+<pre class="code"><code class="lang-text">:: ใช้ ModelSim ในโหมดบรรทัดคำสั่ง (Transcript)
+vlib work
+vcom -2008 ../tb/alu_ref_pkg.vhd
+vcom -2008 ../rtl/alu8.vhd
+vcom -2008 ../rtl/hex2seg.vhd
+vcom -2008 ../rtl/sync_fifo.vhd
+vcom -2008 ../rtl/int8_mac.vhd
+vcom -2008 ../rtl/top_alu8.vhd
+vcom -2008 tb/tb_alu8.vhd
+vsim -c work.tb_alu8 -do &quot;run -all; quit -f&quot;</code></pre>
+<div class="table-wrap"><table><thead><tr><th>คำสั่ง</th><th>ความหมาย</th></tr></thead><tbody><tr><td><code>vlib work</code></td><td>สร้าง work library</td></tr><tr><td><code>vcom -2008</code></td><td>คอมไพล์เป็นมาตรฐาน VHDL-2008 (ต้องใช้เมื่อมี <code>std.env.stop</code>)</td></tr><tr><td><code>vsim -c</code></td><td>รันแบบ console ไม่มีหน้าต่างกราฟิก</td></tr><tr><td><code>run -all</code></td><td>จำลองจนจบเวลา</td></tr><tr><td><code>quit -f</code></td><td>ออกโดยไม่ถาม</td></tr></tbody></table></div>
+<p>ถ้าใช้โหมด GUI: <code>File &gt; New &gt; Project</code> แล้วเพิ่มไฟล์ เลือก <code>Compile Order &gt; Compile All</code> แล้วกด <code>Simulate &gt; Run Simulation &gt; Start</code></p>
+<h4 id="ch01-142-ดวย-ghdl-ทางเลอกทไมตองมใบอนญาต">1.4.2 ด้วย GHDL (ทางเลือกที่ไม่ต้องมีใบอนุญาต)</h4>
+<pre class="code"><code class="lang-powershell"># ต้องอยู่ในพาทที่เป็น ASCII ล้วน (ดูบทที่ 0 หัวข้อ 0.3.3)
+ghdl -a --std=08 tb/alu_ref_pkg.vhd
+ghdl -a --std=08 rtl/alu8.vhd rtl/hex2seg.vhd rtl/sync_fifo.vhd rtl/int8_mac.vhd rtl/top_alu8.vhd
+ghdl -a --std=08 tb/tb_alu8.vhd tb/tb_sync_fifo.vhd tb/tb_int8_mac.vhd tb/tb_top_alu8.vhd
+
+ghdl -e --std=08 tb_alu8
+ghdl -r --std=08 tb_alu8 --assert-level=error</code></pre>
+<p>ตัวเลือก <code>--assert-level=error</code> ทำให้ GHDL หยุดและคืนค่าสถานะไม่เป็นศูนย์ทันทีที่พบข้อผิดพลาด เหมาะกับการนำไปใช้ในสคริปต์อัตโนมัติ (CI)</p>
+<h4 id="ch01-143-ผลทคาดหวง">1.4.3 ผลที่คาดหวัง</h4>
+<pre class="code"><code class="lang-text">=== tb_alu8 ===      tb_alu8: checked 47104 cases, errors 0    PASS
+=== tb_sync_fifo === tb_sync_fifo: checked 16 items, errors 0   PASS
+=== tb_int8_mac ===  tb_int8_mac: sent 70 transactions, received 70   PASS
+=== tb_top_alu8 ===  tb_top_alu8: checked 1026 cases, errors 0  PASS</code></pre>
+<blockquote>ผลนี้เป็นผลจากการรันจริงด้วย GHDL 5.0.1 ในครั้งที่จัดทำคู่มือ จำนวนเคสอาจต่างกันเล็กน้อยถ้าผู้เรียนแก้ชุดทดสอบ</blockquote>
+<hr>
+<h3 id="ch01-15-แบบฝกหดบทท-1">1.5 แบบฝึกหัดบทที่ 1</h3>
+<h4 id="ch01-lab-11-สราง-testbench-แบบตรวจตวเองสาหรบ-alu8">Lab 1.1 — สร้าง testbench แบบตรวจตัวเองสำหรับ alu8</h4>
+<p><strong>เป้าหมาย</strong>: เรียนรู้การเขียน testbench ที่ตรวจตัวเองและรายงานผล</p>
+<ol>
+<li>คัดลอก <code>labs/tb/tb_alu8.vhd</code> ไปยังโฟลเดอร์ของคุณ</li>
+<li>เปลี่ยนค่าใน <code>B_LIST</code> ให้มีเพียง 3 ค่า แล้วรัน ดูจำนวนเคสที่ตรวจลดลง</li>
+<li><strong>ทำให้พังโดยตั้งใจ</strong>: แก้ <code>alu8.vhd</code> ให้ <code>OP_SHR</code> ทำงานเป็นการเลื่อนเชิงตรรกะ (เปลี่ยน <code>shift_right</code> เป็น <code>shift_left</code> ชั่วคราว)</li>
+</ol>
+<p>รันซ้ำแล้วดูว่า testbench จับบั๊กได้อย่างไร และข้อความแจ้งเตือนเป็นอย่างไร</p>
+<ol>
+<li>คืนค่าโค้ดเดิม แล้วรันซ้ำเพื่อยืนยันว่าผ่าน</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: เข้าใจว่าข้อความแจ้งเตือนบอกอะไรได้บ้าง และรู้ว่าต้องแก้อะไรให้ถูก</p>
+<h4 id="ch01-lab-12-ตรวจจบบก-rising_edge">Lab 1.2 — ตรวจจับบั๊ก <code>rising_edge</code></h4>
+<p><strong>เป้าหมาย</strong>: เห็นผลของบั๊กที่พบจริงด้วยตัวเอง</p>
+<ol>
+<li>ในสำเนา <code>sync_fifo.vhd</code> ของคุณ ให้ลบคำว่า <code>elsif rising_edge(clk) then</code> ออก</li>
+</ol>
+<p>(คง <code>if rst_n = '0' then ... else ...</code> ไว้)</p>
+<ol>
+<li>รัน <code>tb_sync_fifo</code> ดูว่าพังอย่างไร และข้อความบอกว่าอะไร</li>
+<li>คืนค่าโค้ดเดิม รันซ้ำ ต้องผ่าน</li>
+</ol>
+<p><strong>คำถาม</strong>: ถ้าไม่มี testbench คุณจะพบบั๊กนี้ได้อย่างไร และค่าในรายงานของ Precision จะเป็นอย่างไร (พื้นที่มากกว่าปกติ, เวลาแย่กว่าปกติ หรืออย่างไร)</p>
+<h4 id="ch01-lab-13-เพมการทดสอบของคณเอง">Lab 1.3 — เพิ่มการทดสอบของคุณเอง</h4>
+<p><strong>เป้าหมาย</strong>: ฝึกเขียนกรณีทดสอบเพิ่มเติม</p>
+<p>เพิ่มการทดสอบใน <code>tb_alu8.vhd</code> สำหรับกรณี <strong>overflow ที่เกิดจริง</strong> (เช่น 127 + 1, −128 − 1, 100 × ไม่มี) โดยตรวจทั้งค่าผลลัพธ์และแฟล็ก <code>overflow</code> เขียนรายละเอียดของกรณีที่เพิ่มลงในรายงาน</p>
+<p><strong>เกณฑ์ผ่าน</strong>: testbench ยังผ่าน และมีการทดสอบ overflow อย่างชัดเจน</p>
+<hr>
+<h3 id="ch01-16-สรปบท">1.6 สรุปบท</h3>
+<ul>
+<li>RTL ที่จะสังเคราะห์ต้องผ่านการตรวจก่อนเสมอ และต้องผ่านด้วย testbench ที่ตรวจตัวเอง</li>
+<li>แบบจำลองอ้างอิงต้องใช้วิธีคำนวณคนละแบบกับ RTL มิฉะนั้นบั๊กจะหายไปพร้อมกัน</li>
+<li>บั๊กที่พบจริงระหว่างทำแล็บ: ขาด <code>rising_edge</code>, <code>others</code> ใน expression, อักษรไทยใน string, ลำดับบิตที่ต่อสัญญาณ</li>
+<li>เมื่อ tool รายงานข้อผิดพลาดเกี่ยวกับอักขระหรือพาธ ให้สงสัยเรื่อง encoding ก่อนสงสัยโค้ด</li>
+</ul>
+<p><strong>เตรียมตัวก่อนบทถัดไป</strong>: นำ RTL ที่ผ่านการตรวจแล้วเข้าโปรเจกต์ Precision (บทที่ 2)</p>
+<p class="srcfile">แหล่งไฟล์: 01-vhdl-rtl-and-verification.md</p>
+<h2 id="ch02-บทท-2-ตงคาโปรเจกต-precision-และสงเคราะห">บทที่ 2 — ตั้งค่าโปรเจกต์ Precision และสังเคราะห์</h2>
+<blockquote><strong>จุดยืนของบทนี้</strong>: ครอบคลุมขั้นที่ 1 (Set-Up Precision: a–d) และขั้นที่ 2 (Run Synthesis: a–b) ของคู่มือ PS2018.1 อย่างละเอียดจนผู้เรียนทำตามได้ทีละขั้น</blockquote>
+<hr>
+<h3 id="ch02-21-ขนท-1a-create-project">2.1 ขั้นที่ 1a — Create project</h3>
+<h4 id="ch02-211-ทาใน-gui">2.1.1 ทำใน GUI</h4>
+<pre class="code"><code class="lang-text">File &gt; New Project...
+  Project name : top_alu8
+  Location     : &lt;โฟลเดอร์งานของคุณ&gt;/ps_lab
+  [Create Project]</code></pre>
+<p>ตั้งชื่อโปรเจกต์ให้ตรงกับชื่อ top module เพราะ PS จะใช้ชื่อนี้เป็นชื่อเน็ตลิสต์ และเป็นชื่อ top ที่ Vivado จะใช้อ้างอิง</p>
+<h4 id="ch02-212-โครงสรางโฟลเดอรทแนะนา">2.1.2 โครงสร้างโฟลเดอร์ที่แนะนำ</h4>
+<pre class="code"><code class="lang-text">ps_lab/
+├── rtl/          ไฟล์ VHDL
+├── sdc/          ไฟล์เงื่อนไขเวลา
+├── ps/           โฟลเดอร์โปรเจกต์ Precision (สร้างอัตโนมัติ)
+└── netlist/      เน็ตลิสต์ EDIF ที่ส่งต่อให้ Vivado</code></pre>
+<p>เตรียมโฟลเดอร์ <code>netlist/</code> ไว้ตั้งแต่ต้น เพราะผลลัพธ์ของ PS จะถูกส่งต่อไปที่นั่น</p>
+<h4 id="ch02-213-สงทไมควรทา">2.1.3 สิ่งที่ไม่ควรทำ</h4>
+<div class="table-wrap"><table><thead><tr><th>อย่า</th><th>เพราะ</th></tr></thead><tbody><tr><td>อย่าใส่ไฟล์ RTL ที่ยังไม่ผ่านการจำลอง</td><td>PS จะสังเคราะห์ผิดแล้วรายงานว่า "ผ่าน" ทำให้หลอกตัวเอง</td></tr><tr><td>อย่าเพิ่มไฟล์ Verilog และ VHDL ปนกันโดยไม่แก้ข้อกำหนดภาษา</td><td>PS จะเดาชนิดจากนามสกุลไฟล์ ซึ่งไม่เสมอไปตามความจริง</td></tr><tr><td>อย่าแก้ไฟล์ RTL ที่อยู่ในโฟลเดอร์ของ PS</td><td>PS จะจัดการไฟล์เหล่านั้นเอง ควรแก้ที่ต้นทางแล้วสังเคราะห์ใหม่</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch02-22-ขนท-1b-add-design-source-files">2.2 ขั้นที่ 1b — Add design source files</h3>
+<h4 id="ch02-221-ชนดไฟลท-ps-อานได">2.2.1 ชนิดไฟล์ที่ PS อ่านได้</h4>
+<p>ตามคู่มือ PS2018.1 Precision อ่านไฟล์ได้ 4 ชนิด</p>
+<div class="table-wrap"><table><thead><tr><th>ชนิด</th><th>หน้าที่</th><th>ในแล็บนี้ใช้ไฟล์ใด</th></tr></thead><tbody><tr><td><strong>VHDL</strong></td><td>โค้ดออกแบบ</td><td><code>rtl/alu8.vhd</code>, <code>rtl/hex2seg.vhd</code>, <code>rtl/top_alu8.vhd</code></td></tr><tr><td><strong>Verilog</strong></td><td>โค้ดออกแบบ (ทางเลือก)</td><td>ไม่ได้ใช้ในแล็บนี้</td></tr><tr><td><strong>EDIF</strong></td><td>เน็ตลิสต์ที่สังเคราะห์มาแล้ว (เชื่อมต่อดีไซน์ใหญ่)</td><td>ไม่ได้ใช้ในแล็บนี้</td></tr><tr><td><strong>SDC</strong></td><td>เงื่อนไขเวลา (ขั้นที่ 1d)</td><td><code>sdc/top_alu8.sdc</code></td></tr></tbody></table></div>
+<blockquote>ในทางปฏิบัติโปรเจกต์ขนาดใหญ่จะมีทั้ง 4 ชนิดอยู่ด้วยกัน เช่น โมดูลหลักเป็น VHDL, IP core จากผู้ขายเป็น EDIF, และมี SDC รวม</blockquote>
+<h4 id="ch02-222-เพมไฟลใน-gui">2.2.2 เพิ่มไฟล์ใน GUI</h4>
+<pre class="code"><code class="lang-text">File &gt; Add Files...
+  [Add Files...] เลือกชนิดไฟล์ VHDL
+  เลือก: alu8.vhd, hex2seg.vhd, top_alu8.vhd
+  [OK]</code></pre>
+<p><strong>ลำดับการเพิ่มไฟล์สำคัญ</strong>: PS ต้องเห็นโมดูลที่เป็น dependency ก่อน จึงเพิ่ม <code>alu8.vhd</code> → <code>hex2seg.vhd</code> → <code>top_alu8.vhd</code> (leaf ก่อน top)</p>
+<p>หลังเพิ่มแล้วให้ตรวจว่า PS รู้จัก hierarchy ถูกต้อง</p>
+<pre class="code"><code class="lang-text">Design &gt; Show Hierarchy
+  ต้องเห็น:
+    top_alu8
+     ├── alu8
+     └── hex2seg  (x2)</code></pre>
+<p>ถ้า hierarchy ไม่ถูกต้อง แสดงว่า:</p>
+<ul>
+<li>เพิ่มไฟล์มาผิดลำดับ → ลบแล้วเพิ่มใหม่</li>
+<li>ชื่อ entity ไม่ตรงกับชื่อที่ instantiate</li>
+<li>มีไฟล์ค้างอยู่ในโปรเจกต์ → ตรวจรายการไฟล์ทั้งหมด</li>
+</ul>
+<h4 id="ch02-223-ขอควรระวงเรองไลบราร">2.2.3 ข้อควรระวังเรื่องไลบรารี</h4>
+<p>ถ้ามีโมดูลที่ต้อง "สังเคราะห์เป็นแบบตรง" (black box) ต้องระบุชัดเจน มิฉะนั้น PS อาจสร้างเน็ตลิสต์ที่ไม่มีพินจริงและจะพังตอนวางวางใน Vivado</p>
+<hr>
+<h3 id="ch02-23-ขนท-1c-select-device">2.3 ขั้นที่ 1c — Select device</h3>
+<h4 id="ch02-231-เลอกอปกรณสาหรบ-nexys-a7-100t">2.3.1 เลือกอุปกรณ์สำหรับ Nexys A7-100T</h4>
+<pre class="code"><code class="lang-text">Design &gt; Environment Settings... &gt; Setup Design
+  Family        : Xilinx 7-Series (Artix-7)
+  Device        : XC7A100T
+  Package       : CSG324
+  Speed Grade   : -1
+  [OK]</code></pre>
+<p>หรือถ้ารุ่นที่ใช้แสดงเป็น "Part Number" ให้ใส่โดยตรง:</p>
+<pre class="code"><code class="lang-text">  Part          : xc7a100tcsg324-1</code></pre>
+<h4 id="ch02-232-ขอมลอปกรณอางองสาหรบ-nexys-a7-100t">2.3.2 ข้อมูลอุปกรณ์อ้างอิงสำหรับ Nexys A7-100T</h4>
+<div class="table-wrap"><table><thead><tr><th>รายการ</th><th>ค่า</th></tr></thead><tbody><tr><td>ผู้ผลิตชิป</td><td>Xilinx (AMD)</td></tr><tr><td>ตระกูล</td><td>Artix-7 (7-Series)</td></tr><tr><td>ชื่อ part</td><td>XC7A100T-1CSG324C</td></tr><tr><td>ใน Vivado</td><td><code>xc7a100tcsg324-1</code></td></tr><tr><td>Board part ใน Vivado</td><td><code>digilentinc.com/nexys-a7-100T</code></td></tr><tr><td>LUT</td><td>63,400</td></tr><tr><td>Flip-Flop</td><td>126,800</td></tr><tr><td>BRAM</td><td>4,860 Kbit</td></tr><tr><td>DSP48E1</td><td>240</td></tr><tr><td>Clock Management Tile</td><td>6</td></tr><tr><td>นาฬิกาหลักบนบอร์ด</td><td>100 MHz ที่พิน E3 (MRCC, bank 35)</td></tr></tbody></table></div>
+<blockquote><strong>ข้อควรรู้</strong>: ความจุด้านบนคือของ XC7A100T ส่วนบอร์ด Nexys A7 มีให้เลือกสองรุ่น คือ A7-100T และ A7-50T ที่มี XC7A50T ตรวจสอบรุ่นของบอร์ดของตัวเองจากซีรีส์เลขท้องบนกล่อง หรือจาก Vivado Board Part</blockquote>
+<h4 id="ch02-233-ทาไมการเลอก-part-จงสาคญมาก">2.3.3 ทำไมการเลือก part จึงสำคัญมาก</h4>
+<p>เมื่อเลือก part แล้ว PS จะใช้ <strong>ไลบรารีเซลล์จริง</strong> ของอุปกรณ์ในการสังเคราะห์ ทำให้ได้ตัวเลขที่ใกล้เคียงความจริงมากขึ้น เช่น</p>
+<ul>
+<li>LUT ที่ต้องใช้จริง (ไม่ใช่จำนวน gate เชิงตรรกะ)</li>
+<li>ความหน่วงการเดินสายภายในเซลล์ (t_int, t_co)</li>
+<li>จำนวนรีจิสเตอร์ต่อเซลล์</li>
+<li>ข้อจำกัดของการใช้ DSP/BRAM</li>
+</ul>
+<p>ถ้าไม่เลือก part รายงานเวลาจะเป็นค่าประมาณของตรรกะเชิงหลักการ ซึ่งห่างจากความจริงมาก โดยเฉพาะกับ FPGA</p>
+<h4 id="ch02-234-ถารนทใชไมม-artix-7">2.3.4 ถ้ารุ่นที่ใช้ไม่มี Artix-7</h4>
+<p>PS2018.1 รองรับตระกูลอุปกรณ์ตามรุ่น จึงอาจมีกรณีที่รายการไม่มี Artix-7 ให้เลือก มีทางออก 3 ทาง เรียงตามความเหมาะสม</p>
+<ol>
+<li><strong>ใช้การสังเคราะห์แบบไม่ผูกกับอุปกรณ์ (generic)</strong> — ได้ตัวเลขประมาณที่ใช้</li>
+</ol>
+<p>เปรียบเทียบสัดส่วนได้ แต่ใช้ตัดสินว่าผ่านบอร์ดจริงไม่ได้</p>
+<ol>
+<li><strong>ส่งต่อเป็นเน็ตลิสต์ VHDL/Verilog แทน EDIF</strong> แล้วให้ Vivado สังเคราะห์ต่อ</li>
+</ol>
+<p>(เสียข้อดีของการใช้ไลบรารีของอุปกรณ์ใน PS แต่ยังได้ผลลัพธ์บนฮาร์ดแวร์)</p>
+<ol>
+<li><strong>อัปเกรดรุ่นของ PS</strong> แล้วทำตามขั้นตอนเดิมทั้งหมด</li>
+</ol>
+<hr>
+<h3 id="ch02-24-ขนท-1d-set-frequency">2.4 ขั้นที่ 1d — Set Frequency</h3>
+<p>นี่คือขั้นตอนที่ถูกมองข้ามที่สุด และเป็นต้นเหตุของปัญหามากที่สุดในงานสังเคราะห์</p>
+<h4 id="ch02-241-สองวธทใชได">2.4.1 สองวิธีที่ใช้ได้</h4>
+<p><strong>วิธีที่ 1 — ผ่าน GUI</strong></p>
+<pre class="code"><code class="lang-text">Setup Timing &gt; Add Clock...
+  Clock name  : sys_clk
+  Frequency  : 100 MHz
+  [Add Clock]</code></pre>
+<p>ข้อดี: เร็วและตรงไปตรงมา ข้อด้อย: ไม่บันทึกไว้ในไฟล์ ทำซ้ำไม่ได้ง่าย และตั้ง input/output delay ไม่ได้</p>
+<p><strong>วิธีที่ 2 — ผ่านไฟล์ SDC (แนะนำ)</strong></p>
+<pre class="code"><code class="lang-text">File &gt; Add Files...  เลือกชนิด SDC  → เลือก sdc/top_alu8.sdc</code></pre>
+<p>เนื้อหาไฟล์ <code>sdc/top_alu8.sdc</code></p>
+<pre class="code"><code class="lang-tcl">create_clock -name sys_clk -period 10.000 -waveform {0.000 5.000} \
+             [get_ports {CLK100MHZ}]
+
+set_input_delay  -clock sys_clk -max 2.000 [get_ports {SW[*]}]
+set_input_delay  -clock sys_clk -max 2.000 [get_ports {BTN[*]}]
+
+set_output_delay -clock sys_clk -max 2.000 [get_ports {LED[*]}]
+set_output_delay -clock sys_clk -max 2.000 [get_ports {AN[*]}]
+set_output_delay -clock sys_clk -max 2.000 [get_ports {SEG[*]}]
+
+set_false_path -from [get_ports {CPU_RESETN}]</code></pre>
+<h4 id="ch02-242-อธบายทละบรรทด">2.4.2 อธิบายทีละบรรทัด</h4>
+<div class="table-wrap"><table><thead><tr><th>คำสั่ง</th><th>ความหมาย</th><th>ถ้าไม่ใส่จะเกิดอะไร</th></tr></thead><tbody><tr><td><code>create_clock</code></td><td>สร้างนาฬิกาหลัก 100 MHz (คาบเวลา 10 ns)</td><td><strong>ไม่มีเส้นทางไหนถูกจำกัดเวลาเลย</strong> รายงานเวลาจะว่าง</td></tr><tr><td><code>set_input_delay</code></td><td>เวลาที่อินพุตจากภายนอกใช้ในการสร้าง</td><td>เส้นทางอินพุต → รีจิสเตอร์จะถูกมองว่า "ไม่จำกัด"</td></tr><tr><td><code>set_output_delay</code></td><td>เวลาที่ต้องใช้ในการขับเอาต์พุต</td><td>เส้นทางรีจิสเตอร์ → เอาต์พุตจะถูกมองว่า "ไม่จำกัด"</td></tr><tr><td><code>set_false_path</code></td><td>ตัดเส้นทางรีเซ็ตแบบ asynchronous</td><td>เส้นทางรีเซ็ตจะไปกวนการวิเคราะห์และอาจรายงานผิดพลาด</td></tr></tbody></table></div>
+<h4 id="ch02-243-ตรวจสอบวาจากดครบแลวหรอยง">2.4.3 ตรวจสอบว่าจำกัดครบแล้วหรือยัง</h4>
+<p>ก่อนสังเคราะห์ ให้รันการรายงานเส้นทางที่ไม่ถูกจำกัด</p>
+<pre class="code"><code class="lang-text">Report &gt; Timing &gt; Unconstrained Paths</code></pre>
+<p><strong>เกณฑ์ผ่าน: ต้องไม่มีเส้นทางที่ไม่ถูกจำกัดเลย</strong> (หรือถ้ามี ต้องอธิบายได้ว่าทำไมถึงยอมรับได้)</p>
+<p>ถ้ายังไม่ได้สังเคราะห์ ให้รันหลังจาก Compile แล้ว เพราะ PS ต้องรู้จัก hierarchy ก่อนจะตรวจเส้นทางได้</p>
+<h4 id="ch02-244-เทยบ-sdc-กบ-xdc-ใน-vivado">2.4.4 เทียบ SDC กับ XDC ใน Vivado</h4>
+<p>Vivado ใช้ XDC ซึ่งเป็นภาษา Tcl เหมือนกัน แต่มีข้อกำหนดของตัวเองเพิ่ม (เช่น <code>set_property PACKAGE_PIN</code>) ในไฟล์ <code>labs/vivado/nexys_a7_100t.xdc</code> ของคู่มือนี้ ได้แยกส่วนที่เป็น "ข้อกำหนดการจัดวางพิน" ออกจาก "ข้อกำหนดเวลา" ให้เห็นชัด</p>
+<div class="table-wrap"><table><thead><tr><th>เรื่อง</th><th>SDC</th><th>XDC</th></tr></thead><tbody><tr><td>รูปแบบ</td><td>Synopsys Design Constraints</td><td>Xilinx Design Constraints (ส่วนขยายของ SDC)</td></tr><tr><td>กำหนดเวลา</td><td>ได้</td><td>ได้</td></tr><tr><td>กำหนดพินชิป</td><td>ไม่ได้</td><td>ได้</td></tr><tr><td>ใช้กับ</td><td>Precision, Synopsys, Quartus</td><td>Vivado</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch02-25-ขนท-2a-compile">2.5 ขั้นที่ 2a — Compile</h3>
+<h4 id="ch02-251-compile-ทาอะไร">2.5.1 Compile ทำอะไร</h4>
+<p>ขั้นตอนนี้ PS จะ</p>
+<ol>
+<li>อ่านไฟล์ RTL ทั้งหมดตามลำดับที่เพิ่มเข้ามา</li>
+<li>ตรวจ syntax ของ VHDL</li>
+<li>สร้าง hierarchy ของโมดูล</li>
+<li>ระบุ top module และตรวจว่าพอร์ตของ top ตรงกับที่คาด</li>
+<li>ตรวจว่ามี black box หรือโมดูลที่หาไม่พบ</li>
+</ol>
+<h4 id="ch02-252-วธรน">2.5.2 วิธีรัน</h4>
+<pre class="code"><code class="lang-text">ปุ่ม Compile บนแถบเครื่องมือ
+หรือ
+Build &gt; Compile</code></pre>
+<h4 id="ch02-253-ขอผดพลาดทพบบอย">2.5.3 ข้อผิดพลาดที่พบบ่อย</h4>
+<div class="table-wrap"><table><thead><tr><th>ข้อความ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr></thead><tbody><tr><td><code>Unable to find entity</code></td><td>เพิ่มไฟล์มาผิดลำดับ</td><td>ลบแล้วเพิ่มใหม่ โดยเริ่มจาก leaf</td></tr><tr><td><code>Top level module not specified</code></td><td>ไม่ได้ตั้ง top</td><td>ตั้ง top module ใน Environment Settings</td></tr><tr><td><code>Port width mismatch</code></td><td>ชนิดข้อมูลของพอร์ตไม่ตรง (เช่น <code>std_logic</code> กับ <code>bit</code>)</td><td>แก้ให้ใช้ชนิดเดียวกันทั้งโมดูล</td></tr><tr><td><code>No clocks found</code></td><td>ยังไม่ได้ใส่ SDC หรือไม่ได้กำหนดความถี่</td><td>ทำขั้น 1d</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch02-26-ขนท-2b-synthesize">2.6 ขั้นที่ 2b — Synthesize</h3>
+<h4 id="ch02-261-สงท-ps-ทาในขนน">2.6.1 สิ่งที่ PS ทำในขั้นนี้</h4>
+<pre class="code"><code class="lang-text">RTL
+ │  การแปลงเป็นตรรกะเชิงบิต (bit-level logic synthesis)
+ ▼
+ตรรกะเชิงบิต
+ │  การแมปเข้าเซลล์จริงของอุปกรณ์ (technology mapping)
+ ▼
+เน็ตลิสต์เซลล์
+ │  การปรับปรุงเวลา (timing optimization)
+ ▼
+เน็ตลิสต์ที่ปรับปรุงแล้ว + รายงาน QoR</code></pre>
+<h4 id="ch02-262-วธรน">2.6.2 วิธีรัน</h4>
+<pre class="code"><code class="lang-text">ปุ่ม Synthesize บนแถบเครื่องมือ
+หรือ
+Build &gt; Synthesize</code></pre>
+<p>ระหว่างรอ PS จะรายงานความคืบหน้าเป็นเฟส: Logic Optimization → Technology Mapping → Timing Optimization</p>
+<h4 id="ch02-263-ตวเลอกทควรรจก">2.6.3 ตัวเลือกที่ควรรู้จัก</h4>
+<div class="table-wrap"><table><thead><tr><th>ตัวเลือก</th><th>ผลต่อ QoR</th><th>ใช้เมื่อ</th></tr></thead><tbody><tr><td><strong>Retiming</strong> (เปิด/ปิด)</td><td>ย้ายรีจิสเตอร์ข้ามตรรกะ combinational เพื่อลดความหน่วงของเส้นทาง</td><td>ต้องการปรับปรุงเวลาแต่ไม่อยากเพิ่มจำนวนรีจิสเตอร์</td></tr><tr><td><strong>Optimization effort</strong> (ต่ำ/กลาง/สูง)</td><td>ยิ่งสูงยิ่งใช้เวลานานแต่ QoR ดีขึ้น</td><td>มีเวลาให้ลองหลายรอบเมื่อปิดเวลาไม่ผ่าน</td></tr><tr><td><strong>Resource sharing</strong></td><td>ลดจำนวนตัวคูณ/ตัวบวก</td><td>พื้นที่สำคัญกว่าเวลา</td></tr><tr><td><strong>Area optimization</strong></td><td>ลดพื้นที่ แลกกับเวลาที่ช้าลง</td><td>พื้นที่เป็นข้อจำกัดหลัก</td></tr></tbody></table></div>
+<blockquote><strong>ข้อควรระวังเรื่อง Retiming</strong>: การย้ายรีจิสเตอร์ข้ามขอบเขตโมดูลหรือข้ามพอร์ต I/O จะเปลี่ยนสมมติฐานของเส้นทาง I/O ทำให้เงื่อนไข SDC ที่เขียนไว้อาจไม่ตรงกับโครงสร้างใหม่ ให้ตรวจรายงานเส้นทางหลังเปิด Retiming อีกครั้งเสมอ</blockquote>
+<hr>
+<h3 id="ch02-27-การทางานแบบสครปต-tcl">2.7 การทำงานแบบสคริปต์ (Tcl)</h3>
+<h4 id="ch02-271-เหตผลทตองทาแบบสครปต">2.7.1 เหตุผลที่ต้องทำแบบสคริปต์</h4>
+<ul>
+<li>ทำซ้ำได้หลายรอบโดยไม่ต้องกดเมาส์ (จำเป็นสำหรับบทที่ 5 ที่ต้องรัน 2 รอบเปรียบเทียบ)</li>
+<li>เก็บไว้ในระบบควบคุมเวอร์ชัน</li>
+<li>ใช้เป็นเอกสารบอกขั้นตอนได้</li>
+</ul>
+<h4 id="ch02-272-วธทปลอดภยทสด-ใหเครองมอสรางสครปตใหเรา">2.7.2 วิธีที่ปลอดภัยที่สุด — ให้เครื่องมือสร้างสคริปต์ให้เรา</h4>
+<pre class="code"><code class="lang-text">ทำขั้นตอนทั้งหมดใน GUI ครั้งแรก
+แล้ว
+File &gt; Save Command File...
+บันทึกเป็น ps_build.tcl</code></pre>
+<p>สคริปต์ที่ได้จะเป็นคำสั่งที่ <strong>คุณทำจริง</strong> ในรุ่นที่คุณใช้ จึงไม่มีความเสี่ยงจากชื่อคำสั่งที่ต่างรุ่น</p>
+<p>จากนั้นรันซ้ำแบบไม่ต้องใช้ GUI ได้ด้วย</p>
+<pre class="code"><code class="lang-text">File &gt; Run Script...  เลือก ps_build.tcl</code></pre>
+<p>หรือจากบรรทัดคำสั่ง</p>
+<pre class="code"><code class="lang-bash">ps_shell -f ps_build.tcl</code></pre>
+<blockquote><em>(ตรวจสอบกับเอกสารของรุ่นที่ใช้ว่าชื่อโปรแกรมและตัวเลือกเรียกสคริปต์เป็นอย่างไร PS2018.1 ใช้ <code>ps_shell</code> ในขณะที่รุ่นที่เก่ากว่าเรียก precision ด้วย <code>-shell</code>)</em></blockquote>
+<h4 id="ch02-273-สครปตทคมอเตรยมให">2.7.3 สคริปต์ที่คู่มือเตรียมให้</h4>
+<p>ไฟล์ <code>labs/precision/ps_build.tcl</code> เขียนตามลำดับงาน PS2018.1 พอดี โดยมีคอมเมนต์ บอกคู่ขั้นตอนใน GUI และตัวแปรที่แก้ได้ที่บรรทัดเดียว</p>
+<pre class="code"><code class="lang-tcl">set design_name &quot;top_alu8&quot;
+set rtl_dir     &quot;../rtl&quot;
+set sdc_file    &quot;../sdc/top_alu8.sdc&quot;
+set out_dir     &quot;out_10ns&quot;
+
+new_project $design_name -force -output $out_dir
+
+add_input_file $rtl_dir/alu8.vhd      -vhdl
+add_input_file $rtl_dir/hex2seg.vhd   -vhdl
+add_input_file $rtl_dir/top_alu8.vhd  -vhdl
+
+setup_design -manufacturer xilinx artix7 -part xc7a100tcsg324 -speed -1
+
+read_sdc $sdc_file
+report_timing -unconstrained_paths
+
+compile
+synthesize
+
+report_timing -max_paths 20       &gt; $out_dir/timing.rpt
+report_timing -unconstrained_paths &gt; $out_dir/unconstrained.rpt
+report_area                       &gt; $out_dir/area.rpt
+
+write_edif $out_dir/$design_name.edif
+write_sdc  $out_dir/$design_name.sdc</code></pre>
+<h4 id="ch02-274-สครปตสาหรบบทท-5">2.7.4 สคริปต์สำหรับบทที่ 5</h4>
+<pre class="code"><code class="lang-tcl"># labs/precision/ps_qor_10ns.tcl
+set sdc_file &quot;../sdc/top_alu8.sdc&quot;
+set out_dir  &quot;out_10ns&quot;
+source ps_build.tcl
+
+# labs/precision/ps_qor_8ns.tcl
+set sdc_file &quot;../sdc/top_alu8_8ns.sdc&quot;
+set out_dir  &quot;out_8ns&quot;
+source ps_build.tcl</code></pre>
+<p>สคริปต์ทั้งสองไฟล์เรียกสคริปต์หลักเดียวกัน ต่างกันแค่ไฟล์ SDC และโฟลเดอร์ผลลัพธ์ ทำให้การเปรียบเทียบเป็นการทดลองที่ควบคุมตัวแปรได้จริง</p>
+<hr>
+<h3 id="ch02-28-แบบฝกหดบทท-2">2.8 แบบฝึกหัดบทที่ 2</h3>
+<h4 id="ch02-lab-21-สรางโปรเจกตและเพมไฟล">Lab 2.1 — สร้างโปรเจกต์และเพิ่มไฟล์</h4>
+<ol>
+<li>สร้างโปรเจกต์ชื่อ <code>top_alu8</code></li>
+<li>เพิ่มไฟล์ VHDL: <code>alu8.vhd</code>, <code>hex2seg.vhd</code>, <code>top_alu8.vhd</code> (เรียงตามลำดับ leaf → top)</li>
+<li>ตรวจ hierarchy ด้วย <code>Design &gt; Show Hierarchy</code></li>
+<li>บันทึกภาพหน้าจอ hierarchy</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: hierarchy แสดง <code>top_alu8</code> ประกอบด้วย <code>alu8</code> และ <code>hex2seg</code> สองตัว</p>
+<h4 id="ch02-lab-22-เลอกอปกรณและตรวจสมบต">Lab 2.2 — เลือกอุปกรณ์และตรวจสมบัติ</h4>
+<ol>
+<li>เปิด <code>Design &gt; Environment Settings &gt; Setup Design</code></li>
+<li>เลือก Artix-7 / XC7A100T / CSG324 / speed -1</li>
+<li>บันทึกค่าที่เห็นในหน้าต่าง (ความจุ LUT/FF/BRAM/DSP ที่ PS รายงาน)</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: ตัวเลขความจุตรงกับตารางในหัวข้อ 2.3.2</p>
+<h4 id="ch02-lab-23-ตงเงอนไขเวลาและตรวจ-unconstrained-paths">Lab 2.3 — ตั้งเงื่อนไขเวลาและตรวจ unconstrained paths</h4>
+<ol>
+<li>เพิ่มไฟล์ <code>sdc/top_alu8.sdc</code></li>
+<li>Compile</li>
+<li>รัน <code>Report &gt; Timing &gt; Unconstrained Paths</code></li>
+<li><strong>บันทึกจำนวนเส้นทางที่ไม่ถูกจำกัด</strong> ก่อนแก้ แล้วแก้ SDC จนเป็น 0</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: ไม่มีเส้นทางที่ไม่ถูกจำกัด</p>
+<h4 id="ch02-lab-24-compile-และ-synthesize">Lab 2.4 — Compile และ Synthesize</h4>
+<ol>
+<li>Compile — ต้องผ่านโดยไม่มี error</li>
+<li>Synthesize — บันทึกเวลาที่ใช้</li>
+<li>เปิดรายงานเวลาและรายงานพื้นที่ บันทึกตัวเลขลงในตาราง <code>labs/results/</code></li>
+<li>สร้างเน็ตลิสต์ EDIF</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: มีรายงานเวลาและพื้นที่ พร้อมไฟล์ <code>top_alu8.edif</code></p>
+<h4 id="ch02-lab-25-ทาสครปตใหเปนอตโนมต">Lab 2.5 — ทำสคริปต์ให้เป็นอัตโนมัติ</h4>
+<ol>
+<li>ทำ Lab 2.1–2.4 อีกครั้งใน GUI</li>
+<li><code>File &gt; Save Command File</code> บันทึกเป็น <code>my_ps_build.tcl</code></li>
+<li>เปรียบเทียบกับ <code>labs/precision/ps_build.tcl</code> แล้วจดความต่าง</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: มีสคริปต์ที่รันซ้ำได้และให้ผลเหมือนเดิม</p>
+<hr>
+<h3 id="ch02-29-สรปบท">2.9 สรุปบท</h3>
+<ul>
+<li>ลำดับของ PS2018.1 คือ สร้างโปรเจกต์ → เพิ่มไฟล์ (VHDL/Verilog/EDIF/SDC) → เลือกอุปกรณ์ → ตั้งความถี่ → Compile → Synthesize</li>
+<li>การเลือก part ทำให้ได้ตัวเลขจากไลบรารีเซลล์จริง ซึ่งเป็นพื้นฐานของการตัดสินใจเรื่อง QoR</li>
+<li>การใส่ SDC ครบถ้วนเป็นเงื่อนไขต้องของการวิเคราะห์ ถ้าไม่ใส่ PS จะไม่รายงานอะไรที่มีความหมาย</li>
+<li>สคริปต์ที่ได้จาก <code>File &gt; Save Command File</code> คือสคริปต์ที่ถูกต้องกับรุ่นที่ใช้เสมอ</li>
+</ul>
+<p><strong>เตรียมตัวก่อนบทถัดไป</strong>: มีรายงานเวลาและพื้นที่จากการสังเคราะห์รอบแรก (บทที่ 3)</p>
+<p class="srcfile">แหล่งไฟล์: 02-precision-project-setup.md</p>
+<h2 id="ch03-บทท-3-วเคราะหผลสงเคราะห-อาน-slackutilization-และยอน-critical-path-กลบไป-hdl">บทที่ 3 — วิเคราะห์ผลสังเคราะห์ อ่าน slack/utilization และย้อน critical path กลับไป HDL</h2>
+<blockquote><strong>จุดยืนของบทนี้</strong>: ตรงกับขั้นที่ 3a ของคู่มือ PS2018.1 ("Report timing, View critical path schematics, Trace components from schematics to HDL sources") บทนี้ตอบคำถามสำคัญสามข้อ: <em>ดีแค่ไหน?</em> <em>แย่ตรงไหน?</em> <em>แก้ที่ตรงไหน?</em></blockquote>
+<hr>
+<h3 id="ch03-31-สรางความเขาใจเรอง-slack-กอน">3.1 สร้างความเข้าใจเรื่อง slack ก่อน</h3>
+<h4 id="ch03-311-slack-คออะไร">3.1.1 slack คืออะไร</h4>
+<p><strong>slack คือเวลาที่ "เหลือ" หลังจากทุกอย่างเสร็จ</strong></p>
+<pre class="code"><code class="lang-text">คาบเวลานาฬิกา (period)      = 10.000 ns
+- เวลาที่ต้องใช้ในเส้นทาง     =  8.200 ns
+------------------------------------
+= slack                      = +1.800 ns   ← ผ่าน มีเวลาเหลือ
+
+คาบเวลานาฬิกา (period)      = 10.000 ns
+- เวลาที่ต้องใช้ในเส้นทาง     = 11.400 ns
+------------------------------------
+= slack                      = -1.400 ns   ← ไม่ผ่าน เกินไป 1.4 ns</code></pre>
+<div class="table-wrap"><table><thead><tr><th>ค่า</th><th>ความหมาย</th><th>ต้องทำอะไร</th></tr></thead><tbody><tr><td>slack &gt; 0</td><td>ผ่าน มีเวลาสำรอง</td><td>ยิ่งมากยิ่งดี (มี headroom รับความไม่แน่นอนของการเดินสาย)</td></tr><tr><td>slack = 0</td><td>ผ่านแบบเป๊ะ</td><td>เสี่ยงมาก ความคลาดเคลื่อนเล็กน้อยก็ทำให้ไม่ผ่าน</td></tr><tr><td>slack &lt; 0</td><td>ไม่ผ่าน (violation)</td><td>ต้องลดเวลาเส้นทางให้สั้นลงอย่างน้อยเท่ากับ \</td></tr></tbody></table></div>
+<h4 id="ch03-312-setup-slack-กบ-hold-slack-ตางกนอยางไร">3.1.2 setup slack กับ hold slack ต่างกันอย่างไร</h4>
+<div class="table-wrap"><table><thead><tr><th></th><th>Setup slack</th><th>Hold slack</th></tr></thead><tbody><tr><td>ความหมาย</td><td>ข้อมูลมาถึงรีจิสเตอร์ <strong>ทันเวลา</strong> ก่อนขอบปิดของนาฬิกา</td><td>ข้อมูลมาถึงรีจิสเตอร์ <strong>ไม่เร็วเกินไป</strong> หลังขอบเปิดของนาฬิกา</td></tr><tr><td>ปัญหาที่พบบ่อย</td><td>เส้นทางยาวเกินคาบเวลา</td><td>เส้นทางสั้นเกินไป</td></tr><tr><td>แก้ด้วย</td><td>เพิ่มรอบนาฬิกา ลดตรรกะ เพิ่ม pipeline</td><td>เพิ่มความหน่วง (insert buffer/delay)</td></tr><tr><td>ตรวจได้แม่นเมื่อ</td><td>หลังสังเคราะห์</td><td><strong>หลังเดินสายเท่านั้น</strong></td></tr></tbody></table></div>
+<blockquote><strong>ข้อควรระวังที่สำคัญที่สุดของบทนี้</strong> รายงาน <strong>hold</strong> จากขั้นสังเคราะห์ของ PS <strong>ยังไม่น่าเชื่อถือ</strong> เพราะยังไม่มีข้อมูล ความหน่วงการเดินสายจริง ซึ่งเป็นตัวแปรที่ทำให้ hold violation เกิดขึ้นบ่อยที่สุด <strong>ต้องตรวจ hold อีกครั้งหลัง route ใน Vivado เสมอ</strong> (บทที่ 4)</blockquote>
+<h4 id="ch03-313-wns-และ-tns">3.1.3 WNS และ TNS</h4>
+<div class="table-wrap"><table><thead><tr><th>ตัวชี้วัด</th><th>ความหมาย</th><th>ใช้ทำอะไร</th></tr></thead><tbody><tr><td><strong>WNS</strong> (Worst Negative Slack)</td><td>slack ที่แย่ที่สุดของทุกเส้นทาง</td><td>ตัวเลขเดียวที่บอกว่า "ผ่านหรือไม่"</td></tr><tr><td><strong>TNS</strong> (Total Negative Slack)</td><td>ผลรวม slack ของทุกเส้นทางที่เป็นลบ</td><td>บอกว่า "แย่แค่ไหน" — ยิ่งมากยิ่งต้องแก้หลายจุด</td></tr></tbody></table></div>
+<p>กติกาที่ใช้ได้จริง: <strong>WNS ≥ 0 และ TNS = 0</strong> คือผ่าน</p>
+<hr>
+<h3 id="ch03-32-การอานรายงานเวลา">3.2 การอ่านรายงานเวลา</h3>
+<h4 id="ch03-321-เปดรายงาน">3.2.1 เปิดรายงาน</h4>
+<pre class="code"><code class="lang-text">Report &gt; Timing &gt; Critical Path
+หรือ
+Report &gt; Timing &gt; Report Timing</code></pre>
+<p>ให้เลือกจำนวนเส้นทางที่ต้องการดู (เช่น 20 เส้นทาง) เพื่อเห็นภาพรวม</p>
+<h4 id="ch03-322-โครงสรางของรายงานหนงเสนทาง">3.2.2 โครงสร้างของรายงานหนึ่งเส้นทาง</h4>
+<pre class="code"><code class="lang-text">Path 1 : top_alu8/alu8 (posedge @ 10.000 ns)
+
+  ------------------------------------------------------------------
+  Startpoint : SW[3] (input)
+  Endpoint   : top_alu8/y_r_reg[4] (posedge @ 20.000 ns)
+  ------------------------------------------------------------------
+  Slack      : 1.842 ns    ← ค่าที่ต้องดูเป็นอันดับแรก
+  ------------------------------------------------------------------
+
+  Delay   Cell      Description
+  0.000  SW[3]     (input)   ─┐
+  1.102  LUT       (A6, ...)  │ เส้นทางอินพุต → รีจิสเตอร์
+  0.740  LUT       (B4, ...)  │ ตรรกะภายใน ALU
+  0.000  y_r_reg[4] (capture) ─┘
+
+  Total delay: 1.842 ns   จาก 23 ระดับตรรกะ</code></pre>
+<h4 id="ch03-323-สงทตองสงเกตในรายงาน">3.2.3 สิ่งที่ต้องสังเกตในรายงาน</h4>
+<div class="table-wrap"><table><thead><tr><th>สิ่งที่ดู</th><th>บอกอะไร</th><th>นำไปใช้ทำอะไร</th></tr></thead><tbody><tr><td><strong>Startpoint / Endpoint</strong></td><td>เส้นทางเริ่มและจบที่ไหน</td><td>บอกว่าปัญหาอยู่ที่ฝั่งอินพุต ฝั่งเอาต์พุต หรือภายใน</td></tr><tr><td><strong>Slack</strong></td><td>เหลือเวลาเท่าไร</td><td>ถ้าติดลบ ต้องแก้ที่เส้นทางนี้ก่อน</td></tr><tr><td><strong>จำนวนระดับตรรกะ (logic levels)</strong></td><td>ยิ่งมากยิ่งยากที่จะทำให้สั้นลง</td><td>ถ้าเยอะเกินจำเป็น แปลว่าโครงสร้างโค้ดไม่ดี</td></tr><tr><td><strong>เวลารวม</strong></td><td>ใช้เวลากี่นาน</td><td>เทียบกับคาบเวลา</td></tr><tr><td><strong>ชนิดเซลล์</strong></td><td>ใช้ LUT หรือ carry chain หรือ DSP</td><td>บอกว่า PS เลือกโครงสร้างอะไรให้</td></tr></tbody></table></div>
+<h4 id="ch03-324-จดสงเกตสาคญ-เสนทางทขาดนาฬกา">3.2.4 จุดสังเกตสำคัญ: เส้นทางที่ขาดนาฬิกา</h4>
+<pre class="code"><code class="lang-text">Startpoint : SW[3] (input)
+Endpoint   : top_alu8/y_r_reg[4] (posedge @ 20.000 ns)</code></pre>
+<p>จุดสังเกตคือ <strong>"posedge @ 10.000 ns"</strong> หมายถึงมีนาฬิกากำกับอยู่ ถ้าเห็นข้อความแบบ</p>
+<pre class="code"><code class="lang-text">Startpoint : SW[3] (input)
+Endpoint   : top_alu8/y_r_reg[4] (no clock)</code></pre>
+<p>แปลว่าเส้นทางนี้ <strong>ไม่ถูกจำกัดเวลา</strong> ซึ่งไม่ควรเกิดขึ้น ถ้าเกิด แปลว่า SDC ไม่ครบ หรือมีพอร์ตที่ไม่ได้กำหนดเวลา</p>
+<hr>
+<h3 id="ch03-33-การอานรายงานการใชทรพยากร-utilization">3.3 การอ่านรายงานการใช้ทรัพยากร (utilization)</h3>
+<h4 id="ch03-331-เปดรายงาน">3.3.1 เปิดรายงาน</h4>
+<pre class="code"><code class="lang-text">Report &gt; Area (หรือ Utilization)</code></pre>
+<h4 id="ch03-332-ตวอยางรายงาน">3.3.2 ตัวอย่างรายงาน</h4>
+<pre class="code"><code class="lang-text">Design Statistics
+--------------------------------------------------------------
+Cell Type        Count      %      Area (cell units)
+--------------------------------------------------------------
+LUT4                148    0.23      592.00
+FDRE                 61    0.05      244.00
+CARRY4                6    0.01       36.00
+--------------------------------------------------------------
+Total              215             872.00
+--------------------------------------------------------------
+
+Device Utilization (XC7A100T)
+--------------------------------------------------------------
+Resource          Used      Available      %
+--------------------------------------------------------------
+Slice LUT        148         63,400     0.23
+Slice Registers   61        126,800     0.05
+BRAM18             0           270       0.00
+DSP48E1            0           240       0.00
+--------------------------------------------------------------</code></pre>
+<h4 id="ch03-333-วธอานทถกตอง">3.3.3 วิธีอ่านที่ถูกต้อง</h4>
+<ol>
+<li><strong>ดูเปอร์เซ็นต์ ไม่ใช่จำนวนสัมบูรณ์</strong> — ถ้าใช้ 2% ของ LUT ก็ยังมีที่ว่างเหลือเพียงพอ</li>
+<li><strong>ดูทรัพยากรที่เป็นข้อจำกัด</strong> — ถ้าใช้ LUT ไม่เต็มแต่ใช้ BRAM เต็ม ก็ต้องหาวิธีลด BRAM</li>
+<li><strong>เปรียบเทียบกับบอร์ดจริงเสมอ</strong> — ค่าเปอร์เซ็นต์ในรายงานคือเทียบกับ <strong>ชิป</strong> ไม่ใช่บอร์ด</li>
+</ol>
+<p>(Nexys A7-100T ใช้ XC7A100T จึงใช้ค่าข้างบนได้เลย)</p>
+<ol>
+<li><strong>จำนวน LUT ที่ไม่ใช่ LUT4</strong> — PS อาจรายงานเป็น LUT5/LUT6 หรือรวมเป็น LUT</li>
+</ol>
+<p>ต้องดูว่ารายงานนับอย่างไรก่อนเปรียบเทียบระหว่างรอบ</p>
+<h4 id="ch03-334-จดทควรสงเกตเปนพเศษ">3.3.4 จุดที่ควรสังเกตเป็นพิเศษ</h4>
+<div class="table-wrap"><table><thead><tr><th>สังเกต</th><th>ความหมาย</th></tr></thead><tbody><tr><td><code>CARRY4</code> มีจำนวนมาก</td><td>ตัวบวก/ตัวลบถูกสังเคราะห์เป็น carry chain — เป็นเรื่องดีสำหรับ FPGA</td></tr><tr><td><code>DSP48E1</code> = 0 แต่มีตัวคูณ</td><td>PS อาจสังเคราะห์ตัวคูณเป็น LUT ซึ่งใช้ทรัพยากรมากกว่ามาก</td></tr><tr><td>จำนวน FF เพิ่มขึ้นมากเมื่อเปิด Retiming</td><td>ตัวสังเคราะห์ย้ายรีจิสเตอร์จำนวนมากเพื่อลดเวลา</td></tr></tbody></table></div>
+<blockquote><strong>คำถามชวนคิด</strong>: ในแล็บนี้มี <code>int8_mac.vhd</code> ที่มีตัวคูณ 8×8 ลองเพิ่มเข้าโปรเจกต์แล้วสังเคราะห์ใหม่ ดูว่า PS เลือกใช้ DSP48E1 หรือไม่ และถ้าไม่ใช้ เพราะอะไร (คำตอบที่คาดหวัง: ต้องเปิดตัวเลือกการสังเคราะห์ตัวคูณเป็น DSP)</blockquote>
+<hr>
+<h3 id="ch03-34-เสนทางทไมถกจากด-unconstrained-paths">3.4 เส้นทางที่ไม่ถูกจำกัด (unconstrained paths)</h3>
+<h4 id="ch03-341-ทาไมตองสนใจเสนทางเหลานมาก">3.4.1 ทำไมต้องสนใจเส้นทางเหล่านี้มาก</h4>
+<p>เส้นทางที่ไม่ถูกจำกัดเวลา คือเส้นทางที่ <strong>ตัวสังเคราะห์ไม่รู้ว่าต้องเร็วแค่ไหน</strong> ผลคือ</p>
+<ul>
+<li>ตัวสังเคราะห์จะไม่พยายามปรับปรุงเส้นทางนั้น → ได้ QoR ที่แย่</li>
+<li>รายงานเวลาจะไม่แสดงเส้นทางนี้ → คิดว่าผ่านทั้งที่จริง ๆ ไม่ได้ผ่าน</li>
+<li>เมื่อส่งต่อไป Vivado แล้วเพิ่งมีคนเห็นว่าเส้นทางนั้นพัง → เสียเวลาแก้ทีหลัง</li>
+</ul>
+<h4 id="ch03-342-ตรวจสอบ">3.4.2 ตรวจสอบ</h4>
+<pre class="code"><code class="lang-text">Report &gt; Timing &gt; Unconstrained Paths</code></pre>
+<p>หรือในสคริปต์</p>
+<pre class="code"><code class="lang-tcl">report_timing -unconstrained_paths</code></pre>
+<h4 id="ch03-343-สาเหตทพบบอย-และวธแก">3.4.3 สาเหตุที่พบบ่อย และวิธีแก้</h4>
+<div class="table-wrap"><table><thead><tr><th>สาเหตุ</th><th>อาการ</th><th>วิธีแก้</th></tr></thead><tbody><tr><td>ลืมสร้างนาฬิกา</td><td>ทุกเส้นทางไม่ถูกจำกัด</td><td><code>create_clock</code></td></tr><tr><td>พอร์ตอินพุตไม่ได้ระบุเวลา</td><td>เส้นทางอินพุต → รีจิสเตอร์ ไม่ถูกจำกัด</td><td><code>set_input_delay</code></td></tr><tr><td>พอร์ตเอาต์พุตไม่ได้ระบุเวลา</td><td>เส้นทางรีจิสเตอร์ → เอาต์พุต ไม่ถูกจำกัด</td><td><code>set_output_delay</code></td></tr><tr><td>นาฬิกาที่สร้างจากนาฬิกาอื่น</td><td>เส้นทางของนาฬิกาที่ derive ไม่ถูกจำกัด</td><td><code>create_generated_clock</code></td></tr><tr><td>เส้นทางรีเซ็ต</td><td>รีเซ็ตไปยัง FF ไม่ถูกจำกัด</td><td><code>set_false_path</code></td></tr></tbody></table></div>
+<h4 id="ch03-344-สตรจา">3.4.4 สูตรจำ</h4>
+<blockquote><strong>ทุกเส้นทางที่เราสนใจต้องมีนาฬิกากำกับ</strong> เส้นทางที่ "ไม่มีปัญหา" ก็ยังต้องถูกจำกัด เพราะการไม่ถูกจำกัดแปลว่า "เรายังไม่รู้"</blockquote>
+<hr>
+<h3 id="ch03-35-ยอนจาก-critical-path-ใน-schematic-กลบไป-hdl">3.5 ย้อนจาก critical path ใน schematic กลับไป HDL</h3>
+<p>นี่คือความสามารถที่คู่มือ PS2018.1 ชูในข้อ 3a และเป็นจุดขายหลักของ PS</p>
+<h4 id="ch03-351-ภาพรวมของการยอนกลบ">3.5.1 ภาพรวมของการย้อนกลับ</h4>
+<pre class="code"><code class="lang-text">รายงานเวลา (ระบุเซลล์ที่วิกฤต)
+        │
+        ▼
+Schematic viewer (เห็นโครงสร้างตรรกะรอบเซลล์ที่วิกฤต)
+        │
+        ▼ เลือกเซลล์แล้วสั่งให้แสดงต้นทาง
+โค้ด HDL ต้นทาง (บรรทัดที่เขียนตรรกะนั้น)</code></pre>
+<h4 id="ch03-352-วธทาใน-ps">3.5.2 วิธีทำใน PS</h4>
+<p><strong>ขั้นที่ 1 — เปิด schematic ของเส้นทางวิกฤต</strong></p>
+<pre class="code"><code class="lang-text">Report &gt; Timing &gt; Critical Path
+คลิกขวาที่เส้นทางที่ต้องการ &gt; View Schematic</code></pre>
+<p>หรือเปิด schematic ของทั้งดีไซน์แล้วเลื่อนไปยังเซลล์ที่ระบุในรายงาน</p>
+<p><strong>ขั้นที่ 2 — เลือกเซลล์ที่ต้องการ</strong></p>
+<p>คลิกเซลล์ใน schematic จะเปิดหน้าต่างคุณสมบัติของเซลล์ ซึ่งแสดง</p>
+<ul>
+<li>ชนิดเซลล์และพิน</li>
+<li>ความหน่วงที่ประเมินได้</li>
+<li><strong>ต้นทางของเซลล์ (cell origin)</strong> — เซลล์ใดในตรรกะเดิมที่ถูกยุบรวมมาเป็นเซลล์นี้</li>
+</ul>
+<p><strong>ขั้นที่ 3 — ไปที่โค้ดต้นทาง</strong></p>
+<p>เมื่อเลือกเซลล์แล้ว ใช้คำสั่งแสดงต้นทางในโค้ด HDL</p>
+<pre class="code"><code class="lang-text">คลิกขวาที่เซลล์ &gt; Show Source (หรือ Locate in Source / Trace to Source)</code></pre>
+<p><em>ชื่อเมนูอาจต่างกันเล็กน้อยตามรุ่น — ให้เลือกจากเมนูที่มีอยู่จริง (ตรวจสอบกับเอกสารของรุ่นที่ใช้)</em></p>
+<p>ผลลัพธ์คือหน้าต่างแสดงโค้ด VHDL พร้อมเครื่องหมายบรรทัดที่สร้างตรรกะนั้น</p>
+<h4 id="ch03-353-วธทางเลอกทใชไดเสมอ-อานจากรายงาน">3.5.3 วิธีทางเลือกที่ใช้ได้เสมอ — อ่านจากรายงาน</h4>
+<p>รายงานเวลาของ PS มักระบุ <strong>บรรทัดของโค้ดต้นทาง</strong> ในแต่ละขั้นของเส้นทาง วิธีนี้ไม่ต้องพึ่ง schematic viewer และใช้ได้แม้ไม่มี GUI</p>
+<pre class="code"><code class="lang-text">  Delay   Cell          Description              Source
+  0.000  SW[3]         (input)
+  1.102  LUT (A6)      alu8.vhd:118             ← บรรทัดที่สร้างตรรกะ
+  0.740  LUT (B4)      alu8.vhd:126
+  0.000  y_r_reg[4]    (capture)                 top_alu8.vhd:95</code></pre>
+<p>จากนี้ผู้เรียนเปิดไฟล์ที่ระบุแล้วไปที่บรรทัดนั้นได้ทันที</p>
+<h4 id="ch03-354-วธทางเลอกทสาม-ใช-vivado-ชวย">3.5.4 วิธีทางเลือกที่สาม — ใช้ Vivado ช่วย</h4>
+<p>เมื่อส่งต่อไป Vivado แล้ว Vivado มี cross-probe ที่ชัดเจนมาก</p>
+<pre class="code"><code class="lang-text">Report &gt; Report Timing
+คลิกขวาที่เซลล์ในรายงาน &gt; Open Synthesized Design
+แล้วในหน้าต่าง Schematic:
+  คลิกขวาที่เซลล์ &gt; Open Source</code></pre>
+<blockquote>ข้อดีของการใช้ Vivado ช่วยคือมีโค้ดต้นทาง (RTL) อยู่ในโปรเจกต์เต็มรูปแบบ จึงเปิดไฟล์ต้นทางและแสดงตำแหน่งบรรทัดได้ทันที เหตุผลที่ควรเก็บ RTL ไว้ในโปรเจกต์ Vivado เสมอ แม้จะรับ EDIF มาก็ตาม</blockquote>
+<h4 id="ch03-355-ตวอยางการวเคราะห-critical-path-จรง">3.5.5 ตัวอย่างการวิเคราะห์ critical path จริง</h4>
+<p>สมมติรายงานเวลาชี้ว่า</p>
+<pre class="code"><code class="lang-text">Startpoint : SW[15:8] (input)
+Endpoint   : top_alu8/y_r_reg[7] (posedge @ 10.000 ns)
+Slack      : -0.230 ns
+  1.842  LUT   alu8.vhd:118   ← ตัวบวกขั้นแรก
+  1.210  LUT   alu8.vhd:126   ← ตัวบวกขั้นสอง
+  0.980  LUT   alu8.vhd:118
+  ...</code></pre>
+<p><strong>ลำดับการคิด</strong></p>
+<ol>
+<li>เส้นทางนี้คืออินพุต → รีจิสเตอร์ แปลว่าเป็น <strong>เส้นทางขาอินพุต</strong> ไม่ใช่ขาเอาต์พุต</li>
+<li>slack ติดลบ 0.23 ns แปลว่าเกินมาเล็กน้อย</li>
+<li>ตรรกะทั้งหมดอยู่ใน <code>alu8.vhd</code> บรรทัด 118–126 คือส่วนของตัวบวก/ตัวลบ</li>
+<li>ทางเลือกในการแก้:</li>
+</ol>
+<ul>
+<li>ถ้าเส้นทางนี้สำคัญมาก → ลดความกว้างบิตของ ALU (ไม่ใช่ทางเลือกที่ดีในทางปฏิบัติ)</li>
+<li>ถ้าเกิดจาก carry chain ที่ยาว → ดูว่า PS ได้ใช้ carry chain หรือยัง</li>
+<li>ลดเวลาที่ใช้กับอินพุต: <code>set_input_delay</code> ลดลงเป็น 1.5 ns จะได้ slack เพิ่ม 0.5 ns</li>
+<li>เพิ่มรอบนาฬิกา (ไม่ได้ในบอร์ดนี้ เพราะนาฬิกาหลักคือ 100 MHz)</li>
+<li>ลดจำนวนชั้นของตรรกะ: เพิ่ม pipeline stage ใน RTL (เปลี่ยนโค้ด ไม่ใช่แก้ที่เครื่องมือ)</li>
+</ul>
+<blockquote><strong>บทเรียน</strong>: เมื่อปัญหาอยู่ที่ตรรกะ การแก้ที่เครื่องมือมีขีดจำกัด การย้อนกลับไปที่โค้ด HDL คือวิธีที่ยั่งยืนกว่าการไล่ปรับตัวเลือกของเครื่องมือไปเรื่อย ๆ</blockquote>
+<hr>
+<h3 id="ch03-36-ตารางสรปการวเคราะห-qor">3.6 ตารางสรุปการวิเคราะห์ QoR</h3>
+<p>ใช้ตารางนี้เป็นแบบฟอร์มมาตรฐานของทีม ทุกครั้งที่สังเคราะห์</p>
+<div class="table-wrap"><table><thead><tr><th>หมวด</th><th>ตัวชี้วัด</th><th>ค่าที่ได้</th><th>ค่าที่ต้องการ</th><th>ผ่าน?</th></tr></thead><tbody><tr><td>เวลา</td><td>Setup slack วิกฤต</td><td></td><td>≥ 0</td><td></td></tr><tr><td>เวลา</td><td>จำนวนเส้นทางที่ slack &lt; 0</td><td></td><td>0</td><td></td></tr><tr><td>เวลา</td><td>เส้นทางที่ไม่ถูกจำกัด</td><td></td><td>0</td><td></td></tr><tr><td>เวลา</td><td>ระดับตรรกะของเส้นทางวิกฤต</td><td></td><td>ตามงบการออกแบบ</td><td></td></tr><tr><td>พื้นที่</td><td>LUT</td><td></td><td>&lt; 50% ของทรัพยากร</td><td></td></tr><tr><td>พื้นที่</td><td>FF</td><td></td><td></td><td></td></tr><tr><td>พื้นที่</td><td>BRAM</td><td></td><td></td><td></td></tr><tr><td>พื้นที่</td><td>DSP48</td><td></td><td></td><td></td></tr><tr><td>ความถูกต้อง</td><td>เส้นทางรีเซ็ต</td><td></td><td>ถูกตัดแล้ว</td><td></td></tr></tbody></table></div>
+<hr>
+<h3 id="ch03-37-แบบฝกหดบทท-3">3.7 แบบฝึกหัดบทที่ 3</h3>
+<h4 id="ch03-lab-31-อานรายงานเวลา">Lab 3.1 — อ่านรายงานเวลา</h4>
+<ol>
+<li>เปิด <code>Report &gt; Timing &gt; Critical Path</code></li>
+<li>ตอบคำถามต่อไปนี้จากรายงาน แล้วบันทึกคำตอบ</li>
+</ol>
+<ul>
+<li>Startpoint และ Endpoint ของเส้นทางวิกฤตคืออะไร</li>
+<li>slack เป็นเท่าไร เป็นบวกหรือลบ</li>
+<li>เส้นทางวิกฤตผ่านกี่ระดับตรรกะ</li>
+<li>มีเซลล์ชนิดใดบ้างในเส้นทาง (LUT / carry / DSP)</li>
+<li>เส้นทางวิกฤตอยู่ที่ไฟล์และบรรทัดใด</li>
+</ul>
+<p><strong>เกณฑ์ผ่าน</strong>: ตอบได้ครบ 5 ข้อพร้อมตัวเลขจากรายงานจริง</p>
+<h4 id="ch03-lab-32-ยอน-critical-path-กลบไป-hdl">Lab 3.2 — ย้อน critical path กลับไป HDL</h4>
+<ol>
+<li>ทำตามขั้นตอนในหัวข้อ 3.5.2 เพื่อเปิดโค้ดต้นทางจาก schematic</li>
+<li>ถ้าหาเมนู <code>Show Source</code> ไม่พบ ให้ใช้วิธีในหัวข้อ 3.5.3 (อ่านบรรทัดจากรายงาน)</li>
+<li>ถ้ามีเวลา ให้ลองทำใน Vivado ตามหัวข้อ 3.5.4 ด้วย</li>
+<li>บันทึกว่าค้นพบตรรกะที่ทำให้เส้นทางยาวในโค้ดตรงไหน</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: ระบุได้ว่าตรรกะในโค้ดส่วนใดทำให้เส้นทางวิกฤต</p>
+<h4 id="ch03-lab-33-ตรวจเสนทางทไมถกจากด">Lab 3.3 — ตรวจเส้นทางที่ไม่ถูกจำกัด</h4>
+<ol>
+<li>ลบบรรทัด <code>set_input_delay</code> ออกจาก SDC ชั่วคราว</li>
+<li>สังเคราะห์ใหม่ แล้วรันรายงาน unconstrained paths</li>
+<li>จดจำนวนเส้นทางที่เพิ่มขึ้น</li>
+<li>คืนค่า SDC แล้วสังเคราะห์ซ้ำ ตรวจว่ากลับมาเป็น 0</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: เห็นความสัมพันธ์ระหว่างเงื่อนไข SDC กับจำนวนเส้นทางที่ไม่ถูกจำกัดอย่างชัดเจน</p>
+<h4 id="ch03-lab-34-วเคราะหการใชทรพยากร">Lab 3.4 — วิเคราะห์การใช้ทรัพยากร</h4>
+<ol>
+<li>เปิดรายงาน area/utilization</li>
+<li>บันทึกจำนวน LUT, FF, BRAM, DSP และเปอร์เซ็นต์ที่ใช้</li>
+<li>ตอบ: ทรัพยากรใดถูกใช้มากที่สุดในเชิงเปอร์เซ็นต์ และมีข้อจำกัดอะไรต่อไป</li>
+<li><strong>ลองเพิ่ม <code>int8_mac.vhd</code></strong> เข้าไปในโปรเจกต์ แล้วสังเคราะห์ซ้ำ</li>
+</ol>
+<p>ตรวจว่า PS ใช้ DSP48E1 หรือสังเคราะห์ตัวคูณด้วย LUT</p>
+<p><strong>เกณฑ์ผ่าน</strong>: มีตารางสรุป QoR ครบทุกช่อง และอธิบายผลของการเพิ่ม int8_mac ได้</p>
+<hr>
+<h3 id="ch03-38-สรปบท">3.8 สรุปบท</h3>
+<ul>
+<li>slack = เวลาที่เหลือ ต้อง ≥ 0; WNS ≥ 0 และ TNS = 0 คือผ่าน</li>
+<li>setup ต้องตรวจหลังสังเคราะห์ได้ แต่ <strong>hold ต้องตรวจหลังเดินสาย</strong></li>
+<li>ทุกเส้นทางที่เราสนใจต้องถูกจำกัดเวลา ไม่มีข้อยกเว้น</li>
+<li>ความสามารถหลักของ PS คือย้อนจากเซลล์ใน schematic กลับไปโค้ด HDL ได้</li>
+<li>เมื่อปัญหาอยู่ที่โครงสร้างตรรกะ การแก้ที่ RTL ยั่งยืนกว่าการไล่ปรับตัวเลือกของเครื่องมือ</li>
+</ul>
+<p><strong>เตรียมตัวก่อนบทถัดไป</strong>: มีเน็ตลิสต์ EDIF จากบทที่ 2 พร้อมรายงาน QoR (บทที่ 4)</p>
+<p class="srcfile">แหล่งไฟล์: 03-qor-analysis-and-critical-path.md</p>
+<h2 id="ch04-บทท-4-สงตอไปยง-vivado-ดวย-edif-xdc-และ-tcl">บทที่ 4 — ส่งต่อไปยัง Vivado ด้วย EDIF, XDC และ Tcl</h2>
+<blockquote><strong>จุดยืนของบทนี้</strong>: ตรงกับขั้นที่ 3b ของคู่มือ PS2018.1 ("Run integrated Place and Route and review reports") ในเชิงหลักการ และเป็นขั้นตอนที่ใช้จริงกับ FPGA เพราะ Precision Synthesis ส่งต่อเน็ตลิสต์ให้ Vivado ทำ Place &amp; Route</blockquote>
+<hr>
+<h3 id="ch04-41-ทาไมตองสงตอ">4.1 ทำไมต้องส่งต่อ</h3>
+<div class="table-wrap"><table><thead><tr><th>งาน</th><th>ใครทำ</th><th>เหตุผล</th></tr></thead><tbody><tr><td>สังเคราะห์ RTL → เน็ตลิสต์</td><td>Precision</td><td>เลือกไลบรารีของอุปกรณ์ได้, วิเคราะห์ QoR ได้ละเอียด</td></tr><tr><td>เลือกอุปกรณ์และตั้งค่าเงื่อนไข</td><td>Precision</td><td>รวมไว้ในขั้นตอนเดียว</td></tr><tr><td>วางวาง (place)</td><td>Vivado</td><td>ต้องใช้ข้อมูลภายในของอุปกรณ์ที่ครบถ้วน</td></tr><tr><td>ปรับแต่งการเดินสาย (phys_opt)</td><td>Vivado</td><td>ต้องเห็น routing จริง</td></tr><tr><td>เดินสาย (route)</td><td>Vivado</td><td>เป็นขั้นตอนที่ให้คำตัดเวลา</td></tr><tr><td>ตรวจ DRC และสร้าง bitstream</td><td>Vivado</td><td>ต้องใช้ตัวสร้าง bitstream ของผู้ผลิต</td></tr></tbody></table></div>
+<p><strong>ข้อสรุป</strong>: ตัวเลขเวลาที่ "ผ่าน" จริง ๆ ต้องมาจาก Vivado หลัง route เสร็จเท่านั้น</p>
+<hr>
+<h3 id="ch04-42-สงทตองสงตออะไรบาง">4.2 สิ่งที่ต้องส่งต่ออะไรบ้าง</h3>
+<div class="table-wrap"><table><thead><tr><th>สิ่งที่ส่ง</th><th>รูปแบบ</th><th>ทำหน้าที่</th></tr></thead><tbody><tr><td>เน็ตลิสต์ตรรกะ</td><td><strong>EDIF</strong> (<code>.edif</code>)</td><td>โครงสร้างวงจรที่สังเคราะห์แล้ว พร้อมชื่อเซลล์จริง</td></tr><tr><td>ข้อจำกัดการจัดวางพิน</td><td><strong>XDC</strong> (<code>.xdc</code>)</td><td>ผูกพอร์ตกับพินจริงบนบอร์ด</td></tr><tr><td>ข้อกำหนดเวลา</td><td><strong>XDC</strong> (ส่วนของ SDC)</td><td>นาฬิกาและหน่วง I/O</td></tr><tr><td>ขั้นตอนการทำงาน</td><td><strong>Tcl</strong> (<code>.tcl</code>)</td><td>สั่ง place/route/report อัตโนมัติ</td></tr><tr><td>ข้อกำหนดอุปกรณ์</td><td>part / board part</td><td>บอก Vivado ว่าสร้างสำหรับชิปอะไร</td></tr></tbody></table></div>
+<blockquote><strong>ทำไมต้องมีทั้ง EDIF และ XDC</strong>: EDIF บอก "วงจรเป็นอย่างไร" ส่วน XDC บอก "วงจรนี้อยู่ตรงไหนในชิป" และ "ต้องเร็วแค่ไหน" ขาดส่วนใดส่วนหนึ่งไม่ได้</blockquote>
+<hr>
+<h3 id="ch04-43-ขนตอนสงตอ">4.3 ขั้นตอนส่งต่อ</h3>
+<h4 id="ch04-431-ขนท-1-สรางเนตลสต-edif-จาก-precision">4.3.1 ขั้นที่ 1 — สร้างเน็ตลิสต์ EDIF จาก Precision</h4>
+<p><strong>วิธีที่ 1 — ใน GUI</strong></p>
+<pre class="code"><code class="lang-text">Design &gt; Export &gt; EDIF...
+  File name : netlist/top_alu8.edif
+  [Export]</code></pre>
+<p><strong>วิธีที่ 2 — ในสคริปต์</strong></p>
+<pre class="code"><code class="lang-tcl">write_edif netlist/top_alu8.edif</code></pre>
+<h4 id="ch04-432-ขนท-2-เตรยม-xdc">4.3.2 ขั้นที่ 2 — เตรียม XDC</h4>
+<p>ไฟล์ <code>labs/vivado/nexys_a7_100t.xdc</code> ในคู่มือนี้ทำสองหน้าที่พร้อมกัน</p>
+<ol>
+<li>ผูกพอร์ตกับพินจริงบน Nexys A7-100T</li>
+<li>ประกาศข้อกำหนดเวลา (เหมือน SDC)</li>
+</ol>
+<p>ถ้าต้องการแยกไฟล์ ให้แยกเป็น <code>nexys_a7_100t_pins.xdc</code> (พิน) กับ <code>top_alu8.xdc</code> (เวลา) ซึ่งเป็นแนวปฏิบัติที่ดีกว่าเมื่อมีหลายดีไซน์ใช้บอร์ดเดียวกัน</p>
+<h4 id="ch04-433-ขนท-3-สรางโปรเจกต-vivado">4.3.3 ขั้นที่ 3 — สร้างโปรเจกต์ Vivado</h4>
+<p><strong>แนวทาง A — โหมดโปรเจกต์ (เหมาะกับการเรียนรู้และการ debug)</strong></p>
+<pre class="code"><code class="lang-text">File &gt; Project &gt; New Project
+  Project name : top_alu8_prj
+  Project location : &lt;โฟลเดอร์&gt;
+  [Create Project]
+
+  Project type : RTL Project        (เลือกเฉพาะตอนสร้างโปรเจกต์เปล่า)
+  [Next]
+
+  Boards       : digilentinc.com/nexys-a7-100T
+  [Next]
+
+  ⚠ ตรวจสอบว่าเลือก part ถูก: xc7a100tcsg324-1
+
+  Add Sources... &gt; Add or create constraints  →  Add Files  →  nexys_a7_100t.xdc
+  [Next]
+
+  ⚠ อย่าเพิ่ม RTL ที่นี่ ถ้าจะใช้ EDIF
+
+  Finish</code></pre>
+<p><strong>แนวทาง B — โหมดสคริปต์ (non-project / in-memory)</strong> ตามไฟล์ <code>labs/vivado/run_pnr.tcl</code></p>
+<pre class="code"><code class="lang-tcl">read_edif netlist/top_alu8.edif
+read_xdc  nexys_a7_100t.xdc
+link_design -part xc7a100tcsg324-1 -top top_alu8
+
+opt_design
+place_design
+phys_opt_design
+route_design
+
+report_timing_summary -file vivado_out/timing_summary.rpt
+report_utilization   -file vivado_out/utilization.rpt
+report_drc           -file vivado_out/drc.rpt
+write_bitstream -force vivado_out/top_alu8.bit</code></pre>
+<p>รันด้วย</p>
+<pre class="code"><code class="lang-bash">vivado -mode batch -source run_pnr.tcl</code></pre>
+<h4 id="ch04-434-ขนท-4-ใสเนตลสต-edif-ในโหมดโปรเจกต">4.3.4 ขั้นที่ 4 — ใส่เน็ตลิสต์ EDIF ในโหมดโปรเจกต์</h4>
+<p>เมื่อใช้โหมดโปรเจกต์ ต้องบอก Vivado ว่า "ไม่ต้องสังเคราะห์ใหม่ ใช้ netlist ที่ให้มา"</p>
+<pre class="code"><code class="lang-tcl"># เพิ่ม EDIF เป็นแหล่งข้อมูลระดับ synthesis
+add_files -norecurse netlist/top_alu8.edif
+
+# ปิดขั้นตอนการสังเคราะห์ และใช้ netlist ที่มีอยู่
+set_property source_mgmt_mode None [get_runs synth_1]
+set_property design_mode GateLvl [current_design]</code></pre>
+<blockquote><em>(คำสั่งด้านบนอาจต่างกันเล็กน้อยตามรุ่นของ Vivado ให้ยืนยันกับเอกสารของรุ่นที่ใช้ และถ้าโปรเจกต์ทำงานไม่ผ่าน ให้ใช้แนวทาง B แทน)</em></blockquote>
+<h4 id="ch04-435-ขนท-5-รน-place-route">4.3.5 ขั้นที่ 5 — รัน Place &amp; Route</h4>
+<p><strong>ใน GUI</strong></p>
+<pre class="code"><code class="lang-text">Flow Navigator &gt; Run Implementation
+  ตรวจสอบว่า:
+    - Target Language : Verilog / VHDL (ไม่สำคัญสำหรับ EDIF)
+    - Target Part     : xc7a100tcsg324-1
+  [Launch Implementation</code></pre>
+<p>หรือรันทีละขั้นเพื่อดูผลกลางทาง</p>
+<pre class="code"><code class="lang-text">Tools &gt; Run Flow &gt; Synthesis      (ถ้าใช้ RTL)
+Tools &gt; Run Flow &gt; Implementation</code></pre>
+<p><strong>ในโหมดสคริปต์</strong></p>
+<pre class="code"><code class="lang-tcl">opt_design        # ปรับปรุงตรรกะหลังสังเคราะห์
+place_design      # วางวางเซลล์
+phys_opt_design   # ปรับปรุงการเดินสายหลังวางวาง
+route_design      # เดินสาย</code></pre>
+<h4 id="ch04-436-ขนท-6-ตรวจสอบผล">4.3.6 ขั้นที่ 6 — ตรวจสอบผล</h4>
+<pre class="code"><code class="lang-text">Report &gt; Report Timing Summary
+Report &gt; Report Utilization
+Report &gt; Report DRC
+Report &gt; Report Clock Interaction</code></pre>
+<hr>
+<h3 id="ch04-44-เกณฑตรวจรบงาน-sign-off-gate-กอนสราง-bitstream">4.4 เกณฑ์ตรวจรับงาน (sign-off gate) ก่อนสร้าง bitstream</h3>
+<h4 id="ch04-441-เกณฑมาตรฐาน">4.4.1 เกณฑ์มาตรฐาน</h4>
+<div class="table-wrap"><table><thead><tr><th>เกณฑ์</th><th>ค่าที่ต้องการ</th><th>ตรวจที่ไหน</th></tr></thead><tbody><tr><td>Setup timing</td><td>WNS ≥ 0 และ TNS = 0</td><td><code>Report &gt; Timing Summary</code></td></tr><tr><td>Hold timing</td><td>WNS ≥ 0 และ TNS = 0</td><td><code>Report &gt; Timing Summary</code> (ส่วน min delay)</td></tr><tr><td>Unconstrained paths</td><td>0</td><td><code>Report &gt; Clock Interaction</code></td></tr><tr><td>DRC error</td><td>0</td><td><code>Report &gt; DRC</code></td></tr><tr><td>เงื่อนไขครบถ้วน</td><td>ไม่มี critical warning ว่าพอร์ตไม่ถูกจำกัด</td><td><code>Report &gt; Methodology</code></td></tr></tbody></table></div>
+<h4 id="ch04-442-สครปตตรวจอตโนมต">4.4.2 สคริปต์ตรวจอัตโนมัติ</h4>
+<p>ไฟล์ <code>labs/vivado/check_signoff.tcl</code> ทำหน้าที่ดังนี้</p>
+<pre class="code"><code class="lang-tcl">proc worst_slack {dt} {
+    set paths [get_timing_paths -delay_type $dt -max_paths 1 -nworst 1]
+    if {[llength $paths] == 0} { return &quot;NA&quot; }
+    return [get_property SLACK [lindex $paths 0]]
+}
+
+set setup_slack [worst_slack max]
+set hold_slack  [worst_slack min]
+
+set unconstrained [get_timing_paths -unconstrained -nworst 100]
+set n_unconstrained [llength $unconstrained]
+
+set drc_text [report_drc -return_string]
+set n_drc_error [regexp -count -nocase {ERROR} $drc_text]</code></pre>
+<p>แล้วตรวจเงื่อนไขและเขียนรายงาน</p>
+<pre class="code"><code class="lang-text">Sign-off report
+================================================
+setup slack (worst) : 0.831 ns
+hold  slack (worst) : 0.124 ns
+DRC errors          : 0
+unconstrained paths : 0
+------------------------------------------------
+RESULT: PASS</code></pre>
+<p>ถ้าไม่ผ่าน สคริปต์จะ <strong>ไม่สร้าง bitstream</strong> และจบด้วยข้อความแสดงเหตุผล</p>
+<pre class="code"><code class="lang-text">RESULT: FAIL
+  - setup slack -0.230 &lt; 0.0</code></pre>
+<h4 id="ch04-443-การตความเมอไมผาน">4.4.3 การตีความเมื่อไม่ผ่าน</h4>
+<div class="table-wrap"><table><thead><tr><th>อาการ</th><th>สาเหตุที่เป็นไปได้</th><th>ทางแก้</th></tr></thead><tbody><tr><td>Setup ไม่ผ่าน</td><td>เวลาจริงหลังเดินสายนานกว่าที่คาด</td><td>ปรับ RTL / เพิ่ม effort / ใช้ phys_opt</td></tr><tr><td>Hold ไม่ผ่าน</td><td>เส้นทางสั้นเกินไปหลังเดินสาย</td><td>ใส่ delay buffer, <code>phys_opt_design -directive</code></td></tr><tr><td>DRC error</td><td>ขัดแย้งกับข้อกำหนดการจัดวาง</td><td>แก้ XDC เช่น พินชนกัน</td></tr><tr><td>Unconstrained &gt; 0</td><td>พอร์ตที่ไม่ได้จำกัดเวลา</td><td>เติมเงื่อนไขใน XDC</td></tr></tbody></table></div>
+<blockquote><strong>บทเรียนสำคัญ</strong>: งานที่ผ่านทุกเกณฑ์หลัง route มักจะผ่านได้ แต่งานที่ "ผ่าน" หลังสังเคราะห์อย่างเดียว อาจพังตอน route เพราะ <strong>ความหน่วงการเดินสายจริงอาจมากกว่าที่คาดไว้หลายเท่า</strong></blockquote>
+<hr>
+<h3 id="ch04-45-ตรวจ-hold-violation-และแก">4.5 ตรวจ hold violation และแก้</h3>
+<p>hold เป็นปัญหาที่ <strong>ต้องแก้หลังเดินสาย</strong> เพราะต้องรู้ความหน่วงจริงของสาย</p>
+<h4 id="ch04-451-วธตรวจ">4.5.1 วิธีตรวจ</h4>
+<pre class="code"><code class="lang-text">Report &gt; Report Timing Summary
+  ดูส่วน &quot;Min Delay&quot; / ช่อง &quot;WNS(ns)&quot; ในตาราง &quot;Intra Clock Table&quot;
+  หรือ
+Report &gt; Report Timing
+  เลือก &quot;Hold&quot; / delay_type = min</code></pre>
+<h4 id="ch04-452-วธแกตามลาดบทเหมาะสม">4.5.2 วิธีแก้ตามลำดับที่เหมาะสม</h4>
+<ol>
+<li><strong>ให้ Vivado แก้เองก่อน</strong> — <code>phys_opt_design</code> มีกลไกจัดการ hold อัตโนมัติ</li>
+<li><strong>ปรับ directive</strong></li>
+</ol>
+<p>``<code>tcl phys_opt_design -directive AggressiveFanoutOpt </code>``</p>
+<ol>
+<li><strong>ใส่ delay buffer เอง</strong> — เพิ่มเซลล์หน่วงในเส้นทางที่สั้นเกินไป</li>
+<li><strong>ตัดเส้นทางที่ไม่จำเป็นด้วย <code>set_false_path</code></strong> — ใช้ได้เฉพาะกรณีที่แน่ใจว่าไม่มีความเสี่ยง</li>
+</ol>
+<p>(เช่นเส้นทางข้อมูลที่ไม่มีเงื่อนไขการถือครองข้อมูล)</p>
+<blockquote><strong>ข้อควรระวัง</strong>: การใช้ <code>set_false_path</code> เพื่อ "แก้" hold ที่เกิดจริง คือการซ่อนปัญหา ไม่ใช่การแก้ ต้องใช้เฉพาะเมื่อมีเหตุผลทางระบบรองรับ</blockquote>
+<hr>
+<h3 id="ch04-46-ทดสอบบนฮารดแวรจรง">4.6 ทดสอบบนฮาร์ดแวร์จริง</h3>
+<h4 id="ch04-461-โปรแกรม-bitstream">4.6.1 โปรแกรม bitstream</h4>
+<pre class="code"><code class="lang-text">Hardware Manager &gt; Open Target &gt; Auto Connect
+  เลือกโปรแกรมเมอร์ Digilent USB-JTAG
+  Program Device → เลือกไฟล์ .bit</code></pre>
+<p>หรือใช้เครื่องมือบรรทัดคำสั่ง</p>
+<pre class="code"><code class="lang-bash">openFPGALoader -b vivado_out/top_alu8.bit -c ft232</code></pre>
+<h4 id="ch04-462-วธทดสอบบน-nexys-a7-100t">4.6.2 วิธีทดสอบบน Nexys A7-100T</h4>
+<div class="table-wrap"><table><thead><tr><th>ทดสอบ</th><th>วิธีทำ</th><th>ผลที่คาดหวัง</th></tr></thead><tbody><tr><td>นาฬิกา</td><td>ดูจอ 7 ส่วนเปลี่ยนไปเรื่อย ๆ</td><td>เปลี่ยนประมาณ 1,526 ครั้งต่อวินาที (100 MHz ÷ 2¹⁶)</td></tr><tr><td>ตัวคำนวณ</td><td>ตั้ง SW[7:0] = 5, SW[15:8] = 3, BTN = ADD</td><td>LED[7:0] แสดง 8 (0x08) บนจอแสดง "08"</td></tr><tr><td>ลบ</td><td>BTN = SUB</td><td>LED[7:0] แสดง 2 (0x02)</td></tr><tr><td>zero</td><td>ตั้ง operand เป็น 0</td><td>LED[8] ติด</td></tr><tr><td>overflow</td><td>ตั้ง 127 + 1</td><td>LED[9] ติด และผลเป็น 0x80</td></tr><tr><td>รีเซ็ต</td><td>กดปุ่ม CPU RESET (C12)</td><td>LED และจอถูกล้างเป็นศูนย์</td></tr></tbody></table></div>
+<h4 id="ch04-463-วธตรวจวาความถจอถกตอง">4.6.3 วิธีตรวจว่าความถี่จอถูกต้อง</h4>
+<p>จอเปลี่ยนทุก 2¹⁶ รอบนาฬิกา = 100,000,000 ÷ 65,536 ≈ <strong>1,526 ครั้งต่อวินาที</strong> ถ้าตาไม่จับได้แม้แต่กะพริบ แสดงว่าตัวนับหรือนาฬิกามีปัญหา — ให้ตรวจรายงาน timing ของเส้นทางนั้น</p>
+<hr>
+<h3 id="ch04-47-แนวทางสารองเมอ-edif-ใชไมได">4.7 แนวทางสำรองเมื่อ EDIF ใช้ไม่ได้</h3>
+<p>อาจพบปัญหาที่ Vivado อ่าน EDIF ที่ส่งมาจาก PS ไม่ได้ เนื่องจากปัญหาเรื่องชื่อเซลล์ หรือไลบรารี มีแนวทางสำรอง 3 ทาง เรียงตามลำดับความสะดวก</p>
+<div class="table-wrap"><table><thead><tr><th>ทาง</th><th>วิธี</th><th>ข้อดี/ข้อเสีย</th></tr></thead><tbody><tr><td><strong>1</strong></td><td>ให้ PS ส่งเน็ตลิสต์เป็น <strong>VHDL/Verilog</strong> แล้วให้ Vivado อ่านเป็น source</td><td>ง่าย แต่เสียข้อได้เปรียบของการใช้ไลบรารีอุปกรณ์ใน PS</td></tr><tr><td><strong>2</strong></td><td>เก็บ RTL ไว้ในโปรเจกต์ Vivado แล้วให้ Vivado สังเคราะห์เอง</td><td>ได้ debug ง่าย แต่ไม่ได้ทดสอบคุณภาพของเน็ตลิสต์จาก PS</td></tr><tr><td><strong>3</strong></td><td>ตรวจไลบรารีที่ PS ใช้ แล้วจัดการให้ถูกต้อง</td><td>แก้ที่ต้นเหตุ แต่ต้องเข้าใจรูปแบบ EDIF ของอุปกรณ์</td></tr></tbody></table></div>
+<blockquote><strong>คำแนะนำสำหรับการอบรม</strong>: ให้ทำแบบทาง 2 ควบคู่กับทาง 1 เสมอ เพราะผลลัพธ์ของบทที่ 5 (เปรียบเทียบ 10 ns กับ 8 ns) ต้องเปรียบเทียบ <strong>เน็ตลิสต์ที่สังเคราะห์ด้วยเป้าหมายต่างกัน</strong> ถ้าให้ Vivado สังเคราะห์ใหม่ทั้งคู่ ก็จะไม่ได้ทดสอบสิ่งที่ต้องการทดสอบจริง</blockquote>
+<hr>
+<h3 id="ch04-48-แบบฝกหดบทท-4">4.8 แบบฝึกหัดบทที่ 4</h3>
+<h4 id="ch04-lab-41-สงตอเนตลสตไป-vivado">Lab 4.1 — ส่งต่อเน็ตลิสต์ไป Vivado</h4>
+<ol>
+<li>ส่งออก EDIF จาก Precision ไปที่ <code>netlist/top_alu8.edif</code></li>
+<li>สร้างโปรเจกต์ Vivado แล้วเพิ่ม EDIF + XDC</li>
+<li>ตรวจสอบว่า Vivado อ่านเน็ตลิสต์ได้ (ดูจำนวนเซลล์ใน Report Utilization)</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: Vivado แสดงจำนวน LUT/FF ใกล้เคียงกับที่ PS รายงาน</p>
+<h4 id="ch04-lab-42-รน-place-route-และตรวจ-timing">Lab 4.2 — รัน Place &amp; Route และตรวจ timing</h4>
+<ol>
+<li>รัน implementation จนจบ</li>
+<li>เปิด Timing Summary บันทึก WNS setup, WNS hold, TNS</li>
+<li>เปิด DRC report บันทึกจำนวน error/warning</li>
+<li>เปิด Clock Interaction บันทึกจำนวน unconstrained paths</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: มีตัวเลขครบทุกช่อง และไม่มี unconstrained path</p>
+<h4 id="ch04-lab-43-ทดลองเกณฑ-sign-off-อตโนมต">Lab 4.3 — ทดลองเกณฑ์ sign-off อัตโนมัติ</h4>
+<ol>
+<li>ใช้ <code>labs/vivado/run_pnr.tcl</code> รันแบบ batch</li>
+<li>ตรวจว่าไฟล์ <code>vivado_out/signoff_report.txt</code> ถูกสร้าง</li>
+<li><strong>ทดลองทำให้ไม่ผ่าน</strong>: แก้ XDC ให้คาบเวลานาฬิกาเป็น 2 ns แล้วรันซ้ำ</li>
+</ol>
+<p>ตรวจว่าสคริปต์รายงาน FAIL และ <strong>ไม่สร้าง bitstream</strong></p>
+<ol>
+<li>คืนค่าเดิม</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: เกณฑ์ทำงานถูกต้องทั้งสองกรณี</p>
+<h4 id="ch04-lab-44-สราง-bitstream-และทดสอบบนบอรด">Lab 4.4 — สร้าง bitstream และทดสอบบนบอร์ด</h4>
+<ol>
+<li>เมื่อผ่านเกณฑ์ ให้เขียน bitstream</li>
+<li>โปรแกรมลงบอร์ด</li>
+<li>ทดสอบตามตารางในหัวข้อ 4.6.2 ทุกแถว</li>
+<li>ถ่ายรูปหน้าจอบอร์ดพร้อมตารางผล</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: ผลลัพธ์บนบอร์ดตรงกับที่คำนวณจากตารางในหัวข้อ 4.6.2</p>
+<h4 id="ch04-lab-45-ทาให-hold-violation-เพอเรยนรการแก">Lab 4.5 — ทำให้ hold violation เพื่อเรียนรู้การแก้</h4>
+<ol>
+<li>ตั้งค่าให้ Vivado วางวางแบบเร่งรีบจน hold violation (ลดค่า effort หรือใช้ directive ที่เร็วขึ้น)</li>
+<li>ตรวจพบ hold violation ใน Timing Summary</li>
+<li>แก้ด้วย <code>phys_opt_design</code> แล้วตรวจว่าหาย</li>
+<li>บันทึกว่าการแก้ที่ต่างกันให้ผลต่างกันอย่างไร</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: เข้าใจว่ากลไกการแก้ hold ของ Vivado ทำงานอย่างไร</p>
+<hr>
+<h3 id="ch04-49-สรปบท">4.9 สรุปบท</h3>
+<ul>
+<li>สิ่งที่ส่งต่อ Vivado มี 4 อย่าง: EDIF (วงจร), XDC (พิน + เวลา), part, และขั้นตอน Tcl</li>
+<li>เกณฑ์ sign-off ต้องตรวจ 4 อย่าง: setup, hold, unconstrained paths, DRC</li>
+<li><strong>hold ตรวจได้จริงหลัง route เท่านั้น</strong></li>
+<li>ควรเก็บ RTL ในโปรเจกต์ Vivado ไว้เสมอ เพื่อการ debug และการทำ cross-probe</li>
+<li>สคริปต์เกณฑ์ sign-off ทำให้กระบวนการ "ตรวจก่อนปล่อย" เป็นระบบ ไม่ต้องพึ่งความจำ</li>
+</ul>
+<p><strong>เตรียมตัวก่อนบทถัดไป</strong>: มีผล post-route รอบ 10 ns และ 8 ns สำหรับเปรียบเทียบ (บทที่ 5)</p>
+<p class="srcfile">แหล่งไฟล์: 04-vivado-handoff.md</p>
+<h2 id="ch05-บทท-5-ทดลองเปรยบเทยบ-qor-เปาหมายสงเคราะห-10-ns-กบ-8-ns">บทที่ 5 — ทดลองเปรียบเทียบ QoR: เป้าหมายสังเคราะห์ 10 ns กับ 8 ns</h2>
+<blockquote><strong>เป้าหมายของบทนี้</strong>: ให้ผู้เรียนพิสูจน์ด้วยตัวเองว่า <strong>"ยิ่งบีบเวลาให้เข้ม ยิ่งได้ผลดีขึ้น" เป็นความเข้าใจผิด</strong> และรู้ว่าการประเมิน QoR ที่ถูกต้อง ต้องประเมิน <strong>หลัง routing</strong> ด้วย <strong>เงื่อนไขของบอร์ดจริง</strong> เสมอ ไม่ใช่เงื่อนไขที่ตั้งไว้ตอนสังเคราะห์</blockquote>
+<hr>
+<h3 id="ch05-51-ปญหาทกาลงศกษา">5.1 ปัญหาที่กำลังศึกษา</h3>
+<p>บอร์ด Nexys A7-100T มีนาฬิกาหลัก <strong>100 MHz</strong> คือคาบเวลา <strong>10 ns</strong></p>
+<p>สมมติว่าทีมงานต้องการ "ประกันความเร็ว" มากกว่านั้น จึงตั้งเป้าหมายสังเคราะห์เป็น <strong>8 ns</strong> (คิดเป็น 125 MHz) โดยตั้งสมมติฐานว่า "ยิ่งบีบเวลา ยิ่งได้ดีไซน์ที่เร็วกว่าและปลอดภัยกว่า"</p>
+<p><strong>คำถามของการทดลองนี้คือ</strong>: สมมติฐานนั้นจริงหรือไม่ เมื่อวัดจากผลจริงหลังเดินสาย?</p>
+<hr>
+<h3 id="ch05-52-ทฤษฎ-การบบเวลาทาอะไรกบตวสงเคราะห">5.2 ทฤษฎี: การบีบเวลาทำอะไรกับตัวสังเคราะห์</h3>
+<h4 id="ch05-521-สงทตวสงเคราะหทาเมอเปาหมายเขมขน">5.2.1 สิ่งที่ตัวสังเคราะห์ทำเมื่อเป้าหมายเข้มขึ้น</h4>
+<p>เมื่อบีบเวลาที่ต้องการ ตัวสังเคราะห์จะพยายามลดความหน่วงของเส้นทางวิกฤตด้วยวิธีต่อไปนี้ <strong>เรียงตามลำดับที่มักถูกใช้</strong></p>
+<div class="table-wrap"><table><thead><tr><th>#</th><th>วิธี</th><th>ผลต่อเวลา</th><th>ผลต่อพื้นที่</th><th>ผลข้างเคียง</th></tr></thead><tbody><tr><td>1</td><td>เปลี่ยนโครงสร้างตรรกะให้สั้นลง</td><td>ดีขึ้นมาก</td><td>เพิ่มขึ้น</td><td>ตรรกะซับซ้อนขึ้น อาจเพิ่มพื้นที่มาก</td></tr><tr><td>2</td><td>ทำซ้ำ (duplicate) ตรรกะที่ใช้ร่วมกัน</td><td>ดีขึ้น</td><td>เพิ่มขึ้น</td><td>โครงสร้างฟิสิกส์เปลี่ยน ต้องวางวางใหม่</td></tr><tr><td>3</td><td>ใส่รีจิสเตอร์เพิ่ม (pipeline)</td><td>ดีขึ้นมาก</td><td>เพิ่มขึ้นมาก</td><td><strong>เปลี่ยนสมมติฐานของเส้นทาง I/O</strong> ต้องแก้ SDC</td></tr><tr><td>4</td><td>ย้ายรีจิสเตอร์ (retiming)</td><td>ดีขึ้น</td><td>เพิ่ม/ลดเล็กน้อย</td><td>เปลี่ยนโครงสร้างขอบเขตรีจิสเตอร์</td></tr><tr><td>5</td><td>เปลี่ยนตัวเลือกของการแมปเซลล์</td><td>ดีขึ้นเล็กน้อย</td><td>เพิ่มเล็กน้อย</td><td>ต้องเลือกเซลล์ที่วางวางยากขึ้น</td></tr></tbody></table></div>
+<h4 id="ch05-522-ผลขางเคยงทสาคญทสด-ความแยลงจากการวางวาง">5.2.2 ผลข้างเคียงที่สำคัญที่สุด — "ความแย่ลงจากการวางวาง"</h4>
+<p>นี่คือประเด็นแกนกลางของบทนี้</p>
+<pre class="code"><code class="lang-text">เป้าหมายเข้มขึ้น
+      │
+      ▼
+ตรรกะซับซ้อนขึ้น / เซลล์เฉพาะทางมากขึ้น
+      │
+      ▼
+ความหน่วงการเดินสายเพิ่มขึ้น (routing delay เพิ่ม)
+      │
+      ▼
+พื้นที่ที่ใช้มากขึ้น → ความแน่นของการวางวางเพิ่ม
+      │
+      ▼
+เส้นทางที่ &quot;ดี&quot; ตอนสังเคราะห์ อาจกลายเป็น &quot;แย่&quot; หลังวางวาง</code></pre>
+<p>ดังนั้นตัวเลขที่ PS รายงานหลังสังเคราะห์ <strong>ไม่ใช่ตัวชี้วัดคุณภาพสุดท้าย</strong> แต่เป็นเพียงตัวชี้วัด "ความพยายามของตัวสังเคราะห์ในการตอบสนองต่อคำสั่งของเรา"</p>
+<h4 id="ch05-523-กรณทการบบเวลา-ถกตอง">5.2.3 กรณีที่การบีบเวลา "ถูกต้อง"</h4>
+<p>การบีบเวลาไม่ได้ผิดเสมอไป มีกรณีที่เหมาะสม</p>
+<div class="table-wrap"><table><thead><tr><th>กรณี</th><th>เหตุผล</th></tr></thead><tbody><tr><td>บอร์ดมีนาฬิกาเร็วกว่านี้จริง</td><td>ต้องการประสิทธิภาพที่ 125 MHz จริง ๆ</td></tr><tr><td>ต้องการ headroom สำหรับอุณหภูมิ/แรงดันที่แตกต่างกัน</td><td>เผื่อ margin ไว้</td></tr><tr><td>ยังไม่รู้ความถี่ปลายทาง</td><td>ตั้งค่าขั้นต่ำไว้ก่อนเพื่อคุ้มค่า</td></tr><tr><td>การทำงานแบบ timing closure</td><td>ต้องการให้ตัวสังเคราะห์ทำงานหนักขึ้น</td></tr></tbody></table></div>
+<p>แต่ในกรณีของบอร์ด Nexys A7-100T ที่มีนาฬิกา 100 MHz การตั้ง 8 ns <strong>ไม่ใช่ข้อกำหนดของฮาร์ดแวร์</strong> เป็นการตั้งที่ "เข้มกว่าที่จำเป็น" ซึ่งเป็นหัวข้อของการทดลองนี้</p>
+<hr>
+<h3 id="ch05-53-วธทาการทดลอง">5.3 วิธีทำการทดลอง</h3>
+<h4 id="ch05-531-หลกการควบคมตวแปร">5.3.1 หลักการควบคุมตัวแปร</h4>
+<p>การทดลองที่ดีต้องเปลี่ยน<strong>เฉพาะ</strong>ตัวแปรที่ศึกษา ดังนั้นให้ตรวจสอบว่า</p>
+<div class="table-wrap"><table><thead><tr><th>ตัวแปร</th><th>ค่า</th><th>เหมาะสมไหม</th></tr></thead><tbody><tr><td>ไฟล์ RTL</td><td>เหมือนกันทั้งสองรอบ</td><td>✔ ต้องเหมือนกันเด็ดขาด</td></tr><tr><td>ไลบรารีอุปกรณ์</td><td>เหมือนกัน</td><td>✔</td></tr><tr><td>ตัวเลือก Retiming</td><td>เหมือนกัน</td><td>✔</td></tr><tr><td>Optimization effort</td><td>เหมือนกัน</td><td>✔</td></tr><tr><td>สคริปต์ Vivado</td><td>เหมือนกัน</td><td>✔</td></tr><tr><td><strong>SDC ตอนสังเคราะห์</strong></td><td><strong>10 ns กับ 8 ns</strong></td><td>← ตัวแปรที่ศึกษา</td></tr><tr><td><strong>เงื่อนไขตอนประเมิน</strong></td><td><strong>10 ns ทั้งสองรอบ</strong></td><td>← ตัวแปรที่ควบคุม</td></tr></tbody></table></div>
+<blockquote><strong>ประเด็นสำคัญที่สุดของบทนี้</strong> เมื่อนำเน็ตลิสต์ทั้งสองรอบไป Vivado <strong>ต้องประเมินด้วยคาบเวลา 10 ns เท่ากัน</strong> เพราะ 10 ns คือคาบเวลาจริงของบอร์ด คำตอบคือ "ดีไซน์ไหนทำงานได้ดีกว่า <strong>บนบอร์ดตัวจริง</strong>" ไม่ใช่ "ดีไซน์ไหนบรรลุเป้าหมายที่ตั้งไว้ตอนสังเคราะห์"</blockquote>
+<h4 id="ch05-532-ขนตอน">5.3.2 ขั้นตอน</h4>
+<p><strong>รอบ A — เป้าหมาย 10 ns</strong></p>
+<pre class="code"><code class="lang-bash"># Precision
+ps_shell -f ps_qor_10ns.tcl
+# ผลลัพธ์: out_10ns/top_alu8.edif, out_10ns/timing.rpt, out_10ns/area.rpt
+
+# Vivado: ประเมินด้วยคาบเวลา 10 ns
+vivado -mode batch -source run_pnr.tcl   # โดยแก้ edif_file เป็น out_10ns/top_alu8.edif</code></pre>
+<p><strong>รอบ B — เป้าหมาย 8 ns</strong></p>
+<pre class="code"><code class="lang-bash">ps_shell -f ps_qor_8ns.tcl
+# ผลลัพธ์: out_8ns/top_alu8.edif, out_8ns/timing.rpt, out_8ns/area.rpt
+
+vivado -mode batch -source run_pnr.tcl   # โดยแก้ edif_file เป็น out_8ns/top_alu8.edif
+# และยืนยันว่า XDC ยังเป็นคาบเวลา 10.000 ns</code></pre>
+<p><strong>สำคัญ</strong>: ใน Vivado ต้องใช้ XDC เดิม (10 ns) ทั้งสองรอบ ถ้าใช้ XDC 8 ns กับเน็ตลิสต์รอบ B จะเป็นการประเมินคนละโจทย์ ซึ่งไม่ตอบคำถามที่ต้องการ</p>
+<h4 id="ch05-533-สงทตองบนทก">5.3.3 สิ่งที่ต้องบันทึก</h4>
+<p>ใช้ตารางใน <code>labs/results/qor_results_template.md</code> โดยบันทึก</p>
+<p><strong>จาก Precision (pre-route)</strong></p>
+<ul>
+<li>setup slack วิกฤต, จำนวนเส้นทางที่ slack &lt; 0</li>
+<li>จำนวนระดับตรรกะของเส้นทางวิกฤต</li>
+<li>LUT, FF, BRAM, DSP และพื้นที่รวม</li>
+<li>จำนวนเส้นทางที่ไม่ถูกจำกัด</li>
+</ul>
+<p><strong>จาก Vivado (post-route, ประเมินที่ 10 ns)</strong></p>
+<ul>
+<li>WNS setup, TNS setup</li>
+<li>WNS hold, TNS hold</li>
+<li>เส้นทางวิกฤตที่รายงาน</li>
+<li>LUT/FF หลัง implement</li>
+<li>จำนวน DRC error/warning</li>
+<li>unconstrained paths</li>
+</ul>
+<hr>
+<h3 id="ch05-54-ผลตวอยางและการวเคราะห">5.4 ผลตัวอย่างและการวิเคราะห์</h3>
+<blockquote>ตัวเลขต่อไปนี้เป็น <strong>ตัวอย่างเพื่ออธิบายแนวคิด</strong> ไม่ใช่ผลจากการรันจริง ให้ใช้ตัวเลขของตัวเองในการสรุปผล</blockquote>
+<h4 id="ch05-541-ผลหลงสงเคราะห-pre-route">5.4.1 ผลหลังสังเคราะห์ (pre-route)</h4>
+<div class="table-wrap"><table><thead><tr><th>ตัวชี้วัด</th><th>รอบ A: 10 ns</th><th>รอบ B: 8 ns</th><th>ผลต่าง</th><th>อธิบาย</th></tr></thead><tbody><tr><td>Setup slack วิกฤต</td><td>+1.42 ns</td><td>+0.55 ns</td><td>−0.87 ns</td><td>slack ลดลงเพราะ "เป้าหมาย" เข้มขึ้น ไม่ได้แปลว่าเส้นทางยาวขึ้น</td></tr><tr><td>ระดับตรรกะ</td><td>6</td><td>5</td><td>−1</td><td>PS ย้ายรีจิสเตอร์หรือยุบตรรกะให้สั้นลง</td></tr><tr><td>LUT</td><td>148</td><td>176</td><td>+18.9%</td><td>ต้องใช้ตรรกะมากขึ้นเพื่อย่อเส้นทาง</td></tr><tr><td>FF</td><td>61</td><td>74</td><td>+21.3%</td><td>เพิ่มรีจิสเตอร์ระหว่างทาง</td></tr><tr><td>Unconstrained</td><td>0</td><td>0</td><td>0</td><td>ทั้งสองรอบต้องมี SDC ครบ</td></tr></tbody></table></div>
+<h4 id="ch05-542-ผลหลง-routing-ประเมนท-10-ns-ทงสองรอบ">5.4.2 ผลหลัง routing (ประเมินที่ 10 ns ทั้งสองรอบ)</h4>
+<div class="table-wrap"><table><thead><tr><th>ตัวชี้วัด</th><th>รอบ A: 10 ns</th><th>รอบ B: 8 ns</th><th>ผลต่าง</th><th>อธิบาย</th></tr></thead><tbody><tr><td>WNS setup</td><td>+0.83 ns</td><td>+0.71 ns</td><td>−0.12 ns</td><td>ทั้งสองผ่านที่ 10 ns แต่รอบ B ไม่ได้ดีขึ้น</td></tr><tr><td>TNS setup</td><td>0</td><td>0</td><td>0</td><td>ไม่มีเส้นทางลบในทั้งสองรอบ</td></tr><tr><td>WNS hold</td><td>+0.12 ns</td><td>+0.10 ns</td><td>−0.02 ns</td><td>hold เกิดหลังเดินสายจริง</td></tr><tr><td>LUT (หลัง implement)</td><td>149</td><td>178</td><td>+19.5%</td><td>พื้นที่เพิ่มขึ้นตามคาด</td></tr><tr><td>DRC error</td><td>0</td><td>0</td><td>0</td><td>ทั้งสองรอบผ่าน</td></tr><tr><td>Unconstrained</td><td>0</td><td>0</td><td>0</td><td></td></tr></tbody></table></div>
+<h4 id="ch05-543-ขอสรปจากตวอยาง">5.4.3 ข้อสรุปจากตัวอย่าง</h4>
+<ol>
+<li><strong>รอบ B ไม่ได้ดีกว่าในความหมายที่สำคัญ</strong></li>
+</ol>
+<p>แม้รอบ B จะมี slack ที่รายงานหลังสังเคราะห์ดีขึ้น (+0.55 ns เทียบกับ +1.42 ns) แต่เมื่อวัดที่คาบเวลาจริงของบอร์ด รอบ B แย่กว่าเล็กน้อย (+0.71 เทียบกับ +0.83 ns)</p>
+<ol>
+<li><strong>รอบ B จ่ายค่าด้วยพื้นที่เพิ่มขึ้นราว 20%</strong></li>
+</ol>
+<p>ซึ่งในโปรเจกต์จริงที่มีดีไซน์อื่นอยู่ในชิป พื้นที่ที่เพิ่มขึ้นนี้อาจเป็นปัญหาจริง</p>
+<ol>
+<li>**ตัวเลข pre-route ไม่ได้ทำนายผล post-route ได้แม่น</li>
+</ol>
+<p>การรายงาน slack หลังสังเคราะห์ของรอบ B ดู "ดี" ในเชิงเปอร์เซ็นต์ แต่เพราะเป้าหมายต่างกัน จึงเปรียบเทียบกันโดยตรงไม่ได้</p>
+<ol>
+<li><strong>บทเรียนที่ใช้ได้ทุกโปรเจกต์</strong></li>
+</ol>
+<p>ตั้งเป้าหมายสังเคราะห์ให้ <strong>ตรงกับข้อกำหนดจริงของฮาร์ดแวร์</strong> ไม่ใช่ตั้งให้เข้มที่สุดเท่าที่จะตั้งได้</p>
+<h4 id="ch05-544-ตารางเปรยบเทยบแบบยอ">5.4.4 ตารางเปรียบเทียบแบบย่อ</h4>
+<div class="table-wrap"><table><thead><tr><th></th><th>รอบ A (10 ns)</th><th>รอบ B (8 ns)</th><th>ใครชนะ</th></tr></thead><tbody><tr><td>พื้นที่ (LUT)</td><td>148</td><td>176</td><td>A</td></tr><tr><td>slack ตามเป้าหมายของตัวเอง</td><td>+1.42</td><td>+0.55</td><td>เทียบกันไม่ได้ (คนละเกณฑ์)</td></tr><tr><td>slack ที่เงื่อนไขบอร์ดจริง (10 ns) หลัง routing</td><td>+0.83</td><td>+0.71</td><td><strong>A</strong></td></tr><tr><td>ความซับซ้อนของดีไซน์</td><td>ต่ำกว่า</td><td>สูงกว่า</td><td>A</td></tr><tr><td>ความทนทานต่อความเปลี่ยนแปลงภายหลัง</td><td>สูงกว่า</td><td>ต่ำกว่า</td><td>A</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch05-55-วธตความเมอผลออกมาตางจากทคาด">5.5 วิธีตีความเมื่อผลออกมาต่างจากที่คาด</h3>
+<p>การทดลองนี้อาจได้ผลต่างจากตัวอย่าง และนั่นไม่ใช่เรื่องผิดปกติ เพราะผลขึ้นอยู่กับตัวสังเคราะห์ รุ่น และค่าคอนฟิก</p>
+<div class="table-wrap"><table><thead><tr><th>ผลที่ได้</th><th>การตีความ</th></tr></thead><tbody><tr><td>รอบ B ดีกว่าทั้งพื้นที่และเวลา</td><td>โอกาสเป็นไปได้น้อยมาก ตรวจว่าเงื่อนไขการประเมินเหมือนกันจริงหรือไม่</td></tr><tr><td>รอบ B แย่กว่าทั้งสองอย่าง</td><td>เป็นกรณีที่พบบ่อยที่สุด สนับสนุนข้อสรุปในหัวข้อ 5.4.4</td></tr><tr><td>รอบ B ดีกว่าเรื่องเวลาแต่แย่เรื่องพื้นที่</td><td>ต้องถามว่า "พื้นที่มีค่าอย่างไร" ในโปรเจกต์จริง</td></tr><tr><td>รอบ B ทำให้เกิด hold violation</td><td>โครงสร้างที่ต่างออกไปอาจต้องการความหน่วงต่างจากเดิม ต้องแก้ที่ Vivado</td></tr><tr><td>ทั้งสองรอบมี unconstrained paths</td><td>กลับไปตรวจ SDC ก่อน — การทดลองนี้ใช้ไม่ได้ถ้าเงื่อนไขไม่ครบ</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch05-56-แนวทางแกปญหาเฉพาะของบทน">5.6 แนวทางแก้ปัญหาเฉพาะของบทนี้</h3>
+<h4 id="ch05-561-ปญหา-รอบ-b-ใชเวลาสงเคราะหนานมาก">5.6.1 ปัญหา: รอบ B ใช้เวลาสังเคราะห์นานมาก</h4>
+<div class="table-wrap"><table><thead><tr><th>สาเหตุ</th><th>วิธีแก้</th></tr></thead><tbody><tr><td>PS พยายามทำตามเป้าหมายที่เข้มมากจนต้องลองหลายวิธี</td><td>ลด Optimization effort ลง แต่ต้องใช้ค่าเดียวกันทั้งสองรอบ</td></tr><tr><td>เปิด Retiming ทำให้ต้องย้อนโครงสร้างหลายรอบ</td><td>ปิด Retiming ในทั้งสองรอบ หรือปล่อยเวลาไว้มากขึ้น</td></tr><tr><td>เครื่องไม่แรง</td><td>ลดขนาดดีไซน์ทดสอบ หรือใช้เครื่องที่แรงกว่า</td></tr></tbody></table></div>
+<h4 id="ch05-562-ปญหา-ผล-post-route-แยกวา-pre-route-มาก">5.6.2 ปัญหา: ผล post-route แย่กว่า pre-route มาก</h4>
+<div class="table-wrap"><table><thead><tr><th>สาเหตุ</th><th>วิธีแก้</th></tr></thead><tbody><tr><td>ใช้เงื่อนไขเวลาของรอบผิด (เช่น XDC 8 ns กับเน็ตลิสต์ 10 ns)</td><td>ตรวจว่า XDC เป็น 10.000 ns ทั้งสองรอบ</td></tr><tr><td>ไม่ได้กำหนด input/output delay</td><td>เส้นทาง I/O จะไม่ถูกจำกัดและรายงานจะเพี้ยน</td></tr><tr><td><code>set_false_path</code> ผิดขอบเขต</td><td>ตรวจว่าไม่ได้ตัดเส้นทางที่ควรถูกจำกัด</td></tr></tbody></table></div>
+<h4 id="ch05-563-ปญหา-เสนทาง-io-เปลยนพฤตกรรมระหวางสองรอบ">5.6.3 ปัญหา: เส้นทาง I/O เปลี่ยนพฤติกรรมระหว่างสองรอบ</h4>
+<p>ถ้า Retiming ทำให้รีจิสเตอร์ขยับข้ามพอร์ต I/O สมมติฐานของ SDC จะไม่ตรงอีกต่อไป สังเกตได้จากรายงานของ PS ที่ Startpoint/Endpoint ของเส้นทางเปลี่ยนไป</p>
+<p><strong>วิธีแก้</strong></p>
+<ol>
+<li>ปิด Retiming แล้วสังเคราะห์ซ้ำทั้งสองรอบ (ทางเลือกที่ปลอดภัย)</li>
+<li>หรือยอมรับการเปลี่ยนแปลงและปรับ SDC ให้ตรงกับโครงสร้างใหม่</li>
+</ol>
+<blockquote>ข้อสังเกตนี้เป็นตัวอย่างที่ดีของหลัก <strong>"การเปลี่ยนสมมติฐานของเส้นทาง I/O ต้องไปพร้อมกับการเปลี่ยนเงื่อนไข"</strong></blockquote>
+<h4 id="ch05-564-ปญหา-ผลตางของสองรอบนอยเกนไปจนสรปไมได">5.6.4 ปัญหา: ผลต่างของสองรอบน้อยเกินไปจนสรุปไม่ได้</h4>
+<p>โปรเจกต์ตัวอย่างนี้เล็กมาก (ประมาณ 150 LUT) ผลของการบีบเวลาจึงมีผลน้อย <strong>วิธีเพิ่มความชัดเจนของการทดลอง</strong></p>
+<ul>
+<li>เพิ่ม <code>int8_mac.vhd</code> เข้าไป ซึ่งมีตัวคูณและ pipeline ที่ซับซ้อนกว่า</li>
+<li>เพิ่มกรณีขยาย ให้มีตัวคูณหลายตัวและเส้นทางยาวขึ้น</li>
+<li>ใช้โปรเจกต์จริงของทีมแทน</li>
+</ul>
+<hr>
+<h3 id="ch05-57-แบบฝกหดบทท-5">5.7 แบบฝึกหัดบทที่ 5</h3>
+<h4 id="ch05-lab-51-สงเคราะหสองรอบ">Lab 5.1 — สังเคราะห์สองรอบ</h4>
+<ol>
+<li>รัน <code>ps_qor_10ns.tcl</code> และ <code>ps_qor_8ns.tcl</code></li>
+<li>ตรวจว่าได้เน็ตลิสต์และรายงานครบทั้งสองรอบ</li>
+<li>บันทึกตัวเลข pre-route ลงในตาราง</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: มีรายงานครบทั้งสองรอบ และตัวเลขต่างกันอย่างมีนัยสำคัญ</p>
+<h4 id="ch05-lab-52-ประเมนหลง-routing-ท-10-ns-ทงสองรอบ">Lab 5.2 — ประเมินหลัง routing ที่ 10 ns ทั้งสองรอบ</h4>
+<ol>
+<li>รัน Vivado สำหรับเน็ตลิสต์รอบ A โดยใช้ XDC คาบเวลา 10 ns</li>
+<li>รัน Vivado สำหรับเน็ตลิสต์รอบ B <strong>โดยยังใช้ XDC คาบเวลา 10 ns เหมือนเดิม</strong></li>
+<li>บันทึกตัวเลข post-route ลงในตาราง</li>
+<li>ตรวจว่าเกณฑ์ sign-off ผ่านทั้งสองรอบ</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: มีตัวเลข post-route ครบทั้งสองรอบที่ประเมินด้วยเงื่อนไขเดียวกัน</p>
+<h4 id="ch05-lab-53-เขยนบทวเคราะห">Lab 5.3 — เขียนบทวิเคราะห์</h4>
+<ol>
+<li>ตอบคำถามทั้ง 6 ข้อในหัวข้อ 4 ของตารางบันทึกผล ด้วยตัวเลขของตัวเอง</li>
+<li>เขียนข้อสรุป 5–8 บรรทัดว่า <strong>ควรตั้งเป้าหมายสังเคราะห์เท่าไรในโปรเจกต์จริง</strong> และเพราะอะไร</li>
+<li>ระบุว่าผลการทดลองนี้สนับสนุนหรือไม่สนับสนุนหลักการในหัวข้อ 5.2</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: มีบทวิเคราะห์ที่อ้างอิงตัวเลขจริง ไม่ใช่คัดลอกตัวอย่าง</p>
+<hr>
+<h3 id="ch05-58-สรปบท">5.8 สรุปบท</h3>
+<ul>
+<li>การตั้งเป้าหมายสังเคราะห์ให้เข้มกว่าความจริงไม่ได้ทำให้ดีไซน์ดีขึ้นเสมอไป</li>
+<li>ตัวสังเคราะห์ตอบสนองต่อคำสั่งของเรา แต่คำสั่งที่ดีที่สุดคือคำสั่งที่ตรงกับฮาร์ดแวร์</li>
+<li><strong>ตัวเลข QoR ที่ใช้ตัดสินใจต้องเป็นตัวเลขหลัง routing</strong> ด้วยเงื่อนไขของบอร์ดจริง</li>
+<li>ตัวแปรที่ต้องควบคุมในการทดลองเปรียบเทียบ: RTL, ไลบรารี, ตัวเลือกการสังเคราะห์, สคริปต์ P&amp;R, และเงื่อนไขการประเมิน</li>
+<li>เป้าหมายที่เข้มขึ้นมีต้นทุน: พื้นที่เพิ่ม ความซับซ้อนเพิ่ม และอาจเปลี่ยนสมมติฐานของเส้นทาง I/O</li>
+</ul>
+<p><strong>เตรียมตัวก่อนบทถัดไป</strong>: มีผลเปรียบเทียบครบสองรอบพร้อมบทวิเคราะห์ (บทที่ 6)</p>
+<p class="srcfile">แหล่งไฟล์: 05-qor-comparison-10ns-vs-8ns.md</p>
+<h2 id="ch06-บทท-6-แนวทางแกปญหาและรายการตรวจสอบ">บทที่ 6 — แนวทางแก้ปัญหาและรายการตรวจสอบ</h2>
+<blockquote>บทนี้เป็นคลังปัญหาจริงที่พบระหว่างทำแล็บในคู่มือนี้ รวมถึงรายการตรวจสอบ ที่ใช้ก่อน–หลังแต่ละขั้น ควรใช้เป็น "แผนกู้เมื่อติด" ในห้องเรียน</blockquote>
+<hr>
+<h3 id="ch06-61-แนวทางวเคราะหปญหาแบบเปนขนตอน">6.1 แนวทางวิเคราะห์ปัญหาแบบเป็นขั้นตอน</h3>
+<p>เมื่อมีปัญหา ให้ไล่จากข้างต้น (ต้นทาง) ไปปลายทางตามลำดับนี้ เพราะปัญหาเกือบทั้งหมดในงานสังเคราะห์จะอยู่ที่ขั้นตอนก่อนหน้าเสมอ</p>
+<pre class="code"><code class="lang-text">1. RTL ถูกต้องไหม?          → ผ่าน testbench แล้วหรือยัง
+2. เงื่อนไขเวลาครบไหม?        → มีเส้นทาง unconstrained หรือไม่
+3. ตัวสังเคราะห์ผิดไหม?      → เทียบ pre-route กับค่าที่คาด
+4. การวางวาง/เดินสายผิดไหม? → เทียบ post-route กับ pre-route
+5. ส่งต่อระหว่างเครื่องมือผิดไหม? → เช็ค EDIF / XDC
+6. ข้อจำกัดของชิปเกินไหม?   → utilization</code></pre>
+<hr>
+<h3 id="ch06-62-ปญหาระดบ-rtl-และการจาลอง">6.2 ปัญหาระดับ RTL และการจำลอง</h3>
+<div class="table-wrap"><table><thead><tr><th>อาการ</th><th>สาเหตุที่พบจริง</th><th>วิธีแก้</th></tr></thead><tbody><tr><td>ผลจำลองไม่ตรงกับผลสังเคราะห์</td><td>process ที่ไวต่อ <code>clk</code> ขาด <code>rising_edge(clk)</code></td><td>เพิ่ม <code>elsif rising_edge(clk) then</code> — ดูหัวข้อ 1.1.4</td></tr><tr><td>ค่าผลลัพธ์เป็นสองเท่าที่ควรเป็น</td><td>ตัวสังเคราะห์/การจำลองทำงานทั้งขอบขึ้นและขอบลง</td><td>ตรวจทุก process ที่ sensitive กับ <code>clk</code></td></tr><tr><td>ผลต่างกันเฉพาะคำสั่ง SUB</td><td>สลับลำดับ operand เพราะ <code>A &amp; B</code> เอา A ไว้บิตสูง</td><td>สลับลำดับในการต่อสัญญาณ — ดูหัวข้อ 1.1.5</td></tr><tr><td>ค่า overflow ไม่ตรง</td><td>ส่งค่า byte ดิบเข้าแบบจำลองที่ตีความแบบมีเครื่องหมาย</td><td>แปลงด้วย <code>int_of(byte_of(x))</code> ก่อนส่งเข้าแบบจำลอง</td></tr><tr><td>เกิด latch ในการจำลอง</td><td>ไม่ได้กำหนดค่าเริ่มต้นให้ทุกเอาต์พุต</td><td>ใส่ค่าเริ่มต้นก่อน <code>case</code></td></tr><tr><td>ไฟล์ VHDL คอมไพล์ไม่ผ่าน</td><td>มีอักษรไทยใน string literal</td><td>ใช้ภาษาอังกฤษในข้อความ <code>report</code> — ดูหัวข้อ 1.3.3</td></tr><tr><td>คอมไพล์ไม่ผ่าน "'others' choice not allowed"</td><td>ใช้ <code>(others =&gt; '0')</code> ใน expression</td><td>ใช้ constant — ดูหัวข้อ 1.3.3</td></tr><tr><td>GHDL ขึ้น "invalid character not allowed"</td><td>พาธที่มีอักษรไทย</td><td>คัดลอกไปพาธ ASCII — ดูหัวข้อ 0.3.3</td></tr><tr><td>handshake ตรวจผิดที่</td><td>อ่านค่า signal หลังขอบขึ้น (post-edge) แทนก่อนขอบขึ้น</td><td>ใช้ process ที่ sensitive กับ <code>clk</code> และอ่านค่าในนั้น</td></tr><tr><td>testbench ไม่จบ</td><td>ไม่มีการเรียก <code>stop</code>/<code>finish</code></td><td>เพิ่ม <code>stop</code> เมื่อผ่าน และ <code>assert false severity failure</code> เมื่อไม่ผ่าน</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch06-63-ปญหาระดบโปรเจกต-precision">6.3 ปัญหาระดับโปรเจกต์ Precision</h3>
+<div class="table-wrap"><table><thead><tr><th>อาการ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr></thead><tbody><tr><td><code>Unable to find entity</code></td><td>เพิ่มไฟล์มาผิดลำดับ</td><td>ลบออกแล้วเพิ่มใหม่ โดยเริ่มจาก leaf module</td></tr><tr><td>hierarchy ไม่ครบ</td><td>โมดูลในไฟล์เดียวกันไม่ถูกอ่าน</td><td>แยกแต่ละ entity ออกเป็นไฟล์ย่อย หรือตรวจรูปแบบไฟล์</td></tr><tr><td>ไม่มีรายงานเวลาเลย</td><td>ยังไม่ได้ใส่ SDC หรือไม่ได้กำหนดความถี่</td><td>ทำหัวข้อ 2.4</td></tr><tr><td>รายงานเวลาเป็นศูนย์/ว่าง</td><td>ไม่มี clock ที่เกี่ยวข้อง</td><td>ตรวจ <code>create_clock</code> และชื่อพอร์ต</td></tr><tr><td>เส้นทางไม่ถูกจำกัดจำนวนมาก</td><td>ลืม <code>set_input_delay</code> / <code>set_output_delay</code></td><td>ดูตารางในหัวข้อ 3.4.3</td></tr><tr><td>ตัวเลขเวลาไม่สมจริง</td><td>ไม่ได้เลือกอุปกรณ์</td><td>ตั้ง part ใน Environment Settings</td></tr><tr><td>ไม่พบ part ที่ต้องการ</td><td>รุ่นของ PS ไม่รองรับ</td><td>ใช้การสังเคราะห์แบบ generic หรือส่งเน็ตลิสต์ VHDL/Verilog — ดูหัวข้อ 2.3.4</td></tr><tr><td>โปรเจกต์สังเคราะห์ไม่ซ้ำผลเดิม</td><td>ไม่ได้บันทึกค่าคอนฟิก</td><td>ใช้ <code>File &gt; Save Command File</code> แล้วรันสคริปต์</td></tr><tr><td>สังเคราะห์ช้าผิดปกติ</td><td>เปิด effort สูง หรือเปิด Retiming</td><td>ลด effort หรือปิด Retiming (แต่ต้องใช้ค่าเดียวกันทุกรอบที่เปรียบเทียบ)</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch06-64-ปญหาระดบการสงตอและ-place-route">6.4 ปัญหาระดับการส่งต่อและ Place &amp; Route</h3>
+<div class="table-wrap"><table><thead><tr><th>อาการ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr></thead><tbody><tr><td>Vivado อ่าน EDIF ไม่ได้</td><td>ชื่อเซลล์/ไลบรารีไม่ตรงกับอุปกรณ์</td><td>ตรวจว่า PS ใช้ไลบรารีของอุปกรณ์ถูกตัว; ถ้าไม่ได้ให้ใช้ทางสำรองในหัวข้อ 4.7</td></tr><tr><td>พอร์ตไม่ถูกผูกกับพิน</td><td>ไม่ได้ใส่ XDC</td><td>เพิ่ม <code>nexys_a7_100t.xdc</code></td></tr><tr><td>พอร์ตถูกผูกกับพินแต่ผิดพิน</td><td>ชื่อพอร์ตไม่ตรงกับ XDC</td><td>ตรวจชื่อพอร์ตใน RTL ให้ตรงกับ XDC ทุกตัวอักษร</td></tr><tr><td>Setup ไม่ผ่านหลัง route</td><td>เวลาเดินสายจริงมากกว่าที่ประมาณไว้</td><td>ปรับ RTL, เพิ่ม effort, ใช้ phys_opt — ดูหัวข้อ 4.4.3</td></tr><tr><td>Hold ไม่ผ่าน</td><td>เส้นทางสั้นเกินไปหลังเดินสาย</td><td><code>phys_opt_design</code> หรือใส่ delay buffer — ดูหัวข้อ 4.5</td></tr><tr><td>DRC error</td><td>ข้อกำหนดพินขัดแย้งกัน</td><td>ตรวจรายงาน DRC ว่าพินใดชนกัน</td></tr><tr><td>Unconstrained paths &gt; 0</td><td>พอร์ตบางตัวไม่ได้จำกัดเวลา</td><td>เติมเงื่อนไขใน XDC</td></tr><tr><td>Bitstream ที่ได้โปรแกรมไม่ขึ้น</td><td>ไฟล์ .bit ไม่ตรงกับบอร์ด หรือไม่ได้ตั้ง part</td><td>ตรวจ <code>xc7a100tcsg324-1</code> และความถี่โปรแกรมเมอร์</td></tr><tr><td>บอร์ดแสดงผลผิด</td><td>RTL ผิด หรือสังเคราะห์จาก RTL คนละชุด</td><td>ตรวจว่าไฟล์ที่ใช้สร้าง bitstream ตรงกับที่ทดสอบ</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch06-65-ปญหาการเปรยบเทยบ-qor-บทท-5">6.5 ปัญหาการเปรียบเทียบ QoR (บทที่ 5)</h3>
+<div class="table-wrap"><table><thead><tr><th>อาการ</th><th>สาเหตุ</th><th>วิธีแก้</th></tr></thead><tbody><tr><td>ผลของสองรอบเหมือนกันเป๊ะ</td><td>ลืมแก้ <code>sdc_file</code> ในสคริปต์ หรือสคริปต์ทั้งสองชี้ไฟล์เดียวกัน</td><td>ตรวจไฟล์ SDC ที่แต่ละรอบอ้างอิง</td></tr><tr><td>ทั้งสองรอบมี unconstrained paths</td><td>SDC ไม่ครบ</td><td>ห้ามเริ่มทดลองจนกว่าจะเป็น 0</td></tr><tr><td>ประเมินผิดรอบ</td><td>ใช้ XDC 8 ns กับเน็ตลิสต์รอบ A</td><td>ยืนยันว่า XDC เป็น 10 ns ทั้งสองรอบ</td></tr><tr><td>post-route แย่กว่า pre-route มาก</td><td>เงื่อนไขการประเมินไม่เหมือนกับตอนสังเคราะห์</td><td>ตรวจ input/output delay และ <code>set_false_path</code></td></tr><tr><td>ผลต่างเล็กจนสรุปไม่ได้</td><td>ดีไซน์เล็กเกินไป</td><td>เพิ่ม <code>int8_mac</code> หรือใช้โปรเจกต์จริง</td></tr><tr><td>สังเคราะห์รอบ 8 ns ใช้เวลานานมาก</td><td>effort สูง + เป้าหมายเข้ม</td><td>ลด effort (ใช้ค่าเดียวกันทั้งสองรอบ)</td></tr></tbody></table></div>
+<hr>
+<h3 id="ch06-66-รายการตรวจสอบกอนสงงาน-checklist">6.6 รายการตรวจสอบก่อนส่งงาน (checklist)</h3>
+<h4 id="ch06-661-กอนเรมสงเคราะห">6.6.1 ก่อนเริ่มสังเคราะห์</h4>
+<ul>
+<li>[ ] RTL ผ่าน testbench แบบตรวจตัวเองทุกตัว</li>
+<li>[ ] testbench ครอบคลุมทุกโหมดของตัวออกแบบ</li>
+<li>[ ] เลือก part ตรงกับชิปจริงแล้ว</li>
+<li>[ ] ใส่ SDC ครบ: นาฬิกา, input delay, output delay, false path</li>
+<li>[ ] Compile ผ่านโดยไม่มี error/warning ที่ไม่เข้าใจ</li>
+</ul>
+<h4 id="ch06-662-หลงสงเคราะห">6.6.2 หลังสังเคราะห์</h4>
+<ul>
+<li>[ ] จำนวนเส้นทางที่ไม่ถูกจำกัด = 0</li>
+<li>[ ] setup slack วิกฤต ≥ 0</li>
+<li>[ ] ตรวจ utilization แล้วเทียบกับข้อจำกัดของชิป</li>
+<li>[ ] ระบุชนิดเซลล์หลักที่ใช้ (LUT / carry / DSP / BRAM)</li>
+<li>[ ] ตรวจว่าเส้นทางวิกฤตมาจากโค้ดส่วนที่คาด (ย้อนกลับได้)</li>
+<li>[ ] บันทึกตัวเลขลงตาราง QoR</li>
+</ul>
+<h4 id="ch06-663-กอนสงตอ-vivado">6.6.3 ก่อนส่งต่อ Vivado</h4>
+<ul>
+<li>[ ] ส่งออก EDIF แล้ว</li>
+<li>[ ] ตรวจว่า XDC มีพินครบทุกพอร์ตของ top</li>
+<li>[ ] ยืนยันว่า XDC ใช้คาบเวลาตามข้อกำหนดจริงของฮาร์ดแวร์</li>
+<li>[ ] เก็บ RTL ไว้ในโปรเจกต์ Vivado เพื่อการ debug</li>
+<li>[ ] ตรวจว่า part ใน Vivado ตรงกับ PS</li>
+</ul>
+<h4 id="ch06-664-กอนสราง-bitstream">6.6.4 ก่อนสร้าง bitstream</h4>
+<ul>
+<li>[ ] setup WNS ≥ 0 และ TNS = 0</li>
+<li>[ ] hold WNS ≥ 0 และ TNS = 0</li>
+<li>[ ] unconstrained paths = 0</li>
+<li>[ ] DRC error = 0</li>
+<li>[ ] ไม่มี critical warning ว่าพอร์ตไม่ถูกจำกัด</li>
+<li>[ ] เกณฑ์ sign-off ผ่านจากสคริปต์</li>
+</ul>
+<h4 id="ch06-665-หลงทดสอบบนบอรด">6.6.5 หลังทดสอบบนบอร์ด</h4>
+<ul>
+<li>[ ] โปรแกรม bitstream แล้วบอร์ดทำงาน</li>
+<li>[ ] ทดสอบทุกแถวในตารางหัวข้อ 4.6.2</li>
+<li>[ ] ผลบนบอร์ดตรงกับผลจากการจำลอง</li>
+<li>[ ] บันทึกผลการทดสอบลงรายงาน</li>
+</ul>
+<hr>
+<h3 id="ch06-67-แบบฝกหดบทท-6">6.7 แบบฝึกหัดบทที่ 6</h3>
+<h4 id="ch06-lab-61-สรางคลงปญหาของทม">Lab 6.1 — สร้างคลังปัญหาของทีม</h4>
+<ol>
+<li>รวบรวมปัญหาที่เจอระหว่างทำแล็บ 1–5 (ทั้งที่แก้เองได้และที่ไม่ได้)</li>
+<li>สำหรับแต่ละปัญหา ให้เขียน: อาการ → สาเหตุ → วิธีแก้ → วิธีตรวจสอบว่าแก้แล้ว</li>
+<li>เพิ่มรายการใหม่ที่พบในหัวข้อ 6.2–6.5 เข้าไปด้วย</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: มีคลังปัญหาอย่างน้อย 8 รายการ ในรูปแบบที่ทีมอ่านแล้วใช้ได้ทันที</p>
+<h4 id="ch06-lab-62-ตรวจความพรอมกอนสงงานจรง">Lab 6.2 — ตรวจความพร้อมก่อนส่งงานจริง</h4>
+<ol>
+<li>ทำแบบฝึกหัด 1–5 อีกครั้งโดยไม่เปิด checklist</li>
+<li>จากนั้นทำซ้ำโดยเปิด checklist และเทียบว่าพลาดจุดไหน</li>
+<li>บันทึกว่าจุดที่พลาดบ่อยที่สุดคืออะไร</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: รอบที่สองพลาดน้อยกว่า และเข้าใจว่าจุดที่พลาดบ่อยคืออะไร</p>
+<h4 id="ch06-lab-63-ทาใหเกณฑ-sign-off-ทางานไดจรง">Lab 6.3 — ทำให้เกณฑ์ sign-off ทำงานได้จริง</h4>
+<ol>
+<li>จงให้เกณฑ์ใน <code>check_signoff.tcl</code> ล้มเหลวจริง ๆ อย่างน้อย 2 กรณี (setup, hold, DRC, unconstrained)</li>
+<li>ตรวจว่าสคริปต์รายงานเหตุผลที่ถูกต้อง และไม่สร้าง bitstream</li>
+<li>บันทึกข้อความจริงที่ได้ (ไม่ใช่ที่คัดมา)</li>
+</ol>
+<p><strong>เกณฑ์ผ่าน</strong>: เกณฑ์ทำงานถูกต้องในทุกกรณี</p>
+<hr>
+<h3 id="ch06-68-สรปบท">6.8 สรุปบท</h3>
+<ul>
+<li>ปัญหาเกือบทั้งหมดในงานสังเคราะห์อยู่ที่ขั้นก่อนหน้าเสมอ จึงควรไล่จากต้นทาง</li>
+<li>รายการตรวจสอบที่เขียนไว้ล่วงหน้า ช่วยลดเวลาที่ใช้แก้ปัญหาได้มากกว่าการจำจากหัว</li>
+<li>เกณฑ์ sign-off ที่ทำเป็นสคริปต์ ทำให้ "การตรวจก่อนปล่อย" เป็นกระบวนการมาตรฐาน</li>
+<li>คลังปัญหาของทีมเป็นทรัพย์สินที่ต้องสะสม เพราะปัญหาเดิมมักกลับมาในโปรเจกต์ถัดไป</li>
+</ul>
+<p><strong>ขั้นตอนถัดไป</strong>: ปิดท้ายการอบรมด้วยการทบทวนบทที่ 1–5 และส่งรายงานผลการทดลอง พร้อมตารางบันทึกผล QoR ที่กรอกครบทุกช่อง</p>
+<p class="srcfile">แหล่งไฟล์: 06-troubleshooting-and-checklists.md</p>
+<h2 id="appa-ภาคผนวก-ก-คลงคาสง-tcl-และคาสง-sdc">ภาคผนวก ก — คลังคำสั่ง Tcl และคำสั่ง SDC</h2>
+<blockquote><strong>คำเตือนเรื่องชื่อคำสั่ง</strong>: คำสั่งของ Precision เปลี่ยนแปลงได้ตามรุ่น ให้เทียบกับ <em>Command Reference</em> ของรุ่นที่ใช้เสมอ วิธีที่ปลอดภัยที่สุดคือใช้ <code>File &gt; Save Command File</code> ใน GUI เพื่อเก็บคำสั่งจริง</blockquote>
+<hr>
+<h3 id="appa-ก1-คาสง-precision-synthesis-ตามรปแบบ-ps20181">ก.1 คำสั่ง Precision Synthesis (ตามรูปแบบ PS2018.1)</h3>
+<h4 id="appa-ก11-การจดการโปรเจกตและไฟล">ก.1.1 การจัดการโปรเจกต์และไฟล์</h4>
+<div class="table-wrap"><table><thead><tr><th>คำสั่ง</th><th>หน้าที่</th><th>ตรงกับ GUI</th></tr></thead><tbody><tr><td><code>new_project &lt;name&gt; -force -output &lt;dir&gt;</code></td><td>สร้างโปรเจกต์ใหม่</td><td>File &gt; New Project</td></tr><tr><td><code>add_input_file &lt;file&gt; -vhdl</code></td><td>เพิ่มไฟล์ VHDL</td><td>File &gt; Add Files</td></tr><tr><td><code>add_input_file &lt;file&gt; -verilog</code></td><td>เพิ่มไฟล์ Verilog</td><td>File &gt; Add Files</td></tr><tr><td><code>add_input_file &lt;file&gt; -edif</code></td><td>เพิ่มเน็ตลิสต์ EDIF</td><td>File &gt; Add Files</td></tr><tr><td><code>add_input_file &lt;file&gt; -sdc</code></td><td>เพิ่มไฟล์ SDC</td><td>File &gt; Add Files</td></tr><tr><td><code>read_sdc &lt;file&gt;</code></td><td>อ่านเงื่อนไขเวลา</td><td>Setup Constraints</td></tr><tr><td><code>save_project</code></td><td>บันทึกโปรเจกต์</td><td>File &gt; Save Project</td></tr></tbody></table></div>
+<h4 id="appa-ก12-การตงคาอปกรณและตวเลอก">ก.1.2 การตั้งค่าอุปกรณ์และตัวเลือก</h4>
+<pre class="code"><code class="lang-tcl">setup_design -manufacturer xilinx artix7 -part xc7a100tcsg324 -speed -1</code></pre>
+<p>รูปแบบทั่วไปของ <code>setup_design</code></p>
+<pre class="code"><code class="lang-tcl">setup_design -manufacturer &lt;ผู้ผลิต&gt; &lt;ตระกูล&gt; -part &lt;ชื่อ part&gt; -speed &lt;คลาสความเร็ว&gt;</code></pre>
+<p>ตัวเลือกที่พบบ่อยในไฟล์คอนฟิกของ PS</p>
+<div class="table-wrap"><table><thead><tr><th>ตัวเลือก</th><th>ความหมาย</th></tr></thead><tbody><tr><td><code>retiming</code></td><td>เปิด/ปิดการย้ายรีจิสเตอร์เพื่อปรับปรุงเวลา</td></tr><tr><td><code>optimize</code> / effort</td><td>ระดับความพยายามในการปรับปรุง (ต่ำ/กลาง/สูง)</td></tr><tr><td><code>resource_sharing</code></td><td>ใช้ทรัพยากรร่วมกันระหว่างบล็อกเพื่อลดพื้นที่</td></tr><tr><td><code>hierarchy</code></td><td>วิธีจัดการ hierarchy (auto / flatten / คงเดิม)</td></tr></tbody></table></div>
+<h4 id="appa-ก13-การสงเคราะห">ก.1.3 การสังเคราะห์</h4>
+<pre class="code"><code class="lang-tcl">compile        # ขั้นที่ 2a: อ่านและตรวจ RTL
+synthesize     # ขั้นที่ 2b: สังเคราะห์เป็นเน็ตลิสต์</code></pre>
+<h4 id="appa-ก14-การรายงานผล">ก.1.4 การรายงานผล</h4>
+<pre class="code"><code class="lang-tcl">report_timing                     &gt; timing.rpt          # เส้นทางวิกฤต
+report_timing -max_paths 20       &gt; timing.rpt          # 20 เส้นทาง
+report_timing -unconstrained_paths &gt; unconstrained.rpt  # เส้นทางที่ไม่ถูกจำกัด
+report_area                        &gt; area.rpt            # พื้นที่/ทรัพยากร
+report_schematic                                     # เปิด schematic</code></pre>
+<h4 id="appa-ก15-การสงตอผลลพธ">ก.1.5 การส่งต่อผลลัพธ์</h4>
+<pre class="code"><code class="lang-tcl">write_edif out/top_alu8.edif      # เน็ตลิสต์ EDIF ไปยัง Vivado
+write_sdc  out/top_alu8.sdc       # เงื่อนไขเวลา</code></pre>
+<h4 id="appa-ก16-โครงสรางสครปตตวอยางทใชไดจรง">ก.1.6 โครงสร้างสคริปต์ตัวอย่างที่ใช้ได้จริง</h4>
+<pre class="code"><code class="lang-tcl"># ---- ตัวแปร ----
+set design_name &quot;top_alu8&quot;
+set rtl_dir     &quot;../rtl&quot;
+set sdc_file    &quot;../sdc/top_alu8.sdc&quot;
+set out_dir     &quot;out_10ns&quot;
+
+file mkdir $out_dir
+
+# ---- ขั้นที่ 1: Set-Up ----
+new_project $design_name -force -output $out_dir
+
+add_input_file $rtl_dir/alu8.vhd     -vhdl
+add_input_file $rtl_dir/hex2seg.vhd  -vhdl
+add_input_file $rtl_dir/top_alu8.vhd -vhdl
+
+setup_design -manufacturer xilinx artix7 -part xc7a100tcsg324 -speed -1
+
+read_sdc $sdc_file
+report_timing -unconstrained_paths
+
+# ---- ขั้นที่ 2: Run Synthesis ----
+compile
+synthesize
+
+# ---- ขั้นที่ 3: Analyze ----
+report_timing -max_paths 20        &gt; $out_dir/timing.rpt
+report_timing -unconstrained_paths &gt; $out_dir/unconstrained.rpt
+report_area                        &gt; $out_dir/area.rpt
+
+write_edif $out_dir/$design_name.edif
+write_sdc  $out_dir/$design_name.sdc
+
+exit</code></pre>
+<hr>
+<h3 id="appa-ก2-คาสง-sdc-xdc-ทใชในคมอน">ก.2 คำสั่ง SDC / XDC ที่ใช้ในคู่มือนี้</h3>
+<div class="table-wrap"><table><thead><tr><th>คำสั่ง</th><th>หน้าที่</th><th>ตัวอย่าง</th></tr></thead><tbody><tr><td><code>create_clock</code></td><td>สร้างนาฬิกาหลัก</td><td><code>create_clock -name sys_clk -period 10.000 [get_ports {CLK100MHZ}]</code></td></tr><tr><td><code>create_generated_clock</code></td><td>สร้างนาฬิกาที่ derive จากนาฬิกาอื่น</td><td><code>create_generated_clock -name div2 -divide_by 2 -source [get_ports {clk}] [get_pins {div/Q}]</code></td></tr><tr><td><code>set_input_delay</code></td><td>เวลาหน่วงของอินพุต</td><td><code>set_input_delay -clock sys_clk -max 2.000 [get_ports {SW[*]}]</code></td></tr><tr><td><code>set_output_delay</code></td><td>เวลาที่ต้องใช้ขับเอาต์พุต</td><td><code>set_output_delay -clock sys_clk -max 2.000 [get_ports {LED[*]}]</code></td></tr><tr><td><code>set_false_path</code></td><td>ตัดเส้นทางออกจากการวิเคราะห์</td><td><code>set_false_path -from [get_ports {CPU_RESETN}]</code></td></tr><tr><td><code>set_multicycle_path</code></td><td>อนุญาตให้ใช้หลายรอบนาฬิกา</td><td><code>set_multicycle_path -setup 2 -from [get_ports {a}]</code></td></tr><tr><td><code>set_clock_uncertainty</code></td><td>เพิ่มความไม่แน่นอนของนาฬิกา</td><td><code>set_clock_uncertainty -setup 0.150 [get_clocks {sys_clk}]</code></td></tr><tr><td><code>set_max_delay</code> / <code>set_min_delay</code></td><td>จำกัดเวลาสูงสุด/ต่ำสุดโดยตรง</td><td><code>set_max_delay 8.0 -from [get_ports {a}] -to [get_ports {b}]</code></td></tr><tr><td><code>get_ports</code></td><td>เลือกพอร์ต</td><td><code>[get_ports {SW[*]}]</code></td></tr><tr><td><code>get_clocks</code></td><td>เลือกนาฬิกา</td><td><code>[get_clocks {sys_clk}]</code></td></tr><tr><td><code>get_pins</code></td><td>เลือกขาเซลล์</td><td><code>[get_pins {u_ff/D}]</code></td></tr><tr><td><code>get_cells</code></td><td>เลือกเซลล์</td><td><code>[get_cells {u_alu}]</code></td></tr></tbody></table></div>
+<h4 id="appa-ก21-รปแบบ-wildcard-ทตองระวง">ก.2.1 รูปแบบ wildcard ที่ต้องระวัง</h4>
+<pre class="code"><code class="lang-tcl">[get_ports {SW[*]}]      # ถูก: ใช้วงเล็บปีกกาแบบ Tcl
+[get_ports {SW[*]}]      # ถูก
+[get_ports SW[*]]        # ผิด: Tcl จะพยายามขยาย [*] เป็นรายการคำสั่ง</code></pre>
+<p><strong>กฎ</strong>: ควรอยู่ในเครื่องหมาย <code>{ }</code> เสมอ</p>
+<hr>
+<h3 id="appa-ก3-คาสง-vivado-สาหรบ-place-route">ก.3 คำสั่ง Vivado สำหรับ Place &amp; Route</h3>
+<h4 id="appa-ก31-การจดการโปรเจกต">ก.3.1 การจัดการโปรเจกต์</h4>
+<pre class="code"><code class="lang-tcl">create_project -part xc7a100tcsg324-1 -force top_alu8_prj
+set_property board_part digilentinc.com/nexys-a7-100T [current_project]
+add_files -norecurse netlist/top_alu8.edif
+add_files -norecurse nexys_a7_100t.xdc
+set_property top top_alu8 [current_fileset]</code></pre>
+<h4 id="appa-ก32-การอานอนพต">ก.3.2 การอ่านอินพุต</h4>
+<pre class="code"><code class="lang-tcl">read_edif netlist/top_alu8.edif      # เน็ตลิสต์ EDIF
+read_xdc  nexys_a7_100t.xdc          # ข้อจำกัดพินและเวลา
+read_verilog rtl/top.v               # RTL สำหรับ debug
+read_vhdl    rtl/top.vhd</code></pre>
+<h4 id="appa-ก33-การทาใหดทสด">ก.3.3 การทำให้ดีที่สุด</h4>
+<pre class="code"><code class="lang-tcl">link_design -part xc7a100tcsg324-1 -top top_alu8
+opt_design
+place_design
+phys_opt_design
+route_design</code></pre>
+<p>ตัวเลือกที่ควรรู้</p>
+<pre class="code"><code class="lang-tcl">opt_design -directive ExploreWithRemap
+place_design -directive ExtraNetDelay_high
+phys_opt_design -directive AggressiveFanoutOpt
+route_design -directive AggressiveExplore</code></pre>
+<h4 id="appa-ก34-การรายงานผล">ก.3.4 การรายงานผล</h4>
+<pre class="code"><code class="lang-tcl">report_timing_summary -file timing_summary.rpt
+report_utilization   -file utilization.rpt
+report_drc           -file drc.rpt
+report_methodology   -file methodology.rpt
+report_clock_utilization -file clock_utilization.rpt
+report_route_status  -file route_status.rpt
+report_io            -file io.rpt
+report_power         -file power.rpt</code></pre>
+<h4 id="appa-ก35-การสราง-bitstream">ก.3.5 การสร้าง bitstream</h4>
+<pre class="code"><code class="lang-tcl">write_bitstream -force top_alu8.bit
+write_checkpoint -force top_alu8_routed.dcp</code></pre>
+<h4 id="appa-ก36-การดงคาจากรายงานเวลา-สาหรบเกณฑ-sign-off">ก.3.6 การดึงค่าจากรายงานเวลา (สำหรับเกณฑ์ sign-off)</h4>
+<pre class="code"><code class="lang-tcl"># setup slack ที่แย่ที่สุด
+set paths [get_timing_paths -delay_type max -max_paths 1 -nworst 1]
+set setup_slack [get_property SLACK [lindex $paths 0]]
+
+# hold slack ที่แย่ที่สุด
+set paths [get_timing_paths -delay_type min -max_paths 1 -nworst 1]
+set hold_slack [get_property SLACK [lindex $paths 0]]
+
+# เส้นทางที่ไม่ถูกจำกัด
+set unconstrained [get_timing_paths -unconstrained -nworst 100]
+set n [llength $unconstrained]
+
+# จำนวนข้อผิดพลาดของ DRC
+set drc_text [report_drc -return_string]
+set n_err [regexp -count -nocase {ERROR} $drc_text]</code></pre>
+<h4 id="appa-ก37-การเปดดไซนท-route-แลวเพอ-debug">ก.3.7 การเปิดดีไซน์ที่ route แล้วเพื่อ debug</h4>
+<pre class="code"><code class="lang-tcl">open_checkpoint top_alu8_routed.dcp
+report_timing -to [get_cells {top_alu8/y_r_reg[3]}] -max_paths 10</code></pre>
+<hr>
+<h3 id="appa-ก4-สครปตเกณฑ-sign-off-ฉบบสมบรณ">ก.4 สคริปต์เกณฑ์ sign-off ฉบับสมบูรณ์</h3>
+<pre class="code"><code class="lang-tcl"># check_signoff.tcl
+set min_setup_slack 0.0
+set min_hold_slack  0.0
+set max_drc_errors  0
+
+proc worst_slack {dt} {
+    set paths [get_timing_paths -delay_type $dt -max_paths 1 -nworst 1]
+    if {[llength $paths] == 0} { return &quot;NA&quot; }
+    return [get_property SLACK [lindex $paths 0]]
+}
+
+set setup_slack [worst_slack max]
+set hold_slack  [worst_slack min]
+set n_unconstrained [llength [get_timing_paths -unconstrained -nworst 100]]
+set n_drc_error [regexp -count -nocase {ERROR} [report_drc -return_string]]
+
+set signoff_ok 1
+set reasons {}
+if {$setup_slack eq &quot;NA&quot; || $setup_slack &lt; $min_setup_slack} {
+    lappend reasons &quot;setup slack $setup_slack&quot;; set signoff_ok 0 }
+if {$hold_slack eq &quot;NA&quot; || $hold_slack &lt; $min_hold_slack} {
+    lappend reasons &quot;hold slack $hold_slack&quot;; set signoff_ok 0 }
+if {$n_drc_error &gt; $max_drc_errors} {
+    lappend reasons &quot;DRC errors $n_drc_error&quot;; set signoff_ok 0 }
+if {$n_unconstrained &gt; 0} {
+    lappend reasons &quot;unconstrained paths $n_unconstrained&quot;; set signoff_ok 0 }
+
+set fh [open $out_dir/signoff_report.txt w]
+puts $fh &quot;setup slack (worst) : $setup_slack ns&quot;
+puts $fh &quot;hold  slack (worst) : $hold_slack ns&quot;
+puts $fh &quot;DRC errors          : $n_drc_error&quot;
+puts $fh &quot;unconstrained paths : $n_unconstrained&quot;
+if {$signoff_ok} { puts $fh &quot;RESULT: PASS&quot; } else {
+    puts $fh &quot;RESULT: FAIL&quot;
+    foreach r $reasons { puts $fh &quot;  - $r&quot; } }
+close $fh</code></pre>
+<hr>
+<h3 id="appa-ก5-คาสงทใชบอยในการจาลอง-modelsimquestasim">ก.5 คำสั่งที่ใช้บ่อยในการจำลอง (ModelSim/QuestaSim)</h3>
+<div class="table-wrap"><table><thead><tr><th>คำสั่ง</th><th>หน้าที่</th></tr></thead><tbody><tr><td><code>vlib work</code></td><td>สร้าง work library</td></tr><tr><td><code>vmap work ./work</code></td><td>จับคู่ library กับโฟลเดอร์</td></tr><tr><td><code>vcom -2008 file.vhd</code></td><td>คอมไพล์ VHDL-2008</td></tr><tr><td><code>vlog -sv file.sv</code></td><td>คอมไพล์ SystemVerilog</td></tr><tr><td><code>vsim -c work.tb -do "run -all; quit -f"</code></td><td>จำลองแบบ console</td></tr><tr><td><code>vsim work.tb -view</code></td><td>เปิดหน้าต่าง waveform</td></tr><tr><td><code>add wave -r sim:/tb/*</code></td><td>เพิ่มสัญญาณทั้งหมดลง waveform</td></tr><tr><td><code>run -all</code></td><td>จำลองจนจบเวลา</td></tr><tr><td><code>quit -f</code></td><td>ออกโดยไม่ถาม</td></tr></tbody></table></div>
+<hr>
+<h3 id="appa-ก6-คาสง-ghdl">ก.6 คำสั่ง GHDL</h3>
+<div class="table-wrap"><table><thead><tr><th>คำสั่ง</th><th>หน้าที่</th></tr></thead><tbody><tr><td><code>ghdl -a --std=08 file.vhd</code></td><td>วิเคราะห์ (compile) ไฟล์</td></tr><tr><td><code>ghdl -e --std=08 top</code></td><td>เอลาโบเรตเป็น executable</td></tr><tr><td><code>ghdl -r --std=08 top</code></td><td>จำลอง</td></tr><tr><td><code>ghdl -r --std=08 top --assert-level=error</code></td><td>หยุดทันทีเมื่อพบข้อผิดพลาด</td></tr><tr><td><code>--workdir=&lt;dir&gt;</code></td><td>กำหนดตำแหน่งเก็บ work library</td></tr><tr><td><code>ghdl --clean --workdir=&lt;dir&gt;</code></td><td>ล้าง work library</td></tr></tbody></table></div>
+<blockquote><strong>อย่าลืม</strong>: พาธของ workdir และไฟล์ต้นทางต้องเป็น ASCII ล้วน (ดูหัวข้อ 0.3.3)</blockquote>
+<hr>
+<h3 id="appa-ก7-คาสงโปรแกรมบอรด">ก.7 คำสั่งโปรแกรมบอร์ด</h3>
+<pre class="code"><code class="lang-bash"># openFPGALoader
+openFPGALoader -b top_alu8.bit -c ft232
+
+# Vivado Hardware Manager แบบไม่ใช้ GUI
+open_hw_manager
+connect_hw_server
+open_hw_target
+set devices [get_hw_devices]
+current_hw_device $devices
+set_property PROGRAM.FILE {top_alu8.bit} $devices
+program_hw_devices $devices
+refresh_hw_device $devices</code></pre>
+<hr>
+<h3 id="appa-ก8-พนสาคญของ-nexys-a7-100t-ทใชในคมอน">ก.8 พินสำคัญของ Nexys A7-100T ที่ใช้ในคู่มือนี้</h3>
+<div class="table-wrap"><table><thead><tr><th>สัญญาณ</th><th>พิน</th><th>หมายเหตุ</th></tr></thead><tbody><tr><td>CLK100MHZ</td><td>E3</td><td>นาฬิกา 100 MHz (MRCC, bank 35)</td></tr><tr><td>CPU_RESETN</td><td>C12</td><td>รีเซ็ต active low</td></tr><tr><td>BTN[0] (BTNU)</td><td>M18</td><td></td></tr><tr><td>BTN[1] (BTNL)</td><td>P17</td><td></td></tr><tr><td>BTN[2] (BTNR)</td><td>M17</td><td></td></tr><tr><td>SW[0]–SW[7]</td><td>J15, L16, M13, R15, R17, T18, U18, R13</td><td>LVCMOS33</td></tr><tr><td>SW[8]–SW[9]</td><td>T8, U8</td><td><strong>LVCMOS18</strong></td></tr><tr><td>SW[10]–SW[15]</td><td>R16, T13, H6, U12, U11, V10</td><td>LVCMOS33</td></tr><tr><td>LED[0]–LED[15]</td><td>H17, K15, J13, N14, R18, V17, U17, U16, V16, T15, U14, T16, V15, V14, V12, V11</td><td></td></tr><tr><td>AN[0]–AN[3]</td><td>J17, J18, T9, J14</td><td>ตัวเลือกหลักจอ (common anode)</td></tr><tr><td>SEG[0]–SEG[6]</td><td>T10, R10, K16, K13, P15, T11, L18</td><td>a,b,c,d,e,f,g</td></tr></tbody></table></div>
+<p>แหล่งอ้างอิงหลัก: <a href="https://github.com/Digilent/digilent-xdc" target="_blank" rel="noopener">Digilent digilent-xdc</a> (Nexys-A7-100T-Master.xdc)</p>
+<p class="srcfile">แหล่งไฟล์: appendix-a-tcl-command-reference.md</p>
+<h2 id="appb-ภาคผนวก-ข-ประจาศพทไทยองกฤษ-glossary">ภาคผนวก ข — ประจำศัพท์ไทย–อังกฤษ (Glossary)</h2>
+<p>จัดเรียงตามลำดับตัวอักษรภาษาอังกฤษ ค้นหาได้ทั้งคำไทยและคำอังกฤษ</p>
+<hr>
+<h3 id="appb-a">A</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>ASIC (Application-Specific Integrated Circuit)</td><td>วงจรรวมเฉพาะกิจ</td><td>ชิปที่ออกแบบมาเพื่องานเฉพาะทาง</td></tr><tr><td>Async reset</td><td>รีเซ็ตแบบไม่ประสานเวลา</td><td>รีเซ็ตที่ทำงานโดยไม่ต้องรอขอบนาฬิกา</td></tr><tr><td>AXI-Stream</td><td>—</td><td>โปรโตคอลส่งข้อมูลแบบสตรีมมิ่งที่ใช้ tvalid/tready</td></tr></tbody></table></div>
+<h3 id="appb-b">B</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Backpressure</td><td>แรงดันย้อนกลับ</td><td>กลไกที่ผู้รับบอกผู้ส่งให้หยุดส่งชั่วคราว</td></tr><tr><td>Bitstream</td><td>บิตสตรีม</td><td>ไฟล์ที่เขียนลงชิป FPGA เพื่อกำหนดการทำงานของวงจร</td></tr><tr><td>Black box</td><td>กล่องดำ</td><td>โมดูลที่ทำงานถูกต้องแต่ไม่เห็นรายละเอียดภายใน</td></tr><tr><td>BRAM (Block RAM)</td><td>—</td><td>หน่วยความจำบล็อกภายใน FPGA</td></tr></tbody></table></div>
+<h3 id="appb-c">C</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Clock skew</td><td>ความเบี่ยงเบนนาฬิกา</td><td>ความต่างของเวลาที่นาฬิกาไปถึงจุดต่าง ๆ ในวงจร</td></tr><tr><td>Congestion</td><td>ความแน่น</td><td>บริเวณที่มีการเชื่อมต่อหนาแน่นเกินไป ทำให้เดินสายยาก</td></tr><tr><td>Critical path</td><td>เส้นทางวิกฤต</td><td>เส้นทางที่ใช้เวลามากที่สุด กำหนดความเร็วของวงจร</td></tr><tr><td>Cross-probing</td><td>การเชื่อมข้าม</td><td>การคลิกที่วงจรแล้วเปิดโค้ดต้นทางทันที</td></tr></tbody></table></div>
+<h3 id="appb-d">D</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>DSP48E1</td><td>—</td><td>หน่วยคูณสะสมสำเร็จใน FPGA ของ Xilinx 7-Series</td></tr><tr><td>DRC (Design Rule Check)</td><td>การตรวจกฎการออกแบบ</td><td>ตรวจข้อผิดพลาดของข้อจำกัดทางกายภาพ</td></tr><tr><td>DFF/DRE</td><td>ฟลิป-flop</td><td>รีจิสเตอร์เก็บค่า 1 บิต</td></tr></tbody></table></div>
+<h3 id="appb-e">E</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>EDIF (Electronic Design Interchange Format)</td><td>รูปแบบแลกเปลี่ยนข้อมูลอิเล็กทรอนิกส์</td><td>มาตรฐานนำเน็ตลิสต์ของวงจร ใช้ส่งต่อระหว่างเครื่องมือ</td></tr><tr><td>Effort (optimization effort)</td><td>ความพยายามในการปรับปรุง</td><td>ปริมาณเวลาและทรัพยากรที่เครื่องมือใช้ในการปรับปรุง</td></tr><tr><td>Elaboration</td><td>การขยายตัว</td><td>กระบวนการสร้าง hierarchy และตรวจการเชื่อมต่อของโมดูล</td></tr></tbody></table></div>
+<h3 id="appb-f">F</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>FIFO (First In First Out)</td><td>—</td><td>โครงสร้างข้อมูลแบบเข้าก่อนออกก่อน</td></tr><tr><td>Fix-up</td><td>การแก้ให้ถูกต้อง</td><td>การแก้ไขปัญหาที่พบระหว่างกระบวนการ</td></tr></tbody></table></div>
+<h3 id="appb-g">G</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Gate-level netlist</td><td>เน็ตลิสต์ระดับประตูตรรกะ</td><td>เน็ตลิสต์ที่เซลล์ถูกแทนที่ด้วยประตูตรรกะพื้นฐาน</td></tr><tr><td>Gray code</td><td>รหัสเกรย์</td><td>รหัสที่บิตที่เปลี่ยนมีเพียงหนึ่งบิตต่อการนับถัดไป</td></tr></tbody></table></div>
+<h3 id="appb-h">H</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Hold slack</td><td>สลักโฮลด</td><td>เวลาสำรองของข้อกำหนดการถือข้อมูล (ต้องตรวจหลังเดินสาย)</td></tr><tr><td>Hold time</td><td>เวลาถือ</td><td>เวลาที่ข้อมูลต้องคงอยู่หลังขอบนาฬิกา</td></tr></tbody></table></div>
+<h3 id="appb-i">I</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>I/O delay</td><td>เวลาหน่วงของอินพุต/เอาต์พุต</td><td>เวลาที่สัญญาณใช้เวลาเดินทางถึง/ออกจากชิป</td></tr><tr><td>IP (Intellectual Property)</td><td>ทรัพย์สินทางปัญญา</td><td>โมดูลสำเร็จรูปที่ซื้อมาใช้ในดีไซน์</td></tr></tbody></table></div>
+<h3 id="appb-l">L</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Latency</td><td>เวลาหน่วง</td><td>เวลาที่ข้อมูลใช้เดินทางผ่านวงจร</td></tr><tr><td>LUT (Look-Up Table)</td><td>ตารางค้นหา</td><td>หน่วยตรรกะพื้นฐานของ FPGA ที่ทำหน้าที่เป็นตรรกะตามต้องการได้</td></tr><tr><td>LUTRAM</td><td>—</td><td>LUT ที่ถูกใช้เป็นหน่วยความจำขนาดเล็ก</td></tr></tbody></table></div>
+<h3 id="appb-m">M</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Master clock</td><td>นาฬิกาหลัก</td><td>นาฬิกาต้นทางที่กระจายไปทั่วทั้งชิป</td></tr><tr><td>Metastability</td><td>เมตาสเทเบิลิตี</td><td>สถานะกึ่งไม่เสถียรของ flip-flop เมื่อสัญญาณเปลี่ยนใกล้ขอบนาฬิกามาก ๆ</td></tr><tr><td>Multiplexer (mux)</td><td>ตัวเลือกสัญญาณ</td><td>วงจรเลือกหนึ่งในหลายสัญญาณเข้าออก</td></tr></tbody></table></div>
+<h3 id="appb-n">N</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Netlist</td><td>เน็ตลิสต์</td><td>รายการเซลล์และการเชื่อมต่อทั้งหมดของวงจรหลังสังเคราะห์</td></tr><tr><td>Next-point</td><td>จุดถัดไป</td><td>จุดสัญญาณที่รับผลจากจุดปัจจุบัน</td></tr></tbody></table></div>
+<h3 id="appb-o">O</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Open cell library</td><td>ไลบรารีเซลล์แบบเปิด</td><td>ไลบรารีที่เปิดเผยโครงสร้างภายในของเซลล์</td></tr><tr><td>Optimization effort</td><td>ความพยายามในการปรับปรุง</td><td>ดู Effort</td></tr></tbody></table></div>
+<h3 id="appb-p">P</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Part (FPGA part)</td><td>รุ่นชิป</td><td>ระบุชนิดชิป ตระกูล แพ็กเกจ และคลาสความเร็ว</td></tr><tr><td>Phys_opt</td><td>การปรับปรุงระดับการจัดวาง</td><td>ขั้นตอนปรับปรุงที่ทำหลังวางวางเพื่อแก้ปัญหาเวลา</td></tr><tr><td>Pipeline</td><td>ไปป์ไลน์</td><td>แบ่งตรรกะเป็นหลายขั้นเพื่อลดความยาวของเส้นทาง</td></tr><tr><td>Place</td><td>การวางวาง</td><td>การกำหนดตำแหน่งเซลล์ในชิป</td></tr><tr><td>Place and Route (P&amp;R)</td><td>การวางวางและเดินสาย</td><td>ขั้นตอนสร้างการจัดวางจริงของวงจร</td></tr><tr><td>Precision Synthesis (PS)</td><td>—</td><td>เครื่องมือสังเคราะห์ตรรกะของซีเมนส์</td></tr><tr><td>Propagation delay</td><td>เวลาการเผยแพร่</td><td>เวลาที่สัญญาณใช้เดินทางผ่านประตูตรรกะ</td></tr></tbody></table></div>
+<h3 id="appb-q">Q</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>QoR (Quality of Results)</td><td>คุณภาพของผลลัพธ์</td><td>ตัวชี้วัดคุณภาพของเน็ตลิสต์ ทั้งด้านเวลาและพื้นที่</td></tr><tr><td>Quasi-static</td><td>กึ่งคงที่</td><td>ค่าที่คงที่ในช่วงเวลายาว ๆ แต่อาจเปลี่ยนได้ในอีกช่วงหนึ่ง</td></tr></tbody></table></div>
+<h3 id="appb-r">R</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Register</td><td>รีจิสเตอร์</td><td>วงจรเก็บค่า 1 บิต (flip-flop)</td></tr><tr><td>Retiming</td><td>การย้ายรีจิสเตอร์</td><td>เทคนิคที่ย้ายรีจิสเตอร์ข้ามตรรกะเพื่อปรับปรุงเวลา</td></tr><tr><td>Route</td><td>การเดินสาย</td><td>การกำหนดเส้นทางจริงของสัญญาณระหว่างเซลล์</td></tr><tr><td>Routing delay</td><td>เวลาเดินสาย</td><td>เวลาที่สัญญาณใช้เดินทางบนสายที่วางจริง</td></tr></tbody></table></div>
+<h3 id="appb-s">S</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Schematic</td><td>แผนผังวงจร</td><td>มุมมองของวงจรที่แสดงเป็นสัญลักษณ์ของเซลล์และการเชื่อมต่อ</td></tr><tr><td>SDC (Synopsys Design Constraints)</td><td>—</td><td>ภาษาสำหรับกำหนดเงื่อนไขเวลาและข้อจำกัดอื่น</td></tr><tr><td>Self-checking testbench</td><td>testbench แบบตรวจตัวเอง</td><td>testbench ที่ตรวจผลและตัดสินใจผ่าน/ไม่ผ่านเองได้</td></tr><tr><td>Setup slack</td><td>สลักตั้งค่า</td><td>เวลาสำรองของข้อกำหนดการตั้งค่าข้อมูล</td></tr><tr><td>Setup time</td><td>เวลาตั้งค่า</td><td>เวลาที่ข้อมูลต้องมาถึงก่อนขอบนาฬิกา</td></tr><tr><td>Slack</td><td>เวลาสำรอง</td><td>เวลาที่เหลือหลังจากความต้องการครบทุกอย่าง</td></tr><tr><td>Speed grade</td><td>คลาสความเร็ว</td><td>ระดับความเร็วของซิลิกอนในอุปกรณ์</td></tr><tr><td>Synthesis</td><td>การสังเคราะห์</td><td>การแปลง RTL เป็นเน็ตลิสต์</td></tr><tr><td>Synchronous reset</td><td>รีเซ็ตแบบประสานเวลา</td><td>รีเซ็ตที่ทำงานเมื่อมีขอบนาฬิกา</td></tr></tbody></table></div>
+<h3 id="appb-t">T</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Tcl</td><td>—</td><td>ภาษาสคริปต์ที่ใช้ควบคุมเครื่องมือ EDA หลายตัว</td></tr><tr><td>Timing closure</td><td>การปิดเวลา</td><td>กระบวนการปรับดีไซน์จนให้ผ่านข้อกำหนดเวลา</td></tr><tr><td>TNS (Total Negative Slack)</td><td>ผลรวมสลักลบ</td><td>ผลรวมของ slack ที่เป็นลบทั้งหมด</td></tr><tr><td>Type</td><td>ชนิดข้อมูล</td><td>เช่น <code>std_logic</code>, <code>signed</code>, <code>unsigned</code></td></tr></tbody></table></div>
+<h3 id="appb-u">U</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Unconstrained path</td><td>เส้นทางที่ไม่ถูกจำกัด</td><td>เส้นทางที่ไม่มีข้อกำหนดเวลากำกับ</td></tr><tr><td>Utilization</td><td>การใช้ทรัพยากร</td><td>สัดส่วนทรัพยากรของชิปที่ดีไซน์ใช้</td></tr></tbody></table></div>
+<h3 id="appb-v">V</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>VHDL</td><td>—</td><td>ภาษาอธิบายฮาร์ดแวร์ (Very High Speed Integrated Circuit Hardware Description Language)</td></tr><tr><td>Vivado</td><td>—</td><td>เครื่องมือของ AMD/Xilinx สำหรับสังเคราะห์ วางวาง เดินสาย และสร้าง bitstream</td></tr></tbody></table></div>
+<h3 id="appb-w">W</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>Waveform</td><td>รูปคลื่นสัญญาณ</td><td>กราฟแสดงการเปลี่ยนแปลงของสัญญาณตามเวลา</td></tr><tr><td>WNS (Worst Negative Slack)</td><td>สลักลบแย่ที่สุด</td><td>slack ที่แย่ที่สุดของทุกเส้นทาง</td></tr></tbody></table></div>
+<h3 id="appb-x">X</h3>
+<div class="table-wrap"><table><thead><tr><th>อังกฤษ</th><th>ไทย</th><th>คำอธิบาย</th></tr></thead><tbody><tr><td>XDC (Xilinx Design Constraints)</td><td>—</td><td>รูปแบบข้อจำกัดของ Vivado ใช้กำหนดพินและเวลา</td></tr></tbody></table></div>
+<hr>
+<h3 id="appb-ศพทเฉพาะของบอรด-nexys-a7-100t">ศัพท์เฉพาะของบอร์ด Nexys A7-100T</h3>
+<div class="table-wrap"><table><thead><tr><th>คำ</th><th>ความหมาย</th></tr></thead><tbody><tr><td>Artix-7</td><td>ตระกูล FPGA ของ Xilinx ที่ใช้ในบอร์ดนี้</td></tr><tr><td>MRCC</td><td>ขานาฬิกาหลักของบล็อก I/O (Multi-Region Clock Capable)</td></tr><tr><td>Bank</td><td>กลุ่มขา I/O ที่ใช้นาฬิการ่วมกันได้</td></tr><tr><td>Common anode</td><td>จอ 7 ส่วนที่ขา anode ต่อกับ VCC ส่วนที่ติดคือสัญญาณ 0</td></tr><tr><td>LUT</td><td>ตารางค้นหา หน่วยตรรกะหลักของ FPGA</td></tr><tr><td>CMT</td><td>Clock Management Tile ที่ใช้สร้างนาฬิกาใหม่จากนาฬิกาหลัก</td></tr></tbody></table></div>
+<hr>
+<h3 id="appb-คายอทใชบอยในคมอน">คำย่อที่ใช้บ่อยในคู่มือนี้</h3>
+<div class="table-wrap"><table><thead><tr><th>คำย่อ</th><th>ความหมาย</th></tr></thead><tbody><tr><td>ALU</td><td>หน่วยคำนวณตรรกะและคณิต</td></tr><tr><td>DAC</td><td>Digital-to-Analog Converter</td></tr><tr><td>FFT</td><td>Fast Fourier Transform</td></tr><tr><td>FIFO</td><td>First In First Out</td></tr><tr><td>FSM</td><td>Finite State Machine</td></tr><tr><td>HDL</td><td>Hardware Description Language</td></tr><tr><td>IO</td><td>Input/Output</td></tr><tr><td>LUTRAM</td><td>LUT ที่ใช้เป็นหน่วยความจำ</td></tr><tr><td>MAC</td><td>Multiply-Accumulate หน่วยคูณสะสม</td></tr><tr><td>MB</td><td>Megabyte</td></tr><tr><td>MHz</td><td>Megahertz หน่วยความถี่</td></tr><tr><td>ns</td><td>นาโนวินาที (1 ตารางนาโนวินาที = 1 พิโกวินาที)</td></tr><tr><td>PCB</td><td>Printed Circuit Board บอร์ดวงจรพิมพ์</td></tr><tr><td>PS</td><td>Precision Synthesis</td></tr><tr><td>RTL</td><td>Register Transfer Level ระดับการถ่ายเทข้อมูลระหว่างรีจิสเตอร์</td></tr><tr><td>SDC</td><td>Synopsys Design Constraints</td></tr><tr><td>SRAM</td><td>Static Random Access Memory</td></tr><tr><td>TCL</td><td>Tool Command Language</td></tr><tr><td>TNS</td><td>Total Negative Slack</td></tr><tr><td>USB</td><td>Universal Serial Bus</td></tr><tr><td>VHDL</td><td>Very High Speed Integrated Circuit Hardware Description Language</td></tr><tr><td>WNS</td><td>Worst Negative Slack</td></tr><tr><td>XDC</td><td>Xilinx Design Constraints</td></tr></tbody></table></div>
+<p class="srcfile">แหล่งไฟล์: appendix-b-glossary-th-en.md</p>
+</main>
+</div>
+</body>
+</html>
