@@ -1,0 +1,52 @@
+#=====================================================================
+# vectors.txt -- LAB 08 : file based test vectors
+#---------------------------------------------------------------------
+# One vector per line, all values in hexadecimal:
+#
+#    ADDR   DATA   EXPECTED   OP
+#
+#   ADDR     4 bit address of the register file
+#   DATA     8 bit value that is written to that address
+#            (00 and ignored when OP = R)
+#   EXPECTED 8 bit value that the read back must give
+#   OP       W = write DATA to ADDR and read it back
+#            R = read only, the register must still hold EXPECTED
+#
+# The first line of the file must be the line "AA 3F" shape :
+# address first, data second.
+#
+# The reader in tb_stimulus.vhd uses "hread", and hread only works on
+# BIT_VECTOR -- that is why the DUT data path uses bit_vector.
+#=====================================================================
+00 11 11 W
+01 22 22 W
+02 33 33 W
+03 44 44 W
+04 55 55 W
+05 66 66 W
+06 77 77 W
+07 88 88 W
+08 99 99 W
+09 AA AA W
+0A BB BB W
+0B CC CC W
+0C DD DD W
+0D EE EE W
+0E FF FF W
+0F 5A 5A W
+00 00 11 R
+01 00 22 R
+02 00 33 R
+03 00 44 R
+04 00 55 R
+05 00 66 R
+06 00 77 R
+07 00 88 R
+08 00 99 R
+09 00 AA R
+0A 00 BB R
+0B 00 CC R
+0C 00 DD R
+0D 00 EE R
+0E 00 FF R
+0F 00 5A R

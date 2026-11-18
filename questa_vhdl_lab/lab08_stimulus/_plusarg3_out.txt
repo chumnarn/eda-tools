@@ -1,0 +1,20 @@
+Reading pref.tcl
+
+# 2026.1
+
+# do _plusarg3.do
+=== ::do_argv ===
+
+=== ::kernel_args ===
+-c -onfinish stop +MYPLUS=42 +COUNT=7 -do {do _plusarg3.do}
+=== try getarg with an args variable ===
+# -c -onfinish stop +MYPLUS=42 +COUNT=7 -do \{do _plusarg3.do\}
+getarg ok -> 0
+argsVar now = -c -onfinish stop +MYPLUS=42 +COUNT=7 -do \{do _plusarg3.do\}
+=== try getarg with MYPLUS=42 style ===
+# -c -onfinish stop +MYPLUS=42 +COUNT=7 -do \{do _plusarg3.do\}
+getarg err: expected boolean value but got "has_value"
+=== regexp method (proven) ===
+FOUND plusarg MYPLUS = 42
+FOUND plusarg COUNT = 7
+=== done ===
