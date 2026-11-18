@@ -1,0 +1,99 @@
+=====================================================================
+ LAB 01 : RTL baseline (VHDL)
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab01_rtl_baseline
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS -- 9 checks, 0 errors
+=====================================================================
+Reading pref.tcl
+
+# 2026.1
+
+# do run_batch.do
+====================================================================
+ LAB 01 : RTL baseline (VHDL)
+====================================================================
+---- 1. compile the VHDL RTL and the testbench ----
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 03:54:16 on Nov 19,2026
+# vcom -2008 -work work C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/rtl/cnt4.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity cnt4
+# -- Compiling architecture rtl of cnt4
+# End time: 03:54:16 on Nov 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 03:54:17 on Nov 19,2026
+# vcom -2008 -work work C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_cnt4
+# -- Compiling architecture sim of tb_cnt4
+# -- Loading package ENV
+# End time: 03:54:17 on Nov 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+---- 2. simulate ----
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -t 10ps -voptargs="+acc" work.tb_cnt4 -gGATE=false -gRESULTFILE=results/result_rtl.txt -gTRACEFILE=results/trace_rtl.txt 
+# Start time: 03:54:18 on Nov 19,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_cnt4(sim)
+# Loading work.cnt4(rtl)
+# ** Note: === tb_cnt4 : RTL ===
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=20 ns : after reset         q = 0
+#    Time: 20 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=26 ns : count up 1            q = 1
+#    Time: 26 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=36 ns : count up 2            q = 2
+#    Time: 36 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=46 ns : count up 3            q = 3
+#    Time: 46 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=56 ns : count up 4            q = 4
+#    Time: 56 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=66 ns : count up 5            q = 5
+#    Time: 66 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=76 ns : count up 6            q = 6
+#    Time: 76 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=106 ns : hold (en = '0')     q = 6
+#    Time: 106 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=136 ns : count up again     q = 9
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:  checks = 9 , errors = 0
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note: TEST_PASSED : tb_cnt4 completed
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# Break in Process stim at C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd line 186
+# Stopped at C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd line 186
+---- 3. the verdict ----
+# PASS
+   the RTL verdict : PASS
+   the trace file  : results/trace_rtl.txt
+RESULT: PASS
+# End time: 03:54:20 on Nov 19,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+[RESULT] PASS

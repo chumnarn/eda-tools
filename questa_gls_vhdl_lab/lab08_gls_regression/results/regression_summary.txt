@@ -1,0 +1,8 @@
+PASS  lab01_rtl_baseline  
+PASS  lab02_synth_netlist  
+PASS  lab03_cell_library  
+PASS  lab04_gls_first  
+PASS  lab05_rtl_vs_gate  
+PASS  lab06_x_propagation  
+PASS  lab07_netlist_bug  
+PASS  lab08_multi_design  

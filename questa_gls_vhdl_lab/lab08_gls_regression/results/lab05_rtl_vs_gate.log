@@ -1,0 +1,390 @@
+=====================================================================
+ LAB 05 : RTL against gate level
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab05_rtl_vs_gate
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS -- the two traces are IDENTICAL
+=====================================================================
+[STEP 1] the RTL level run
+Reading pref.tcl
+
+# 2026.1
+
+# do run_rtl.do
+====================================================================
+ LAB 05 : step 1 -- the RTL level run
+====================================================================
+---- compile the VHDL RTL and the testbench ----
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 03:55:09 on Nov 19,2026
+# vcom -2008 -work work C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/rtl/cnt4.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity cnt4
+# -- Compiling architecture rtl of cnt4
+# End time: 03:55:09 on Nov 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 03:55:10 on Nov 19,2026
+# vcom -2008 -work work C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_cnt4
+# -- Compiling architecture sim of tb_cnt4
+# -- Loading package ENV
+# End time: 03:55:10 on Nov 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -t 10ps -voptargs="+acc" work.tb_cnt4 -gGATE=false -gRESULTFILE=results/result_rtl.txt -gTRACEFILE=results/trace_rtl.txt 
+# Start time: 03:55:11 on Nov 19,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_cnt4(sim)
+# Loading work.cnt4(rtl)
+# ** Note: === tb_cnt4 : RTL ===
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=20 ns : after reset         q = 0
+#    Time: 20 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=26 ns : count up 1            q = 1
+#    Time: 26 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=36 ns : count up 2            q = 2
+#    Time: 36 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=46 ns : count up 3            q = 3
+#    Time: 46 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=56 ns : count up 4            q = 4
+#    Time: 56 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=66 ns : count up 5            q = 5
+#    Time: 66 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=76 ns : count up 6            q = 6
+#    Time: 76 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=106 ns : hold (en = '0')     q = 6
+#    Time: 106 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=136 ns : count up again     q = 9
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:  checks = 9 , errors = 0
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note: TEST_PASSED : tb_cnt4 completed
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# Break in Process stim at C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd line 186
+# Stopped at C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd line 186
+   the RTL verdict : PASS
+# End time: 03:55:12 on Nov 19,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+[STEP 2] the gate level run
+Reading pref.tcl
+
+# 2026.1
+
+# do run_gls.do
+====================================================================
+ LAB 05 : step 2 -- the gate level run
+====================================================================
+---- compile the cells, the netlist and the testbench ----
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 03:55:15 on Nov 19,2026
+# vlog -work work C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/cells/sg13g2_stdcell.v 
+# -- Compiling module sg13g2_a21o_1
+# -- Compiling module sg13g2_a21o_2
+# -- Compiling module sg13g2_a21oi_1
+# -- Compiling module sg13g2_a21oi_2
+# -- Compiling module sg13g2_a221oi_1
+# -- Compiling module sg13g2_a22oi_1
+# -- Compiling module sg13g2_and2_1
+# -- Compiling module sg13g2_and2_2
+# -- Compiling module sg13g2_and3_1
+# -- Compiling module sg13g2_and3_2
+# -- Compiling module sg13g2_and4_1
+# -- Compiling module sg13g2_and4_2
+# -- Compiling module sg13g2_antennanp
+# -- Compiling module sg13g2_buf_1
+# -- Compiling module sg13g2_buf_16
+# -- Compiling module sg13g2_buf_2
+# -- Compiling module sg13g2_buf_4
+# -- Compiling module sg13g2_buf_8
+# -- Compiling module sg13g2_decap_4
+# -- Compiling module sg13g2_decap_8
+# -- Compiling module sg13g2_dfrbp_1
+# -- Compiling module sg13g2_dfrbp_2
+# -- Compiling module sg13g2_dfrbpq_1
+# -- Compiling module sg13g2_dfrbpq_2
+# -- Compiling module sg13g2_dlhq_1
+# -- Compiling module sg13g2_dlhr_1
+# -- Compiling module sg13g2_dlhrq_1
+# -- Compiling module sg13g2_dllr_1
+# -- Compiling module sg13g2_dllrq_1
+# -- Compiling module sg13g2_dlygate4sd1_1
+# -- Compiling module sg13g2_dlygate4sd2_1
+# -- Compiling module sg13g2_dlygate4sd3_1
+# -- Compiling module sg13g2_ebufn_2
+# -- Compiling module sg13g2_ebufn_4
+# -- Compiling module sg13g2_ebufn_8
+# -- Compiling module sg13g2_einvn_2
+# -- Compiling module sg13g2_einvn_4
+# -- Compiling module sg13g2_einvn_8
+# -- Compiling module sg13g2_fill_1
+# -- Compiling module sg13g2_fill_2
+# -- Compiling module sg13g2_fill_4
+# -- Compiling module sg13g2_fill_8
+# -- Compiling module sg13g2_inv_1
+# -- Compiling module sg13g2_inv_16
+# -- Compiling module sg13g2_inv_2
+# -- Compiling module sg13g2_inv_4
+# -- Compiling module sg13g2_inv_8
+# -- Compiling module sg13g2_lgcp_1
+# -- Compiling module sg13g2_mux2_1
+# -- Compiling module sg13g2_mux2_2
+# -- Compiling module sg13g2_mux4_1
+# -- Compiling module sg13g2_nand2_1
+# -- Compiling module sg13g2_nand2_2
+# -- Compiling module sg13g2_nand2b_1
+# -- Compiling module sg13g2_nand2b_2
+# -- Compiling module sg13g2_nand3_1
+# -- Compiling module sg13g2_nand3b_1
+# -- Compiling module sg13g2_nand4_1
+# -- Compiling module sg13g2_nor2_1
+# -- Compiling module sg13g2_nor2_2
+# -- Compiling module sg13g2_nor2b_1
+# -- Compiling module sg13g2_nor2b_2
+# -- Compiling module sg13g2_nor3_1
+# -- Compiling module sg13g2_nor3_2
+# -- Compiling module sg13g2_nor4_1
+# -- Compiling module sg13g2_nor4_2
+# -- Compiling module sg13g2_o21ai_1
+# -- Compiling module sg13g2_or2_1
+# -- Compiling module sg13g2_or2_2
+# -- Compiling module sg13g2_or3_1
+# -- Compiling module sg13g2_or3_2
+# -- Compiling module sg13g2_or4_1
+# -- Compiling module sg13g2_or4_2
+# -- Compiling module sg13g2_sdfbbp_1
+# -- Compiling module sg13g2_sdfrbp_1
+# -- Compiling module sg13g2_sdfrbp_2
+# -- Compiling module sg13g2_sdfrbpq_1
+# -- Compiling module sg13g2_sdfrbpq_2
+# -- Compiling module sg13g2_sighold
+# -- Compiling module sg13g2_slgcp_1
+# -- Compiling module sg13g2_tiehi
+# -- Compiling module sg13g2_tielo
+# -- Compiling module sg13g2_xnor2_1
+# -- Compiling module sg13g2_xor2_1
+# -- Compiling UDP ihp_latch
+# -- Compiling UDP ihp_dff_err
+# -- Compiling UDP ihp_dff
+# -- Compiling UDP ihp_dff_r_err
+# -- Compiling UDP ihp_dff_r
+# -- Compiling UDP ihp_dff_s_err
+# -- Compiling UDP ihp_dff_s
+# -- Compiling UDP ihp_dff_sr_err
+# -- Compiling UDP ihp_dff_sr_0
+# -- Compiling UDP ihp_dff_sr_1
+# -- Compiling UDP ihp_latch_r
+# -- Compiling UDP ihp_latch_s
+# -- Compiling UDP ihp_latch_sr_0
+# -- Compiling UDP ihp_latch_sr_1
+# -- Compiling UDP ihp_mux2
+# -- Compiling UDP ihp_mux4
+# -- Compiling UDP ihp_mux8
+# 
+# Top level modules:
+# 	sg13g2_a21o_1
+# 	sg13g2_a21o_2
+# 	sg13g2_a21oi_1
+# 	sg13g2_a21oi_2
+# 	sg13g2_a221oi_1
+# 	sg13g2_a22oi_1
+# 	sg13g2_and2_1
+# 	sg13g2_and2_2
+# 	sg13g2_and3_1
+# 	sg13g2_and3_2
+# 	sg13g2_and4_1
+# 	sg13g2_and4_2
+# 	sg13g2_antennanp
+# 	sg13g2_buf_1
+# 	sg13g2_buf_16
+# 	sg13g2_buf_2
+# 	sg13g2_buf_4
+# 	sg13g2_buf_8
+# 	sg13g2_decap_4
+# 	sg13g2_decap_8
+# 	sg13g2_dfrbp_1
+# 	sg13g2_dfrbp_2
+# 	sg13g2_dfrbpq_1
+# 	sg13g2_dfrbpq_2
+# 	sg13g2_dlhq_1
+# 	sg13g2_dlhr_1
+# 	sg13g2_dlhrq_1
+# 	sg13g2_dllr_1
+# 	sg13g2_dllrq_1
+# 	sg13g2_dlygate4sd1_1
+# 	sg13g2_dlygate4sd2_1
+# 	sg13g2_dlygate4sd3_1
+# 	sg13g2_ebufn_2
+# 	sg13g2_ebufn_4
+# 	sg13g2_ebufn_8
+# 	sg13g2_einvn_2
+# 	sg13g2_einvn_4
+# 	sg13g2_einvn_8
+# 	sg13g2_fill_1
+# 	sg13g2_fill_2
+# 	sg13g2_fill_4
+# 	sg13g2_fill_8
+# 	sg13g2_inv_1
+# 	sg13g2_inv_16
+# 	sg13g2_inv_2
+# 	sg13g2_inv_4
+# 	sg13g2_inv_8
+# 	sg13g2_lgcp_1
+# 	sg13g2_mux2_1
+# 	sg13g2_mux2_2
+# 	sg13g2_mux4_1
+# 	sg13g2_nand2_1
+# 	sg13g2_nand2_2
+# 	sg13g2_nand2b_1
+# 	sg13g2_nand2b_2
+# 	sg13g2_nand3_1
+# 	sg13g2_nand3b_1
+# 	sg13g2_nand4_1
+# 	sg13g2_nor2_1
+# 	sg13g2_nor2_2
+# 	sg13g2_nor2b_1
+# 	sg13g2_nor2b_2
+# 	sg13g2_nor3_1
+# 	sg13g2_nor3_2
+# 	sg13g2_nor4_1
+# 	sg13g2_nor4_2
+# 	sg13g2_o21ai_1
+# 	sg13g2_or2_1
+# 	sg13g2_or2_2
+# 	sg13g2_or3_1
+# 	sg13g2_or3_2
+# 	sg13g2_or4_1
+# 	sg13g2_or4_2
+# 	sg13g2_sdfbbp_1
+# 	sg13g2_sdfrbp_1
+# 	sg13g2_sdfrbp_2
+# 	sg13g2_sdfrbpq_1
+# 	sg13g2_sdfrbpq_2
+# 	sg13g2_sighold
+# 	sg13g2_slgcp_1
+# 	sg13g2_tiehi
+# 	sg13g2_tielo
+# 	sg13g2_xnor2_1
+# 	sg13g2_xor2_1
+# End time: 03:55:15 on Nov 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 03:55:15 on Nov 19,2026
+# vlog -work work C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/cnt4_net.v 
+# -- Compiling module cnt4
+# 
+# Top level modules:
+# 	cnt4
+# End time: 03:55:15 on Nov 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 03:55:16 on Nov 19,2026
+# vcom -2008 -work work C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_cnt4
+# -- Compiling architecture sim of tb_cnt4
+# -- Loading package ENV
+# End time: 03:55:16 on Nov 19,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -t 10ps -voptargs="+acc" work.tb_cnt4 -gGATE=true -gRESULTFILE=results/result_gls.txt -gTRACEFILE=results/trace_gls.txt 
+# Start time: 03:55:17 on Nov 19,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_cnt4(sim)
+# Loading work.cnt4
+# Loading work.sg13g2_nand3_1
+# Loading work.sg13g2_nand4_1
+# Loading work.sg13g2_xnor2_1
+# Loading work.sg13g2_xor2_1
+# Loading work.sg13g2_a21o_1
+# Loading work.sg13g2_and2_1
+# Loading work.sg13g2_dfrbpq_1
+# Loading work.ihp_dff_r_err
+# Loading work.ihp_dff_r
+# ** Note: === tb_cnt4 : GATE LEVEL ===
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=20 ns : after reset         q = 0
+#    Time: 20 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=26 ns : count up 1            q = 1
+#    Time: 26 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=36 ns : count up 2            q = 2
+#    Time: 36 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=46 ns : count up 3            q = 3
+#    Time: 46 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=56 ns : count up 4            q = 4
+#    Time: 56 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=66 ns : count up 5            q = 5
+#    Time: 66 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=76 ns : count up 6            q = 6
+#    Time: 76 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=106 ns : hold (en = '0')     q = 6
+#    Time: 106 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:   t=136 ns : count up again     q = 9
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note:  checks = 9 , errors = 0
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# ** Note: TEST_PASSED : tb_cnt4 completed
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# Break in Process stim at C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd line 186
+# Stopped at C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd line 186
+# PASS
+# PASS
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+---- compare the two traces line by line ----
+# 10
+   the RTL trace has 10 lines
+   OK : the two traces are IDENTICAL
+RESULT: PASS
+# End time: 03:55:18 on Nov 19,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+[RESULT] PASS
