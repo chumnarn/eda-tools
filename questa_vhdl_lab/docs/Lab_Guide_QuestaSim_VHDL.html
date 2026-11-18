@@ -1,0 +1,3237 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>QuestaSim VHDL Simulation - Lab Guide</title>
+  <style>
+
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">
+@page {
+size: A4;
+margin: 18mm 16mm;
+}
+:root {
+--ink: #1b1f24;
+--muted: #5a6570;
+--rule: #d7dde3;
+--accent: #0b5fa5;
+--accent2: #8a4b08;
+--code-bg: #f4f6f8;
+--head-bg: #eef2f6;
+--note-bg: #fff8e6;
+--warn-bg: #fdecec;
+}
+html {
+font-size: 11pt;
+}
+body {
+max-width: 210mm;
+margin: 0 auto;
+padding: 12mm 8mm 20mm;
+color: var(--ink);
+background: #fff;
+font-family: "Leelawadee UI", "Sarabun", "Noto Sans Thai", "Tahoma",
+"Segoe UI", system-ui, sans-serif;
+line-height: 1.65;
+-webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4 {
+font-weight: 700;
+line-height: 1.3;
+color: var(--accent);
+margin: 1.6em 0 0.6em;
+page-break-after: avoid;
+}
+h1 {
+font-size: 1.85rem;
+margin-top: 0;
+padding-bottom: .35em;
+border-bottom: 3px solid var(--accent);
+}
+h2 {
+font-size: 1.45rem;
+margin-top: 1.9em;
+padding-bottom: .25em;
+border-bottom: 1px solid var(--rule);
+}
+h3 { font-size: 1.18rem; color: var(--accent2); }
+h4 { font-size: 1.05rem; color: var(--ink); }
+p { margin: .55em 0; }
+
+#TOC, nav#TOC {
+background: var(--head-bg);
+border: 1px solid var(--rule);
+border-radius: 6px;
+padding: 1em 1.4em;
+margin: 1.4em 0 2em;
+font-size: .95rem;
+}
+#TOC ul { margin: .25em 0; padding-left: 1.2em; }
+#TOC > ul > li > a { font-weight: 600; }
+
+table {
+border-collapse: collapse;
+width: 100%;
+margin: 1em 0 1.3em;
+font-size: .93rem;
+page-break-inside: avoid;
+}
+thead { background: var(--head-bg); }
+th, td {
+border: 1px solid var(--rule);
+padding: .42em .6em;
+text-align: left;
+vertical-align: top;
+}
+th {
+font-weight: 700;
+color: var(--accent);
+white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: #fafbfc; }
+
+code {
+font-family: "Cascadia Mono", "Consolas", "DejaVu Sans Mono", monospace;
+font-size: .88em;
+background: var(--code-bg);
+padding: .1em .32em;
+border-radius: 3px;
+color: #0a3d62;
+}
+pre {
+background: var(--code-bg);
+border: 1px solid var(--rule);
+border-left: 4px solid var(--accent);
+border-radius: 4px;
+padding: .75em 1em;
+overflow-x: auto;
+page-break-inside: avoid;
+font-size: .86rem;
+line-height: 1.5;
+}
+pre code {
+background: none;
+padding: 0;
+color: #1b1f24;
+font-size: 1em;
+}
+
+blockquote {
+margin: 1em 0;
+padding: .7em 1.1em;
+background: var(--note-bg);
+border-left: 4px solid var(--accent2);
+color: #3d3226;
+}
+blockquote p { margin: .35em 0; }
+blockquote > p:first-child strong { color: var(--accent2); }
+
+ul, ol { margin: .5em 0 .8em; padding-left: 1.6em; }
+li { margin: .22em 0; }
+li > ul, li > ol { margin: .25em 0; }
+
+hr {
+border: none;
+border-top: 1px solid var(--rule);
+margin: 2em 0;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+@media print {
+body {
+max-width: none;
+padding: 0;
+font-size: 10pt;
+}
+h1 { page-break-before: always; }
+h1:first-of-type { page-break-before: avoid; }
+pre, table, blockquote { page-break-inside: avoid; }
+a { color: var(--ink); }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">QuestaSim VHDL Simulation - Lab Guide</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#คู่มือปฏิบัติการ-questasim-การจำลองด้วย-vhdl" id="toc-คู่มือปฏิบัติการ-questasim-การจำลองด้วย-vhdl">คู่มือปฏิบัติการ QuestaSim:
+การจำลองด้วย VHDL</a>
+<ul>
+<li><a href="#ตั้งแต่พื้นฐานจนถึงขั้นสูง--แบบ-lab-แบบทีละขั้น" id="toc-ตั้งแต่พื้นฐานจนถึงขั้นสูง--แบบ-lab-แบบทีละขั้น">ตั้งแต่พื้นฐานจนถึงขั้นสูง — แบบ Lab
+แบบทีละขั้น</a></li>
+<li><a href="#ภาคนำ" id="toc-ภาคนำ">ภาคนำ</a>
+<ul>
+<li><a href="#คู่มือนี้เหมาะกับใคร" id="toc-คู่มือนี้เหมาะกับใคร">คู่มือนี้เหมาะกับใคร</a></li>
+<li><a href="#สิ่งที่คุณจะได้หลังจบคู่มือนี้" id="toc-สิ่งที่คุณจะได้หลังจบคู่มือนี้">สิ่งที่คุณจะได้หลังจบคู่มือนี้</a></li>
+<li><a href="#วิธีใช้คู่มือนี้" id="toc-วิธีใช้คู่มือนี้">วิธีใช้คู่มือนี้</a></li>
+</ul></li>
+<li><a href="#บทที่-1--เตรียมเครื่องมือ" id="toc-บทที่-1--เตรียมเครื่องมือ">บทที่ 1 —
+เตรียมเครื่องมือ</a>
+<ul>
+<li><a href="#11-เครื่องมือที่ใช้" id="toc-11-เครื่องมือที่ใช้">1.1
+เครื่องมือที่ใช้</a></li>
+<li><a href="#12--เรื่องใบอนุญาต-license--อ่านให้เข้าใจก่อนทำ-lab" id="toc-12--เรื่องใบอนุญาต-license--อ่านให้เข้าใจก่อนทำ-lab">1.2 ⚠ เรื่องใบอนุญาต
+(license) — อ่านให้เข้าใจก่อนทำ lab</a></li>
+<li><a href="#13-โครงสร้างโฟลเดอร์ของคู่มือ" id="toc-13-โครงสร้างโฟลเดอร์ของคู่มือ">1.3 โครงสร้างโฟลเดอร์ของคู่มือ</a></li>
+<li><a href="#14-สคริปต์-runcmd-ทำอะไรบ้าง" id="toc-14-สคริปต์-runcmd-ทำอะไรบ้าง">1.4 สคริปต์ <code>run.cmd</code>
+ทำอะไรบ้าง</a></li>
+<li><a href="#15-คำสั่งพื้นฐานที่ใช้บ่อย" id="toc-15-คำสั่งพื้นฐานที่ใช้บ่อย">1.5
+คำสั่งพื้นฐานที่ใช้บ่อย</a></li>
+</ul></li>
+<li><a href="#lab-01--การจำลองครั้งแรก" id="toc-lab-01--การจำลองครั้งแรก">LAB 01 — การจำลองครั้งแรก</a>
+<ul>
+<li><a href="#เป้าหมาย" id="toc-เป้าหมาย">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง" id="toc-ไฟล์ที่เกี่ยวข้อง">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน--แบบ-gui" id="toc-ขั้นตอน--แบบ-gui">ขั้นตอน — แบบ
+GUI</a></li>
+<li><a href="#ขั้นตอน--แบบ-batch" id="toc-ขั้นตอน--แบบ-batch">ขั้นตอน — แบบ
+batch</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้" id="toc-สิ่งที่ควรรู้จาก-lab-นี้">สิ่งที่ควรรู้จาก Lab
+นี้</a></li>
+<li><a href="#แบบฝึกหัด" id="toc-แบบฝึกหัด">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-02--design-library-และการอ้างอิงข้ามไลบรารี" id="toc-lab-02--design-library-และการอ้างอิงข้ามไลบรารี">LAB 02 — Design
+library และการอ้างอิงข้ามไลบรารี</a>
+<ul>
+<li><a href="#เป้าหมาย-1" id="toc-เป้าหมาย-1">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-1" id="toc-ไฟล์ที่เกี่ยวข้อง-1">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน" id="toc-ขั้นตอน">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-1" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-1">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-1" id="toc-แบบฝึกหัด-1">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-03--testbench-แบบตรวจตัวเอง-self-checking" id="toc-lab-03--testbench-แบบตรวจตัวเอง-self-checking">LAB 03 — Testbench
+แบบตรวจตัวเอง (self-checking)</a>
+<ul>
+<li><a href="#เป้าหมาย-2" id="toc-เป้าหมาย-2">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-2" id="toc-ไฟล์ที่เกี่ยวข้อง-2">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน-1" id="toc-ขั้นตอน-1">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-2" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-2">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-2" id="toc-แบบฝึกหัด-2">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-04--การวิเคราะห์-waveform" id="toc-lab-04--การวิเคราะห์-waveform">LAB 04 — การวิเคราะห์ waveform</a>
+<ul>
+<li><a href="#เป้าหมาย-3" id="toc-เป้าหมาย-3">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-3" id="toc-ไฟล์ที่เกี่ยวข้อง-3">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน-2" id="toc-ขั้นตอน-2">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-3" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-3">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-3" id="toc-แบบฝึกหัด-3">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-05--การ-debug" id="toc-lab-05--การ-debug">LAB 05 — การ
+debug</a>
+<ul>
+<li><a href="#เป้าหมาย-4" id="toc-เป้าหมาย-4">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-4" id="toc-ไฟล์ที่เกี่ยวข้อง-4">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#บั๊กที่ซ่อนอยู่" id="toc-บั๊กที่ซ่อนอยู่">บั๊กที่ซ่อนอยู่</a></li>
+<li><a href="#ขั้นตอน-3" id="toc-ขั้นตอน-3">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-4" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-4">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-4" id="toc-แบบฝึกหัด-4">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-06--ตามหาต้นเหตุของค่า-x-unknown" id="toc-lab-06--ตามหาต้นเหตุของค่า-x-unknown">LAB 06 — ตามหาต้นเหตุของค่า X
+(Unknown)</a>
+<ul>
+<li><a href="#เป้าหมาย-5" id="toc-เป้าหมาย-5">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-5" id="toc-ไฟล์ที่เกี่ยวข้อง-5">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน-4" id="toc-ขั้นตอน-4">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-5" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-5">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-5" id="toc-แบบฝึกหัด-5">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-07--หน่วยความจำ-ram-และคำสั่ง-mem" id="toc-lab-07--หน่วยความจำ-ram-และคำสั่ง-mem">LAB 07 — หน่วยความจำ (RAM)
+และคำสั่ง <code>mem</code></a>
+<ul>
+<li><a href="#เป้าหมาย-6" id="toc-เป้าหมาย-6">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-6" id="toc-ไฟล์ที่เกี่ยวข้อง-6">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน-5" id="toc-ขั้นตอน-5">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-6" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-6">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-6" id="toc-แบบฝึกหัด-6">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-08--สติมูลัสขั้นสูง-จากไฟล์-แบบสุ่ม-และการปรับค่า" id="toc-lab-08--สติมูลัสขั้นสูง-จากไฟล์-แบบสุ่ม-และการปรับค่า">LAB 08 — สติมูลัสขั้นสูง:
+จากไฟล์, แบบสุ่ม, และการปรับค่า</a>
+<ul>
+<li><a href="#เป้าหมาย-7" id="toc-เป้าหมาย-7">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-7" id="toc-ไฟล์ที่เกี่ยวข้อง-7">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#generic-ของ-testbench" id="toc-generic-ของ-testbench">generic ของ testbench</a></li>
+<li><a href="#ขั้นตอน-6" id="toc-ขั้นตอน-6">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-7" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-7">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-7" id="toc-แบบฝึกหัด-7">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-09--psl-assertion-property-specification-language" id="toc-lab-09--psl-assertion-property-specification-language">LAB 09 —
+PSL assertion (Property Specification Language)</a>
+<ul>
+<li><a href="#เป้าหมาย-8" id="toc-เป้าหมาย-8">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-8" id="toc-ไฟล์ที่เกี่ยวข้อง-8">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#psl-ใน-vhdl-เขียนยังไง" id="toc-psl-ใน-vhdl-เขียนยังไง">PSL ใน
+VHDL เขียนยังไง</a></li>
+<li><a href="#ขั้นตอน-7" id="toc-ขั้นตอน-7">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-8" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-8">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-8" id="toc-แบบฝึกหัด-8">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-10--code-coverage-ของ-vhdl" id="toc-lab-10--code-coverage-ของ-vhdl">LAB 10 — Code coverage ของ
+VHDL</a>
+<ul>
+<li><a href="#เป้าหมาย-9" id="toc-เป้าหมาย-9">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-9" id="toc-ไฟล์ที่เกี่ยวข้อง-9">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน-8" id="toc-ขั้นตอน-8">ขั้นตอน</a></li>
+<li><a href="#ผลลัพธ์ที่วัดได้จริง" id="toc-ผลลัพธ์ที่วัดได้จริง">ผลลัพธ์ที่วัดได้จริง</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-9" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-9">สิ่งที่ควรรู้จาก
+Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-9" id="toc-แบบฝึกหัด-9">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#lab-11--regression-และการทำงานอัตโนมัติ-ci" id="toc-lab-11--regression-และการทำงานอัตโนมัติ-ci">LAB 11 — Regression
+และการทำงานอัตโนมัติ (CI)</a>
+<ul>
+<li><a href="#เป้าหมาย-10" id="toc-เป้าหมาย-10">เป้าหมาย</a></li>
+<li><a href="#ไฟล์ที่เกี่ยวข้อง-10" id="toc-ไฟล์ที่เกี่ยวข้อง-10">ไฟล์ที่เกี่ยวข้อง</a></li>
+<li><a href="#ขั้นตอน-9" id="toc-ขั้นตอน-9">ขั้นตอน</a></li>
+<li><a href="#สิ่งที่ควรรู้จาก-lab-นี้-10" id="toc-สิ่งที่ควรรู้จาก-lab-นี้-10">สิ่งที่ควรรู้จาก Lab นี้</a></li>
+<li><a href="#แบบฝึกหัด-10" id="toc-แบบฝึกหัด-10">แบบฝึกหัด</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก" id="toc-ภาคผนวก">ภาคผนวก</a>
+<ul>
+<li><a href="#ภาคผนวก-ก--กับดักที่วัดได้จริงบนเครื่องนี้" id="toc-ภาคผนวก-ก--กับดักที่วัดได้จริงบนเครื่องนี้">ภาคผนวก ก —
+กับดักที่วัดได้จริงบนเครื่องนี้</a></li>
+<li><a href="#ภาคผนวก-ข--ตารางคำสั่ง-tcl-ที่ใช้บ่อย-ตรวจด้วย-help-คำสั่ง" id="toc-ภาคผนวก-ข--ตารางคำสั่ง-tcl-ที่ใช้บ่อย-ตรวจด้วย-help-คำสั่ง">ภาคผนวก ข —
+ตารางคำสั่ง Tcl ที่ใช้บ่อย (ตรวจด้วย <code>help &lt;คำสั่ง&gt;</code>)</a></li>
+<li><a href="#ภาคผนวก-ค--ตัวเลือกของคำสั่งที่ใช้บ่อย" id="toc-ภาคผนวก-ค--ตัวเลือกของคำสั่งที่ใช้บ่อย">ภาคผนวก ค —
+ตัวเลือกของคำสั่งที่ใช้บ่อย</a></li>
+<li><a href="#ภาคผนวก-ง--เทียบกับ-questa-sim-tutorial-20261-คู่มือทางการ" id="toc-ภาคผนวก-ง--เทียบกับ-questa-sim-tutorial-20261-คู่มือทางการ">ภาคผนวก ง
+— เทียบกับ Questa SIM Tutorial 2026.1 (คู่มือทางการ)</a></li>
+<li><a href="#ภาคผนวก-จ--สรุป-ทำอะไรต่อ-หลังจบทุก-lab" id="toc-ภาคผนวก-จ--สรุป-ทำอะไรต่อ-หลังจบทุก-lab">ภาคผนวก จ — สรุป “ทำอะไรต่อ”
+หลังจบทุก lab</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-ฉ--คำถามที่พบบ่อย-faq" id="toc-ภาคผนวก-ฉ--คำถามที่พบบ่อย-faq">ภาคผนวก ฉ — คำถามที่พบบ่อย
+(FAQ)</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="คู่มือปฏิบัติการ-questasim-การจำลองด้วย-vhdl">คู่มือปฏิบัติการ QuestaSim:
+การจำลองด้วย VHDL</h1>
+<h3 id="ตั้งแต่พื้นฐานจนถึงขั้นสูง--แบบ-lab-แบบทีละขั้น">ตั้งแต่พื้นฐานจนถึงขั้นสูง — แบบ Lab
+แบบทีละขั้น</h3>
+<blockquote>
+<p><strong>ทุกตัวเลขและข้อความในคู่มือนี้มาจากการรันจริงบนเครื่อง Windows</strong>
+ด้วย ModelSim DE-64 / QuestaSim <strong>2026.1</strong>
+(<code>vsim 2026.1 Simulator 2026.01 Jan 25 2026</code>)
+ไม่ใช่ตัวอย่างที่แต่งขึ้น — ทำซ้ำตามคู่มือแล้วจะได้ผลชุดเดียวกัน รวมถึงข้อความ error
+ที่ควรรู้ด้วย</p>
+</blockquote>
+<hr />
+<h2 id="ภาคนำ">ภาคนำ</h2>
+<h3 id="คู่มือนี้เหมาะกับใคร">คู่มือนี้เหมาะกับใคร</h3>
+<p>ผู้เรียน/ผู้ใช้งานที่ต้องการ <strong>จำลองวงจรดิจิทัลที่เขียนด้วย VHDL</strong> บน
+QuestaSim ตั้งแต่ยังไม่เคยเปิดเครื่องมือเลย จนถึงขั้นที่ต้องทำระบบตรวจสอบอัตโนมัติ (code
+coverage, PSL assertion, regression) เพื่อปล่อยซิปสำหรับชิป</p>
+<h3 id="สิ่งที่คุณจะได้หลังจบคู่มือนี้">สิ่งที่คุณจะได้หลังจบคู่มือนี้</h3>
+<table>
+<thead>
+<tr>
+<th>ความสามารถ</th>
+<th>Lab ที่เกี่ยวข้อง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>คอมไพล์/โหลด/จำลอง VHDL ทั้งแบบ GUI และแบบ batch</td>
+<td>01</td>
+</tr>
+<tr>
+<td>จัดการ design library หลายชุด และอ้างอิงข้ามไลบรารี</td>
+<td>02</td>
+</tr>
+<tr>
+<td>เขียน testbench ที่ตรวจตัวเองและส่งสัญญาณ PASS/FAIL ให้ CI</td>
+<td>03</td>
+</tr>
+<tr>
+<td>อ่าน waveform, วัดเวลา, ส่งออก WLF/VCD</td>
+<td>04</td>
+</tr>
+<tr>
+<td>หาบั๊กด้วย breakpoint, step, examine</td>
+<td>05</td>
+</tr>
+<tr>
+<td>หาที่มาของค่า X (Unknown)</td>
+<td>06</td>
+</tr>
+<tr>
+<td>ตรวจ/โหลด/บันทึกหน่วยความจำ (RAM)</td>
+<td>07</td>
+</tr>
+<tr>
+<td>สร้างสติมูลัสจากไฟล์, สุ่มแบบสุ่ม, ปรับค่าผ่าน generic</td>
+<td>08</td>
+</tr>
+<tr>
+<td>เขียน property assertion ด้วย PSL</td>
+<td>09</td>
+</tr>
+<tr>
+<td>วัด code coverage ของ DUT ที่เขียนด้วย VHDL</td>
+<td>10</td>
+</tr>
+<tr>
+<td>ทำ regression และสรุปผลอัตโนมัติ</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<h3 id="วิธีใช้คู่มือนี้">วิธีใช้คู่มือนี้</h3>
+<ol type="1">
+<li>อ่าน <strong>บทที่ 1</strong> (เตรียมเครื่องมือ) ก่อนเสมอ</li>
+<li>ทำ lab ตามลำดับ 01 → 11 แต่ละ lab ใช้เวลาไม่นาน</li>
+<li>ทุก lab มี 2 วิธีรัน:
+<ul>
+<li><strong>แบบ GUI</strong> — เปิด QuestaSim แล้วทำตามขั้นตอนที่ระบุ
+(เห็นภาพจริง)</li>
+<li><strong>แบบ batch</strong> — พิมพ์ <code>run.cmd</code> ในหน้าต่างพร้อม
+(ใช้กับ CI ได้)</li>
+</ul></li>
+<li>ทุก lab มีส่วน <strong>“แบบฝึกหัด”</strong> ปิดท้าย — ลองทำเองก่อนดูเฉลย</li>
+</ol>
+<blockquote>
+<p><strong>ข้อควรรู้เรื่องภาษา</strong> ข้อความที่เครื่องมือพิมพ์ออกมา (ใน
+Transcript, ในข้อความ error) เป็น <strong>ภาษาอังกฤษ</strong> เพราะทั้ง
+ModelSim และ QuestaSim เขียน log ตาม code page ของ console
+ถ้าใส่ภาษาไทยลงในข้อความที่เครื่องมือพิมพ์ จะเห็นเป็นตัวยึก ส่วน
+<strong>คำอธิบายในคู่มือฉบับนี้เป็นภาษาไทยทั้งหมด</strong></p>
+</blockquote>
+<hr />
+<h2 id="บทที่-1--เตรียมเครื่องมือ">บทที่ 1 — เตรียมเครื่องมือ</h2>
+<h3 id="11-เครื่องมือที่ใช้">1.1 เครื่องมือที่ใช้</h3>
+<p>คู่มือนี้เขียนและทดสอบกับชุดติดตั้งสองชุดที่อยู่ในเครื่องนี้</p>
+<table>
+<thead>
+<tr>
+<th>ชุดติดตั้ง</th>
+<th>ตำแหน่ง</th>
+<th>หมายเหตุ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Questa Sim-64 2026.1</td>
+<td><code>C:\Siemens\questasim64_2026.1\win64</code></td>
+<td>ชุดเต็ม ใช้กับ GUI (คือ <code>vish.exe</code>)</td>
+</tr>
+<tr>
+<td>ModelSim DE-64 2026.1</td>
+<td><code>C:\Siemens\modelsim_dlx64_2026.1\win64pe</code></td>
+<td>ชุดที่ใช้รันแบบ batch ในคู่มือนี้</td>
+</tr>
+</tbody>
+</table>
+<p>ทั้งสองชุดเป็น <strong>โค้ดเดียวกันเวอร์ชัน 2026.1</strong> คำสั่ง
+<code>vlib / vmap / vcom / vsim / vcover</code>
+ที่ใช้ในคู่มือนี้ใช้ได้ทั้งสองชุดอย่างเหมือนกันทุกประการ</p>
+<p>ตรวจสอบเวอร์ชันได้ด้วย</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;C:\Siemens\questasim64_2026.1\win64\vsim.exe&quot;</span> -version</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">:: Questa Sim-64 vsim 2026.1 Simulator 2026.01 Jan 25 2026</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;C:\Siemens\modelsim_dlx64_2026.1\win64pe\vsim.exe&quot;</span> -version</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">:: Model Technology ModelSim DE-64 vsim 2026.1 Simulator 2026.01 Jan 25 2026</span></span></code></pre></div>
+<h3 id="12--เรื่องใบอนุญาต-license--อ่านให้เข้าใจก่อนทำ-lab">1.2 ⚠ เรื่องใบอนุญาต
+(license) — อ่านให้เข้าใจก่อนทำ lab</h3>
+<p>ใบอนุญาตของเครื่องนี้เป็น <strong>node-locked แบบ session เดียว</strong>
+ความหมายคือ <strong>เปิดจำลองได้ session เดียวต่อชุดติดตั้ง</strong> ถ้ามี GUI
+เปิดค้างไว้ การรันแบบบรรทัดคำสั่งจะถูกปฏิเสธด้วยข้อความ</p>
+<pre class="text"><code>** Error: License checkout has been disallowed because
+only one session is allowed to run on an uncounted nodelocked
+license and an instance of QuestaSim is already running with a
+nodelocked license on this machine.</code></pre>
+<p><strong>วิธีแก้</strong></p>
+<table>
+<thead>
+<tr>
+<th>สถานการณ์</th>
+<th>ทำอย่างไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ต้องการรันแบบ batch / CI</td>
+<td>ใช้ชุด ModelSim DE-64 (ใช้งานพร้อมกับ QuestaSim GUI ได้)</td>
+</tr>
+<tr>
+<td>ต้องการใช้ QuestaSim แบบ CLI</td>
+<td><strong>ปิด QuestaSim GUI ก่อน</strong> แล้วค่อยรัน</td>
+</tr>
+<tr>
+<td>อยากให้สคริปต์จัดการเอง</td>
+<td>ไฟล์ <code>run.cmd</code> ของทุก lab มี “license probe” ที่ลองไล่หา</td>
+</tr>
+<tr>
+<td>ชุดติดตั้งที่ใช้ได้จริงให้เอง (ดูหัวข้อ 1.4)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ข้อสังเกตที่วัดได้จริง</strong> คำสั่ง
+<code>vsim -c -do &quot;quit -f&quot;</code> <strong>ไม่</strong> ดึง license — ต้อง
+<strong>โหลด design</strong> จึงเช็ค license ดังนั้นการทดสอบว่า license ว่างไหม
+ต้องคอมไพล์แล้วโหลด design จริง</p>
+</blockquote>
+<h3 id="13-โครงสร้างโฟลเดอร์ของคู่มือ">1.3 โครงสร้างโฟลเดอร์ของคู่มือ</h3>
+<pre class="text"><code>questa_vhdl_lab/
+├── docs/                     คู่มือฉบับนี้ (Markdown / HTML / PDF)
+├── tools/
+│   ├── pick_tool.cmd           เลือกชุดติดตั้งที่ยังมี license ว่าง (ใช้ร่วมกันทุก lab)
+│   ├── run_template.cmd       เทมเพลตสคริปต์รันของทุก lab
+│   ├── make-runners.ps1       ตัวสร้าง run.cmd ของทุก lab
+│   ├── build-docs.ps1         รวม Markdown แล้วสร้าง HTML + PDF
+│   └── probe/probe_top.vhd    design จิ๋วสำหรับ license probe
+├── lab01_first_simulation/    ครั้งแรก: compile / load / run
+├── lab02_libraries/           design library และการอ้างอิงข้ามไลบรารี
+├── lab03_selfchecking_tb/     testbench แบบตรวจตัวเอง
+├── lab04_waveform/            waveform, WLF, VCD
+├── lab05_debugging/           breakpoint / step / examine
+├── lab06_dataflow/            ตามหาต้นเหตุของค่า X
+├── lab07_memory/              RAM และคำสั่ง mem
+├── lab08_stimulus/            สติมูลัสจากไฟล์ / สุ่ม / generic
+├── lab09_psl/                 PSL assertion
+├── lab10_coverage/            code coverage ของ VHDL
+└── lab11_regression/          regression และสรุปผล</code></pre>
+<p>ภายในแต่ละ lab โครงสร้างเหมือนกันหมด</p>
+<pre class="text"><code>labNN_xxx/
+├── src/        ไฟล์ DUT (design ที่ถูกทดสอบ)
+├── tb/         ไฟล์ testbench
+├── run.do      สคริปต์สำหรับใช้ใน GUI
+├── run_batch.do สคริปต์สำหรับรันแบบ batch (ไม่มี GUI)
+├── run.cmd     ตัวรันแบบ Windows (เลือกเครื่องมือ + ตัดสิน PASS/FAIL)
+└── results/    ผลลัพธ์ที่ได้จากการรัน</code></pre>
+<h3 id="14-สคริปต์-runcmd-ทำอะไรบ้าง">1.4 สคริปต์ <code>run.cmd</code>
+ทำอะไรบ้าง</h3>
+<p><code>run.cmd</code> ของทุก lab สร้างจากเทมเพลตเดียวกัน
+(<code>tools/run_template.cmd</code>) มี 4 ขั้นตอน</p>
+<ol type="1">
+<li><strong>หาเครื่องมือ</strong> — เรียก <code>tools/pick_tool.cmd</code>
+ซึ่งไล่จาก <code>QUESTASIM_HOME</code> → <code>MODELSIM_HOME</code> → path
+ที่ติดตั้งไว้ แล้วทดสอบด้วย license probe จริง (คอมไพล์ + โหลด design จิ๋ว)
+เพื่อเลือกชุดติดตั้งที่ license ว่างจริงในเวลานั้น</li>
+<li><strong>เข้าโฟลเดอร์ของ lab</strong> (<code>cd /d &quot;%~dp0&quot;</code>)
+เพื่อให้สคริปต์ <code>.do</code> หาไฟล์เจอ</li>
+<li><strong>รัน</strong>
+<code>vsim -c -onfinish stop -do &quot;do run_batch.do&quot;</code></li>
+<li><strong>ตัดสินผล</strong> — อ่านไฟล์ <code>result.txt</code> ที่ testbench
+เขียนไว้ แล้วคืนรหัสจบการทำงาน</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>รหัสจบ</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>ผ่าน (PASS)</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>ไม่ผ่าน (FAIL)</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>หาเครื่องมือหรือโฟลเดอร์ไม่เจอ</td>
+</tr>
+<tr>
+<td><code>90</code></td>
+<td>เครื่องมือล้มเหลวระหว่างทำงาน (คอมไพล์ไม่ผ่าน ฯลฯ)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ทำไมต้องอ่าน <code>result.txt</code> แทนที่จะเชื่อ exit code ของ
+<code>vsim</code> ?</strong> เพราะ <code>vsim</code> คืนค่า <code>0</code>
+แม้แต่จะ <strong>เปิดไฟล์ <code>.do</code> ไม่ได้</strong> เลย (เห็นข้อความ
+<code>Cannot open macro file: ...</code> แล้วจบด้วยรหัส 0) การอ่านไฟล์ผลลัพธ์ที่
+testbench เขียนเองจึงเป็นวิธีที่เชื่อถือได้จริง</p>
+</blockquote>
+<h3 id="15-คำสั่งพื้นฐานที่ใช้บ่อย">1.5 คำสั่งพื้นฐานที่ใช้บ่อย</h3>
+<table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vlib &lt;path&gt;</code></td>
+<td>สร้างไลบรารีจริง (โฟลเดอร์ที่เก็บ design unit ที่คอมไพล์แล้ว)</td>
+</tr>
+<tr>
+<td><code>vmap &lt;ชื่อ&gt; &lt;path&gt;</code></td>
+<td>ผูก “ชื่อเชิงตรรกะ” ของไลบรารีเข้ากับโฟลเดอร์จริง แล้วบันทึกใน
+<code>modelsim.ini</code></td>
+</tr>
+<tr>
+<td><code>vcom -2008 &lt;file.vhd&gt;</code></td>
+<td>คอมไพล์ VHDL (ใช้มาตรฐาน VHDL-2008)</td>
+</tr>
+<tr>
+<td><code>vsim &lt;lib&gt;.&lt;entity&gt;</code></td>
+<td>โหลด design เข้าจำลอง (ทำให้เกิดการ “optimize”)</td>
+</tr>
+<tr>
+<td><code>run -all</code></td>
+<td>รันจำลองจนจบการจำลอง</td>
+</tr>
+<tr>
+<td><code>run &lt;เวลา&gt;</code></td>
+<td>รันจำลองเป็นเวลาที่กำหนด เช่น <code>run 500 ns</code></td>
+</tr>
+<tr>
+<td><code>quit -code &lt;n&gt;</code></td>
+<td>จบการทำงานพร้อมรหัสจบ (สำคัญมากสำหรับ CI)</td>
+</tr>
+<tr>
+<td><code>add wave -r /*</code></td>
+<td>เพิ่มสัญญาณทั้งหมดเข้าหน้าต่าง Wave</td>
+</tr>
+<tr>
+<td><code>examine -radix hex &lt;path&gt;</code></td>
+<td>ดูค่าปัจจุบันของสัญญาณ</td>
+</tr>
+<tr>
+<td><code>bp &lt;file&gt; &lt;บรรทัด&gt;</code></td>
+<td>ตั้ง breakpoint</td>
+</tr>
+<tr>
+<td><code>log -recursive /*</code></td>
+<td>บันทึกทุกสัญญาณลงไฟล์ WLF</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="lab-01--การจำลองครั้งแรก">LAB 01 — การจำลองครั้งแรก</h2>
+<h3 id="เป้าหมาย">เป้าหมาย</h3>
+<p>คอมไพล์ DUT + testbench ของ VHDL แล้วจำลองออกมาเป็นรูปคลื่น ทั้งแบบที่ “มองเห็น”
+(GUI) และแบบที่ “ตรวจอัตโนมัติ” (batch)</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/counter.vhd</code></td>
+<td>DUT — ตัวนับขึ้น/ลง 8 บิต มี enable และ reset</td>
+</tr>
+<tr>
+<td><code>tb/tb_counter.vhd</code></td>
+<td>testbench — สร้างนาฬิกา ป้อนสติมูลัส และ monitor ค่า</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน--แบบ-gui">ขั้นตอน — แบบ GUI</h3>
+<p><strong>ขั้นที่ 1 : เปิด QuestaSim และเข้าโฟลเดอร์ของ lab</strong></p>
+<p>ที่เมนู <code>File &gt; Change Directory...</code> เลือกโฟลเดอร์
+<code>lab01_first_simulation</code> (สำคัญมาก —
+สคริปต์ทั้งหมดอ้างอิงไฟล์แบบสัมพัทธ์)</p>
+<p><strong>ขั้นที่ 2 : สร้าง work library</strong></p>
+<p>พิมพ์ที่ prompt ในหน้าต่าง Transcript</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>vlib work</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>vmap work work</span></code></pre></div>
+<p>ผลลัพธ์ที่จะเห็น</p>
+<pre class="text"><code># Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work
+# Copying C:/Siemens/modelsim_dlx64_2026.1/win64pe/../modelsim.ini to modelsim.ini
+# Modifying modelsim.ini</code></pre>
+<blockquote>
+<p><code>vlib</code> สร้างโฟลเดอร์ <code>work</code> ส่วน <code>vmap</code>
+เป็นการ <strong>ผูกชื่อ</strong> <code>work</code> เข้ากับโฟลเดอร์นั้น
+แล้วบันทึกการผูกไว้ในไฟล์ <code>modelsim.ini</code> ถ้าไม่ <code>vmap</code>
+ไลบรารีจะ “มองไม่เห็น” และคอมไพล์ไม่ได้</p>
+</blockquote>
+<p><strong>ขั้นที่ 3 : คอมไพล์</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> src<span class="op">/</span>counter.vhd</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> tb<span class="op">/</span>tb_counter.vhd</span></code></pre></div>
+<blockquote>
+<p><strong>ทำไมต้องใส่ <code>-2008</code> ?</strong>
+<code>std.env.finish</code> (ที่ testbench ใช้จบการจำลอง) เป็นของใหม่ใน
+VHDL-2008 ค่าเริ่มต้นของ <code>vcom</code> คือ VHDL-93 ซึ่งไม่รู้จักแพ็กเกจนี้</p>
+</blockquote>
+<p><strong>ขั้นที่ 4 : โหลด design</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>vsim work.tb_counter</span></code></pre></div>
+<p>สังเกตว่าข้อความจะบอกว่าโหลดอะไรบ้าง</p>
+<pre class="text"><code># Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_counter(sim)
+# Loading work.counter(rtl)</code></pre>
+<p><strong>ขั้นที่ 5 : เปิดหน้าต่าง Wave แล้วรัน</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ot">add</span> wave -r <span class="op">/</span>tb_counter<span class="op">/*</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>run -all</span></code></pre></div>
+<h3 id="ขั้นตอน--แบบ-batch">ขั้นตอน — แบบ batch</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> questa_vhdl_lab\lab01_first_simulation</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริง (ตัดเฉพาะส่วนสำคัญ)</p>
+<pre class="text"><code>====================================================================
+ LAB 01 : first simulation
+ cwd    : C:\...\questa_vhdl_lab\lab01_first_simulation
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+====================================================================
+# ** Note: tb_counter : start
+# ** Note:   [mon] t=0 ns cnt = 00
+# ** Note: tb_counter : reset released, cnt = 00
+# ** Note:   [mon] t=35 ns cnt = 01
+# ** Note:   [mon] t=45 ns cnt = 02
+# ** Note:   [mon] t=55 ns cnt = 03
+# ** Note:   [mon] t=65 ns cnt = 04
+# ** Note:   [mon] t=75 ns cnt = 05
+# ** Note: tb_counter : after 5 counts up, cnt = 05
+# ** Note: tb_counter : while disabled, cnt = 05
+# ** Note:   [mon] t=115 ns cnt = 04
+# ** Note:   [mon] t=125 ns cnt = 03
+# ** Note: tb_counter : after 2 counts down, cnt = 03
+# ** Note: TEST_PASSED : tb_counter completed
+RESULT: PASS
+[RESULT] PASS</code></pre>
+<p>รหัสจบของโปรเซส <code>cmd.exe</code> = <code>0</code></p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. นาฬิกาต้องถูก “เริ่มต้น” เสมอ</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ot">signal</span> clk <span class="ot">:</span> <span class="dt">std_logic</span> <span class="ot">:=</span> <span class="bn">&#39;0&#39;</span>;       <span class="co">-- ต้องมีค่าเริ่มต้น</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>clk <span class="ot">&lt;=</span> <span class="kw">not</span> clk <span class="kw">after</span> CLK_PERIOD <span class="ot">/</span> <span class="dv">2</span>;</span></code></pre></div>
+<p>ถ้าไม่ใส่ <code>:= &#39;0&#39;</code> สัญญาณจะเริ่มเป็น <code>&#39;U&#39;</code> และ
+<code>not &#39;U&#39;</code> ก็ยังเป็น <code>&#39;U&#39;</code> นาฬิกาจะ <strong>ไม่มีวัน
+toggle</strong> และการจำลองจะ “เงียบ ๆ” ทำงานผิด</p>
+<p><strong>2. <code>add wave -r /*</code> ใช้ในโหมด console
+ไม่ได้</strong></p>
+<p>ถ้ารัน <code>vsim -c</code> (โหมดไม่มี GUI) คำสั่งนี้จะ error คู่มือนี้จึงห่อด้วย
+<code>if {[catch {add wave -r /*} err]} { ... }</code> ในสคริปต์
+<code>.do</code></p>
+<p><strong>3. <code>run -all</code> ใช้เวลานานมากได้</strong></p>
+<p>ค่าเริ่มต้นของการรันใน GUI คือ 100 ns ถ้าต้องการนานกว่านั้นให้พิมพ์
+<code>run 500 ns</code></p>
+<h3 id="แบบฝึกหัด">แบบฝึกหัด</h3>
+<ol type="1">
+<li>เปลี่ยน <code>WIDTH</code> ใน generic ของ <code>counter.vhd</code> เป็น
+4 แล้วรันใหม่ ดูว่า waveform เปลี่ยนอย่างไร</li>
+<li>แก้ <code>CLK_PERIOD</code> เป็น <code>20 ns</code>
+แล้วดูว่าระยะห่างระหว่างขอบขึ้นใน waveform เปลี่ยนไปเท่าไร</li>
+<li>ลบ <code>:= &#39;0&#39;</code> ออกจาก <code>signal clk</code> แล้วรัน —
+อธิบายว่าทำไมจำลองไม่เดิน</li>
+</ol>
+<hr />
+<h2 id="lab-02--design-library-และการอ้างอิงข้ามไลบรารี">LAB 02 — Design
+library และการอ้างอิงข้ามไลบรารี</h2>
+<h3 id="เป้าหมาย-1">เป้าหมาย</h3>
+<p>เรียนรู้ว่า “ไลบรารี” คืออะไร, <code>vlib</code> กับ <code>vmap</code>
+ต่างกันอย่างไร และ <strong>วิธีเรียกใช้ design unit ที่อยู่คนละไลบรารี</strong></p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-1">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>ไลบรารีปลายทาง</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/adder_pkg.vhd</code></td>
+<td><code>work</code></td>
+<td>package — มีฟังก์ชัน <code>parity</code> และ <code>to_hex</code></td>
+</tr>
+<tr>
+<td><code>src/ip_core.vhd</code></td>
+<td><code>ip_lib</code></td>
+<td>entity — ตัวนับที่ทำหน้าที่เป็น “IP core”</td>
+</tr>
+<tr>
+<td><code>src/counter_top.vhd</code></td>
+<td><code>work</code></td>
+<td>top ที่เรียกทั้งสองอย่าง</td>
+</tr>
+<tr>
+<td><code>tb/tb_libraries.vhd</code></td>
+<td><code>work</code></td>
+<td>testbench</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : สร้างไลบรารีสองชุด</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>vlib work</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>vmap work work</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>vlib lib<span class="op">/</span>ip_lib</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>vmap ip_lib lib<span class="op">/</span>ip_lib</span></code></pre></div>
+<p><strong>ขั้นที่ 2 : คอมไพล์แยกตามไลบรารี</strong></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work work   src<span class="op">/</span>adder_pkg.vhd</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work ip_lib src<span class="op">/</span>ip_core.vhd</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work work   src<span class="op">/</span>counter_top.vhd</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work work   tb<span class="op">/</span>tb_libraries.vhd</span></code></pre></div>
+<p><strong>ขั้นที่ 3 : ตรวจว่ามีอะไรอยู่ในไลบรารี</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>vdir -lib ip_lib</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code># Loading ip_lib.ip_core(rtl)</code></pre>
+<p><strong>ขั้นที่ 4 : โหลดและรัน</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>vsim work.tb_libraries</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>run -all</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code># ** Note: ==============================================
+# ** Note:  adder_pkg version = 1.0.0
+# ** Note: ==============================================
+# ** Note:   [mon] t=0 ns value=00 parity=&#39;0&#39;
+# ** Note:   [mon] t=25 ns value=01 parity=&#39;1&#39;
+# ** Note:   [mon] t=45 ns value=03 parity=&#39;0&#39;
+# ** Note:   [mon] t=55 ns value=04 parity=&#39;1&#39;
+# ** Note:   [mon] t=65 ns value=05 parity=&#39;0&#39;
+# ** Note: value  = 06
+# ** Note: parity = &#39;0&#39;
+# ** Note: TEST_PASSED : lab02_libraries</code></pre>
+<p>สังเกตว่า transcript จะแสดง <code>Loading ip_lib.ip_core(rtl)</code> —
+ตัวจำลองหา design unit จากไลบรารี <code>ip_lib</code> ที่ผูกไว้ใน
+<code>modelsim.ini</code> เจอโดยอัตโนมัติ</p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-1">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. <code>use</code> clause เลือกได้เฉพาะ PACKAGE</strong></p>
+<p>เขียนแบบนี้ <strong>ผิด</strong>:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> ip_lib<span class="ot">.</span>ip_core<span class="ot">.</span><span class="kw">all</span>;      <span class="co">-- ** Error: &#39;ip_core&#39; is not a library or a package.</span></span></code></pre></div>
+<p><strong>2. ชื่อไลบรารีต้องประกาศด้วย <code>library</code> clause
+ก่อน</strong></p>
+<p>เขียนแบบนี้ก็ <strong>ผิดเช่นกัน</strong>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>core <span class="ot">:</span> <span class="cf">entity</span> <span class="dv">ip_lib</span><span class="ot">.</span>ip_core      <span class="co">-- ** Error: (vcom-1136) Unknown identifier &quot;ip_lib&quot;.</span></span></code></pre></div>
+<p>ทางที่ถูกต้องคือ <strong>ประกาศไลบรารีใน context</strong> แล้วเรียกแบบ direct
+entity instantiation</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">library</span> ip_lib;                  <span class="co">-- &lt;&lt;&lt; บรรทัดนี้สำคัญ</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ot">...</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>core <span class="ot">:</span> <span class="cf">entity</span> <span class="dv">ip_lib</span><span class="ot">.</span>ip_core</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">generic</span> <span class="kw">map</span> (<span class="dt">WIDTH</span> <span class="ot">=&gt;</span> <span class="dt">WIDTH</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">port</span> <span class="kw">map</span> (clk <span class="ot">=&gt;</span> clk<span class="ot">,</span> rst <span class="ot">=&gt;</span> rst<span class="ot">,</span> en <span class="ot">=&gt;</span> en<span class="ot">,</span> value <span class="ot">=&gt;</span> core_val);</span></code></pre></div>
+<p><strong>3. ห้ามลบ <code>modelsim.ini</code> ระหว่าง
+session</strong></p>
+<p>ถ้าสคริปต์ <code>.do</code> สั่ง
+<code>file delete -force modelsim.ini</code> ตัวจำลองที่โหลดไฟล์นี้ไว้
+ตั้งแต่ตอนเริ่มจะหาไฟล์ไม่เจอ แล้ว <strong>คอมไพล์ที่อ้างไลบรารีอื่นจะ error</strong>
+ให้ <code>vmap</code> เป็นคนสร้าง/แก้ไฟล์นี้แทน</p>
+<p><strong>4. package ข้ามไลบรารีก็ทำได้</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> work<span class="ot">.</span>adder_pkg<span class="ot">.</span><span class="kw">all</span>;          <span class="co">-- package อยู่ใน work</span></span></code></pre></div>
+<h3 id="แบบฝึกหัด-1">แบบฝึกหัด</h3>
+<ol type="1">
+<li>สร้างไลบรารีชุดที่สามชื่อ <code>util_lib</code> แล้วย้าย
+<code>adder_pkg</code> ไปไว้ที่นั่น (ต้องแก้
+<code>library util_lib; use util_lib.adder_pkg.all;</code>
+ในไฟล์ที่อ้างถึง)</li>
+<li>ตั้งใจลบบรรทัด <code>library ip_lib;</code> ออกจาก
+<code>counter_top.vhd</code> แล้วคอมไพล์ จะเห็นข้อความ error อะไร</li>
+</ol>
+<hr />
+<h2 id="lab-03--testbench-แบบตรวจตัวเอง-self-checking">LAB 03 — Testbench
+แบบตรวจตัวเอง (self-checking)</h2>
+<h3 id="เป้าหมาย-2">เป้าหมาย</h3>
+<p>เขียน testbench ที่ <strong>ตรวจคำตอบด้วยตัวเอง</strong>
+และรายงานผลให้ระบบอัตโนมัติตัดสินได้ พร้อมเรียนรู้ severity level ของ
+<code>assert</code> และจังหวะการตรวจที่ถูกต้องสำหรับ FSM</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-2">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/fsm_timer.vhd</code></td>
+<td>DUT — FSM ตัวจับเวลา (IDLE → RUN → DONE) เอาต์พุตแบบ Moore</td>
+</tr>
+<tr>
+<td><code>tb/tb_timer.vhd</code></td>
+<td>testbench ที่ตรวจตัวเอง มี generic <code>INJECT_ERROR</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน-1">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : คอมไพล์และรัน</strong></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>vlib work</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>vmap work work</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> src<span class="op">/</span>fsm_timer.vhd</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> tb<span class="op">/</span>tb_timer.vhd</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>vsim work.tb_timer</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>run -all</span></code></pre></div>
+<p><strong>ขั้นที่ 2 : ดูผลสรุป</strong></p>
+<pre class="text"><code># ** Note: --------------------------------------------------
+# ** Note:  checks = 7 , errors = 0
+# ** Note: --------------------------------------------------
+# ** Note: TEST_PASSED : lab03_selfchecking_tb</code></pre>
+<p><strong>ขั้นที่ 3 : จงใจให้มันพัง เพื่อดูว่า “ไม่ผ่าน” หน้าตาเป็นอย่างไร</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>run_fail.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริง (ที่วัดได้)</p>
+<pre class="text"><code># ** Note: --------------------------------------------------
+# ** Note:  tb_timer : start
+# ** Note: --------------------------------------------------
+# ** Failure: FAIL: injected error (INJECT_ERROR = true)
+# Stopped at tb/tb_timer.vhd line 126
+RESULT: FAIL
+[RESULT] FAIL as expected -- exit=1</code></pre>
+<p>สังเกตว่า <strong>ไม่มีบรรทัดสรุป <code>checks = ...</code> เลย</strong>
+เพราะ <code>severity failure</code> หยุด process ตรงนั้น
+บรรทัดสรุปผลซึ่งอยู่ถัดไปจึงไม่ได้ทำงาน (ทำให้ testbench ต้องเขียน
+<code>result.txt</code> = <code>FAIL</code> <strong>ก่อน</strong>
+<code>assert</code> — ดูโค้ดใน <code>tb/tb_timer.vhd</code>)</p>
+<p>รหัสจบของ <code>cmd.exe</code> = <code>1</code> ตามที่ตั้งใจไว้</p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-2">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. severity ของ <code>assert</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>severity</th>
+<th>ผลต่อการจำลอง</th>
+<th>ใช้เมื่อ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>note</code></td>
+<td>พิมพ์ข้อความ ไม่หยุด</td>
+<td>ข้อมูลประกอบ</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>พิมพ์ข้อความ ไม่หยุด</td>
+<td>เตือนที่ยังไม่ผิดจริง</td>
+</tr>
+<tr>
+<td><code>error</code></td>
+<td>พิมพ์ข้อความ <strong>หยุดการจำลอง</strong></td>
+<td>ตรวจไม่ผ่าน</td>
+</tr>
+<tr>
+<td><code>failure</code></td>
+<td>พิมพ์ข้อความ <strong>หยุดการจำลอง</strong></td>
+<td>ผิดร้ายแรง ต้องแก้</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. Moore output ต้องตรวจ “หลัง” ขอบขึ้น 1 ns</strong></p>
+<p>เอาต์พุตแบบ Moore ลงทะเบียนแล้ว ค่าจึงเปลี่ยน <strong>หลัง</strong>
+ขอบขึ้นเสียงไปเล็กน้อย ถ้าตรวจทันทีที่ขอบขึ้นจะเห็นค่าของรอบก่อนหน้า → ผลลัพธ์เพี้ยนทั้งชุด</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">wait</span> <span class="kw">until</span> <span class="kw">rising_edge</span>(clk);</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="kw">wait</span> <span class="kw">for</span> <span class="dv">1</span> <span class="dt">ns</span>;                 <span class="co">-- &lt;&lt;&lt; จุดนี้สำคัญ</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="kw">assert</span> cnt <span class="ot">=</span> exp_cnt <span class="kw">report</span> <span class="st">&quot;...&quot;</span> <span class="kw">severity</span> <span class="kw">error</span>;</span></code></pre></div>
+<p>ถ้าใช้ <strong>Mealy</strong> (เอาต์พุตเป็น combinational) ต้องตรวจ
+<strong>ที่</strong> ขอบขึ้นเลย เพราะค่าจะเปลี่ยนพร้อมกับขอบขึ้น ไม่งั้นจะพลาดพัลส์ 1
+รอบที่ต้องการตรวจ</p>
+<p><strong>3. นับ error ด้วย VARIABLE ไม่ใช่ signal</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ot">variable</span> errors <span class="ot">:</span> <span class="dt">integer</span> <span class="ot">:=</span> <span class="dv">0</span>;</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ot">...</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> cnt <span class="ot">/=</span> exp_cnt <span class="kw">then</span> errors <span class="ot">:=</span> errors <span class="ot">+</span> <span class="dv">1</span>; <span class="kw">end</span> <span class="kw">if</span>;</span></code></pre></div>
+<p>ถ้าใช้ <code>signal</code> ค่าจะถูกอัปเดตท้าย delta cycle
+ตัวสรุปจะเห็นค่าคนละรอบ (เช่นเห็น <code>N-1</code> แทน <code>N</code>)</p>
+<p><strong>4. เขียนผลลงไฟล์ <code>result.txt</code> เอง</strong></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">procedure</span> <span class="dv">write_result</span>(<span class="ot">constant</span> fname <span class="ot">:</span> <span class="kw">in</span> <span class="dt">string</span>; <span class="ot">constant</span> verdict <span class="ot">:</span> <span class="kw">in</span> <span class="dt">string</span>) <span class="cf">is</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">file</span> f <span class="ot">:</span> <span class="dt">text</span>;</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">variable</span> l <span class="ot">:</span> <span class="dt">line</span>;</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="kw">begin</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  file_open(f<span class="ot">,</span> fname<span class="ot">,</span> write_mode);</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  write(l<span class="ot">,</span> verdict);</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  writeline(f<span class="ot">,</span> l);</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>  file_close(f);</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end procedure write_result;</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="ot">...</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>write_result(<span class="st">&quot;result.txt&quot;</span><span class="ot">,</span> <span class="st">&quot;PASS&quot;</span>);</span></code></pre></div>
+<blockquote>
+<p>ข้อควรระวัง: <code>writeline</code> รับค่าเป็น <code>line</code> (access
+to string) <strong>ไม่ใช่ string ธรรมดา</strong> ต้อง
+<code>write(l, verdict)</code> แล้วค่อย <code>writeline(f, l)</code>
+ถ้าเขียน <code>writeline(f, verdict)</code> จะได้
+<code>** Error: (vcom-1600) No feasible entries for subprogram &quot;WRITELINE&quot;.</code></p>
+</blockquote>
+<p><strong>5. <code>const</code> เป็นคำสงวนใน VHDL-2008</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">procedure</span> <span class="dv">write_result</span>(const fname <span class="ot">:</span> <span class="kw">in</span> <span class="dt">string</span>; <span class="ot">...</span>)   <span class="co">-- ผิด ! ต้องใช้ constant</span></span></code></pre></div>
+<p>ใน VHDL-2008 คำว่า <code>const</code> ถูกสงวนไว้สำหรับ interface constant
+ถ้าใช้ผิดจะได้
+<code>** Error: near &quot;fname&quot;: (vcom-1576) expecting &#39;:&#39;.</code></p>
+<p><strong>6. <code>std.env.finish</code> ต้องห่อด้วย <code>catch</code>
+ในสคริปต์</strong></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{[</span><span class="cf">catch</span> <span class="kw">{</span>run -all<span class="kw">}</span> err<span class="kw">]}</span> <span class="kw">{</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">puts</span> <span class="st">&quot;---- simulation stopped by an assertion : </span><span class="dt">$err</span><span class="st"> ----&quot;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p>ถ้าไม่ห่อ และ testbench หยุดด้วย <code>severity failure</code> ModelSim จะ
+<strong>รีสตาร์ทรายการคำสั่ง <code>-do</code> ตั้งแต่ต้น</strong>
+ทำให้สคริปต์ถูกรันซ้ำ</p>
+<h3 id="แบบฝึกหัด-2">แบบฝึกหัด</h3>
+<ol type="1">
+<li>เปลี่ยน <code>wait for 1 ns</code> เป็น <code>wait for 0 ns</code>
+แล้วรันซ้ำ ดูว่า error กี่ตัว</li>
+<li>เพิ่มเคสตรวจที่ขอบขึ้นแรกหลัง reset (ว่า <code>cnt</code> ยังเป็น
+<code>00</code>)</li>
+<li>เปลี่ยน <code>severity error</code> เป็น <code>severity warning</code>
+ใน testbench แล้วดูว่า การจำลองจะ “หยุด” หรือไม่</li>
+</ol>
+<hr />
+<h2 id="lab-04--การวิเคราะห์-waveform">LAB 04 — การวิเคราะห์ waveform</h2>
+<h3 id="เป้าหมาย-3">เป้าหมาย</h3>
+<p>สร้าง waveform ที่ “อ่านเป็น” เรียนรู้การวัดเวลาด้วย cursor และส่งออกผลลัพธ์เป็นไฟล์
+WLF (native) และ VCD (มาตรฐาน) เพื่อนำไปใช้ต่อ</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-3">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/clock_div.vhd</code></td>
+<td>DUT — ตัวหารความถี่นาฬิกา (<code>div_clk</code> เปลี่ยนสถานะทุก ๆ
+<code>DIV</code> รอบ)</td>
+</tr>
+<tr>
+<td><code>tb/tb_divider.vhd</code></td>
+<td>testbench พร้อม monitor จับเวลาขอบขึ้น</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน-2">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : เตรียมหน้าต่าง Wave</strong></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>vlib work</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>vmap work work</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> src<span class="op">/</span>clock_div.vhd</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> tb<span class="op">/</span>tb_divider.vhd</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>vsim work.tb_divider</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="ot">add</span> wave -r <span class="op">/*</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>run -all</span></code></pre></div>
+<p><strong>ขั้นที่ 2 : วัดความระยะห่างระหว่างขอบขึ้น</strong></p>
+<p>ในหน้าต่าง Wave กดไอคอนเส้นประ (cursor) แล้วลากไปวางบนขอบขึ้นของ
+<code>div_clk</code> สองครั้ง → ค่าในช่อง “Time Delta” จะเป็นคาบของสัญญาณ</p>
+<p>ถ้าทำแบบ batch ให้ดูจากข้อความใน transcript ที่ monitor พิมพ์</p>
+<pre class="text"><code># ** Note:   [mon] t=65 ns div_clk rising #1
+# ** Note:   [mon] t=145 ns div_clk rising #2
+# ** Note:   [mon] t=225 ns div_clk rising #3
+# ** Note:   [mon] t=305 ns div_clk rising #4
+# ** Note:   [mon] t=385 ns div_clk rising #5</code></pre>
+<blockquote>
+<p>คาบที่วัดได้ = 145 − 65 = <strong>80 ns</strong> ตรวจสอบด้วยทฤษฎี: คาบของ
+<code>div_clk</code> = 2 × <code>DIV</code> × คาบของ <code>clk</code> =
+2 × 4 × 10 ns = <strong>80 ns</strong> ✔</p>
+</blockquote>
+<p><strong>ขั้นที่ 3 : เปลี่ยนฐานแสดงผล (radix)</strong></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ot">add</span> wave -radix hex <span class="op">/</span>tb_divider<span class="op">/*</span></span></code></pre></div>
+<p><strong>ขั้นที่ 4 : บันทึกเป็น WLF และ VCD</strong></p>
+<p>ในสคริปต์ <code>run_batch.do</code> ของ lab นี้</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>log -recursive <span class="op">/*</span>                 -- บันทึกทุกสัญญาณเป็น vsim.wlf</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>vcd <span class="kw">file</span> results<span class="op">/</span>waveform.vcd     -- เตรียมไฟล์ VCD   (ต้องทำก่อน run<span class="op">!</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>vcd <span class="ot">add</span> -r <span class="op">/*</span>                     -- เพิ่มสัญญาณที่จะส่งออก</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>run -all</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>vcd <span class="kw">flush</span>                         -- ปิดและเขียนไฟล์ให้เรียบร้อย</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code>  vsim.wlf                              49152 bytes
+  results/waveform.vcd                   3219 bytes
+  created results\waveform_from_wlf.vcd</code></pre>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-3">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. ต้อง “เตรียม” VCD ก่อน <code>run</code> เสมอ</strong></p>
+<p>ถ้าสั่ง <code>vcd add</code> หลัง <code>run -all</code> เสร็จแล้ว ไฟล์ VCD
+จะมีแต่ส่วนหัว (ประกาศตัวแปร) <strong>แต่ไม่มีค่าที่เปลี่ยนแปลงเลย</strong>
+ขนาดไฟล์จะเล็กกว่าเดิมมาก</p>
+<table>
+<thead>
+<tr>
+<th>สถานการณ์</th>
+<th>ขนาดไฟล์ที่ได้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vcd add</code> หลัง <code>run</code></td>
+<td>1,310 bytes (มีแต่ header)</td>
+</tr>
+<tr>
+<td><code>vcd add</code> ก่อน <code>run</code></td>
+<td><strong>3,219 bytes</strong> (มีค่าครบ) ✔</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2. แปลง WLF → VCD ต้องทำหลัง simulator ปิดตัวลง</strong></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>wlf2vcd vsim.wlf <span class="at">-o</span> results\waveform_from_wlf.vcd</span></code></pre></div>
+<p>ถ้ารันคำสั่งนี้ <strong>ระหว่าง</strong> จำลอง จะได้</p>
+<pre class="text"><code>** Error: Unable to open WLF file &quot;vsim.wlf&quot;.</code></pre>
+<p>เพราะไฟล์ WLF ถูกล็อกไว้ระหว่างที่ simulator ยังทำงาน คู่มือนี้จึงย้ายคำสั่งนี้ไปไว้ใน
+<code>run.cmd</code> หลัง <code>vsim</code> จบแล้ว</p>
+<p><strong>3. เครื่องมือแปลงไฟล์ที่มีให้ใช้</strong></p>
+<table>
+<thead>
+<tr>
+<th>เครื่องมือ</th>
+<th>ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>wlf2vcd</code></td>
+<td>WLF → VCD</td>
+</tr>
+<tr>
+<td><code>vcd2wlf</code></td>
+<td>VCD → WLF</td>
+</tr>
+<tr>
+<td><code>vcd2qwave</code></td>
+<td>VCD → ไฟล์สำหรับ Questa Visualizer</td>
+</tr>
+</tbody>
+</table>
+<h3 id="แบบฝึกหัด-3">แบบฝึกหัด</h3>
+<ol type="1">
+<li>เปลี่ยน <code>DIV</code> เป็น 8 แล้วรันซ้ำ ตรวจว่าคาบที่วัดได้เป็น 160 ns</li>
+<li>เพิ่มสัญญาณ <code>data_bus</code> (ที่เปลี่ยนทุกขอบขึ้นของ
+<code>div_clk</code>) แล้วหา cursor ที่ทำให้
+เห็นการเปลี่ยนแปลงของทั้งสองสัญญาณพร้อมกัน</li>
+<li>เปิดไฟล์ <code>results/waveform.vcd</code> ด้วยโปรแกรมดู waveform ใด ๆ
+(เช่น GTKWave) แล้วเทียบกับหน้าต่าง Wave ของ QuestaSim</li>
+</ol>
+<hr />
+<h2 id="lab-05--การ-debug">LAB 05 — การ debug</h2>
+<h3 id="เป้าหมาย-4">เป้าหมาย</h3>
+<p>หาบั๊กใน DUT ที่ “เขียนดูถูกต้อง” แต่ทำงานผิด ด้วยเครื่องมือ debug ของ
+QuestaSim</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-4">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/alu.vhd</code></td>
+<td>DUT — ALU 8 บิต <strong>มีบั๊กจริง 1 จุด</strong></td>
+</tr>
+<tr>
+<td><code>tb/tb_alu.vhd</code></td>
+<td>testbench ที่ป้อนเวกเตอร์ 4 ชุด</td>
+</tr>
+</tbody>
+</table>
+<h3 id="บั๊กที่ซ่อนอยู่">บั๊กที่ซ่อนอยู่</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">when</span> <span class="st">&quot;01&quot;</span> <span class="ot">=&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  tmp <span class="ot">:=</span> (<span class="bn">&#39;0&#39;</span> <span class="ot">&amp;</span> <span class="dt">unsigned</span>(a)) <span class="ot">+</span> (<span class="bn">&#39;0&#39;</span> <span class="ot">&amp;</span> <span class="dt">unsigned</span>(b));   <span class="co">-- &lt;&lt;&lt; </span><span class="al">BUG</span><span class="co"> : ต้องเป็น &quot;-&quot;</span></span></code></pre></div>
+<p>กรณี <code>op = &quot;01&quot;</code> คือการ “ลบ” แต่โค้ดกลับบวก</p>
+<h3 id="ขั้นตอน-3">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : รันแล้วดูว่าพัง</strong></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code># ** Note: PASS : op=0 got=0F
+# ** Error: FAIL : op=1 a=0A b=05 expected=05 got=0F   [SUB exposes the bug]
+# ** Note: PASS : op=2 got=30
+# ** Note: PASS : op=3 got=FC
+# ** Note:  checks = 4 , errors = 1
+# ** Error: TEST FAILED : 1 error(s)
+# Stopped at tb/tb_alu.vhd line 124
+RESULT: FAIL
+[RESULT] FAIL -- exit=1</code></pre>
+<p>สังเกตว่าเคสอื่น ๆ ผ่านหมด เพราะการ “เขียนเทสต์เยอะ” อย่างเดียวไม่พอ
+ต้องรู้ด้วยว่าเคสไหนครอบคลุมพฤติกรรมของ DUT</p>
+<p>รหัสจบของ <code>cmd.exe</code> = <code>1</code> — นี่คือผลที่
+<strong>ตั้งใจให้เป็นแดง</strong> (entry point ที่เป็น “เขียว” ของ lab นี้คือ
+<code>run_debug.cmd</code> ดูขั้นที่ 5)</p>
+<p><strong>ขั้นที่ 2 : ตั้ง breakpoint</strong></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>bp src<span class="op">/</span>alu.vhd <span class="dv">36</span></span></code></pre></div>
+<blockquote>
+<p>ต้องเป็น <strong>บรรทัดที่ execute ได้จริง</strong> (บรรทัดที่มีคำสั่ง)
+ถ้าตั้งผิดบรรทัดจะขึ้นว่า breakpoint ไม่ได้ถูกตั้ง</p>
+</blockquote>
+<p><strong>ขั้นที่ 3 : รันจนกว่าจะติด</strong></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>run -all</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code>bp src/alu.vhd 36  ;# 1
+# Break in Process comb at src/alu.vhd line 36
+# Stopped at src/alu.vhd line 36</code></pre>
+<p><strong>ขั้นที่ 4 : ดูค่าของสัญญาณ</strong></p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>examine -radix hex -value <span class="op">/</span>tb_alu<span class="op">/</span>dut<span class="op">/</span>a</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>examine -radix hex -value <span class="op">/</span>tb_alu<span class="op">/</span>dut<span class="op">/</span>b</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>examine -radix hex -value <span class="op">/</span>tb_alu<span class="op">/</span>dut<span class="op">/</span>op</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>examine -radix hex -value <span class="op">/</span>tb_alu<span class="op">/</span>dut<span class="op">/</span>y</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code>  a = 0A
+  b = 05
+  op = 1
+  y = 0F</code></pre>
+<blockquote>
+<p><code>0A − 05</code> ควรเป็น <code>05</code> แต่ได้ <code>0F</code> ซึ่งคือ
+<code>0A + 05</code> → <strong>ยืนยันว่าเป็นบั๊ก</strong> <code>op = 1</code>
+แปลว่า <code>op</code> = <code>&quot;01&quot;</code> ในฐานสอง ✔</p>
+</blockquote>
+<p>สคริปต์ <code>run_debug.cmd</code> ทำทั้งหมดนี้ให้อัตโนมัติและสรุปว่า</p>
+<pre class="text"><code>BUG CONFIRMED : y = 0F but A - B should be 05
+RESULT: PASS</code></pre>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-4">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. ในโหมด console ต้อง <code>puts</code> ค่าที่
+<code>examine</code> คืนมาเอง</strong></p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> v <span class="kw">[</span>examine -radix hex -value <span class="op">/</span>tb_alu<span class="op">/</span>dut<span class="op">/</span>y<span class="kw">]</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="kw">puts</span> <span class="st">&quot;  y = </span><span class="dt">$v</span><span class="st">&quot;</span></span></code></pre></div>
+<p>ถ้าเรียก <code>examine</code> เปล่า ๆ ในโหมด <code>vsim -c</code>
+เอาต์พุตจะ <strong>ไม่ถูกพิมพ์ออกมา</strong> (ในโหมด GUI จะไปโผล่ในหน้าต่าง
+Source Examine แทน)</p>
+<p><strong>2. เวลาจำลองปัจจุบันอยู่ใน <code>$::now</code></strong></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="kw">puts</span> <span class="st">&quot;---- simulation stopped at </span><span class="dt">$::now</span><span class="st"> ----&quot;</span></span></code></pre></div>
+<p>ห้ามใช้ <code>[time]</code> เพราะจะชนกับคำสั่ง <code>time</code> ของ Tcl
+(จะได้
+<code>** Error: wrong # args: should be &quot;time command ?count?&quot;</code>)</p>
+<p><strong>3. <code>force</code> / <code>release</code> ใช้กับสัญญาณ VHDL
+ได้</strong></p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>force <span class="op">/</span>tb_alu<span class="op">/</span>dut<span class="op">/</span>op <span class="dv">01</span> -deposit</span></code></pre></div>
+<p>เหมาะกับการ “ยัดค่า” เข้าไปในสัญญาณเพื่อขับ design ให้เข้าเงื่อนไขที่ต้องการ</p>
+<p><strong>4. คำสั่ง debug ที่ใช้บ่อย</strong></p>
+<table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bp &lt;file&gt; &lt;line&gt;</code></td>
+<td>ตั้ง breakpoint</td>
+</tr>
+<tr>
+<td><code>bp</code></td>
+<td>แสดง breakpoint ทั้งหมด</td>
+</tr>
+<tr>
+<td><code>run -all</code> / <code>run -next</code> /
+<code>run -finish</code></td>
+<td>รันจนจบ / จนบรรทัดถัดไป / จนจบ process</td>
+</tr>
+<tr>
+<td><code>step</code> / <code>next</code></td>
+<td>เข้าไปใน process / ข้ามบรรทัด</td>
+</tr>
+<tr>
+<td><code>examine -radix hex -value &lt;path&gt;</code></td>
+<td>ดูค่า</td>
+</tr>
+<tr>
+<td><code>when &lt;เงื่อนไข&gt; {&lt;คำสั่ง&gt;}</code></td>
+<td>ตั้ง action ให้ทำงานเมื่อเงื่อนไขเป็นจริง</td>
+</tr>
+<tr>
+<td><code>force</code> / <code>release</code></td>
+<td>บังคับ/ปล่อยค่าของสัญญาณ</td>
+</tr>
+<tr>
+<td><code>restart</code></td>
+<td>เริ่มจำลองใหม่จากเวลา 0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="แบบฝึกหัด-4">แบบฝึกหัด</h3>
+<ol type="1">
+<li>แก้บั๊กใน <code>src/alu.vhd</code> ให้ถูกต้อง แล้วรัน <code>run.cmd</code>
+อีกครั้ง ต้องได้ PASS</li>
+<li>ตั้ง breakpoint ที่ <strong>บรรทัดของ testbench</strong> (ไม่ใช่ของ DUT)
+แล้วใช้ <code>step</code> ดูว่า <code>errors</code> เปลี่ยนจาก 0 เป็น 1
+ตรงจุดไหน</li>
+<li>ใช้ <code>force</code> สั่งค่า <code>op</code> เป็น <code>&quot;01&quot;</code>
+ในขณะจำลอง แล้วดูว่า <code>y</code> เปลี่ยนอย่างไร</li>
+</ol>
+<hr />
+<h2 id="lab-06--ตามหาต้นเหตุของค่า-x-unknown">LAB 06 — ตามหาต้นเหตุของค่า X
+(Unknown)</h2>
+<h3 id="เป้าหมาย-5">เป้าหมาย</h3>
+<p>เข้าใจว่าค่า <code>X</code>/<code>U</code> เกิดมาอย่างไร ต่างกันอย่างไรระหว่าง
+“ปกติ” กับ “บั๊ก” และเรียนรู้วิธีไล่หาต้นเหตุของ <code>X</code> ใน hierarchy</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-5">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/x_demo.vhd</code></td>
+<td>DUT — มีทั้ง register ที่ไม่ init และสัญญาณที่ไม่เคยถูก assign</td>
+</tr>
+<tr>
+<td><code>tb/tb_x.vhd</code></td>
+<td>testbench ที่รายงานว่าสัญญาณใดเป็น X บ้าง</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน-4">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : รันแล้วดูค่า</strong></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code># ** Note:  t=1ns (no reset yet) : sum = XXX  eq = &#39;0&#39;  eq2 = &#39;U&#39;
+# ** Note:    -&gt; X here is NORMAL (register not initialised yet)
+# ** Note:    -&gt; eq  uses &#39;=&#39; so it stays &#39;0&#39; even with X
+# ** Note:    -&gt; eq2 uses xor so the X propagates
+# ** Note:  after reset          : sum = 07A  eq = &#39;0&#39;
+# ** Note:                         eq2 = &#39;U&#39;
+# ** Note:    -&gt; eq2 is X forever : root cause is never_driven which is never assigned (this is the bug)
+# ** Note:  errors = 0
+  /tb_x/dut/acc = 46
+  /tb_x/dut/never_driven = XX
+  /tb_x/eq = 0
+  /tb_x/eq2 = U
+  /tb_x/sum = 07A
+RESULT: PASS</code></pre>
+<p><strong>ขั้นที่ 2 : ไล่หาทีละชั้น</strong></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>examine -radix hex -value <span class="op">/</span>tb_x<span class="op">/</span>dut<span class="op">/</span>acc</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>examine -radix hex -value <span class="op">/</span>tb_x<span class="op">/</span>dut<span class="op">/</span>never_driven</span></code></pre></div>
+<p>จะเห็นว่า <code>acc</code> กลับมาเป็นค่าที่รู้ (<code>46</code>) หลัง reset แต่
+<code>never_driven</code> เป็น <code>XX</code>
+<strong>ตลอดการจำลอง</strong> → นั่นคือต้นเหตุ</p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-5">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. <code>X</code> ตอนเวลา 0 ไม่ใช่บั๊ก</strong></p>
+<p>register ที่ไม่มีค่าเริ่มต้นจะเริ่มเป็น <code>&#39;U&#39;</code> จนกว่าจะถูกเขียนครั้งแรก หลัง
+reset ถ้ายังเป็น <code>X</code> อยู่ → มีปัญหาจริง</p>
+<p><strong>2. <code>X</code> แพร่ผ่านตัวไหนบ้าง (วัดได้จริง)</strong></p>
+<table>
+<thead>
+<tr>
+<th>ตัวดำเนินการ</th>
+<th>ผลกับ X</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code> <code>-</code> <code>*</code> (numeric_std)</td>
+<td><strong>แพร่ X</strong> ✔</td>
+</tr>
+<tr>
+<td><code>xor</code> <code>and</code> <code>or</code> <code>not</code>
+(bitwise)</td>
+<td><strong>แพร่ X</strong> ✔</td>
+</tr>
+<tr>
+<td><code>=</code> <code>/=</code> (IEEE 1164)</td>
+<td><strong>ไม่แพร่</strong> — คืนค่า <code>FALSE</code> เมื่อ operand มี X
+✘</td>
+</tr>
+</tbody>
+</table>
+<p>นี่คือเหตุผลที่ <code>eq</code> (ที่ใช้ <code>=</code>) เป็น <code>&#39;0&#39;</code>
+แต่ <code>eq2</code> (ที่ใช้ <code>xor</code>) เป็น <code>&#39;U&#39;</code>
+ถ้าเขียนโค้ดที่ “ตรวจความเท่ากัน” แล้วคาดหวังว่าจะได้ X เมื่อข้อมูลเพี้ยน <strong>จะไม่ได้
+X</strong> — ต้องใช้ bitwise หรือ <code>is_x()</code> ตรวจแทน</p>
+<p><strong>3. ตรวจ X ด้วย <code>is_x()</code> (VHDL-2008)</strong></p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> is_x(sum) <span class="kw">then</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">report</span> <span class="st">&quot;FAIL: sum is still unknown after reset&quot;</span> <span class="kw">severity</span> <span class="kw">error</span>;</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span> <span class="kw">if</span>;</span></code></pre></div>
+<p><strong>4. ระดับของการไล่หา X</strong></p>
+<pre class="text"><code>เอาต์พุตที่เป็น X
+   ↓ ดูสัญญาณข��าบนใน hierarchy
+สัญญาณต้นทาง
+   ↓ ดูว่าถูก assign ที่ไหน
+process / port
+   ↓
+สาเหตุ: ไม่มี reset / ไม่เคยถูก assign / อ่านค่าก่อนถูกเขียน</code></pre>
+<p><strong>5. เครื่องมือใน GUI</strong></p>
+<ul>
+<li><strong>Dataflow window</strong> (<code>View &gt; Dataflow</code>):
+แสดงแผนผังการไหลของข้อมูล คลิกที่สัญญาณที่เป็น X แล้วดูเส้นทางย้อนกลับไปยังต้นทาง</li>
+<li><strong>Source window</strong>: คลิกชื่อสัญญาณแล้วเลือก
+<code>Examine</code> เพื่อดูค่า ณ เวลาที่ cursor อยู่</li>
+<li><strong>Objects window</strong>: เห็นค่าปัจจุบันของสัญญาณทั้งหมดใน scope
+ที่เลือก</li>
+</ul>
+<h3 id="แบบฝึกหัด-5">แบบฝึกหัด</h3>
+<ol type="1">
+<li>เพิ่ม signal <code>ghost</code> ใน <code>x_demo.vhd</code>
+ที่ประกาศแล้วไม่ assign เช่นเดียวกับ <code>never_driven</code> แล้วต่อเข้ากับ
+<code>eq2</code> — สังเกตว่าผลลัพธ์เปลี่ยนอย่างไร</li>
+<li>เปลี่ยน <code>eq</code> ให้ใช้ <code>xor</code> แทน <code>=</code>
+แล้วรันซ้ำ — <code>eq</code> จะกลายเป็น <code>X</code> ตอน t=0 หรือไม่</li>
+<li>ใส่ <code>rst</code> ที่ไม่มีเงื่อนไขใน <code>fsm_timer.vhd</code> ของ Lab
+03 แล้วดูว่าเอาต์พุตจะเป็น X ตอนไหน</li>
+</ol>
+<hr />
+<h2 id="lab-07--หน่วยความจำ-ram-และคำสั่ง-mem">LAB 07 — หน่วยความจำ (RAM)
+และคำสั่ง <code>mem</code></h2>
+<h3 id="เป้าหมาย-6">เป้าหมาย</h3>
+<p>เรียนรู้วิธี “มองเข้าไป” ในอาร์เรย์ของ VHDL จากภายนอก
+โหลดค่าเริ่มต้นลงไปในหน่วยความจำ และค้นหาค่าที่ต้องการ</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-6">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/ram.vhd</code></td>
+<td>DUT — RAM 256 × 8 บิต แบบ single port</td>
+</tr>
+<tr>
+<td><code>tb/tb_ram.vhd</code></td>
+<td>testbench — เขียนค่าแล้วอ่านกลับมาตรวจทั้ง 256 คำ</td>
+</tr>
+<tr>
+<td><code>mem_init.txt</code></td>
+<td>ไฟล์ค่าเริ่มต้นของหน่วยความจำ (256 คำ ฐานสิบหก)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน-5">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : คอมไพล์และโหลด</strong></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>vlib work</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>vmap work work</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> src<span class="op">/</span>ram.vhd</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> tb<span class="op">/</span>tb_ram.vhd</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>vsim -voptargs<span class="op">=+</span>acc work.tb_ram</span></code></pre></div>
+<p><strong>ขั้นที่ 2 : ดูว่ามีหน่วยความจำอะไรบ้างใน design</strong></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>mem <span class="kw">list</span> -r</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code>VHDL:    /tb_ram/dut/mem [0:255] x 8 w
+VHDL:    /tb_ram/dut/ram_inst/mem [0:255] x 8 w
+VHDL:    /tb_ram/stim/v_read [0:255] x 8 w</code></pre>
+<p>สังเกตว่า <strong>1 ตัวแปรใน VHDL กลายเป็น 3 รายการ</strong>
+ในรายการของตัวจำลอง เพราะตัวจำลองมองเห็นทั้งตัวแปรที่ประกาศไว้
+ตัวที่เกิดจากการแตกตัวของ signal และตัวแปรภายในของ process ใน testbench</p>
+<p><strong>ขั้นที่ 3 : โหลดค่าเริ่มต้นลงในหน่วยความจำ</strong></p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>mem <span class="kw">load</span> -format hex -infile mem_init.txt -startaddress <span class="dv">0</span> -endaddress <span class="dv">255</span> <span class="op">/</span>tb_ram<span class="op">/</span>dut<span class="op">/</span>mem</span></code></pre></div>
+<blockquote>
+<p>ทำก่อน <code>run</code> เสมอ — ค่าจะถูกเขียนลงหน่วยความจำที่เวลา 0</p>
+</blockquote>
+<p><strong>ขั้นที่ 4 : ดูและค้นหาในหน่วยความจำ</strong></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>mem display -dataradix hexadecimal -wordsperline <span class="dv">16</span> <span class="op">/</span>tb_ram<span class="op">/</span>dut<span class="op">/</span>mem</span></code></pre></div>
+<p>ผลลัพธ์จริง (16 คำต่อบรรทัด)</p>
+<pre class="text"><code>  0: 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F 10
+ 16: 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E 1F 20
+ 32: 21 22 23 24 25 26 27 28 29 2A 2B 2C 2D 2E 2F 30
+ ...
+208: D1 D2 D3 D4 D5 D6 D7 D8 D9 DA DB DC DD DE DF E0</code></pre>
+<p>เลขหน้าเป็น <strong>ที่อยู่แบบฐานสิบ</strong> ส่วนข้อมูลเป็นฐานสิบหก</p>
+<p>ค้นหาค่า</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>mem <span class="ot">search</span> -glob <span class="dv">3</span>F <span class="op">/</span>tb_ram<span class="op">/</span>dut<span class="op">/</span>mem</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code> 62: 8&#39;h3F</code></pre>
+<p>บันทึกออกมาเป็นไฟล์</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>mem save -outfile mem_saved.txt -format hex <span class="op">/</span>tb_ram<span class="op">/</span>dut<span class="op">/</span>mem</span></code></pre></div>
+<p><strong>ขั้นที่ 5 : รันและดูว่าหน่วยความจำเปลี่ยนไปอย่างไร</strong></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>run -all</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>mem display -dataradix hexadecimal -wordsperline <span class="dv">16</span> <span class="op">/</span>tb_ram<span class="op">/</span>dut<span class="op">/</span>mem</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code># ** Note: tb_ram : phase 1 checked 256 words, mismatches = 0
+# ** Note: tb_ram : measured mem[0]=01 mem[1]=02 mem[10]=0B mem[62]=3F mem[254]=FF mem[255]=00
+# ** Note: tb_ram : phase 2 wrote 17 words (0..15 and 255) and read them back
+# ** Note: tb_ram : measured mem[0]=01 (still the loaded value), mem[255]=EE
+# ** Note: TEST_PASSED : tb_ram memory checks completed
+RESULT: PASS</code></pre>
+<p>สังเกตว่า <code>mem[255]</code> เปลี่ยนจาก <code>00</code> เป็น
+<code>EE</code> หลัง testbench เขียนทับ แต่ <code>mem[0]</code> ยังเป็น
+<code>01</code> เพราะ testbench เขียนที่ address 255 เท่านั้น</p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-6">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. <code>mem</code> ใน 2026.1 ไม่มีคำสั่ง
+<code>mem export</code></strong></p>
+<p>คำสั่งที่มีจริงคือ</p>
+<pre class="text"><code>mem compare   mem display   mem list   mem load   mem save   mem search</code></pre>
+<p>ต้องการ “ส่งออก” ให้ใช้ <strong><code>mem save</code></strong> แทน</p>
+<p><strong>2. <code>mem save</code> ไม่คืนข้อความกลับมา</strong></p>
+<p>คำสั่ง <code>mem save -outfile ...</code> เขียนไฟล์เรียบร้อย แต่คืนค่าว่าง
+(ถ้าเก็บผลลัพธ์มา <code>puts</code> จะได้บรรทัดว่าง) — ต้องไปเปิดไฟล์ที่ได้แทน</p>
+<p><strong>3. ⚠ <code>+acc</code> ไม่จำเป็นสำหรับหน่วยความจำที่เป็น VHDL
+array</strong></p>
+<p>คู่มือนี้ทดสอบโดยรันแบบไม่ใส่ <code>-voptargs=+acc</code>
+(<code>run_noacc.do</code> ในโฟลเดอร์ lab) ผลที่วัดได้</p>
+<table>
+<thead>
+<tr>
+<th>รายการ</th>
+<th>ผลเมื่อไม่ใส่ <code>+acc</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mem list -r</code></td>
+<td>เห็นหน่วยความจำครบเหมือนกัน</td>
+</tr>
+<tr>
+<td><code>mem load</code></td>
+<td>ไม่มีข้อความ error</td>
+</tr>
+<tr>
+<td><code>mem display</code></td>
+<td><strong>ได้ข้อมูลเหมือนกันทุกบรรทัด</strong></td>
+</tr>
+<tr>
+<td><code>mem search</code></td>
+<td>ไม่มีข้อความ error</td>
+</tr>
+<tr>
+<td>testbench อ่านค่ากลับ</td>
+<td>ผ่าน 256/256 คำ</td>
+</tr>
+</tbody>
+</table>
+<p>ข้อสรุป: <strong>สำหรับอาร์เรย์ของ VHDL คำสั่ง <code>mem</code>
+ทำงานได้โดยไม่ต้องใช้ <code>+acc</code></strong> (ส่วน memory ของ Verilog
+มักต้องใช้) — แต่การใส่ <code>+acc</code> ไว้ก็ไม่เสียหาย และช่วยให้เห็น signal
+ภายในทั้งหมดได้</p>
+<p><strong>4. <code>mem list -r</code> ช่วยหา “ทาง”
+ไปยังหน่วยความจำ</strong></p>
+<p>ถ้าไม่รู้ว่าหน่วยความจำอยู่ที่ไหน ให้ใช้ <code>mem list -r</code> ก่อน แล้วค่อยใช้
+path ที่ได้ (เช่น <code>/tb_ram/dut/mem</code>)</p>
+<h3 id="แบบฝึกหัด-6">แบบฝึกหัด</h3>
+<ol type="1">
+<li>แก้ <code>mem_init.txt</code> ให้คำที่ 100 เป็น <code>AA</code> แล้วรัน
+<code>mem search -glob AA</code></li>
+<li>ใช้ <code>mem load -filldata 55 -filltype inc</code>
+โหลดค่าทั้งหน่วยความจำ แล้วดูด้วย <code>mem display</code> ว่าได้ค่าอะไร</li>
+<li>ลอง <code>mem compare</code> ระหว่างหน่วยความจำสองตัวของ design
+ที่มีมากกว่าหนึ่ง instance</li>
+</ol>
+<hr />
+<h2 id="lab-08--สติมูลัสขั้นสูง-จากไฟล์-แบบสุ่ม-และการปรับค่า">LAB 08 — สติมูลัสขั้นสูง:
+จากไฟล์, แบบสุ่ม, และการปรับค่า</h2>
+<h3 id="เป้าหมาย-7">เป้าหมาย</h3>
+<p>สร้างสติมูลัสที่ใกล้เคียงความจริง ด้วยสามวิธีที่ใช้จริงในงาน verification</p>
+<ol type="1">
+<li><strong>อ่านเวกเตอร์จากไฟล์</strong> — ใช้ซ้ำชุดทดสอบเดิมได้</li>
+<li><strong>สุ่มเอง</strong> — ทดสอบกรณีที่คิดไม่ออก</li>
+<li><strong>ปรับพารามิเตอร์</strong> — ใช้ testbench ชุดเดียวทดสอบหลาย
+configuration</li>
+</ol>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-7">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/ram8.vhd</code></td>
+<td>DUT — register file 16 × 8 บิต (ทางข้อมูลเป็น
+<code>bit_vector</code>)</td>
+</tr>
+<tr>
+<td><code>tb/tb_stimulus.vhd</code></td>
+<td>testbench — อ่านเวกเตอร์จากไฟล์ สุ่มค่า และเขียนผลลง
+<code>result.txt</code></td>
+</tr>
+<tr>
+<td><code>tb/probe_uniform.vhd</code></td>
+<td>โปรแกรมเล็ก ๆ ที่โชว์ค่าจริงที่ <code>uniform</code> คืนมา</td>
+</tr>
+<tr>
+<td><code>vectors.txt</code></td>
+<td>ไฟล์เวกเตอร์ (ที่อยู่, ข้อมูล, ค่าที่คาดหวัง, คำสั่ง)</td>
+</tr>
+<tr>
+<td><code>run.cmd</code> / <code>run_batch.do</code></td>
+<td>ตัวรันแบบไม่มีหน้าต่าง</td>
+</tr>
+<tr>
+<td><code>run.do</code></td>
+<td>ตัวรันสำหรับใช้ในหน้าต่าง GUI</td>
+</tr>
+</tbody>
+</table>
+<h3 id="generic-ของ-testbench">generic ของ testbench</h3>
+<table>
+<thead>
+<tr>
+<th>generic</th>
+<th>ค่าเริ่มต้น</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VECTOR_FILE</code></td>
+<td><code>&quot;vectors.txt&quot;</code></td>
+<td>ชื่อไฟล์เวกเตอร์</td>
+</tr>
+<tr>
+<td><code>NUM_RANDOM</code></td>
+<td><code>8</code></td>
+<td>จำนวนเวกเตอร์สุ่ม</td>
+</tr>
+<tr>
+<td><code>SEED1</code></td>
+<td><code>12345</code></td>
+<td>seed ตัวที่ 1</td>
+</tr>
+<tr>
+<td><code>SEED2</code></td>
+<td><code>67890</code></td>
+<td>seed ตัวที่ 2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน-6">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : รัน</strong></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p><code>run.cmd</code> จะรัน <strong>สองครั้ง</strong> ในไฟล์เดียว</p>
+<ul>
+<li>ครั้งที่ 1 — ใช้ generic ที่กำหนดไว้ใน <code>run_batch.do</code>
+(<code>-gNUM_RANDOM=8 -gSEED1=12345 -gSEED2=67890</code>)</li>
+<li>ครั้งที่ 2 — ใช้ค่าจาก plusarg ที่ <code>run.cmd</code> ส่งเข้ามา
+(<code>+NUM_RANDOM=4 +SEED1=777 +SEED2=888</code>) โดยสคริปต์ Tcl
+แปลงกลับเป็น generic</li>
+</ul>
+<p><strong>ขั้นที่ 2 : ดูผลลัพธ์ที่วัดได้จริง — ครั้งที่ 1 (generic)</strong></p>
+<pre class="text"><code>** Note: tb_stimulus : parameters from the generics
+** Note: tb_stimulus :   VECTOR_FILE = vectors.txt
+** Note: tb_stimulus :   NUM_RANDOM  = 8
+** Note: tb_stimulus :   SEED1       = 12345
+** Note: tb_stimulus :   SEED2       = 67890
+** Note: tb_stimulus : phase 1 - file based stimulus from vectors.txt
+** Note: tb_stimulus : phase 1 read 32 vectors from 52 lines of the file
+** Note: tb_stimulus : phase 2 - random stimulus with ieee.math_real.uniform
+** Note: tb_stimulus : random vector 1 : A addr=15 data=233 | B addr=15 data=233
+** Note: tb_stimulus : random vector 2 : A addr=2 data=132 | B addr=2 data=132
+** Note: tb_stimulus : random vector 3 : A addr=6 data=188 | B addr=6 data=188
+** Note: tb_stimulus : random vector 4 : A addr=1 data=87 | B addr=1 data=87
+** Note: tb_stimulus : random vector 5 : A addr=0 data=51 | B addr=0 data=51
+** Note: tb_stimulus : random vector 6 : A addr=13 data=244 | B addr=13 data=244
+** Note: tb_stimulus : random vector 7 : A addr=4 data=95 | B addr=4 data=95
+** Note: tb_stimulus : random vector 8 : A addr=0 data=239 | B addr=0 data=239
+** Note: tb_stimulus : the same seed pair (12345,67890) reproduces the same sequence : true
+** Note: tb_stimulus : file vectors : read=32 passed=32 failed=0
+** Note: tb_stimulus : random vectors : count=8 passed=8 failed=0
+** Note: TEST_PASSED : tb_stimulus completed</code></pre>
+<p>จบที่เวลา <strong>246 ns</strong> — อ่านเวกเตอร์จากไฟล์ได้ 32 จาก 52 บรรทัด
+(อีก 20 บรรทัดเป็นบรรทัดอธิบายที่ขึ้นต้นด้วย <code>#</code> ซึ่ง <code>hread</code>
+อ่านไม่ได้แล้วข้ามไป)</p>
+<p><strong>ขั้นที่ 3 : ดูผลลัพธ์ที่วัดได้จริง — ครั้งที่ 2 (plusarg →
+generic)</strong></p>
+<pre class="text"><code>plusarg found : +NUM_RANDOM=4   -&gt;   passed to VHDL as -gNUM_RANDOM=4
+plusarg found : +SEED1=777   -&gt;   passed to VHDL as -gSEED1=777
+plusarg found : +SEED2=888   -&gt;   passed to VHDL as -gSEED2=888
+--- second run, parameterised by the plusargs ---
+** Note: tb_stimulus : phase 1 read 32 vectors from 52 lines of the file
+** Note: tb_stimulus : random vector 1 : A addr=0 data=157 | B addr=0 data=157
+** Note: tb_stimulus : random vector 2 : A addr=6 data=11 | B addr=6 data=11
+** Note: tb_stimulus : random vector 3 : A addr=15 data=161 | B addr=15 data=161
+** Note: tb_stimulus : random vector 4 : A addr=12 data=162 | B addr=12 data=162
+** Note: tb_stimulus : the same seed pair (777,888) reproduces the same sequence : true
+** Note: tb_stimulus : file vectors : read=32 passed=32 failed=0
+** Note: tb_stimulus : random vectors : count=4 passed=4 failed=0
+** Note: TEST_PASSED : tb_stimulus completed</code></pre>
+<p>จบที่เวลา <strong>206 ns</strong> (สั้นลงเพราะสุ่มแค่ 4 เวกเตอร์แทน 8)</p>
+<p>สรุปตัวเลขที่วัดได้จริง</p>
+<table>
+<thead>
+<tr>
+<th>รอบ</th>
+<th>วิธีกำหนดค่า</th>
+<th>เวกเตอร์จากไฟล์</th>
+<th>สุ่มได้</th>
+<th>ผ่าน / พัง</th>
+<th>เวลาจบ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>generic <code>-gNUM_RANDOM=8 -gSEED1=12345 -gSEED2=67890</code></td>
+<td>32 / 52 บรรทัด</td>
+<td>8</td>
+<td>8 / 0</td>
+<td>246 ns</td>
+</tr>
+<tr>
+<td>2</td>
+<td>plusarg <code>+NUM_RANDOM=4 +SEED1=777 +SEED2=888</code></td>
+<td>32 / 52 บรรทัด</td>
+<td>4</td>
+<td>4 / 0</td>
+<td>206 ns</td>
+</tr>
+</tbody>
+</table>
+<p>ทั้งสองรอบจบด้วย <code>Errors: 0, Warnings: 0</code></p>
+<p><strong>ขั้นที่ 4 : ดูค่าจริงที่ <code>uniform</code> คืนมา (สำคัญที่สุดของ lab
+นี้)</strong></p>
+<p>รันโปรแกรมเล็ก ๆ ที่แนบมาให้ดู</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> lab08_stimulus</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>vcom <span class="at">-2008</span> tb<span class="at">/probe_uniform</span>.vhd</span>
+<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>vsim <span class="at">-c</span> <span class="at">-onfinish</span> stop work.probe_uniform <span class="at">-do</span> <span class="st">&quot;run -all&quot;</span></span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code>** Note: seed (777,888) -- raw values of uniform :
+** Note:   call 1 : u = 9.976514e-01   integer(u*16.0) = 16   integer(u*256.0) = 255
+** Note:   call 2 : u = 6.140334e-01   integer(u*16.0) = 10   integer(u*256.0) = 157
+** Note:   call 3 : u = 3.730142e-01   integer(u*16.0) = 6   integer(u*256.0) = 95
+** Note:   call 4 : u = 4.306080e-02   integer(u*16.0) = 1   integer(u*256.0) = 11
+** Note: seed (12345,67890) -- raw values of uniform :
+** Note:   call 1 : u = 9.435974e-01   integer(u*16.0) = 15   integer(u*256.0) = 242
+** Note:   call 2 : u = 9.083188e-01   integer(u*16.0) = 15   integer(u*256.0) = 233
+** Note:   call 3 : u = 1.466878e-01   integer(u*16.0) = 2   integer(u*256.0) = 38
+** Note:   call 4 : u = 5.147019e-01   integer(u*16.0) = 8   integer(u*256.0) = 132</code></pre>
+<p>เทียบกับผลของ testbench ในขั้นที่ 3 จะตรงกันเป๊ะ เช่น seed
+<code>(777,888)</code> เรียกครั้งที่ 2 ได้ <code>integer(u*256.0) = 157</code>
+ก็คือ “random vector 1 : data=157” ที่ testbench พิมพ์ออกมา</p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-7">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. VHDL ไม่มี plusargs — ใช้ generic แทน</strong></p>
+<p>ใน Verilog ใช้ <code>+TEST=xxx</code> ได้ แต่ VHDL-2008 ไม่มี
+<code>std.env.getenv</code> ต้องใช้ <strong>generic</strong>
+และส่งค่าตอนโหลด design</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>vsim work.tb_stimulus -gNUM_RANDOM<span class="op">=</span><span class="dv">16</span> -gSEED1<span class="op">=</span><span class="dv">1</span> -gSEED2<span class="op">=</span><span class="dv">2</span></span></code></pre></div>
+<p>ข้อควรระวังใน PowerShell: ต้องใส่เครื่องหมายคำพูด</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>vsim work<span class="op">.</span><span class="fu">tb_stimulus</span> <span class="st">&quot;-gSEED1=12345&quot;</span>     <span class="co"># ถูก</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>vsim work<span class="op">.</span><span class="fu">tb_stimulus</span> <span class="op">-</span>gSEED1<span class="op">=</span><span class="dv">12345</span>      <span class="co"># ผิด -- PowerShell ไม่ขยายตัวแปรใน argument ของโปรแกรม native</span></span></code></pre></div>
+<p>ถ้าอยากให้ผู้ใช้สั่งแบบ Verilog ก็ให้ฝั่ง Tcl เป็นตัวแปลกลาง ตามที่
+<code>run_batch.do</code> ทำไว้: อ่าน <code>+NAME=VALUE</code> จาก
+<code>$::argv</code> แล้วแปลงเป็น <code>-gNAME=VALUE</code></p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="cf">foreach</span> a <span class="kw">[split</span> <span class="dt">$::argv</span> <span class="st">&quot; &quot;</span><span class="kw">]</span> <span class="kw">{</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">{[regexp</span> <span class="kw">{</span>^<span class="ch">\+</span>(<span class="kw">[</span>A-Za-z_<span class="kw">][</span>A-Za-z0-9_<span class="kw">]</span><span class="op">*</span>)<span class="op">=</span>(.<span class="op">*</span>)$<span class="kw">}</span> <span class="dt">$a</span> -<span class="op">&gt;</span> nm val<span class="kw">]}</span> <span class="kw">{</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lappend</span> gargs -g<span class="dt">$nm</span><span class="op">=</span><span class="dt">$val</span></span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb76-5"><a href="#cb76-5" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p><strong>2. <code>uniform</code> คืนค่าที่ใกล้ 1.0 มากได้ —
+และนั่นคือกับดัก</strong></p>
+<p>จากผลวัดจริงข้างบน: seed <code>(777,888)</code> คืนค่าแรก
+<code>9.976514e-01</code> การเขียนแบบที่คนส่วนใหญ่เขียน</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>a_addr(i) <span class="ot">:=</span> <span class="dt">integer</span>(r_addr <span class="ot">*</span> <span class="dv">16</span><span class="ot">.</span><span class="dv">0</span>);    <span class="co">-- ตั้งใจได้ 0 .. 15</span></span></code></pre></div>
+<p>จะได้ <strong>16</strong> ซึ่งไม่พอดีกับ address bus 4 บิต เมื่อส่งเข้า
+<code>to_unsigned(16, 4)</code> ตัวจำลองจะเตือน</p>
+<pre class="text"><code>** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated</code></pre>
+<p>และที่อยู่จะกลายเป็น 0 <strong>โดยไม่มีใครรู้ตัว</strong> ร้ายที่สุดคือ testbench
+ยังขึ้น <code>TEST_PASSED</code> เพราะมันเขียนที่ address 0 แล้วอ่านกลับมาที่
+address 0 เท่ากัน — บั๊กแบบเงียบ ๆ ที่ไม่มี checker จับได้</p>
+<p>แก้โดยบังคับให้อยู่ในช่วงของ bus</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>a_addr(i) <span class="ot">:=</span> <span class="dt">integer</span>(r_addr <span class="ot">*</span> <span class="dv">16</span><span class="ot">.</span><span class="dv">0</span>) <span class="kw">mod</span> <span class="dv">16</span>;</span></code></pre></div>
+<blockquote>
+<p>กฎ: <strong>อย่าเชื่อว่า <code>uniform</code> คืนค่าในช่วงเปิด (0,1)
+เสมอไป</strong> ต้อง <code>mod</code> หรือ clamp
+ทุกครั้งที่เอาไปแปลงเป็นจำนวนเต็ม</p>
+</blockquote>
+<p><strong>3. <code>variable a, b : positive := 777;</code> ให้ค่า 777
+ทั้งสองตัว</strong></p>
+<p>เขียนผิดแบบนี้</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="ot">variable</span> s1<span class="ot">,</span> s2 <span class="ot">:</span> <span class="dt">positive</span> <span class="ot">:=</span> <span class="dv">777</span>;    <span class="co">-- ทั้ง s1 และ s2 = 777 !!</span></span></code></pre></div>
+<p>ต้องประกาศแยกทีละตัว</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ot">variable</span> s1 <span class="ot">:</span> <span class="dt">positive</span> <span class="ot">:=</span> <span class="dv">777</span>;</span>
+<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="ot">variable</span> s2 <span class="ot">:</span> <span class="dt">positive</span> <span class="ot">:=</span> <span class="dv">888</span>;</span></code></pre></div>
+<p>ถ้าไม่ระวัง ผลของการทดสอบแบบสุ่มจะเปลี่ยนไปเงียบ ๆ โดยที่ seed ที่ “คิดว่าใช้”
+ไม่ใช่ค่าที่ใช้จริง</p>
+<p><strong>4. seed คู่เดียวกันให้ลำดับเลขเดิมเสมอ</strong></p>
+<p>วัดได้จากขั้นที่ 2 และ 3 ข้างบน — รอบที่ 1 ใช้ seed <code>(12345,67890)</code>
+รอบที่ 2 ใช้ seed <code>(777,888)</code> แต่ทั้งสองรอบให้ค่า “A = B” ทุกตัว และ
+testbench พิมพ์ <code>reproduces the same sequence : true</code></p>
+<p>กฎที่ต้องจำ</p>
+<ul>
+<li>ต้องมี <strong>สอง</strong> seed (ไม่ใช่หนึ่ง)</li>
+<li>ค่าของ seed ทั้งสองเปลี่ยนไปทุกครั้งที่เรียก <code>uniform</code> →
+ถ้าต้องการผลลัพธ์เดิมต้อง “บันทึกค่า seed ก่อนเรียก” แล้วค่อยใช้ค่าใหม่ (ใน testbench
+นี้คือ <code>sa1/sa2</code> กับ <code>sb1/sb2</code> ที่ประกาศแยกจากกัน)</li>
+<li><strong>seed คู่เดียวกันให้ลำดับเลขเดิมเสมอ</strong> → ใช้ทำ regression แบบ
+deterministic ได้</li>
+</ul>
+<p><strong>5. <code>hread</code> อ่านได้เฉพาะ
+<code>BIT_VECTOR</code></strong></p>
+<p>ข้อจำกัดของแพ็กเกจ <code>std.textio</code> คือ <code>hread</code> มี
+overload สำหรับ <code>bit_vector</code> เท่านั้น ไม่มีสำหรับ
+<code>std_logic_vector</code> ทางเลือก:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- ทางเลือกที่ใช้ได้ : เก็บค่าเป็น bit_vector แล้วแปลงทีหลัง</span></span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="ot">variable</span> bv <span class="ot">:</span> <span class="dt">bit_vector</span>(<span class="dv">7</span> <span class="ot">downto</span> <span class="dv">0</span>);</span>
+<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>hread(l<span class="ot">,</span> bv);</span>
+<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;=</span> <span class="dt">std_logic_vector</span>(bv);</span></code></pre></div>
+<p>DUT ของ lab นี้ (<code>src/ram8.vhd</code>) จึงใช้
+<code>bit_vector</code> เป็นทางข้อมูลโดยเฉพาะ ส่วน address
+และสัญญาณควบคุมยังเป็น <code>std_logic</code> ตามปกติ</p>
+<p><strong>6. อ่านตัวอักษรท้ายบรรทัดทีละตัว — อย่าใช้
+<code>read(l, s)</code></strong></p>
+<p>คำสั่ง <code>read</code> ของ <code>std.textio</code> เมื่ออ่าน
+<code>string</code> จาก <code>line</code> ต้องการ string ที่ยาว
+<strong>เท่ากับทั้งที่เหลือของบรรทัด</strong> พอดี ถ้าไม่ใช่จะได้</p>
+<pre class="text"><code>** Error: (vsim-3549) String is not the length of the remaining line.</code></pre>
+<p>ทางแก้คืออ่านทีละตัวอักษรแล้วข้ามช่องว่าง</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a>read(l<span class="ot">,</span> c);</span>
+<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>while c <span class="ot">&lt;=</span> <span class="bn">&#39; &#39;</span> loop</span>
+<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>    read(l<span class="ot">,</span> c);</span>
+<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span> loop;</span>
+<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a>v_op <span class="ot">:=</span> c;</span></code></pre></div>
+<p><strong>7. อย่าอ่าน <code>transcript</code> เพื่อตัดสินผล — ให้ testbench
+เขียนผลเอง</strong></p>
+<p>เมื่อโหลด design ครั้งที่สอง (รอบ plusarg) ตัวจำลองจะถือไฟล์
+<code>transcript</code> ไว้ในโหมดเขียน ทำให้อ่านไม่ได้ → ตัวตัดสินจาก transcript
+จะพังแบบไม่มีข้อความ</p>
+<p>แนวทางที่ใช้ใน lab นี้: <strong>testbench เขียนผลลง <code>result.txt</code>
+เอง</strong></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="kw">procedure</span> <span class="dv">write_result</span>(<span class="ot">constant</span> fname <span class="ot">:</span> <span class="kw">in</span> <span class="dt">string</span>; <span class="ot">constant</span> verdict <span class="ot">:</span> <span class="kw">in</span> <span class="dt">string</span>) <span class="cf">is</span></span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">file</span> f <span class="ot">:</span> <span class="dt">text</span>;</span>
+<span id="cb85-3"><a href="#cb85-3" aria-hidden="true" tabindex="-1"></a>    <span class="ot">variable</span> l <span class="ot">:</span> <span class="dt">line</span>;</span>
+<span id="cb85-4"><a href="#cb85-4" aria-hidden="true" tabindex="-1"></a><span class="kw">begin</span></span>
+<span id="cb85-5"><a href="#cb85-5" aria-hidden="true" tabindex="-1"></a>    file_open(f<span class="ot">,</span> fname<span class="ot">,</span> write_mode);</span>
+<span id="cb85-6"><a href="#cb85-6" aria-hidden="true" tabindex="-1"></a>    write(l<span class="ot">,</span> verdict);</span>
+<span id="cb85-7"><a href="#cb85-7" aria-hidden="true" tabindex="-1"></a>    writeline(f<span class="ot">,</span> l);</span>
+<span id="cb85-8"><a href="#cb85-8" aria-hidden="true" tabindex="-1"></a>    file_close(f);</span>
+<span id="cb85-9"><a href="#cb85-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end procedure write_result;</span></span>
+<span id="cb85-10"><a href="#cb85-10" aria-hidden="true" tabindex="-1"></a><span class="ot">...</span></span>
+<span id="cb85-11"><a href="#cb85-11" aria-hidden="true" tabindex="-1"></a>write_result(<span class="st">&quot;result.txt&quot;</span><span class="ot">,</span> <span class="st">&quot;PASS&quot;</span>);</span></code></pre></div>
+<p>แล้ว <code>run_batch.do</code> อ่านไฟล์นั้นเพื่อตัดสิน ไม่ใช้ exit code ของ
+<code>vsim</code> (เพราะ <code>vsim</code> คืน 0 แม้จะเปิดไฟล์
+<code>.do</code> ไม่ได้ — ดูข้อ C.4 ในภาคผนวก ก)</p>
+<p><strong>8. อ่านไฟล์ด้วย <code>std.textio</code></strong></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="kw">file</span> f <span class="ot">:</span> <span class="dt">text</span>;</span>
+<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a><span class="ot">variable</span> l <span class="ot">:</span> <span class="dt">line</span>;</span>
+<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a><span class="ot">variable</span> addr<span class="ot">,</span> data <span class="ot">:</span> <span class="dt">integer</span>;</span>
+<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a><span class="ot">...</span></span>
+<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a>file_open(f<span class="ot">,</span> <span class="st">&quot;vectors.txt&quot;</span><span class="ot">,</span> read_mode);</span>
+<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a>while <span class="kw">not</span> endfile(f) loop</span>
+<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a>    readline(f<span class="ot">,</span> l);</span>
+<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a>    read(l<span class="ot">,</span> addr);</span>
+<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a>    read(l<span class="ot">,</span> data);</span>
+<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a>    <span class="ot">...</span></span>
+<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span> loop;</span>
+<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a>file_close(f);</span></code></pre></div>
+<p>บรรทัดที่ขึ้นต้นด้วย <code>#</code> จะทำให้ <code>hread</code> ล้มเหลว
+ในโค้ดจริงใช้ <code>hread(l, addr_bv, good)</code> แล้วตรวจ flag
+<code>good</code> ถ้าเป็น false ก็ข้ามบรรทัดนั้น (นั่นคือเหตุผลที่ “52 บรรทัด → 32
+เวกเตอร์”)</p>
+<p><strong>9. เปรียบเทียบผลกับไฟล์คำตอบ (golden file)</strong></p>
+<p>เขียนผลลัพธ์ลงไฟล์ แล้วเทียบกับไฟล์ที่คาดหวังไว้ ถ้าเทียบกับไฟล์ที่ “คาดหวัง”
+ให้เขียนไฟล์คำตอบออกมาเป็น golden file แล้วในรอบถัดไปให้เทียบ —
+เป็นวิธีมาตรฐานของการทำ regression</p>
+<h3 id="แบบฝึกหัด-7">แบบฝึกหัด</h3>
+<ol type="1">
+<li>เปลี่ยน <code>SEED1</code>/<code>SEED2</code> เป็นค่าอื่นแล้วรันซ้ำ
+ดูว่าลำดับตัวเลขที่สุ่มได้เปลี่ยนอย่างไร</li>
+<li>ใส่ค่า seed เดิมกลับแล้วรันซ้ำ → ต้องได้ผลเหมือนเดิมทุกประการ</li>
+<li>เพิ่มเวกเตอร์ผิดลงใน <code>vectors.txt</code> แล้วดูว่า testbench จับได้ไหม
+(ต้องเห็น <code>** Error: Assertion failed</code> และ
+<code>result.txt</code> ต้องเป็น <code>FAIL</code>)</li>
+<li>ลบ <code>mod 16</code> ออกจาก <code>tb_stimulus.vhd</code> แล้วใช้
+seed <code>(777,888)</code> → ต้องเห็น
+<code>** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated</code> ทั้งที่
+testbench ยังขึ้น <code>TEST_PASSED</code> (บั๊กแบบเงียบ)</li>
+</ol>
+<hr />
+<h2 id="lab-09--psl-assertion-property-specification-language">LAB 09 —
+PSL assertion (Property Specification Language)</h2>
+<h3 id="เป้าหมาย-8">เป้าหมาย</h3>
+<p>เขียน “คุณสมบัติ” ของ design ในรูปแบบที่เครื่องมือตรวจให้อัตโนมัติ แทนที่จะเขียน
+<code>assert</code> ทีละเคสเอง</p>
+<p>PSL คือภาษาที่ออกแบบมาให้ “เขียนสเปกเป็นคุณสมบัติ” เช่น “ถ้าขอแล้วต้องตอบรับภายใน 1
+รอบนาฬิกา” แล้วให้ตัวจำลองพิสูจน์ให้</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-8">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/handshake.vhd</code></td>
+<td>DUT — handshake แบบ req/ack มี generic <code>BUGGY</code>
+เลือกเวอร์ชันที่พัง</td>
+</tr>
+<tr>
+<td><code>tb/tb_handshake.vhd</code></td>
+<td>testbench ที่ส่ง 3 คำขอ</td>
+</tr>
+<tr>
+<td><code>run_fail.cmd</code> / <code>run_nopsl.cmd</code></td>
+<td>สคริปต์สำหรับกรณี “พัง” และกรณี “ปิด PSL”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="psl-ใน-vhdl-เขียนยังไง">PSL ใน VHDL เขียนยังไง</h3>
+<p>PSL ฝังอยู่ใน <strong>คอมเมนต์</strong> ที่ขึ้นต้นด้วย <code>-- psl</code></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="cf">architecture</span> <span class="dv">rtl</span> <span class="kw">of</span> <span class="fu">handshake</span> <span class="kw">is</span></span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- psl default clock is rising_edge(clk);</span></span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">...</span></span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="kw">begin</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>  <span class="ot">...</span></span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- psl req_ack: assert always (req -&gt; next ack);</span></span>
+<span id="cb87-7"><a href="#cb87-7" aria-hidden="true" tabindex="-1"></a><span class="cf">end architecture rtl;</span></span></code></pre></div>
+<h3 id="ขั้นตอน-7">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : รันกรณีปกติ (ดีไซน์ถูกต้อง)</strong></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริง</p>
+<pre class="text"><code># ** Note: TEST_PASSED : 3/3 handshakes answered within the latency bound
+# ** Note: transaction 1 : ack on cycle 1
+# ** Note: transaction 2 : ack on cycle 1
+# ** Note: transaction 3 : ack on cycle 1
+---- no PSL assertion fired, as expected ----
+RESULT: PASS</code></pre>
+<p><strong>ขั้นที่ 2 : รันกรณีที่ดีไซน์พัง</strong></p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a>run_fail.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริง (ข้อความสำคัญที่สุดของ lab นี้)</p>
+<pre class="text"><code>** Error: Assertion failed
+   Time: 45 ns Started: 35 ns  Scope: /tb_handshake/dut/req_ack File: src/handshake.vhd Line: 59</code></pre>
+<p>สิ่งที่ข้อความนี้บอกเรา</p>
+<table>
+<thead>
+<tr>
+<th>ส่วน</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>** Error:</code></td>
+<td>severity คือ Error (ไม่ใช่ failure)</td>
+</tr>
+<tr>
+<td><code>Time: 45 ns</code></td>
+<td>เวลาที่ property <strong>พัง</strong></td>
+</tr>
+<tr>
+<td><code>Started: 35 ns</code></td>
+<td>เวลาที่ property เริ่มติดตาม (นับจากรอบก่อนหน้า)</td>
+</tr>
+<tr>
+<td><code>Scope: /tb_handshake/dut/req_ack</code></td>
+<td><strong>ชื่อ property</strong> ปรากฏใน scope → ระบุได้ว่าตัวไหนพัง</td>
+</tr>
+<tr>
+<td><code>File:</code> / <code>Line:</code></td>
+<td>ชี้ไปที่คอมเมนต์ <code>-- psl</code> ที่เขียนไว้</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>จุดสำคัญของการออกแบบ lab นี้</strong> testbench ตรวจแค่
+“ตอบรับภายใน 2 รอบ” (เงื่อนไขหลวม) เวลาเปิด PSL จึง <strong>ไม่</strong> พัง
+แต่พอปิด PSL ด้วย <code>-nopsl</code> บั๊กที่แท้จริง (ตอบช้าเกิน 1 รอบ) จะ
+<strong>ไม่มีใครจับได้เลย</strong> นี่คือคุณค่าของ property checking</p>
+</blockquote>
+<p><strong>ขั้นที่ 3 : ลองปิด PSL เพื่อเปรียบเทียบ</strong></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>run_nopsl.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริง — สังเกตว่า <strong>ไม่มีข้อความ “Assertion failed” เลย</strong>
+และ transcript จะบอกว่า ack มาช้า (<code>ack on cycle 2 (late)</code>)
+แต่ไม่มีอะไรมาตรวจจับ</p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-8">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. PSL ใน VHDL เปิดใช้งาน “ตั้งแต่แรก”</strong></p>
+<p><code>vcom -help all</code> ไม่มีตัวเลือก <code>-psl</code> แบบบวก
+มีแค่</p>
+<table>
+<thead>
+<tr>
+<th>ตัวเลือก</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-nopsl</code></td>
+<td>ปิดการ parse PSL ที่ฝังในคอมเมนต์</td>
+</tr>
+<tr>
+<td><code>-pslext</code></td>
+<td>เปิดตัวดำเนินการ LTL/Universal ของ PSL</td>
+</tr>
+<tr>
+<td><code>-pslfile &lt;file&gt;</code></td>
+<td>compile และ bind PSL vunit จากไฟล์ภายนอก</td>
+</tr>
+</tbody>
+</table>
+<p><code>vcom -2008 -nopsl src/handshake.vhd</code> คอมไพล์ผ่าน <strong>0
+error 0 warning</strong> และคอมเมนต์ <code>-- psl</code>
+จะกลายเป็นคอมเมนต์ธรรมดา</p>
+<p><strong>2. <code>default clock</code> ต้องมาก่อน property</strong></p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- psl default clock is rising_edge(clk);   -- ต้องเป็น directive แรก</span></span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- psl req_ack: assert always (req -&gt; next ack);</span></span></code></pre></div>
+<p>ถ้าเอา property มาก่อน <code>default clock</code> จะได้</p>
+<pre class="text"><code>** Error: Only simple boolean properties can be unclocked.</code></pre>
+<p><strong>3. directive ที่ใช้ได้ / ใช้ไม่ได้ (ทดสอบจริงทุกข้อ)</strong></p>
+<table>
+<thead>
+<tr>
+<th>รูปแบบ</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-- psl default clock is rising_edge(clk);</code></td>
+<td>✔ ใช้ได้</td>
+</tr>
+<tr>
+<td><code>-- psl name: assert always (req -&gt; next ack);</code></td>
+<td>✔ ใช้ได้</td>
+</tr>
+<tr>
+<td><code>-- psl name: assert always (not ((req = &#39;1&#39;) and (ack = &#39;1&#39;)));</code></td>
+<td>✔ ใช้ได้</td>
+</tr>
+<tr>
+<td><code>-- psl name: assert always (...) @(rising_edge(clk));</code></td>
+<td>✔ ใช้ได้ (ระบุ clock เอง)</td>
+</tr>
+<tr>
+<td><code>-- psl name: assume always (req -&gt; next not req);</code></td>
+<td>✔ ใช้ได้ <strong>และถูกบังคับใช้จริง</strong> (violation ถูกรายงานเป็น
+error)</td>
+</tr>
+<tr>
+<td><code>-- psl name: cover {req; ack};</code></td>
+<td>✔ ใช้ได้ (ต้องเป็นรูปแบบ sequence) — แต่ <strong>ไม่มีข้อความตอบกลับ</strong>
+ตอนรัน</td>
+</tr>
+<tr>
+<td><code>-- psl name: assert always (...) severity error;</code></td>
+<td>✘
+<code>syntax error, unexpected &quot;IDENTIFIER&quot;, expecting &#39;;&#39;</code></td>
+</tr>
+<tr>
+<td><code>-- psl name: assert always (req -&gt; next[1 to 2] ack);</code></td>
+<td>✘ <code>near &quot;to&quot;: syntax error</code> (แม้ใส่ <code>-pslext</code>
+ก็ยังไม่ได้)</td>
+</tr>
+<tr>
+<td><code>-- psl name: cover (req = &#39;1&#39;);</code></td>
+<td>✘
+<code>Type error resolving infix expression &quot;=&quot; as type PSL SERE.</code></td>
+</tr>
+<tr>
+<td><code>-- psl name: cover always (req -&gt; next ack);</code></td>
+<td>✘ <code>Type conflict in &#39;always&#39; as type &#39;PSL SERE&#39;.</code></td>
+</tr>
+<tr>
+<td><code>-- psl name: cover {req; next ack};</code></td>
+<td>✘ <code>near &quot;next&quot;: syntax error</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>4. วาง directive ไว้ตรงไหนได้</strong></p>
+<table>
+<thead>
+<tr>
+<th>ตำแหน่ง</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ในส่วน declarative ของ architecture (ก่อน <code>begin</code>)</td>
+<td>✔ คอมไพล์ผ่าน</td>
+</tr>
+<tr>
+<td>ในส่วน body ของ architecture (หลัง <code>begin</code>)</td>
+<td>✔ คอมไพล์ผ่าน</td>
+</tr>
+<tr>
+<td>ภายใน process</td>
+<td>✘ <code>near &quot;psl&quot;: syntax error</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>5. <code>cover</code> ไม่มี feedback</strong></p>
+<p>คำสั่ง <code>cover</code> จะนับว่า property เคยเป็นจริงกี่ครั้ง แต่
+<strong>ไม่มีข้อความออกมา</strong> และใน 2026.1 <strong>ไม่มีคำสั่ง Tcl ชื่อ
+<code>psl</code></strong> เลย (<code>help psl</code> → “No help for psl
+available”) ถ้าต้องการดูจำนวนครั้งที่ cover ถูก hit ให้ใช้ <strong>code
+coverage</strong> (Lab 10) แทน</p>
+<p><strong>6. <code>assume</code> ถูกบังคับใช้จริง</strong></p>
+<p>เมื่อ environment ที่ test ให้มาผิดเงื่อนไข <code>assume</code>
+ตัวจำลองจะรายงานเป็น error พร้อมชื่อ property เหมือนกัน
+เหมาะมากสำหรับการกลั่นกรองสติมูลัสที่ผิดวิธี</p>
+<h3 id="แบบฝึกหัด-8">แบบฝึกหัด</h3>
+<ol type="1">
+<li>เพิ่ม property
+<code>-- psl no_ack_stuck: assert always (not (req and not ack)) ;</code>
+แล้วทำให้ ack ค้างสักหนึ่งรอบเพื่อดูว่าจับได้ไหม</li>
+<li>เขียน <code>assume</code> ที่บังคับว่า “req ต้องเป็น 1 ครั้งแล้วหายไป” แล้วส่ง
+req ที่ค้าง ดูว่าตัวจำลองรายงานอย่างไร</li>
+<li>ลองใส่ <code>severity error</code> ต่อท้าย property แล้วดูข้อความ error
+ที่ได้</li>
+</ol>
+<hr />
+<h2 id="lab-10--code-coverage-ของ-vhdl">LAB 10 — Code coverage ของ
+VHDL</h2>
+<h3 id="เป้าหมาย-9">เป้าหมาย</h3>
+<p>วัดว่าโค้ด DUT ของเราถูกทดสอบครบแค่ไหน — ไม่ใช่แค่ “ผ่าน”
+และเรียนรู้การรวมผลจากหลายชุดทดสอบเข้าด้วยกัน</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-9">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>src/alu_fsm.vhd</code></td>
+<td>DUT — FSM 5 สถานะ + ALU <code>case</code> + condition ซับซ้อน +
+<code>for</code>-generate 4 ช่อง + loop</td>
+</tr>
+<tr>
+<td><code>tb/tb_alu_fsm.vhd</code></td>
+<td><strong>testbench เดียว</strong> เลือก test ด้วย generic
+<code>TEST</code> = <code>basic</code> / <code>extra</code> /
+<code>edge</code></td>
+</tr>
+<tr>
+<td><code>tb/pitfall/</code></td>
+<td>testbench อีกชุด (ชื่อต่างไป) ใช้สาธิตกับดัก instance path</td>
+</tr>
+<tr>
+<td><code>compile.do</code>, <code>test_*.do</code>,
+<code>merge.do</code>, <code>report.do</code></td>
+<td>สคริปต์แต่ละขั้นตอนของ flow</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน-8">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : คอมไพล์ — ใส่ coverage เฉพาะ DUT</strong></p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> src<span class="op">/</span>alu_fsm.vhd <span class="op">+</span>cover<span class="op">=</span>bcesft     ;<span class="co"># DUT  : มี coverage</span></span>
+<span id="cb95-2"><a href="#cb95-2" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> tb<span class="op">/</span>tb_alu_fsm.vhd                 ;<span class="co"># TB   : ไม่มี coverage</span></span></code></pre></div>
+<blockquote>
+<p>ใส่ coverage เฉพาะ DUT เท่านั้น ไม่งั้นตัวเลขในรายงานจะปนมากับโค้ดสติมูลัส</p>
+</blockquote>
+<p><strong>ขั้นที่ 2 : รันแต่ละชุดทดสอบแล้วบันทึกผล</strong></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>vsim -coverage work.tb_alu_fsm -gTEST<span class="op">=</span>basic</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>run -all</span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>coverage save results<span class="op">/</span>basic.ucdb -codeAll -testname basic</span></code></pre></div>
+<p>ทำซ้ำสำหรับ <code>extra</code> และ <code>edge</code></p>
+<p><strong>ขั้นที่ 3 : รวมผล</strong></p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a>vcover merge results<span class="op">/</span>merged.ucdb results<span class="op">/</span>basic.ucdb results<span class="op">/</span>extra.ucdb results<span class="op">/</span>edge.ucdb</span></code></pre></div>
+<p><strong>ขั้นที่ 4 : ดูรายงาน</strong></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a>vcover report -summary -codeAll -output results<span class="op">/</span>merged_report.txt results<span class="op">/</span>merged.ucdb</span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>vcover report -details -codeAll -output results<span class="op">/</span>merged_detail.txt results<span class="op">/</span>merged.ucdb</span>
+<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>vcover report -html   -codeAll -output results<span class="op">/</span>html_report     results<span class="op">/</span>merged.ucdb</span></code></pre></div>
+<h3 id="ผลลัพธ์ที่วัดได้จริง">ผลลัพธ์ที่วัดได้จริง</h3>
+<table>
+<thead>
+<tr>
+<th>ชุดทดสอบ</th>
+<th>Branches</th>
+<th>Conditions</th>
+<th>FSM States</th>
+<th>FSM Transitions</th>
+<th>Statements</th>
+<th>Toggles</th>
+<th><strong>รวม</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>basic</code></td>
+<td>93.44%</td>
+<td>100.00%</td>
+<td>100.00%</td>
+<td>62.50%</td>
+<td>93.33%</td>
+<td>63.69%</td>
+<td><strong>85.49%</strong></td>
+</tr>
+<tr>
+<td><code>extra</code></td>
+<td>93.44%</td>
+<td>0.00%</td>
+<td>100.00%</td>
+<td>62.50%</td>
+<td>93.33%</td>
+<td>84.93%</td>
+<td><strong>72.36%</strong></td>
+</tr>
+<tr>
+<td><code>edge</code></td>
+<td>96.72%</td>
+<td>100.00%</td>
+<td>100.00%</td>
+<td>75.00%</td>
+<td>96.66%</td>
+<td>93.15%</td>
+<td><strong>93.58%</strong></td>
+</tr>
+<tr>
+<td><strong>รวม (merged)</strong></td>
+<td>98.36%</td>
+<td>100.00%</td>
+<td>100.00%</td>
+<td>75.00%</td>
+<td>98.33%</td>
+<td>95.20%</td>
+<td><strong>94.48%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>ตัวอย่างรายงานจริงจาก <code>results/merged_report.txt</code></p>
+<pre class="text"><code>Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ---------------- ----      ----    ------    ------  --------
+    Branches                        61        60         1         1    98.36%
+    Conditions                       2         2         0         1   100.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         6         2         1    75.00%
+    Statements                      60        59         1         1    98.33%
+    Toggles                        146       139         7         1    95.20%
+Total coverage (filtered view): 94.48%</code></pre>
+<p>ดูรายละเอียดว่าอะไรยังไม่ถูกทดสอบ
+(<code>results/merged_detail.txt</code>)</p>
+<pre class="text"><code>------------------------------------CASE Branch------------------------------------
+    141               1                    ***0***
+Branch totals: 4 hits of 5 branches = 80.00%</code></pre>
+<pre class="text"><code>    Uncovered Transitions :
+    -----------------------
+Line            Trans_ID          Transition
+----            --------          ----------
+  109                   2          ST_LOAD -&gt; ST_IDLE
+  109                   6          ST_WAIT -&gt; ST_IDLE</code></pre>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-9">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. ค่าเริ่มต้นของ <code>+cover</code> คือ <code>sbceft</code> —
+ให้เขียน spec เต็มทุกครั้ง</strong></p>
+<p>จาก <code>vcom -help all</code>:</p>
+<pre class="text"><code>+cover[=&lt;spec&gt;]   ... If no &lt;spec&gt; characters are given, sbceft is the default.</code></pre>
+<p>การทดสอบ A/B ด้วย design และ test เดียวกันให้ตัวเลข <strong>เหมือนกันทุก
+metric</strong> (<code>results/pitfall_cover_spec_comparison.txt</code>)
+แต่การเขียน spec เต็ม ทำให้ผลไม่ขึ้นกับค่าเริ่มต้นของเครื่องมือ — ควรทำเสมอ</p>
+<p><strong>2. ⚠ ต้องใช้ <code>-onfinish stop</code> เสมอ</strong></p>
+<p>ถ้า testbench จบด้วย <code>std.env.finish</code> โดยไม่ใส่
+<code>-onfinish stop</code> session จะ <strong>ตายทันที</strong> คำสั่ง
+<code>coverage save</code> จะไม่ได้ทำงาน และ <strong>ไม่มีไฟล์
+<code>.ucdb</code> ถูกสร้างขึ้นเลย</strong> — เงียบไปแบบไม่บอกเหตุ</p>
+<table>
+<thead>
+<tr>
+<th>การรัน</th>
+<th>ผลลัพธ์</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vsim -c -coverage work.tb_alu_fsm</code></td>
+<td>ไม่มีไฟล์ <code>.ucdb</code> เลย
+(<code>results/pitfall_finish_nostop.ucdb</code> ไม่ถูกสร้าง)</td>
+</tr>
+<tr>
+<td><code>vsim -c -onfinish stop -coverage work.tb_alu_fsm</code></td>
+<td>มีไฟล์ <code>.ucdb</code>
+(<code>results/pitfall_finish_stop.ucdb</code>, 2,368 bytes) ✔</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. ⚠ <code>coverage goal</code> ใช้ได้เฉพาะใน Coverage View
+mode</strong></p>
+<p>ในการจำลองปกติจะได้</p>
+<pre class="text"><code>** Error: Coverage sub-command &#39;goal&#39; may be used in viewcov mode only.</code></pre>
+<p>และข้อความนี้เป็น <strong>error จริง</strong> ที่จะไปตาม hook
+<code>onerror</code> ในสคริปต์ ต้องเรียกในโหมด Coverage View เท่านั้น</p>
+<div class="sourceCode" id="cb104"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>vsim -c -viewcov results<span class="op">/</span>merged.ucdb -do <span class="st">&quot;coverage goal; quit -f&quot;</span></span></code></pre></div>
+<p><strong>4. ⚠ ชื่อ testbench ต้องเหมือนเดิมเสมอเมื่อ merge ผล</strong></p>
+<p>ถ้าใช้ testbench คนละชื่อ instance path จะต่างกัน ตัวจำลองจะ <strong>นับ bin
+แยกชุด</strong> ไม่ใช่รวมกัน → ตัวเลขเพี้ยน</p>
+<table>
+<thead>
+<tr>
+<th>วิธี</th>
+<th>Instances</th>
+<th>Branches bins</th>
+<th>Toggles bins</th>
+<th>ผลรวม</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✔ testbench เดียว 3 generic</td>
+<td>2</td>
+<td>61</td>
+<td>146</td>
+<td><strong>94.48%</strong></td>
+</tr>
+<tr>
+<td>✘ testbench สองชื่อ</td>
+<td>4</td>
+<td><strong>122</strong> (โตสองเท่า)</td>
+<td>292</td>
+<td><strong>50.74%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>วิธีที่ถูก: ใช้ <strong>testbench เดียว</strong> แล้วเลือกชุดทดสอบด้วย
+generic</p>
+<p><strong>5. <code>vcover</code> คืน exit code 0 เสมอ</strong></p>
+<p>แม้จะมี error เช่น
+<code>** Error: (vcover-7) Failed to open UCDB file …</code> ต้องอ่าน
+<strong>เนื้อหา</strong> ของรายงาน ไม่ใช่ exit code</p>
+<p><strong>6. coverage ไม่สะสมข้ามการโหลด design ใหม่ใน session
+เดียว</strong></p>
+<p>ถ้าโหลด design ใหม่ใน session เดิม ตัวนับจะถูกรีเซ็ต ต้องรันแต่ละชุดทดสอบเป็น
+session แยก (ซึ่งคือสิ่งที่ <code>run.cmd</code> ของ lab นี้ทำ)</p>
+<p><strong>7. ครอบคลุมได้ครบทั้ง 6 metric สำหรับ VHDL</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>ตัวย่อในคำสั่ง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branch</td>
+<td><code>b</code></td>
+</tr>
+<tr>
+<td>Condition</td>
+<td><code>c</code></td>
+</tr>
+<tr>
+<td>Expression</td>
+<td><code>e</code></td>
+</tr>
+<tr>
+<td>Statement</td>
+<td><code>s</code></td>
+</tr>
+<tr>
+<td>Toggle</td>
+<td><code>t</code></td>
+</tr>
+<tr>
+<td>FSM (states + transitions)</td>
+<td><code>f</code></td>
+</tr>
+</tbody>
+</table>
+<p>ตัวคอมไพล์ยังบอกด้วยว่าเจอ FSM กี่ตัว</p>
+<pre class="text"><code>** Note: (vcom-143) Recognized 1 FSM in architecture body &quot;alu_fsm(rtl)&quot;.</code></pre>
+<h3 id="แบบฝึกหัด-9">แบบฝึกหัด</h3>
+<ol type="1">
+<li>เพิ่มเทสต์ที่ทำให้ transition <code>ST_LOAD -&gt; ST_IDLE</code> เกิดขึ้น แล้ว
+merge ใหม่ ตัวเลข FSM Transitions ต้องขึ้นจาก 75.00%</li>
+<li>ลองเปลี่ยนชื่อ testbench เป็นชื่ออื่นแล้ว merge ดูความเพี้ยนของตัวเลข</li>
+<li>ตั้ง coverage goal ใน Coverage View mode แล้วดูว่าบรรทัดไหนยังไม่ถึงเกณฑ์</li>
+</ol>
+<hr />
+<h2 id="lab-11--regression-และการทำงานอัตโนมัติ-ci">LAB 11 — Regression
+และการทำงานอัตโนมัติ (CI)</h2>
+<h3 id="เป้าหมาย-10">เป้าหมาย</h3>
+<p>ทำให้ทุก lab ที่ทำไว้ “รันได้ด้วยคำสั่งเดียว” และสรุปผลเป็นตาราง
+พร้อมรหัสจบการทำงานที่เครื่อง CI นำไปใช้ต่อได้ทันที</p>
+<h3 id="ไฟล์ที่เกี่ยวข้อง-10">ไฟล์ที่เกี่ยวข้อง</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>regression.cmd</code></td>
+<td>ตัวรันทุก lab แล้วสรุปผล</td>
+</tr>
+<tr>
+<td><code>results/regression_summary.txt</code></td>
+<td>ตารางสรุปผลล่าสุด</td>
+</tr>
+<tr>
+<td><code>results/&lt;lab&gt;.log</code></td>
+<td>log ของแต่ละ lab แยกกัน</td>
+</tr>
+<tr>
+<td><code>../tools/pick_tool.cmd</code></td>
+<td>เลือกชุดติดตั้งที่ยังมี license ว่าง (ใช้ร่วมกันทุก lab)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ขั้นตอน-9">ขั้นตอน</h3>
+<p><strong>ขั้นที่ 1 : รันทั้งชุด</strong></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> questa_vhdl_lab\lab11_regression</span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>regression.cmd</span></code></pre></div>
+<p>ผลลัพธ์จริงจากเครื่องนี้ (รอบที่ผ่านทั้งหมด)</p>
+<pre class="text"><code>====================================================================
+ LAB 11 : regression -- running every lab
+ root    : C:\...\questa_vhdl_lab\lab11_regression\..
+====================================================================
+[PASS] lab01_first_simulation
+[PASS] lab02_libraries
+[PASS] lab03_selfchecking_tb
+[PASS] lab04_waveform
+[PASS] lab05_debugging
+[PASS] lab06_dataflow
+[PASS] lab07_memory
+[PASS] lab08_stimulus
+[PASS] lab09_psl
+[PASS] lab10_coverage
+
+====================================================================
+ REGRESSION SUMMARY
+ total = 10   passed = 10   failed = 0
+ summary file : C:\...\lab11_regression\results\regression_summary.txt
+====================================================================
+PASS  lab01_first_simulation  script=run.cmd
+PASS  lab02_libraries  script=run.cmd
+PASS  lab03_selfchecking_tb  script=run.cmd
+PASS  lab04_waveform  script=run.cmd
+PASS  lab05_debugging  script=run_debug.cmd
+PASS  lab06_dataflow  script=run.cmd
+PASS  lab07_memory  script=run.cmd
+PASS  lab08_stimulus  script=run.cmd
+PASS  lab09_psl  script=run.cmd
+PASS  lab10_coverage  script=run.cmd
+[REGRESSION] ALL GREEN</code></pre>
+<p>รหัสจบของ <code>cmd.exe</code> = <code>0</code> เมื่อทุก lab เขียว</p>
+<p><strong>ขั้นที่ 2 : ดู log ของ lab ที่พัง</strong></p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> results\lab05_debugging.log</span></code></pre></div>
+<p>ทุก lab ถูกเรียกด้วย <code>call</code> และ stdout ถูกเปลี่ยนเป็นไฟล์ ทำให้
+ไม่มีข้อความรบกวนหน้าต่าง และยังได้ log แยกไว้ตรวจย้อนหลัง</p>
+<p><strong>ขั้นที่ 3 : ลองให้ regression เป็นแดง</strong></p>
+<p>จงใจแก้ <code>src/alu.vhd</code> ใน lab05 ให้พัง (แล้วแก้กลับ) แล้วรัน
+<code>regression.cmd</code> ใหม่ จะเห็น</p>
+<pre class="text"><code>[FAIL] lab05_debugging  exit=1
+...
+[REGRESSION] FAILED -- 1 lab(s) did not pass</code></pre>
+<p>และรหัสจบของ <code>cmd.exe</code> จะเป็น <code>1</code></p>
+<h3 id="สิ่งที่ควรรู้จาก-lab-นี้-10">สิ่งที่ควรรู้จาก Lab นี้</h3>
+<p><strong>1. “เขียว” ของแต่ละ lab อาจไม่ใช่ <code>run.cmd</code>
+เสมอไป</strong></p>
+<p>lab ที่มี “เคสที่ตั้งใจให้พัง” ต้องใช้ entry point คนละอัน</p>
+<table>
+<thead>
+<tr>
+<th>lab</th>
+<th>สคริปต์ที่เป็น “เขียว”</th>
+<th>สคริปต์ที่เป็น “แดงโดยตั้งใจ”</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>lab03</td>
+<td><code>run.cmd</code></td>
+<td><code>run_fail.cmd</code> (จงใจให้ assert fail)</td>
+</tr>
+<tr>
+<td>lab05</td>
+<td><code>run_debug.cmd</code> (หาบั๊กสำเร็จ)</td>
+<td><code>run.cmd</code> (DUT มีบั๊กจริง)</td>
+</tr>
+<tr>
+<td>lab09</td>
+<td><code>run.cmd</code></td>
+<td><code>run_fail.cmd</code> (PSL ต้อง fail)</td>
+</tr>
+</tbody>
+</table>
+<p>ผลที่วัดได้จริงของทุกชุดทางเลือก</p>
+<table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>ผลลัพธ์</th>
+<th>รหัสจบ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>lab03\run.cmd</code></td>
+<td><code>[RESULT] PASS</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>lab03\run_fail.cmd</code></td>
+<td><code>** Failure: FAIL: injected error (INJECT_ERROR = true)</code>
+→ <code>[RESULT] FAIL as expected</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>lab05\run_debug.cmd</code></td>
+<td><code>[RESULT] PASS</code> (พบบั๊กที่ <code>y = 0F</code>)</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>lab05\run.cmd</code></td>
+<td><code>[RESULT] FAIL -- exit=1</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>lab09\run.cmd</code></td>
+<td><code>[RESULT] PASS</code> (ไม่มี PSL fire)</td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td><code>lab09\run_fail.cmd</code></td>
+<td><code>[RESULT] FAIL -- EXPECTED for run_fail.cmd</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>lab09\run_nopsl.cmd</code></td>
+<td><code>[RESULT] PASS</code> (ปิด PSL แล้วไม่มีอะไรจับบั๊ก)</td>
+<td><code>0</code></td>
+</tr>
+</tbody>
+</table>
+<p>ถ้าใส่ <code>run.cmd</code> ของ lab05 ลงในรายการ regression
+ระบบจะแดงตลอด เพราะโดยออกแบบ lab นั้นไว้ให้พัง</p>
+<p><strong>2. สคริปต์ที่ถูกเรียกด้วย <code>call</code>
+เปลี่ยนโฟลเดอร์ปัจจุบัน</strong></p>
+<p><code>run.cmd</code> ของทุก lab มี <code>cd /d &quot;%~dp0&quot;</code> จึง
+<strong>ต้องกลับมา</strong> หลังเรียกเสร็จ</p>
+<div class="sourceCode" id="cb110"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="bu">call</span> <span class="ot">&quot;%ROOT%\%%L\!LABSCRIPT!&quot;</span> <span class="kw">&gt;</span> <span class="st">&quot;</span><span class="pp">%</span><span class="va">LOGDIR</span><span class="pp">%</span><span class="st">\</span><span class="sc">%%</span><span class="va">L</span><span class="st">.log&quot;</span> <span class="kw">2&gt;&amp;1</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="st">&quot;</span><span class="va">RC</span>=<span class="pp">!</span><span class="va">ERRORLEVEL</span><span class="pp">!</span><span class="st">&quot;</span></span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> <span class="at">/d</span> <span class="st">&quot;</span><span class="pp">%~dp</span><span class="va">0</span><span class="st">&quot;</span>                 -- <span class="kw">&lt;&lt;&lt;</span> ต้องมีบรรทัดนี้</span></code></pre></div>
+<p>ถ้าลืม รายการถัดไปจะหาไฟล์ไม่เจอเพราะอยู่ผิดโฟลเดอร์ อาการที่เห็นจริงคือ
+<code>Cannot open macro file: run_batch.do</code> (ดูข้อ C.29 ในภาคผนวก ก)
+และ <code>vsim</code> จะคืนรหัส <code>0</code> พร้อมกับไม่มี
+<code>result.txt</code> → ต้องตัดสินจากไฟล์ผลลัพธ์เสมอ</p>
+<p><strong>3. ใช้ delayed expansion (<code>!var!</code>) เมื่ออ่านตัวแปรภายใน
+<code>for</code> loop</strong></p>
+<div class="sourceCode" id="cb111"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb111-1"><a href="#cb111-1" aria-hidden="true" tabindex="-1"></a><span class="bu">setlocal</span> enabledelayedexpansion</span>
+<span id="cb111-2"><a href="#cb111-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb111-3"><a href="#cb111-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;</span><span class="pp">!</span><span class="va">RC</span><span class="pp">!</span><span class="st">&quot;</span><span class="kw">==</span><span class="st">&quot;0&quot;</span> <span class="kw">(</span> ... <span class="kw">)</span></span></code></pre></div>
+<p>ถ้าใช้ <code>%RC%</code> ค่าจะถูกขยายตอน <em>อ่านทั้งบล็อก</em>
+จึงได้ค่าเก่าเสมอ</p>
+<p><strong>4. <code>for %%L in (...)</code> ใช้ <code>=</code>
+เป็นตัวคั่นข้อมูลไม่ได้</strong></p>
+<p>ดูข้อ C.5 ในภาคผนวก ก — ถ้าต้องการผูก lab กับสคริปต์ ให้แยกกรณีพิเศษออกไปเป็น
+<code>if</code></p>
+<p><strong>5. รหัสจบที่ CI ต้องดู</strong></p>
+<table>
+<thead>
+<tr>
+<th>รหัส</th>
+<th>แปลว่า</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>ทุก lab ผ่าน → ให้ pipeline เดินต่อ</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>มี lab ไม่ผ่าน → ให้ pipeline ล้ม</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>สคริปต์หาเครื่องมือ/โฟลเดอร์ไม่เจอ → ปัญหาการตั้งค่า ไม่ใช่ปัญหา DUT</td>
+</tr>
+</tbody>
+</table>
+<p><strong>6. รันทีละ lab เท่านั้น (ข้อจำกัดของ license)</strong></p>
+<p>license ของเครื่องนี้เป็น single-session สคริปต์จึงรันทีละ lab และแต่ละ lab
+ต้องรอให้จบก่อนของถัดไป</p>
+<p><strong>7. อย่า hardcode path ของชุดติดตั้ง — ให้
+<code>tools/pick_tool.cmd</code> เลือก</strong></p>
+<p>ถ้า hardcode ว่าใช้ QuestaSim เสมอ จะพังทันทีที่มี QuestaSim GUI เปิดค้างไว้
+เพราะ license เป็น session เดียว (ข้อ C.24 ในภาคผนวก ก)</p>
+<p>ทางแก้คือให้ทุก lab เรียก <code>tools/pick_tool.cmd</code> ซึ่งจะ</p>
+<ol type="1">
+<li>ไล่ชุดติดตั้งตามลำดับ <code>QUESTASIM_HOME</code> →
+<code>MODELSIM_HOME</code> → path ที่ติดตั้งไว้</li>
+<li>ทดสอบด้วย license probe จริง (คอมไพล์ + โหลด design จิ๋ว
+<code>tools/probe/probe_top.vhd</code>)</li>
+<li>เลือกชุดแรกที่ดึง license ได้จริง แล้วส่งค่ากลับมาในตัวแปร <code>MT</code></li>
+</ol>
+<div class="sourceCode" id="cb112"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="bu">call</span> <span class="ot">&quot;%~dp0..\tools\pick_tool.cmd&quot;</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">not</span> <span class="at">defined</span> <span class="va">MT</span> <span class="kw">(</span></span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> [ERROR] no usable vsim.exe with a free licence was found.</span>
+<span id="cb112-4"><a href="#cb112-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> <span class="at">/b</span> 2</span>
+<span id="cb112-5"><a href="#cb112-5" aria-hidden="true" tabindex="-1"></a><span class="kw">)</span></span>
+<span id="cb112-6"><a href="#cb112-6" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="st">&quot;</span><span class="va">PATH</span>=<span class="pp">%</span><span class="va">MT</span><span class="pp">%</span><span class="st">;</span><span class="pp">%</span><span class="va">PATH</span><span class="pp">%</span><span class="st">&quot;</span></span></code></pre></div>
+<p>ผลที่วัดได้จริงระหว่างที่ QuestaSim GUI เปิดค้างไว้</p>
+<pre class="text"><code> tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe</code></pre>
+<p>— ระบบเลือก ModelSim DE-64 ให้เองโดยที่ผู้ใช้ไม่ต้องแก้อะไร</p>
+<blockquote>
+<p>ถ้าอยากบังคับให้ใช้ชุดใดชุดหนึ่ง ให้ตั้ง <code>QUESTASIM_HOME</code> หรือ
+<code>MODELSIM_HOME</code> ตัวแปรสองตัวนี้ถูกอ่านเป็นอันดับแรกโดย
+<code>pick_tool.cmd</code></p>
+</blockquote>
+<h3 id="แบบฝึกหัด-10">แบบฝึกหัด</h3>
+<ol type="1">
+<li>จงใจแก้ <code>src/alu.vhd</code> ใน lab05 ให้พังอีกครั้ง แล้วรัน
+<code>regression.cmd</code> ดูว่า lab05 กลายเป็น <code>[FAIL]</code>
+และรหัสจบกลายเป็น 1</li>
+<li>เพิ่มเคส “negative test” ของ lab09 (<code>run_fail.cmd</code>)
+เข้าไปในรายการด้วย แล้วทำให้มันรายงานว่าผ่านเมื่อ PSL <strong>ไม่</strong> fire
+(ซึ่งถือว่าล้มเหลว)</li>
+<li>เขียนสคริปต์ที่อ่าน <code>results/regression_summary.txt</code>
+แล้วส่งอีเมล/แจ้งเตือน เมื่อมี lab ล้มเหลว</li>
+<li>เปิด QuestaSim GUI ค้างไว้ แล้วรัน <code>regression.cmd</code> อีกครั้ง →
+ต้องยังเป็น ALL GREEN เพราะทุก lab หาเครื่องมือที่ license ว่างให้เอง</li>
+</ol>
+<hr />
+<h2 id="ภาคผนวก">ภาคผนวก</h2>
+<h3 id="ภาคผนวก-ก--กับดักที่วัดได้จริงบนเครื่องนี้">ภาคผนวก ก —
+กับดักที่วัดได้จริงบนเครื่องนี้</h3>
+<p>ทุกข้อในตารางนี้ <strong>เกิดขึ้นจริง</strong> ระหว่างทำคู่มือนี้ ไม่ใช่ข้อควรระวังทั่วไป
+แต่ละข้อมีวิธีตรวจสอบและวิธีแก้ให้พร้อมกัน</p>
+<h4 id="c1-info-script-ในไฟล์-do-คืนค่าผิด--ทำให้-questasim-crash">C.1
+<code>info script</code> ในไฟล์ <code>.do</code> คืนค่าผิด — ทำให้ QuestaSim
+crash</h4>
+<table>
+<tbody>
+<tr>
+<td><strong>อาการ</strong></td>
+<td><code>vsim.exe : ** Fatal: Exiting VSIM license process.</code> แล้ว
+process ตายด้วยรหัส <code>3221225477</code> (0xC0000005, access
+violation)</td>
+</tr>
+<tr>
+<td><strong>สาเหตุ</strong></td>
+<td>เมื่อสั่ง <code>do file.do</code> ตัว <code>info script</code> ของ Tcl
+จะคืนค่า <strong>path ของตัว vsim</strong> ไม่ใช่ไฟล์ <code>.do</code></td>
+</tr>
+<tr>
+<td><strong>ตัวอย่าง</strong></td>
+<td><code>cd [file normalize [file dirname [info script]]]</code> →
+<code>cd</code> เข้า <code>C:/mtitcl/vsim</code> (โฟลเดอร์ของตัวโปรแกรม)
+แล้วพัง</td>
+</tr>
+<tr>
+<td><strong>วิธีตรวจ</strong></td>
+<td>พิมพ์ <code>puts [info script]</code> ในไฟล์ <code>.do</code> → จะได้
+<code>C:/mtitcl/vsim/vsim</code></td>
+</tr>
+<tr>
+<td><strong>วิธีแก้</strong></td>
+<td>ใช้ <code>source file.do</code> แทน <code>do file.do</code> —
+<code>source</code> ทำให้ <code>info script</code> คืน path ของไฟล์จริง</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb114"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># do  -&gt; info script = C:/mtitcl/vsim/vsim   (ผิด)</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a><span class="co"># source -&gt; info script = C:/path/to/your/file.do   (ถูก)</span></span></code></pre></div>
+<blockquote>
+<p>คู่มือนี้เลือกใช้แนวทางที่ปลอดภัยกว่า คือ <strong>ไม่พึ่ง <code>info script</code>
+เลย</strong> ทุกสคริปต์ <code>.do</code> ต้องรันจากโฟลเดอร์ของ lab (ทำโดย
+<code>run.cmd</code> ที่ <code>cd /d &quot;%~dp0&quot;</code>) และมี guard
+ตรวจว่าอยู่ในโฟลเดอร์ที่ถูกต้อง</p>
+</blockquote>
+<h4 id="c2-ภาษาไทยในไฟล์-cmd-ทำให้-cmdexe-พังโครงสร้างบรรทัด">C.2
+ภาษาไทยในไฟล์ <code>.cmd</code> ทำให้ <code>cmd.exe</code>
+พังโครงสร้างบรรทัด</h4>
+<table>
+<tbody>
+<tr>
+<td><strong>อาการ</strong></td>
+<td><code>&#39;&lt;ภาษาไทย&gt;&#39; is not recognized as an internal or external command</code>
+และบรรทัดถัดไปเสียไปด้วย (เช่น <code>echo</code> กลายเป็น
+<code>cho</code>)</td>
+</tr>
+<tr>
+<td><strong>สาเหตุ</strong></td>
+<td><code>cmd.exe</code> อ่านไฟล์ <code>.cmd</code> ตาม code page ของ
+console (ไม่ใช่ UTF-8) ไบต์ภาษาไทยจึงกินตัวอักษรแรกของบรรทัดถัดไป</td>
+</tr>
+<tr>
+<td><strong>วิธีแก้</strong></td>
+<td>ให้ไฟล์ <code>.cmd</code> เป็น <strong>ASCII ล้วน</strong>
+เขียนคำอธิบายภาษาไทยไว้ใน <code>rem</code> ที่เป็น ASCII หรือย้ายไปไว้ในคู่มือ</td>
+</tr>
+</tbody>
+</table>
+<p>ตรวจสอบด้วย PowerShell ก่อน commit ไฟล์</p>
+<div class="sourceCode" id="cb115"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb115-1"><a href="#cb115-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-ChildItem</span> <span class="op">-</span>Recurse <span class="op">-</span>Include <span class="op">*.</span><span class="fu">cmd</span> <span class="op">|</span> <span class="fu">ForEach-Object</span> <span class="op">{</span></span>
+<span id="cb115-2"><a href="#cb115-2" aria-hidden="true" tabindex="-1"></a>  <span class="va">$n</span> <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb115-3"><a href="#cb115-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">foreach</span> <span class="op">(</span><span class="va">$line</span> <span class="kw">in</span> <span class="op">[</span>System<span class="op">.</span><span class="fu">IO</span><span class="op">.</span><span class="fu">File</span><span class="op">]::</span>ReadAllLines<span class="op">(</span><span class="va">$_</span><span class="op">.</span><span class="fu">FullName</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb115-4"><a href="#cb115-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">$n</span><span class="op">++</span></span>
+<span id="cb115-5"><a href="#cb115-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span><span class="va">$line</span> <span class="op">-match</span> <span class="st">&#39;[^\x00-\x7F]&#39;</span><span class="op">)</span> <span class="op">{</span> <span class="st">&quot;</span><span class="op">$(</span><span class="va">$_</span><span class="op">.</span><span class="fu">FullName</span><span class="op">)</span><span class="st">:</span><span class="va">$n</span><span class="st"> : </span><span class="va">$line</span><span class="st">&quot;</span> <span class="op">}</span></span>
+<span id="cb115-6"><a href="#cb115-6" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb115-7"><a href="#cb115-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h4 id="c3-วงเล็บที่ไม่-escape-ใน-echo-ที่อยู่ใน-if-block">C.3 วงเล็บที่ไม่ escape
+ใน <code>echo</code> ที่อยู่ใน <code>if</code> block</h4>
+<table>
+<tbody>
+<tr>
+<td><strong>อาการ</strong></td>
+<td>สคริปต์หยุดทันที <strong>โดยไม่มีข้อความแม้แต่บรรทัดเดียว</strong> และ exit code
+= 1</td>
+</tr>
+<tr>
+<td><strong>สาเหตุ</strong></td>
+<td><code>cmd.exe</code> มอง <code>(</code> ในข้อความว่าเป็นการเปิด block
+ใหม่ ทำให้ syntax เพี้ยน</td>
+</tr>
+<tr>
+<td><strong>ตัวอย่าง</strong></td>
+<td><code>echo [RESULT] FAIL  (no result file)</code> ภายใน
+<code>if (...)</code> → พัง</td>
+</tr>
+</tbody>
+</table>
+<p>วิธีแก้: เขียนข้อความให้ไม่มีวงเล็บ หรือ escape ด้วย <code>^(</code> และ
+<code>^)</code></p>
+<h4 id="c4-vsim-คืน-exit-code-0-แม้แต่เปิดไฟล์-do-ไม่ได้">C.4 <code>vsim</code>
+คืน exit code 0 แม้แต่เปิดไฟล์ <code>.do</code> ไม่ได้</h4>
+<table>
+<tbody>
+<tr>
+<td><strong>อาการ</strong></td>
+<td>สคริปต์ batch รายงานว่า PASS ทั้งที่ไม่มีอะไรรันจริง</td>
+</tr>
+<tr>
+<td><strong>สาเหตุ</strong></td>
+<td><code>vsim -c -do &quot;do ไม่มีไฟล์.do&quot;</code> พิมพ์
+<code>Cannot open macro file: ...</code> แล้วจบด้วยรหัส 0</td>
+</tr>
+<tr>
+<td><strong>วิธีแก้</strong></td>
+<td>ให้ testbench เขียนผลลงไฟล์ <code>result.txt</code> แล้วให้สคริปต์อ่านไฟล์นั้น
+(ไม่พึ่ง exit code อย่างเดียว)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="c5-ใน-for-v-in--เครื่องหมาย--ถูกตีความเป็นตัวคั่นคู่-varvalue">C.5 ใน
+<code>for %%V in (...)</code> เครื่องหมาย <code>=</code> ถูกตีความเป็นตัวคั่นคู่
+<code>var=value</code></h4>
+<table>
+<tbody>
+<tr>
+<td><strong>อาการ</strong></td>
+<td>รายการที่ตั้งใจจะเป็น 1 ชิ้น กลายเป็นหลายชิ้น</td>
+</tr>
+<tr>
+<td><strong>สาเหตุ</strong></td>
+<td>ภาษาของ <code>for</code> รองรับรายการรูปแบบ <code>ตัวแปร=ค่า</code>
+จึงตัดข้อความที่มี <code>=</code> ออกเป็นคนละชิ้น</td>
+</tr>
+<tr>
+<td><strong>วิธีแก้</strong></td>
+<td>อย่าใช้ <code>=</code> เป็นตัวคั่นข้อมูลในรายการของ <code>for</code> —
+แยกกรณีพิเศษออกไปเป็น <code>if</code> แทน</td>
+</tr>
+</tbody>
+</table>
+<h4 id="c6-ไฟล์-vhd-ที่มี-bom-utf-8-with-bom-คอมไพล์ไม่ได้">C.6 ไฟล์
+<code>.vhd</code> ที่มี BOM (UTF-8 with BOM) คอมไพล์ไม่ได้</h4>
+<table>
+<tbody>
+<tr>
+<td><strong>อาการ</strong></td>
+<td><code>** Error: tb/tb_timer.vhd(1): near &quot;?&quot;: syntax error</code></td>
+</tr>
+<tr>
+<td><strong>สาเหตุ</strong></td>
+<td>BOM (3 ไบต์ <code>EF BB BF</code>) ที่หัวไฟล์ถูกตัวคอมไพล์อ่านเป็นอักขระผิด</td>
+</tr>
+<tr>
+<td><strong>วิธีแก้</strong></td>
+<td>บันทึกเป็น UTF-8 <strong>ไม่มี BOM</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb116"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="va">$enc</span> <span class="op">=</span> <span class="fu">New-Object</span> System<span class="op">.</span><span class="fu">Text</span><span class="op">.</span><span class="fu">UTF8Encoding</span><span class="op">(</span><span class="va">$false</span><span class="op">)</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>System<span class="op">.</span><span class="fu">IO</span><span class="op">.</span><span class="fu">File</span><span class="op">]::</span>WriteAllText<span class="op">(</span><span class="va">$path</span><span class="op">,</span> <span class="va">$text</span><span class="op">,</span> <span class="va">$enc</span><span class="op">)</span></span></code></pre></div>
+<h4 id="c7-ภาษาไทยใน-string-literal-ของ-vhdl-ใช้ไม่ได้">C.7 ภาษาไทยใน
+string literal ของ VHDL ใช้ไม่ได้</h4>
+<table>
+<tbody>
+<tr>
+<td><strong>อาการ</strong></td>
+<td><code>** Error: (vcom-1576) String literal has a character with value 0x95 not in the enumeration type std.STANDARD.CHARACTER.</code></td>
+</tr>
+<tr>
+<td><strong>สาเหตุ</strong></td>
+<td>string literal ของ VHDL ประกอบด้วยอักขระ <code>CHARACTER</code>
+(Latin-1) เท่านั้น</td>
+</tr>
+<tr>
+<td><strong>วิธีแก้</strong></td>
+<td>ใช้ภาษาไทยได้ใน <strong>comment</strong> เท่านั้น ใน
+<code>report</code>/<code>assert</code> ให้ใช้ภาษาอังกฤษ</td>
+</tr>
+</tbody>
+</table>
+<h4 id="c8-const-เป็นคำสงวนใน-vhdl-2008">C.8 <code>const</code>
+เป็นคำสงวนใน VHDL-2008</h4>
+<div class="sourceCode" id="cb117"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="kw">procedure</span> <span class="dv">write_result</span>(const fname <span class="ot">:</span> <span class="kw">in</span> <span class="dt">string</span>; <span class="ot">...</span>)   <span class="co">-- ผิด</span></span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- ** Error: near &quot;fname&quot;: (vcom-1576) expecting &#39;:&#39;.</span></span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="kw">procedure</span> <span class="dv">write_result</span>(<span class="ot">constant</span> fname <span class="ot">:</span> <span class="kw">in</span> <span class="dt">string</span>; <span class="ot">...</span>) <span class="co">-- ถูก</span></span></code></pre></div>
+<h4 id="c9-writeline-ต้องการ-line-ไม่ใช่-string">C.9 <code>writeline</code>
+ต้องการ <code>line</code> ไม่ใช่ <code>string</code></h4>
+<div class="sourceCode" id="cb118"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb118-1"><a href="#cb118-1" aria-hidden="true" tabindex="-1"></a>writeline(f<span class="ot">,</span> verdict);      <span class="co">-- ผิด : (vcom-1600) No feasible entries for subprogram &quot;WRITELINE&quot;</span></span>
+<span id="cb118-2"><a href="#cb118-2" aria-hidden="true" tabindex="-1"></a>write(l<span class="ot">,</span> verdict);</span>
+<span id="cb118-3"><a href="#cb118-3" aria-hidden="true" tabindex="-1"></a>writeline(f<span class="ot">,</span> l);            <span class="co">-- ถูก</span></span></code></pre></div>
+<h4 id="c10-std_logic_vector-ไม่มีตัว-">C.10 <code>std_logic_vector</code>
+ไม่มีตัว <code>+</code></h4>
+<div class="sourceCode" id="cb119"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">:=</span> (<span class="bn">&#39;0&#39;</span> <span class="ot">&amp;</span> <span class="dt">unsigned</span>(a)) <span class="ot">+</span> (<span class="bn">&#39;0&#39;</span> <span class="ot">&amp;</span> <span class="dt">unsigned</span>(b));   <span class="co">-- ผิด : ผสมสองชนิด</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>tmp <span class="ot">:=</span> (<span class="bn">&#39;0&#39;</span> <span class="ot">&amp;</span> <span class="dt">unsigned</span>(a)) <span class="ot">+</span> <span class="dt">unsigned</span>(<span class="bn">&#39;0&#39;</span> <span class="ot">&amp;</span> <span class="dt">unsigned</span>(b));  <span class="co">-- ถูก</span></span></code></pre></div>
+<h4 id="c11-bus-เป็นคำสงวนของ-vhdl">C.11 <code>bus</code> เป็นคำสงวนของ
+VHDL</h4>
+<p>ตั้งชื่อ signal ว่า <code>bus</code> ไม่ได้ → ใช้ <code>data_bus</code>
+แทน</p>
+<h4 id="c12-string0-to-n-ใช้ไม่ได้">C.12 <code>string(0 to n)</code>
+ใช้ไม่ได้</h4>
+<p><code>STRING</code> ถูกนิยามเป็น
+<code>array (POSITIVE range &lt;&gt;) of CHARACTER</code> ดังนั้น index
+ต้องเป็นบวกเสมอ ใช้ <code>string(1 to n)</code></p>
+<h4 id="c13-array-ของ-unconstrained-string-ต้องมีความยาวเท่ากันทุกช่อง">C.13
+array ของ unconstrained string ต้องมีความยาวเท่ากันทุกช่อง</h4>
+<div class="sourceCode" id="cb120"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb120-1"><a href="#cb120-1" aria-hidden="true" tabindex="-1"></a><span class="ot">type</span> note_array <span class="ot">is</span> <span class="kw">array</span> (<span class="dt">natural</span> <span class="kw">range</span> <span class="ot">&lt;&gt;</span>) <span class="kw">of</span> <span class="dt">string</span>;</span>
+<span id="cb120-2"><a href="#cb120-2" aria-hidden="true" tabindex="-1"></a><span class="ot">constant</span> NOTES <span class="ot">:</span> note_array <span class="ot">:=</span> (<span class="st">&quot;ADD ok&quot;</span><span class="ot">,</span> <span class="st">&quot;SUB exposes the bug&quot;</span>);  <span class="co">-- ผิด</span></span>
+<span id="cb120-3"><a href="#cb120-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- ** Error: (vcom-1622) Unconstrained subelements cannot be of different sizes.</span></span></code></pre></div>
+<p>ทางออกที่ดีกว่า: ใช้ enumerated type + ฟังก์ชันแปลงเป็น string</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="ot">type</span> note_id_t <span class="ot">is</span> (N_ADD<span class="ot">,</span> N_SUB<span class="ot">,</span> N_AND<span class="ot">,</span> N_OR);</span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a><span class="at">function</span> <span class="dv">note_text</span>(n <span class="ot">:</span> note_id_t) <span class="cf">return</span> <span class="dt">string</span> <span class="kw">is</span> <span class="ot">...</span></span></code></pre></div>
+<h4 id="c14-use-clause-เลือกได้เฉพาะ-package">C.14 <code>use</code> clause
+เลือกได้เฉพาะ package</h4>
+<div class="sourceCode" id="cb122"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb122-1"><a href="#cb122-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> ip_lib<span class="ot">.</span>ip_core<span class="ot">.</span><span class="kw">all</span>;   <span class="co">-- ผิด : &#39;ip_core&#39; is not a library or a package</span></span></code></pre></div>
+<p>และชื่อไลบรารีต้องประกาศก่อน</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="kw">library</span> ip_lib;            <span class="co">-- ต้องมีบรรทัดนี้</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a>core <span class="ot">:</span> <span class="cf">entity</span> <span class="dv">ip_lib</span><span class="ot">.</span>ip_core <span class="kw">port</span> <span class="kw">map</span> (<span class="ot">...</span>);</span></code></pre></div>
+<h4 id="c15-อย่าลบ-modelsimini-ระหว่าง-session">C.15 อย่าลบ
+<code>modelsim.ini</code> ระหว่าง session</h4>
+<p>ตัวจำลองโหลดไฟล์นี้ไว้ตั้งแต่ตอนเริ่ม ถ้าลบทิ้ง การคอมไพล์ที่อ้างไลบรารีอื่นจะ ขึ้น
+<code>** Error: (vcom-1136) Unknown identifier &quot;ip_lib&quot;.</code></p>
+<h4 id="c16-vcd-add-ต้องทำก่อน-run">C.16 <code>vcd add</code> ต้องทำก่อน
+<code>run</code></h4>
+<p>ถ้าทำหลัง ไฟล์ VCD จะมีแต่ header (1,310 bytes) ไม่มีค่าที่เปลี่ยนแปลง ทำก่อนจะได้
+3,219 bytes</p>
+<h4 id="c17-wlf2vcd-เปิดไฟล์-wlf-ไม่ได้ระหว่างจำลอง">C.17
+<code>wlf2vcd</code> เปิดไฟล์ WLF ไม่ได้ระหว่างจำลอง</h4>
+<pre class="text"><code>** Error: Unable to open WLF file &quot;vsim.wlf&quot;.</code></pre>
+<p>ต้องรอให้ simulator ปิดตัวลงก่อน</p>
+<h4 id="c18-severity-failure-ทำให้สคริปต์-do-ถูกรันซ้ำ">C.18
+<code>severity failure</code> ทำให้สคริปต์ <code>.do</code> ถูกรันซ้ำ</h4>
+<p>เมื่อ testbench หยุดด้วย <code>severity failure</code> ระหว่าง
+<code>run -all</code> ModelSim จะ abort สคริปต์ปัจจุบัน แล้ว
+<strong>เริ่มรายการคำสั่ง <code>-do</code> ใหม่ตั้งแต่ต้น</strong> (ตรวจได้จาก log
+ที่มีบรรทัด <code># do run_batch.do</code> ซ้ำ)</p>
+<p>ทางแก้ที่ใช้ในคู่มือนี้: ห่อ <code>run -all</code> ด้วย <code>catch</code> และให้
+testbench เป็นคนเขียนผล</p>
+<h4 id="c19-examine-ในโหมด-console-ไม่พิมพ์ผลลัพธ์">C.19 <code>examine</code>
+ในโหมด console ไม่พิมพ์ผลลัพธ์</h4>
+<p>ต้องเก็บค่าที่คืนมาแล้ว <code>puts</code> เอง</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb125-1"><a href="#cb125-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> v <span class="kw">[</span>examine -radix hex -value <span class="op">/</span>tb_alu<span class="op">/</span>dut<span class="op">/</span>y<span class="kw">]</span></span>
+<span id="cb125-2"><a href="#cb125-2" aria-hidden="true" tabindex="-1"></a><span class="kw">puts</span> <span class="st">&quot;  y = </span><span class="dt">$v</span><span class="st">&quot;</span></span></code></pre></div>
+<h4 id="c20-time-ชนกับคำสั่ง-time-ของ-tcl">C.20 <code>[time]</code>
+ชนกับคำสั่ง <code>time</code> ของ Tcl</h4>
+<div class="sourceCode" id="cb126"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb126-1"><a href="#cb126-1" aria-hidden="true" tabindex="-1"></a><span class="kw">puts</span> <span class="st">&quot;stopped at [time]&quot;</span>     -- <span class="op">**</span> Error<span class="op">:</span> wrong # args<span class="op">:</span> should be <span class="st">&quot;time command ?count?&quot;</span></span>
+<span id="cb126-2"><a href="#cb126-2" aria-hidden="true" tabindex="-1"></a><span class="kw">puts</span> <span class="st">&quot;stopped at </span><span class="dt">$::now</span><span class="st">&quot;</span>     -- ถูก</span></code></pre></div>
+<h4 id="c21-license-ถูกเช็คตอน-โหลด-design-เท่านั้น">C.21 license ถูกเช็คตอน
+“โหลด design” เท่านั้น</h4>
+<p><code>vsim -c -do &quot;quit -f&quot;</code> ไม่ดึง license ต้องคอมไพล์แล้วโหลด
+design จริงจึงจะเจอข้อความ &quot;License checkout has been disallowed&quot; — ตัว
+<code>run.cmd</code> ใช้หลักการนี้ในการเลือกชุดติดตั้ง</p>
+<h4 id="c22--ไม่แพร่ค่า-x">C.22 <code>=</code> ไม่แพร่ค่า X</h4>
+<p>ตัวเปรียบเทียบของ IEEE 1164 คืน <code>FALSE</code> เมื่อ operand มี
+<code>X</code>/<code>U</code> ต้องใช้ตัวบิต
+(<code>xor</code>/<code>and</code>/<code>or</code>) หรือ
+<code>is_x()</code> ถ้าต้องการให้ X แพร่</p>
+<h4 id="c23-คำสั่ง-mem-ใน-20261-ไม่มี-mem-export">C.23 คำสั่ง <code>mem</code>
+ใน 2026.1 ไม่มี <code>mem export</code></h4>
+<p>คำสั่งที่มีคือ <code>mem compare</code>, <code>mem display</code>,
+<code>mem list</code>, <code>mem load</code>, <code>mem save</code>,
+<code>mem search</code> ใช้ <code>mem save</code> แทน
+<code>mem export</code></p>
+<h4 id="c24-questasim-gui-ที่เปิดค้างไว้-จะบล็อก-questasim-แบบบรรทัดคำสั่ง">C.24
+QuestaSim GUI ที่เปิดค้างไว้ จะบล็อก QuestaSim แบบบรรทัดคำสั่ง</h4>
+<p>วัดได้จริงบนเครื่องนี้: ขณะที่ QuestaSim GUI (<code>vish.exe -gui</code>,
+ชื่อหน้าต่าง “Questa Sim-64 2026.1”) ยังเปิดอยู่ การรัน <code>vsim</code> ของชุด
+QuestaSim แบบบรรทัดคำสั่ง จะได้ข้อความ</p>
+<pre class="text"><code>** Error: License checkout has been disallowed because
+only one session is allowed to run on an uncounted nodelocked
+license and an instance of QuestaSim is already running with a
+nodelocked license on this machine.</code></pre>
+<p>แต่ <strong>ModelSim DE-64 ยังรันได้ตามปกติ</strong> เพราะเป็นอีก seat หนึ่ง
+ทางแก้คืออย่า hardcode path ของชุดใดชุดหนึ่ง แต่ให้สแกน license จริงก่อน (ดู
+<code>tools/pick_tool.cmd</code>) แล้วเลือกชุดที่ใช้ได้</p>
+<h4 id="c25-uniform-อาจคืนค่าที่แปลงเป็น-integer-แล้วเกินช่วงของ-bus">C.25
+<code>uniform</code> อาจคืนค่าที่แปลงเป็น <code>integer</code> แล้วเกินช่วงของ
+bus</h4>
+<p>วัดได้จริง: seed <code>(777,888)</code> คืนค่าแรก
+<code>9.976514e-01</code> <code>integer(u * 16.0)</code> จึงได้
+<strong>16</strong> ซึ่งเกิน address bus 4 บิต ถ้าเอาไป
+<code>to_unsigned(16, 4)</code> จะได้</p>
+<pre class="text"><code>** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated</code></pre>
+<p>และที่อยู่จะกลายเป็น 0 <strong>แบบเงียบ ๆ</strong> — testbench ที่อ่านกลับ
+address เดิม ยังผ่านอยู่ จึงเป็นบั๊กที่ checker แบบธรรมดาจับไม่ได้ แก้ด้วย
+<code>mod 16</code> ทุกครั้งที่แปลงค่าจาก <code>uniform</code>
+ไปเป็นจำนวนเต็ม</p>
+<h4 id="c26-variable-a-b--positive--777-ให้ค่า-777-ทั้งสองตัว">C.26
+<code>variable a, b : positive := 777;</code> ให้ค่า 777
+<strong>ทั้งสองตัว</strong></h4>
+<p>ตัวแปรที่ประกาศรวดในบรรทัดเดียวจะได้ค่าเริ่มต้นเท่ากันหมด
+ต้องประกาศแยกทีละตัวถ้าต้องการ seed สองค่าที่ต่างกัน</p>
+<h4 id="c27-readl-s-อ่าน-string-จาก-line-ต้องยาวเท่ากับที่เหลือของบรรทัด">C.27
+<code>read(l, s)</code> อ่าน <code>string</code> จาก <code>line</code>
+ต้องยาวเท่ากับที่เหลือของบรรทัด</h4>
+<p>ถ้าไม่ใช่จะได้</p>
+<pre class="text"><code>** Error: (vsim-3549) String is not the length of the remaining line.</code></pre>
+<p>แก้โดยอ่านทีละตัวอักษรแล้วข้ายช่องว่าง (<code>read(l, c)</code>) หรือใช้
+<code>hread</code> ซึ่งรับ flag <code>good</code> มาบอกว่าอ่านได้หรือไม่</p>
+<h4 id="c28-transcript-ถูกล็อกเมื่อโหลด-design-ซ้ำ">C.28
+<code>transcript</code> ถูกล็อกเมื่อโหลด design ซ้ำ</h4>
+<p>ถ้าสคริปต์ <code>.do</code> โหลด design ครั้งที่สีด้วย <code>vsim</code> อีกครั้ง
+ไฟล์ <code>transcript</code> จะถูกถือไว้ในโหมดเขียน แล้วอ่านไม่ได้ ทางแก้คือให้
+<strong>testbench เขียนผลลง <code>result.txt</code> เอง</strong>
+แล้วให้สคริปต์ อ่านไฟล์นั้น (ดู Lab 08)</p>
+<h4 id="c29-runcmd-ที่ไม่มี-cd-d-dp0-จะหาไฟล์-do-ไม่เจอ">C.29
+<code>run.cmd</code> ที่ไม่มี <code>cd /d &quot;%~dp0&quot;</code> จะหาไฟล์
+<code>.do</code> ไม่เจอ</h4>
+<p>อาการคือ</p>
+<pre class="text"><code># Cannot open macro file: run_batch.do</code></pre>
+<p>และ <code>vsim</code> จะ <strong>คืน exit code 0</strong> พร้อมกับไม่มีไฟล์
+<code>result.txt</code> ต้องมี <code>cd /d &quot;%~dp0&quot;</code> ใน
+<code>run.cmd</code> ทุกตัวเสมอ และสคริปต์ที่ถูกเรียกด้วย <code>call</code> ต้อง
+<code>cd /d</code> กลับมาที่โฟลเดอร์ตัวเอง (ดูข้อ 2 ของ Lab 11)</p>
+<hr />
+<h3 id="ภาคผนวก-ข--ตารางคำสั่ง-tcl-ที่ใช้บ่อย-ตรวจด้วย-help-คำสั่ง">ภาคผนวก ข —
+ตารางคำสั่ง Tcl ที่ใช้บ่อย (ตรวจด้วย <code>help &lt;คำสั่ง&gt;</code>)</h3>
+<table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>รูปแบบที่วัดได้จริง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mem load</code></td>
+<td><code>mem load {-infile &lt;infile&gt; | -filldata &lt;data_word&gt; [-infile &lt;infile&gt;]} [-endaddress &lt;end&gt;] [-fillradix &lt;radix_type&gt;] [-filltype {dec | inc | rand | value}] [-format [bin | hex | mti]] [&lt;path&gt;] [-skip &lt;Nwords&gt;] [-startaddress &lt;st&gt;] [-truncate]</code></td>
+</tr>
+<tr>
+<td><code>mem save</code></td>
+<td><code>mem save &lt;file_name&gt; [&lt;object_name&gt;]</code></td>
+</tr>
+<tr>
+<td><code>examine</code></td>
+<td><code>examine &lt;name&gt;... [-delta &lt;delta&gt;] [-event &lt;time&gt;] [-handle] {[-in] [-out] [-inout] | [-ports]} [-internal] [-maxlen &lt;integer&gt;] [-expr &lt;expression&gt;] [-name] [-&lt;radix_type&gt;] [-radix &lt;type&gt;] [-showbase] [-time &lt;time&gt;] [-value]</code></td>
+</tr>
+<tr>
+<td><code>add wave</code></td>
+<td><code>add wave [-allowconstants] [-color &lt;name&gt;] [-depth &lt;level&gt;] [-divider &lt;name&gt;] [-expand &lt;signal&gt;] [-format &lt;type&gt;] [-group &lt;group&gt; [&lt;sig&gt;...]] [-height &lt;px&gt;] {[-in] [-out] [-inout] | [-ports]} [-internal] [-label &lt;name&gt;] [-max &lt;real&gt;] [-min &lt;real&gt;] [-noupdate] [-position &lt;loc&gt;] [-radix &lt;type&gt;] [-recursive] [-time] [&lt;object_name&gt;...]</code></td>
+</tr>
+<tr>
+<td><code>bp</code></td>
+<td><code>bp {&lt;filename&gt; &lt;line_number&gt; | in &lt;task_or_fcn&gt;} {-c {...}} [-cond &quot;&lt;expr&gt;&quot;] [-disable] [-id &lt;id#&gt;] [-label &quot;&lt;label&gt;&quot;] [-inst &lt;region&gt;] [&lt;command&gt;...] | [-query &lt;filename&gt; [&lt;line_number&gt;]]</code></td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td><code>run {[&lt;timesteps&gt;[&lt;time_units&gt;]] | -all | -continue | -final | -finish | -init | -next | -over [&lt;n&gt;]} | {-step [&lt;n&gt;] [-current] [-out] [-over [&lt;n&gt;]]}</code></td>
+</tr>
+<tr>
+<td><code>coverage save</code></td>
+<td><code>coverage save [-instance &lt;path&gt;] [-code {b|c|e|s|t|f}...] [-codeAll] [-du &lt;du_name&gt;] [-empty &lt;ucdb&gt;] [-testname &lt;test_name&gt;] [-norecursive] [-onexit] [-prune &lt;inst_path&gt;] [&lt;file_name&gt;] [-assert] [-directive]</code></td>
+</tr>
+<tr>
+<td><code>force</code></td>
+<td><code>force &lt;object_name&gt; {&lt;value&gt; [[@]&lt;time_info&gt;][, &lt;value&gt; ...]} [-freeze | -drive | -deposit] [-cancel [@]&lt;time_info&gt;] [-repeat [@]&lt;time_info&gt;]</code></td>
+</tr>
+<tr>
+<td><code>when</code></td>
+<td><code>when [[-fast] [-id &lt;id#&gt;] [-label &lt;label&gt;] [-repeat] {&lt;condition&gt;} {&lt;command&gt;}]</code></td>
+</tr>
+<tr>
+<td><code>log</code></td>
+<td><code>log -flush &lt;object&gt; | {[-filter &lt;f&gt; | -nofilter &lt;f&gt;] [-howmany] {[-in] [-inout] [-out] | [-ports]} [-internal] [-recursive [-depth &lt;level&gt;]] &lt;object_name&gt; ...}</code></td>
+</tr>
+<tr>
+<td><code>quit</code></td>
+<td><code>quit [-f | -force] [-sim] [-code &lt;integer&gt;]</code></td>
+</tr>
+<tr>
+<td><code>vcd</code></td>
+<td><code>vcd add | checkpoint | comment | dumpports... | file | files | flush | limit | off | on</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="ภาคผนวก-ค--ตัวเลือกของคำสั่งที่ใช้บ่อย">ภาคผนวก ค —
+ตัวเลือกของคำสั่งที่ใช้บ่อย</h3>
+<table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>ตัวเลือก</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vcom</code></td>
+<td><code>-2008</code></td>
+<td>ใช้มาตรฐาน VHDL-2008 (จำเป็นสำหรับ <code>std.env.finish</code>,
+<code>is_x</code>)</td>
+</tr>
+<tr>
+<td><code>vcom</code></td>
+<td><code>-work &lt;lib&gt;</code></td>
+<td>ระบุไลบรารีปลายทาง</td>
+</tr>
+<tr>
+<td><code>vcom</code></td>
+<td><code>-nopsl</code></td>
+<td>ปิดการ parse PSL ที่ฝังในคอมเมนต์</td>
+</tr>
+<tr>
+<td><code>vcom</code></td>
+<td><code>-pslext</code></td>
+<td>เปิดตัวดำเนินการ LTL/Universal ของ PSL</td>
+</tr>
+<tr>
+<td><code>vcom</code></td>
+<td><code>+cover=&lt;spec&gt;</code></td>
+<td>ใส่ instrumentation สำหรับ code coverage (ค่าเริ่มต้นของเครื่องมือคือ
+<code>sbceft</code>)</td>
+</tr>
+<tr>
+<td><code>vsim</code></td>
+<td><code>-c</code></td>
+<td>โหมด console (ไม่มี GUI)</td>
+</tr>
+<tr>
+<td><code>vsim</code></td>
+<td><code>-onfinish &lt;mode&gt;</code></td>
+<td><code>ask</code> (ค่าเริ่มต้น) | <code>stop</code> | <code>exit</code> |
+<code>final</code> — ควรใช้ <code>stop</code> ในงาน batch</td>
+</tr>
+<tr>
+<td><code>vsim</code></td>
+<td><code>-voptargs=+acc</code></td>
+<td>เปิดการเข้าถึง signal ภายในทั้งหมด (จำเป็นสำหรับ memory)</td>
+</tr>
+<tr>
+<td><code>vsim</code></td>
+<td><code>-coverage</code></td>
+<td>เปิดการเก็บข้อมูล coverage</td>
+</tr>
+<tr>
+<td><code>vsim</code></td>
+<td><code>-L &lt;lib&gt;</code></td>
+<td>เพิ่มไลบรารีในเส้นทางค้นหา</td>
+</tr>
+<tr>
+<td><code>vsim</code></td>
+<td><code>-lib &lt;lib&gt;</code></td>
+<td>โหลด top จากไลบรารีที่ระบุ</td>
+</tr>
+<tr>
+<td><code>vsim</code></td>
+<td><code>-g&lt;NAME&gt;=&lt;value&gt;</code></td>
+<td>ส่งค่าให้ generic ของ entity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ภาคผนวก-ง--เทียบกับ-questa-sim-tutorial-20261-คู่มือทางการ">ภาคผนวก ง
+— เทียบกับ Questa SIM Tutorial 2026.1 (คู่มือทางการ)</h3>
+<table>
+<thead>
+<tr>
+<th>Lab ของคู่มือนี้</th>
+<th>บทที่เกี่ยวข้องในคู่มือทางการ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LAB 01</td>
+<td>Ch.3 Basic Simulation — Create the Working Design Library / Compile
+/ Optimize / Load / Run / Breakpoints</td>
+</tr>
+<tr>
+<td>LAB 02</td>
+<td>Ch.5 Working With Multiple Libraries — Creating the Resource Library
+/ Linking to the Resource Library</td>
+</tr>
+<tr>
+<td>LAB 03</td>
+<td>Ch.3 (Run the Simulation) + หลักการเขียน testbench ที่ตรวจตัวเอง</td>
+</tr>
+<tr>
+<td>LAB 04</td>
+<td>Ch.7 Analyzing Waveforms + Ch.8 Creating Stimulus With Waveform
+Editor (ส่วน Export)</td>
+</tr>
+<tr>
+<td>LAB 05</td>
+<td>Ch.3 Set Breakpoints and Step through the Source + Ch.10 Dataflow
+Window</td>
+</tr>
+<tr>
+<td>LAB 06</td>
+<td>Ch.10 Debugging With The Dataflow Window — Tracing an X
+(Unknown)</td>
+</tr>
+<tr>
+<td>LAB 07</td>
+<td>Ch.11 Viewing And Initializing Memories</td>
+</tr>
+<tr>
+<td>LAB 08</td>
+<td>Ch.8 (Create Graphical Stimulus with a Wizard / Simulating with the
+Test Bench File)</td>
+</tr>
+<tr>
+<td>LAB 09</td>
+<td>Ch.14 Debugging With PSL Assertions</td>
+</tr>
+<tr>
+<td>LAB 10</td>
+<td>Ch.13 Simulating With Code Coverage</td>
+</tr>
+<tr>
+<td>LAB 11</td>
+<td>Ch.4 Projects / Simulation Configurations + แนวทาง CI
+ของคู่มือทางการ</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>คู่มือทางการครอบคลุม SystemC, SystemVerilog assertions/functional
+coverage และ DPI ด้วย คู่มือนี้จำกัดขอบเขตที่ <strong>VHDL</strong> ตามที่โจทย์กำหนด
+และเจาะลึกกว่าในส่วน batch/CI กับกับดักที่เจอจริงบนเครื่อง</p>
+</blockquote>
+<h3 id="ภาคผนวก-จ--สรุป-ทำอะไรต่อ-หลังจบทุก-lab">ภาคผนวก จ — สรุป “ทำอะไรต่อ”
+หลังจบทุก lab</h3>
+<table>
+<thead>
+<tr>
+<th>คุณทำได้แล้ว</th>
+<th>ขั้นต่อไปที่ควรทำ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>จำลอง VHDL ได้ทั้ง GUI และ batch</td>
+<td>ลองทำ Lab 11 เพื่อรันทุก lab เป็นชุด</td>
+</tr>
+<tr>
+<td>เขียน testbench ที่ตรวจตัวเอง</td>
+<td>เพิ่ม PSL assertion (Lab 09) เพื่อตรวจ property ที่ซับซ้อนขึ้น</td>
+</tr>
+<tr>
+<td>ดู coverage แล้ว</td>
+<td>ตั้ง coverage goal และทำให้ regression ไม่ผ่านเมื่อ coverage ต่ำกว่าเกณฑ์</td>
+</tr>
+<tr>
+<td>แก้บั๊กด้วย breakpoint</td>
+<td>ลองใช้ <code>force</code>/<code>release</code> และ <code>when</code>
+เพื่อทำ debug แบบในเชิงพฤติกรรม</td>
+</tr>
+<tr>
+<td>ส่งออก VCD ได้</td>
+<td>ต่อเข้ากับ flow อื่น เช่น สร้างรายงาน HTML coverage แล้วเก็บเป็น artifact ของ
+CI</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ภาคผนวก-ฉ--คำถามที่พบบ่อย-faq">ภาคผนวก ฉ — คำถามที่พบบ่อย (FAQ)</h2>
+<p><strong>ถาม: รัน <code>run.cmd</code> แล้วขึ้น
+<code>[RESULT] FAIL -- the simulator did not finish</code> ทำอย่างไร
+?</strong></p>
+<ol type="1">
+<li>เปิดไฟล์ <code>transcript</code> ในโฟลเดอร์ lab ดูข้อความท้าย ๆ</li>
+<li>ถ้าเจอ <code>License checkout has been disallowed</code> → มี
+QuestaSim GUI เปิดค้างอยู่ ให้ปิด แล้วรันใหม่</li>
+<li>ถ้าเจอ <code>Cannot open macro file</code> → สคริปต์ถูกเรียกจากโฟลเดอร์ผิด
+ให้รันจากในโฟลเดอร์ของ lab</li>
+<li>ถ้าเจอ error ของ <code>vcom</code> → ดูบรรทัดและเลขบรรทัดที่ชี้</li>
+</ol>
+<p><strong>ถาม: ทำไมผลลัพธ์ต่างกันเวลารันใน GUI กับแบบ batch ?</strong></p>
+<p>ตรวจดูว่าเวลาจำลองสิ้นสุดเท่าไร — ใน GUI ค่าเริ่มต้นของการรันคือ 100 ns
+ถ้าต้องการให้รันจนจบ ให้ใช้ <code>run -all</code> เสมอ</p>
+<p><strong>ถาม: ใช้ <code>std.env.finish</code> แล้วสคริปต์ถัดไปไม่ทำงาน
+?</strong></p>
+<p>ใช้ <code>vsim -c -onfinish stop</code> — ค่าเริ่มต้นคือ <code>ask</code>
+ซึ่งจะถามในโหมด console และ <code>-onfinish stop</code> จะทำให้จำลอง “หยุด”
+แทนที่จะ “จบ session” คำสั่งที่เหลือจึงทำงานต่อ</p>
+<p><strong>ถาม: จะเขียนข้อความภาษาไทยลงใน report ของ testbench ได้ไหม
+?</strong></p>
+<p>ไม่ได้ใน string literal (ข้อ C.7) แต่ถ้าอยากให้ผู้อ่านไทยเข้าใจ ให้เขียนเป็น
+comment ในไฟล์ VHDL แล้วให้ <code>report</code> พิมพ์ข้อความอังกฤษ</p>
+<p><strong>ถาม: รันทุก lab พร้อมกันได้ไหม ?</strong></p>
+<p><strong>ไม่ได้</strong> ถ้า license เป็น single-session แบบของเครื่องนี้
+ต้องรันทีละ lab หรือใช้เครื่อง/ชุดติดตั้งที่มี license แยกกัน (สคริปต์
+<code>regression.cmd</code> ของ Lab 11 รันทีละ lab อยู่แล้ว)</p>
+<p><strong>ถาม: ย้ายโฟลเดอร์ lab ไปที่อื่นแล้วรันไม่ได้ ?</strong></p>
+<p>ไฟล์ <code>.do</code> ทุกตัวอ้างอิงไฟล์แบบสัมพัทธ์ จึงต้อง <code>cd</code>
+เข้าโฟลเดอร์ lab ก่อนรัน (<code>run.cmd</code> ทำให้อัตโนมัติ) ส่วน
+<code>run.cmd</code> จะหาเครื่องมือจาก path ที่ติดตั้งจริง ถ้าย้ายไปเครื่องอื่นให้ตั้ง
+<code>QUESTASIM_HOME</code> หรือ <code>MODELSIM_HOME</code></p>
+</body>
+</html>
