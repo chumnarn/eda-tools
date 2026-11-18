@@ -1,0 +1,99 @@
+m255
+K4
+z2
+!s11e vcom 2026.1 2026.01, Jan 25 2026
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/000148/Documents/MiniMax/eda-tools/questa_vhdl_lab/lab04_waveform
+Eclock_div
+Z1 w1794983924
+Z2 DPx4 ieee 11 numeric_std 0 22 m=kP7jRZW]kY;6MU;0z<22
+Z3 DPx3 std 6 textio 0 22 <UlP6K1@RDQa_MJ[:UEnP2
+Z4 DPx4 ieee 14 std_logic_1164 0 22 TDbGXLH=YSoj9JRY2gkNY0
+!i122 0
+R0
+Z5 8src/clock_div.vhd
+Z6 Fsrc/clock_div.vhd
+l0
+L13 1
+V^:7BEK31>]]4Y?:^4iI]>2
+!s100 1`[kBYzJba7F4z8k2Kn3]3
+Z7 OP;C;2026.1;84
+33
+Z8 !s110 1794989530
+!i10b 1
+Z9 !s108 1794989530.000000
+Z10 !s90 -2008|src/clock_div.vhd|
+Z11 !s107 src/clock_div.vhd|
+!i113 1
+Z12 o-2008
+Z13 tExplicit 1 CvgOpt 0 defaultOptions 1083485664
+Artl
+R2
+R3
+R4
+Z14 DEx4 work 9 clock_div 0 22 ^:7BEK31>]]4Y?:^4iI]>2
+!i122 0
+l28
+L25 26
+VXS@CGSIIG08d5X9Lm7]km3
+!s100 KiMJJeXEGH0M@@2nICH2_1
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Etb_divider
+Z15 w1794983981
+R2
+R3
+R4
+!i122 1
+R0
+Z16 8tb/tb_divider.vhd
+Z17 Ftb/tb_divider.vhd
+l0
+L17 1
+VV^>`M^[?22Kh0?YgVQTEN2
+!s100 `zf3IHXkmWKhe2i_AehjO2
+R7
+33
+Z18 !s110 1794989531
+!i10b 1
+Z19 !s108 1794989531.000000
+Z20 !s90 -2008|tb/tb_divider.vhd|
+!s107 tb/tb_divider.vhd|
+!i113 1
+R12
+R13
+Asim
+DPx3 std 3 env 0 22 mJj^M]e`oP>;WoZ=b<O3C0
+R14
+R2
+R3
+R4
+DEx4 work 10 tb_divider 0 22 V^>`M^[?22Kh0?YgVQTEN2
+!i122 1
+l41
+L23 82
+Vcj;B@6^:m1ezGomSA4^8Z0
+!s100 HTT;CWUZ8K^jDJdeaW_2;3
+R7
+33
+R18
+!i10b 1
+R19
+R20
+Z21 !s107 tb/tb_divider.vhd|
+!i113 1
+R12
+R13

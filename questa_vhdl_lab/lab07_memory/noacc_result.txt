@@ -1,0 +1,1 @@
+PASS without +acc : the testbench found all 256 words

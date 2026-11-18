@@ -1,0 +1,103 @@
+﻿=====================================================================
+ LAB 06 : dataflow and X tracing
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_vhdl_lab\lab06_dataflow
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+=====================================================================
+Reading pref.tcl
+
+# 2026.1
+
+# do run_batch.do
+====================================================================
+ LAB 06 : dataflow -- finding the source of X
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 14:10:24 on Nov 18,2026
+# vcom -2008 src/x_demo.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity x_demo
+# -- Compiling architecture rtl of x_demo
+# End time: 14:10:24 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 14:10:25 on Nov 18,2026
+# vcom -2008 tb/tb_x.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_x
+# -- Compiling architecture sim of tb_x
+# -- Loading entity x_demo
+# -- Loading package ENV
+# End time: 14:10:25 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim work.tb_x 
+# Start time: 14:10:26 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_x(sim)
+# Loading work.x_demo(rtl)
+# ** Note: ===========================================================
+#    Time: 0 ns  Iteration: 0  Instance: /tb_x
+# ** Note:  X-propagation demo
+#    Time: 0 ns  Iteration: 0  Instance: /tb_x
+# ** Note: ===========================================================
+#    Time: 0 ns  Iteration: 0  Instance: /tb_x
+# ** Note:  t=1ns (no reset yet) : sum = XXX  eq = '0'  eq2 = 'U'
+#    Time: 1 ns  Iteration: 0  Instance: /tb_x
+# ** Note:    -> X here is NORMAL (register not initialised yet)
+#    Time: 1 ns  Iteration: 0  Instance: /tb_x
+# ** Note:    -> eq  uses '=' so it stays '0' even with X
+#    Time: 1 ns  Iteration: 0  Instance: /tb_x
+# ** Note:    -> eq2 uses xor so the X propagates
+#    Time: 1 ns  Iteration: 0  Instance: /tb_x
+# ** Note:  after reset          : sum = 07A  eq = '0'
+#    Time: 51 ns  Iteration: 0  Instance: /tb_x
+# ** Note:                         eq2 = 'U'
+#    Time: 51 ns  Iteration: 0  Instance: /tb_x
+# ** Note:    -> eq2 is X forever : root cause is never_driven which is never assigned (this is the bug)
+#    Time: 51 ns  Iteration: 0  Instance: /tb_x
+# ** Note: ===========================================================
+#    Time: 51 ns  Iteration: 0  Instance: /tb_x
+# ** Note:  errors = 0
+#    Time: 51 ns  Iteration: 0  Instance: /tb_x
+# ** Note: ===========================================================
+#    Time: 51 ns  Iteration: 0  Instance: /tb_x
+# ** Note: TEST_PASSED : lab06_dataflow
+#    Time: 51 ns  Iteration: 0  Instance: /tb_x
+# Break in Process stim at tb/tb_x.vhd line 116
+# Stopped at tb/tb_x.vhd line 116
+---- internal signals of the DUT ----
+  /tb_x/dut/acc = 46
+  /tb_x/dut/never_driven = XX
+  /tb_x/eq = 0
+  /tb_x/eq2 = U
+  /tb_x/sum = 07A
+RESULT: PASS
+# End time: 14:10:28 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+[RESULT] PASS

@@ -1,0 +1,13 @@
+# do _memhelp.do
+# The mem load command updates the simulation memory contents of a specified instance. You can upload contents either from a memory data file, a memory pattern, or both. If both are specified, the pattern is applied only to memory locations not contained in the file.
+# Usage: mem load {-infile <infile> | -filldata <data_word> [-infile <infile>]} [-endaddress <end>] [-fillradix <radix_type>] [-filltype {dec | inc | rand | value}] [-format [bin | hex | mti]] [<path>] [-skip <Nwords>] [-startaddress <st>] [-truncate]
+# The mem display command prints to the Transcript pane the memory contents of the specified instance. As a shorthand, if the given instance path contains only a single array signal or variable, the signal or variable name need not be specified.
+# Usage: mem display [-addressradix [d|h]] [-compress] [-dataradix <radix_type>] [-endaddress <end>] [-format [bin | hex | mti]] [-noaddress] [-startaddress <st>] [-wordsperline <n>] [<path>]
+# The mem save command saves the contents of a memory instance to a file in any of the supported formats: Verilog binary, Verilog hex, and MTI memory pattern data.
+# Usage: mem save -outfile <filename> [-addressradix {dec | hex}] [-dataradix <radix_type>] [-format {bin | hex | mti}] [-compress | -noaddress] [<path>] [-startaddress <st> -endaddress <end>] [-wordsperline <Nwords>]
+# The mem search command finds and prints to the screen the first occurring match of a specified memory pattern in the specified memory instance. Shorthand instance names are accepted.
+# Usage: mem search {-glob <word>[<word>...] | -regexp <word>[<word>...]} [-addressradix <radix>] [-dataradix <radix_type>] [-all] [-replace <word>[ <word>...]] [-startaddress <address>] [-endaddress <address>] [<path>] 
+# The mem list command displays a flattened list of all memory instances in the current or specified context after a design has been elaborated.
+# Usage: mem list [-r] [<path>]
+# The mem compare command compares selected memory to reference memory or file.
+# Usage: mem compare {[-mem <ref_mem>] | [-file <ref_file>]} [actual_mem]

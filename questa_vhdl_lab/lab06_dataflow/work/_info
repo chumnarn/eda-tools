@@ -1,0 +1,99 @@
+m255
+K4
+z2
+!s11e vcom 2026.1 2026.01, Jan 25 2026
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/000148/Documents/MiniMax/eda-tools/questa_vhdl_lab/lab06_dataflow
+Etb_x
+Z1 w1794984686
+Z2 DPx4 ieee 11 numeric_std 0 22 m=kP7jRZW]kY;6MU;0z<22
+Z3 DPx3 std 6 textio 0 22 <UlP6K1@RDQa_MJ[:UEnP2
+Z4 DPx4 ieee 14 std_logic_1164 0 22 TDbGXLH=YSoj9JRY2gkNY0
+!i122 1
+R0
+Z5 8tb/tb_x.vhd
+Z6 Ftb/tb_x.vhd
+l0
+L16 1
+VhJ8;SiF3m0WJ?@h7WRV482
+!s100 WD[bd1_OND0o6`=fQ`D>?2
+Z7 OP;C;2026.1;84
+33
+Z8 !s110 1794989561
+!i10b 1
+Z9 !s108 1794989561.000000
+Z10 !s90 -2008|tb/tb_x.vhd|
+!s107 tb/tb_x.vhd|
+!i113 1
+Z11 o-2008
+Z12 tExplicit 1 CvgOpt 0 defaultOptions 1083485664
+Asim
+DPx3 std 3 env 0 22 mJj^M]e`oP>;WoZ=b<O3C0
+Z13 DEx4 work 6 x_demo 0 22 T:dKXZ@ZQDm>W^WlEg1;D1
+R2
+R3
+R4
+DEx4 work 4 tb_x 0 22 hJ8;SiF3m0WJ?@h7WRV482
+!i122 1
+l40
+L19 102
+VIR598KXKDnf?^eSU0`5KW1
+!s100 65SeeNZEX53S3Y5jOI[UC3
+R7
+33
+R8
+!i10b 1
+R9
+R10
+Z14 !s107 tb/tb_x.vhd|
+!i113 1
+R11
+R12
+Ex_demo
+Z15 w1794984679
+R2
+R3
+R4
+!i122 0
+R0
+Z16 8src/x_demo.vhd
+Z17 Fsrc/x_demo.vhd
+l0
+L21 1
+VT:dKXZ@ZQDm>W^WlEg1;D1
+!s100 INC2Z2Cgk1Mghdg[jIz6H3
+R7
+33
+Z18 !s110 1794989560
+!i10b 1
+Z19 !s108 1794989560.000000
+Z20 !s90 -2008|src/x_demo.vhd|
+Z21 !s107 src/x_demo.vhd|
+!i113 1
+R11
+R12
+Artl
+R2
+R3
+R4
+R13
+!i122 0
+l50
+L33 42
+VV2NZhWKV>NPUQ]jk3[^nW0
+!s100 <bCm3@SIhTVahh]X?78fS2
+R7
+33
+R18
+!i10b 1
+R19
+R20
+R21
+!i113 1
+R11
+R12

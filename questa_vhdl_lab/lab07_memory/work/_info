@@ -1,0 +1,169 @@
+m255
+K4
+z2
+!s11e vcom 2026.1 2026.01, Jan 25 2026
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/000148/Documents/MiniMax/eda-tools/questa_vhdl_lab/lab07_memory
+Eram
+Z1 w1794984774
+Z2 DPx4 work 7 ram_pkg 0 22 XA6TE`iJ>aKA0ZYiaa;hW1
+Z3 DPx4 ieee 11 numeric_std 0 22 m=kP7jRZW]kY;6MU;0z<22
+Z4 DPx3 std 6 textio 0 22 <UlP6K1@RDQa_MJ[:UEnP2
+Z5 DPx4 ieee 14 std_logic_1164 0 22 TDbGXLH=YSoj9JRY2gkNY0
+!i122 0
+R0
+Z6 8src/ram.vhd
+Z7 Fsrc/ram.vhd
+l0
+L38 1
+V9;i`bU6ECzTT_[@zjK1NJ3
+!s100 2OXe2^E]L5>YW:P7AdWQN1
+Z8 OP;C;2026.1;84
+33
+Z9 !s110 1794989576
+!i10b 1
+Z10 !s108 1794989576.000000
+Z11 !s90 -2008|src/ram.vhd|
+Z12 !s107 src/ram.vhd|
+!i113 1
+Z13 o-2008
+Z14 tExplicit 1 CvgOpt 0 defaultOptions 1083485664
+Artl
+R2
+R3
+R4
+R5
+Z15 DEx4 work 3 ram 0 22 9;i`bU6ECzTT_[@zjK1NJ3
+!i122 0
+l57
+L53 20
+V?W?:Z@DhmEOfKS?9NU8NC0
+!s100 ?VIUG];^8:95JLOSYYKE81
+R8
+33
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Pram_pkg
+R4
+R5
+!i122 0
+R1
+R0
+R6
+R7
+l0
+L26 3
+VXA6TE`iJ>aKA0ZYiaa;hW1
+!s100 K[HL3TdjgUNH`SBS8LJS22
+R8
+33
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Eram_wrap
+R1
+R2
+R4
+R5
+!i122 0
+R0
+R6
+R7
+l0
+L81 1
+V=bd[[BlkXo>RMm2`?IH5e2
+!s100 41^e:7[A;TRalLL6<VOQS3
+R8
+33
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Astruct
+R3
+R15
+R2
+R4
+R5
+Z16 DEx4 work 8 ram_wrap 0 22 =bd[[BlkXo>RMm2`?IH5e2
+!i122 0
+l100
+L95 22
+VH2ajBRcbh^V:`Qb7=oagf0
+!s100 Y54_?MHkdGmmJA49FYBCY0
+R8
+33
+R9
+!i10b 1
+R10
+R11
+R12
+!i113 1
+R13
+R14
+Etb_ram
+Z17 w1794985083
+R3
+R4
+R5
+!i122 1
+R0
+Z18 8tb/tb_ram.vhd
+Z19 Ftb/tb_ram.vhd
+l0
+L21 1
+VzYD3QZh@9P2l1^FK`ah:V0
+!s100 PSfSb<j12CgoYOhz@f@5c2
+R8
+33
+Z20 !s110 1794989577
+!i10b 1
+Z21 !s108 1794989577.000000
+Z22 !s90 -2008|tb/tb_ram.vhd|
+!s107 tb/tb_ram.vhd|
+!i113 1
+R13
+R14
+Asim
+DPx3 std 3 env 0 22 mJj^M]e`oP>;WoZ=b<O3C0
+R2
+R16
+R3
+R4
+R5
+DEx4 work 6 tb_ram 0 22 zYD3QZh@9P2l1^FK`ah:V0
+!i122 1
+l69
+L24 202
+VOV@hnD?;QHFWf;UG@RVlZ2
+!s100 ZjjVa8]aj]B@fLP0=<dHG2
+R8
+33
+R20
+!i10b 1
+R21
+R22
+Z23 !s107 tb/tb_ram.vhd|
+!i113 1
+R13
+R14

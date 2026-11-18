@@ -1,0 +1,4 @@
+VHDL:    /tb_ram/dut/mem [0:255] x 8 w
+VHDL:    /tb_ram/dut/ram_inst/mem [0:255] x 8 w
+VHDL:    /tb_ram/stim/v_read [0:255] x 8 w
+
