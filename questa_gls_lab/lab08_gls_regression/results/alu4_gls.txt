@@ -1,0 +1,6 @@
+op=0 a=7 b=5 y=c zero=0
+op=1 a=7 b=5 y=2 zero=0
+op=2 a=c b=a y=8 zero=0
+op=3 a=c b=a y=e zero=0
+op=4 a=c b=a y=6 zero=0
+op=0 a=f b=1 y=0 zero=1

@@ -1,0 +1,74 @@
+=====================================================================
+ LAB 01 : the RTL baseline
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_lab\lab01_rtl_baseline
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS
+=====================================================================
+Reading pref.tcl
+
+# 2026.1
+
+# do run_batch.do
+====================================================================
+ LAB 01 : the RTL baseline
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:26:52 on Nov 18,2026
+# vlog -work work ../rtl/cnt4.v 
+# -- Compiling module cnt4
+# 
+# Top level modules:
+# 	cnt4
+# End time: 21:26:52 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:26:53 on Nov 18,2026
+# vlog -work work ../tb/tb_cnt4.v 
+# -- Compiling module tb_cnt4
+# 
+# Top level modules:
+# 	tb_cnt4
+# End time: 21:26:53 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -voptargs="+acc" work.tb_cnt4 "+tracefile=results/trace_rtl.txt" "+resultfile=result.txt" 
+# Start time: 21:26:54 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_cnt4
+# Loading work.cnt4
+# === tb_cnt4 : RTL ===
+#   t=16.000 ns : after reset          q = 0
+#   t=26.000 ns : count up             q = 1
+#   t=36.000 ns : count up             q = 2
+#   t=46.000 ns : count up             q = 3
+#   t=56.000 ns : count up             q = 4
+#   t=66.000 ns : count up             q = 5
+#   t=76.000 ns : count up             q = 6
+#   t=106.000 ns : hold, en = 0          q = 6
+#   t=136.000 ns : count up again       q = 9
+#   checks = 9 , errors = 0
+# TEST_PASSED : tb_cnt4 completed
+# ** Note: $finish    : ../tb/tb_cnt4.v(125)
+#    Time: 136 ns  Iteration: 0  Instance: /tb_cnt4
+# Break in Module tb_cnt4 at ../tb/tb_cnt4.v line 125
+# Stopped at ../tb/tb_cnt4.v line 125
+# PASS
+RESULT: PASS
+# End time: 21:26:56 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+[RESULT] PASS

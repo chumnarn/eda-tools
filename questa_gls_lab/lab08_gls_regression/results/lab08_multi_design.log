@@ -1,0 +1,1046 @@
+=====================================================================
+ LAB 08 : RTL against gate level, three more designs
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_lab\lab08_gls_regression
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS -- RTL and gate level give the same trace
+=====================================================================
+[DESIGN] alu4
+  ---- the RTL level run ----
+Reading pref.tcl
+
+# 2026.1
+
+# do run_rtl.do
+# cnt4
+# tb_alu4
+====================================================================
+ LAB 08 : the RTL level run of alu4
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:28:57 on Nov 18,2026
+# vlog -work work ../rtl/alu4.v 
+# -- Compiling module alu4
+# 
+# Top level modules:
+# 	alu4
+# End time: 21:28:57 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:28:58 on Nov 18,2026
+# vlog -work work ../tb/tb_alu4.v 
+# -- Compiling module tb_alu4
+# 
+# Top level modules:
+# 	tb_alu4
+# End time: 21:28:58 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -voptargs="+acc" work.tb_alu4 "+tracefile=results/alu4_rtl.txt" "+resultfile=results/alu4_res_rtl.txt" 
+# Start time: 21:28:59 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_alu4
+# Loading work.alu4
+# === tb_alu4 : RTL ===
+#   t=26.000 ns : add -> y = c (zero = 0)
+#   t=36.000 ns : sub -> y = 2 (zero = 0)
+#   t=46.000 ns : and -> y = 8 (zero = 0)
+#   t=56.000 ns : or -> y = e (zero = 0)
+#   t=66.000 ns : xor -> y = 6 (zero = 0)
+#   t=76.000 ns : d with carry out -> y = 0 (zero = 1)
+#   checks = 6 , errors = 0
+# TEST_PASSED : tb_alu4 completed
+# ** Note: $finish    : ../tb/tb_alu4.v(88)
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu4
+# Break in Module tb_alu4 at ../tb/tb_alu4.v line 88
+# Stopped at ../tb/tb_alu4.v line 88
+   the RTL verdict : PASS
+# End time: 21:29:01 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+  ---- the gate level run ----
+Reading pref.tcl
+
+# 2026.1
+
+# do run_gls.do
+# cnt4
+# tb_alu4
+====================================================================
+ LAB 08 : the gate level run of alu4
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:04 on Nov 18,2026
+# vlog -work work ../cells/sg13g2_stdcell.v 
+# -- Compiling module sg13g2_a21o_1
+# -- Compiling module sg13g2_a21o_2
+# -- Compiling module sg13g2_a21oi_1
+# -- Compiling module sg13g2_a21oi_2
+# -- Compiling module sg13g2_a221oi_1
+# -- Compiling module sg13g2_a22oi_1
+# -- Compiling module sg13g2_and2_1
+# -- Compiling module sg13g2_and2_2
+# -- Compiling module sg13g2_and3_1
+# -- Compiling module sg13g2_and3_2
+# -- Compiling module sg13g2_and4_1
+# -- Compiling module sg13g2_and4_2
+# -- Compiling module sg13g2_antennanp
+# -- Compiling module sg13g2_buf_1
+# -- Compiling module sg13g2_buf_16
+# -- Compiling module sg13g2_buf_2
+# -- Compiling module sg13g2_buf_4
+# -- Compiling module sg13g2_buf_8
+# -- Compiling module sg13g2_decap_4
+# -- Compiling module sg13g2_decap_8
+# -- Compiling module sg13g2_dfrbp_1
+# -- Compiling module sg13g2_dfrbp_2
+# -- Compiling module sg13g2_dfrbpq_1
+# -- Compiling module sg13g2_dfrbpq_2
+# -- Compiling module sg13g2_dlhq_1
+# -- Compiling module sg13g2_dlhr_1
+# -- Compiling module sg13g2_dlhrq_1
+# -- Compiling module sg13g2_dllr_1
+# -- Compiling module sg13g2_dllrq_1
+# -- Compiling module sg13g2_dlygate4sd1_1
+# -- Compiling module sg13g2_dlygate4sd2_1
+# -- Compiling module sg13g2_dlygate4sd3_1
+# -- Compiling module sg13g2_ebufn_2
+# -- Compiling module sg13g2_ebufn_4
+# -- Compiling module sg13g2_ebufn_8
+# -- Compiling module sg13g2_einvn_2
+# -- Compiling module sg13g2_einvn_4
+# -- Compiling module sg13g2_einvn_8
+# -- Compiling module sg13g2_fill_1
+# -- Compiling module sg13g2_fill_2
+# -- Compiling module sg13g2_fill_4
+# -- Compiling module sg13g2_fill_8
+# -- Compiling module sg13g2_inv_1
+# -- Compiling module sg13g2_inv_16
+# -- Compiling module sg13g2_inv_2
+# -- Compiling module sg13g2_inv_4
+# -- Compiling module sg13g2_inv_8
+# -- Compiling module sg13g2_lgcp_1
+# -- Compiling module sg13g2_mux2_1
+# -- Compiling module sg13g2_mux2_2
+# -- Compiling module sg13g2_mux4_1
+# -- Compiling module sg13g2_nand2_1
+# -- Compiling module sg13g2_nand2_2
+# -- Compiling module sg13g2_nand2b_1
+# -- Compiling module sg13g2_nand2b_2
+# -- Compiling module sg13g2_nand3_1
+# -- Compiling module sg13g2_nand3b_1
+# -- Compiling module sg13g2_nand4_1
+# -- Compiling module sg13g2_nor2_1
+# -- Compiling module sg13g2_nor2_2
+# -- Compiling module sg13g2_nor2b_1
+# -- Compiling module sg13g2_nor2b_2
+# -- Compiling module sg13g2_nor3_1
+# -- Compiling module sg13g2_nor3_2
+# -- Compiling module sg13g2_nor4_1
+# -- Compiling module sg13g2_nor4_2
+# -- Compiling module sg13g2_o21ai_1
+# -- Compiling module sg13g2_or2_1
+# -- Compiling module sg13g2_or2_2
+# -- Compiling module sg13g2_or3_1
+# -- Compiling module sg13g2_or3_2
+# -- Compiling module sg13g2_or4_1
+# -- Compiling module sg13g2_or4_2
+# -- Compiling module sg13g2_sdfbbp_1
+# -- Compiling module sg13g2_sdfrbp_1
+# -- Compiling module sg13g2_sdfrbp_2
+# -- Compiling module sg13g2_sdfrbpq_1
+# -- Compiling module sg13g2_sdfrbpq_2
+# -- Compiling module sg13g2_sighold
+# -- Compiling module sg13g2_slgcp_1
+# -- Compiling module sg13g2_tiehi
+# -- Compiling module sg13g2_tielo
+# -- Compiling module sg13g2_xnor2_1
+# -- Compiling module sg13g2_xor2_1
+# -- Compiling UDP ihp_latch
+# -- Compiling UDP ihp_dff_err
+# -- Compiling UDP ihp_dff
+# -- Compiling UDP ihp_dff_r_err
+# -- Compiling UDP ihp_dff_r
+# -- Compiling UDP ihp_dff_s_err
+# -- Compiling UDP ihp_dff_s
+# -- Compiling UDP ihp_dff_sr_err
+# -- Compiling UDP ihp_dff_sr_0
+# -- Compiling UDP ihp_dff_sr_1
+# -- Compiling UDP ihp_latch_r
+# -- Compiling UDP ihp_latch_s
+# -- Compiling UDP ihp_latch_sr_0
+# -- Compiling UDP ihp_latch_sr_1
+# -- Compiling UDP ihp_mux2
+# -- Compiling UDP ihp_mux4
+# -- Compiling UDP ihp_mux8
+# 
+# Top level modules:
+# 	sg13g2_a21o_1
+# 	sg13g2_a21o_2
+# 	sg13g2_a21oi_1
+# 	sg13g2_a21oi_2
+# 	sg13g2_a221oi_1
+# 	sg13g2_a22oi_1
+# 	sg13g2_and2_1
+# 	sg13g2_and2_2
+# 	sg13g2_and3_1
+# 	sg13g2_and3_2
+# 	sg13g2_and4_1
+# 	sg13g2_and4_2
+# 	sg13g2_antennanp
+# 	sg13g2_buf_1
+# 	sg13g2_buf_16
+# 	sg13g2_buf_2
+# 	sg13g2_buf_4
+# 	sg13g2_buf_8
+# 	sg13g2_decap_4
+# 	sg13g2_decap_8
+# 	sg13g2_dfrbp_1
+# 	sg13g2_dfrbp_2
+# 	sg13g2_dfrbpq_1
+# 	sg13g2_dfrbpq_2
+# 	sg13g2_dlhq_1
+# 	sg13g2_dlhr_1
+# 	sg13g2_dlhrq_1
+# 	sg13g2_dllr_1
+# 	sg13g2_dllrq_1
+# 	sg13g2_dlygate4sd1_1
+# 	sg13g2_dlygate4sd2_1
+# 	sg13g2_dlygate4sd3_1
+# 	sg13g2_ebufn_2
+# 	sg13g2_ebufn_4
+# 	sg13g2_ebufn_8
+# 	sg13g2_einvn_2
+# 	sg13g2_einvn_4
+# 	sg13g2_einvn_8
+# 	sg13g2_fill_1
+# 	sg13g2_fill_2
+# 	sg13g2_fill_4
+# 	sg13g2_fill_8
+# 	sg13g2_inv_1
+# 	sg13g2_inv_16
+# 	sg13g2_inv_2
+# 	sg13g2_inv_4
+# 	sg13g2_inv_8
+# 	sg13g2_lgcp_1
+# 	sg13g2_mux2_1
+# 	sg13g2_mux2_2
+# 	sg13g2_mux4_1
+# 	sg13g2_nand2_1
+# 	sg13g2_nand2_2
+# 	sg13g2_nand2b_1
+# 	sg13g2_nand2b_2
+# 	sg13g2_nand3_1
+# 	sg13g2_nand3b_1
+# 	sg13g2_nand4_1
+# 	sg13g2_nor2_1
+# 	sg13g2_nor2_2
+# 	sg13g2_nor2b_1
+# 	sg13g2_nor2b_2
+# 	sg13g2_nor3_1
+# 	sg13g2_nor3_2
+# 	sg13g2_nor4_1
+# 	sg13g2_nor4_2
+# 	sg13g2_o21ai_1
+# 	sg13g2_or2_1
+# 	sg13g2_or2_2
+# 	sg13g2_or3_1
+# 	sg13g2_or3_2
+# 	sg13g2_or4_1
+# 	sg13g2_or4_2
+# 	sg13g2_sdfbbp_1
+# 	sg13g2_sdfrbp_1
+# 	sg13g2_sdfrbp_2
+# 	sg13g2_sdfrbpq_1
+# 	sg13g2_sdfrbpq_2
+# 	sg13g2_sighold
+# 	sg13g2_slgcp_1
+# 	sg13g2_tiehi
+# 	sg13g2_tielo
+# 	sg13g2_xnor2_1
+# 	sg13g2_xor2_1
+# End time: 21:29:04 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:05 on Nov 18,2026
+# vlog -work work ../netlist/alu4_net.v 
+# -- Compiling module alu4
+# 
+# Top level modules:
+# 	alu4
+# End time: 21:29:05 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:06 on Nov 18,2026
+# vlog -work work ../tb/tb_alu4.v 
+# -- Compiling module tb_alu4
+# 
+# Top level modules:
+# 	tb_alu4
+# End time: 21:29:06 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -voptargs="+acc" work.tb_alu4 "+GATE" "+tracefile=results/alu4_gls.txt" "+resultfile=results/alu4_res_gls.txt" 
+# Start time: 21:29:07 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_alu4
+# Loading work.alu4
+# Loading work.sg13g2_inv_1
+# Loading work.sg13g2_nor4_1
+# Loading work.sg13g2_and2_1
+# Loading work.sg13g2_nand2_1
+# Loading work.sg13g2_nor3_1
+# Loading work.sg13g2_nor2_1
+# Loading work.sg13g2_nand2b_1
+# Loading work.sg13g2_o21ai_1
+# Loading work.sg13g2_or2_1
+# Loading work.sg13g2_xnor2_1
+# Loading work.sg13g2_xor2_1
+# Loading work.sg13g2_nand3b_1
+# Loading work.sg13g2_nand3_1
+# Loading work.sg13g2_a21o_1
+# Loading work.sg13g2_nand4_1
+# Loading work.sg13g2_nor2b_1
+# Loading work.sg13g2_a21oi_1
+# Loading work.sg13g2_or3_1
+# Loading work.sg13g2_dfrbpq_1
+# Loading work.ihp_dff_r_err
+# Loading work.ihp_dff_r
+# === tb_alu4 : GATE LEVEL ===
+#   t=26.000 ns : add -> y = c (zero = 0)
+#   t=36.000 ns : sub -> y = 2 (zero = 0)
+#   t=46.000 ns : and -> y = 8 (zero = 0)
+#   t=56.000 ns : or -> y = e (zero = 0)
+#   t=66.000 ns : xor -> y = 6 (zero = 0)
+#   t=76.000 ns : d with carry out -> y = 0 (zero = 1)
+#   checks = 6 , errors = 0
+# TEST_PASSED : tb_alu4 completed
+# ** Note: $finish    : ../tb/tb_alu4.v(88)
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu4
+# Break in Module tb_alu4 at ../tb/tb_alu4.v line 88
+# Stopped at ../tb/tb_alu4.v line 88
+# PASS
+# PASS
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+# 7
+   7 trace lines , 0 difference(s)
+RESULT: PASS
+# End time: 21:29:09 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+  [PASS] alu4
+[DESIGN] fsm_light
+  ---- the RTL level run ----
+Reading pref.tcl
+
+# 2026.1
+
+# do run_rtl.do
+# cnt4
+# tb_fsm_light
+====================================================================
+ LAB 08 : the RTL level run of fsm_light
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:12 on Nov 18,2026
+# vlog -work work ../rtl/fsm_light.v 
+# -- Compiling module fsm_light
+# 
+# Top level modules:
+# 	fsm_light
+# End time: 21:29:12 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:13 on Nov 18,2026
+# vlog -work work ../tb/tb_fsm_light.v 
+# -- Compiling module tb_fsm_light
+# 
+# Top level modules:
+# 	tb_fsm_light
+# End time: 21:29:13 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -voptargs="+acc" work.tb_fsm_light "+tracefile=results/fsm_light_rtl.txt" "+resultfile=results/fsm_light_res_rtl.txt" 
+# Start time: 21:29:13 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_fsm_light
+# Loading work.fsm_light
+# === tb_fsm_light : RTL ===
+#   t=17.000 ns : after reset -> state=0 red=1 green=0 yellow=0
+#   t=26.000 ns : RED -> GREEN -> state=1 red=0 green=1 yellow=0
+#   t=36.000 ns : GREEN -> YELLOW -> state=2 red=0 green=0 yellow=1
+#   t=46.000 ns : YELLOW -> RED -> state=0 red=1 green=0 yellow=0
+#   t=56.000 ns : D -> GREEN again -> state=1 red=0 green=1 yellow=0
+#   checks = 5 , errors = 0
+# TEST_PASSED : tb_fsm_light completed
+# ** Note: $finish    : ../tb/tb_fsm_light.v(91)
+#    Time: 56 ns  Iteration: 0  Instance: /tb_fsm_light
+# Break in Module tb_fsm_light at ../tb/tb_fsm_light.v line 91
+# Stopped at ../tb/tb_fsm_light.v line 91
+   the RTL verdict : PASS
+# End time: 21:29:15 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+  ---- the gate level run ----
+Reading pref.tcl
+
+# 2026.1
+
+# do run_gls.do
+# cnt4
+# tb_fsm_light
+====================================================================
+ LAB 08 : the gate level run of fsm_light
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:18 on Nov 18,2026
+# vlog -work work ../cells/sg13g2_stdcell.v 
+# -- Compiling module sg13g2_a21o_1
+# -- Compiling module sg13g2_a21o_2
+# -- Compiling module sg13g2_a21oi_1
+# -- Compiling module sg13g2_a21oi_2
+# -- Compiling module sg13g2_a221oi_1
+# -- Compiling module sg13g2_a22oi_1
+# -- Compiling module sg13g2_and2_1
+# -- Compiling module sg13g2_and2_2
+# -- Compiling module sg13g2_and3_1
+# -- Compiling module sg13g2_and3_2
+# -- Compiling module sg13g2_and4_1
+# -- Compiling module sg13g2_and4_2
+# -- Compiling module sg13g2_antennanp
+# -- Compiling module sg13g2_buf_1
+# -- Compiling module sg13g2_buf_16
+# -- Compiling module sg13g2_buf_2
+# -- Compiling module sg13g2_buf_4
+# -- Compiling module sg13g2_buf_8
+# -- Compiling module sg13g2_decap_4
+# -- Compiling module sg13g2_decap_8
+# -- Compiling module sg13g2_dfrbp_1
+# -- Compiling module sg13g2_dfrbp_2
+# -- Compiling module sg13g2_dfrbpq_1
+# -- Compiling module sg13g2_dfrbpq_2
+# -- Compiling module sg13g2_dlhq_1
+# -- Compiling module sg13g2_dlhr_1
+# -- Compiling module sg13g2_dlhrq_1
+# -- Compiling module sg13g2_dllr_1
+# -- Compiling module sg13g2_dllrq_1
+# -- Compiling module sg13g2_dlygate4sd1_1
+# -- Compiling module sg13g2_dlygate4sd2_1
+# -- Compiling module sg13g2_dlygate4sd3_1
+# -- Compiling module sg13g2_ebufn_2
+# -- Compiling module sg13g2_ebufn_4
+# -- Compiling module sg13g2_ebufn_8
+# -- Compiling module sg13g2_einvn_2
+# -- Compiling module sg13g2_einvn_4
+# -- Compiling module sg13g2_einvn_8
+# -- Compiling module sg13g2_fill_1
+# -- Compiling module sg13g2_fill_2
+# -- Compiling module sg13g2_fill_4
+# -- Compiling module sg13g2_fill_8
+# -- Compiling module sg13g2_inv_1
+# -- Compiling module sg13g2_inv_16
+# -- Compiling module sg13g2_inv_2
+# -- Compiling module sg13g2_inv_4
+# -- Compiling module sg13g2_inv_8
+# -- Compiling module sg13g2_lgcp_1
+# -- Compiling module sg13g2_mux2_1
+# -- Compiling module sg13g2_mux2_2
+# -- Compiling module sg13g2_mux4_1
+# -- Compiling module sg13g2_nand2_1
+# -- Compiling module sg13g2_nand2_2
+# -- Compiling module sg13g2_nand2b_1
+# -- Compiling module sg13g2_nand2b_2
+# -- Compiling module sg13g2_nand3_1
+# -- Compiling module sg13g2_nand3b_1
+# -- Compiling module sg13g2_nand4_1
+# -- Compiling module sg13g2_nor2_1
+# -- Compiling module sg13g2_nor2_2
+# -- Compiling module sg13g2_nor2b_1
+# -- Compiling module sg13g2_nor2b_2
+# -- Compiling module sg13g2_nor3_1
+# -- Compiling module sg13g2_nor3_2
+# -- Compiling module sg13g2_nor4_1
+# -- Compiling module sg13g2_nor4_2
+# -- Compiling module sg13g2_o21ai_1
+# -- Compiling module sg13g2_or2_1
+# -- Compiling module sg13g2_or2_2
+# -- Compiling module sg13g2_or3_1
+# -- Compiling module sg13g2_or3_2
+# -- Compiling module sg13g2_or4_1
+# -- Compiling module sg13g2_or4_2
+# -- Compiling module sg13g2_sdfbbp_1
+# -- Compiling module sg13g2_sdfrbp_1
+# -- Compiling module sg13g2_sdfrbp_2
+# -- Compiling module sg13g2_sdfrbpq_1
+# -- Compiling module sg13g2_sdfrbpq_2
+# -- Compiling module sg13g2_sighold
+# -- Compiling module sg13g2_slgcp_1
+# -- Compiling module sg13g2_tiehi
+# -- Compiling module sg13g2_tielo
+# -- Compiling module sg13g2_xnor2_1
+# -- Compiling module sg13g2_xor2_1
+# -- Compiling UDP ihp_latch
+# -- Compiling UDP ihp_dff_err
+# -- Compiling UDP ihp_dff
+# -- Compiling UDP ihp_dff_r_err
+# -- Compiling UDP ihp_dff_r
+# -- Compiling UDP ihp_dff_s_err
+# -- Compiling UDP ihp_dff_s
+# -- Compiling UDP ihp_dff_sr_err
+# -- Compiling UDP ihp_dff_sr_0
+# -- Compiling UDP ihp_dff_sr_1
+# -- Compiling UDP ihp_latch_r
+# -- Compiling UDP ihp_latch_s
+# -- Compiling UDP ihp_latch_sr_0
+# -- Compiling UDP ihp_latch_sr_1
+# -- Compiling UDP ihp_mux2
+# -- Compiling UDP ihp_mux4
+# -- Compiling UDP ihp_mux8
+# 
+# Top level modules:
+# 	sg13g2_a21o_1
+# 	sg13g2_a21o_2
+# 	sg13g2_a21oi_1
+# 	sg13g2_a21oi_2
+# 	sg13g2_a221oi_1
+# 	sg13g2_a22oi_1
+# 	sg13g2_and2_1
+# 	sg13g2_and2_2
+# 	sg13g2_and3_1
+# 	sg13g2_and3_2
+# 	sg13g2_and4_1
+# 	sg13g2_and4_2
+# 	sg13g2_antennanp
+# 	sg13g2_buf_1
+# 	sg13g2_buf_16
+# 	sg13g2_buf_2
+# 	sg13g2_buf_4
+# 	sg13g2_buf_8
+# 	sg13g2_decap_4
+# 	sg13g2_decap_8
+# 	sg13g2_dfrbp_1
+# 	sg13g2_dfrbp_2
+# 	sg13g2_dfrbpq_1
+# 	sg13g2_dfrbpq_2
+# 	sg13g2_dlhq_1
+# 	sg13g2_dlhr_1
+# 	sg13g2_dlhrq_1
+# 	sg13g2_dllr_1
+# 	sg13g2_dllrq_1
+# 	sg13g2_dlygate4sd1_1
+# 	sg13g2_dlygate4sd2_1
+# 	sg13g2_dlygate4sd3_1
+# 	sg13g2_ebufn_2
+# 	sg13g2_ebufn_4
+# 	sg13g2_ebufn_8
+# 	sg13g2_einvn_2
+# 	sg13g2_einvn_4
+# 	sg13g2_einvn_8
+# 	sg13g2_fill_1
+# 	sg13g2_fill_2
+# 	sg13g2_fill_4
+# 	sg13g2_fill_8
+# 	sg13g2_inv_1
+# 	sg13g2_inv_16
+# 	sg13g2_inv_2
+# 	sg13g2_inv_4
+# 	sg13g2_inv_8
+# 	sg13g2_lgcp_1
+# 	sg13g2_mux2_1
+# 	sg13g2_mux2_2
+# 	sg13g2_mux4_1
+# 	sg13g2_nand2_1
+# 	sg13g2_nand2_2
+# 	sg13g2_nand2b_1
+# 	sg13g2_nand2b_2
+# 	sg13g2_nand3_1
+# 	sg13g2_nand3b_1
+# 	sg13g2_nand4_1
+# 	sg13g2_nor2_1
+# 	sg13g2_nor2_2
+# 	sg13g2_nor2b_1
+# 	sg13g2_nor2b_2
+# 	sg13g2_nor3_1
+# 	sg13g2_nor3_2
+# 	sg13g2_nor4_1
+# 	sg13g2_nor4_2
+# 	sg13g2_o21ai_1
+# 	sg13g2_or2_1
+# 	sg13g2_or2_2
+# 	sg13g2_or3_1
+# 	sg13g2_or3_2
+# 	sg13g2_or4_1
+# 	sg13g2_or4_2
+# 	sg13g2_sdfbbp_1
+# 	sg13g2_sdfrbp_1
+# 	sg13g2_sdfrbp_2
+# 	sg13g2_sdfrbpq_1
+# 	sg13g2_sdfrbpq_2
+# 	sg13g2_sighold
+# 	sg13g2_slgcp_1
+# 	sg13g2_tiehi
+# 	sg13g2_tielo
+# 	sg13g2_xnor2_1
+# 	sg13g2_xor2_1
+# End time: 21:29:18 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:19 on Nov 18,2026
+# vlog -work work ../netlist/fsm_light_net.v 
+# -- Compiling module fsm_light
+# 
+# Top level modules:
+# 	fsm_light
+# End time: 21:29:19 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:19 on Nov 18,2026
+# vlog -work work ../tb/tb_fsm_light.v 
+# -- Compiling module tb_fsm_light
+# 
+# Top level modules:
+# 	tb_fsm_light
+# End time: 21:29:19 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -voptargs="+acc" work.tb_fsm_light "+GATE" "+tracefile=results/fsm_light_gls.txt" "+resultfile=results/fsm_light_res_gls.txt" 
+# Start time: 21:29:20 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_fsm_light
+# Loading work.fsm_light
+# Loading work.sg13g2_inv_1
+# Loading work.sg13g2_nor2b_1
+# Loading work.sg13g2_nor2_1
+# Loading work.sg13g2_dfrbpq_1
+# Loading work.ihp_dff_r_err
+# Loading work.ihp_dff_r
+# === tb_fsm_light : GATE LEVEL ===
+#   t=17.000 ns : after reset -> state=0 red=1 green=0 yellow=0
+#   t=26.000 ns : RED -> GREEN -> state=1 red=0 green=1 yellow=0
+#   t=36.000 ns : GREEN -> YELLOW -> state=2 red=0 green=0 yellow=1
+#   t=46.000 ns : YELLOW -> RED -> state=0 red=1 green=0 yellow=0
+#   t=56.000 ns : D -> GREEN again -> state=1 red=0 green=1 yellow=0
+#   checks = 5 , errors = 0
+# TEST_PASSED : tb_fsm_light completed
+# ** Note: $finish    : ../tb/tb_fsm_light.v(91)
+#    Time: 56 ns  Iteration: 0  Instance: /tb_fsm_light
+# Break in Module tb_fsm_light at ../tb/tb_fsm_light.v line 91
+# Stopped at ../tb/tb_fsm_light.v line 91
+# PASS
+# PASS
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+# 6
+   6 trace lines , 0 difference(s)
+RESULT: PASS
+# End time: 21:29:22 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+  [PASS] fsm_light
+[DESIGN] sr16
+  ---- the RTL level run ----
+Reading pref.tcl
+
+# 2026.1
+
+# do run_rtl.do
+# cnt4
+# tb_sr16
+====================================================================
+ LAB 08 : the RTL level run of sr16
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:25 on Nov 18,2026
+# vlog -work work ../rtl/sr16.v 
+# -- Compiling module sr16
+# 
+# Top level modules:
+# 	sr16
+# End time: 21:29:25 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:26 on Nov 18,2026
+# vlog -work work ../tb/tb_sr16.v 
+# -- Compiling module tb_sr16
+# 
+# Top level modules:
+# 	tb_sr16
+# End time: 21:29:26 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -voptargs="+acc" work.tb_sr16 "+tracefile=results/sr16_rtl.txt" "+resultfile=results/sr16_res_rtl.txt" 
+# Start time: 21:29:26 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_sr16
+# Loading work.sr16
+# === tb_sr16 : RTL ===
+#   t=16.000 ns : after reset -> qout = 0000
+#   t=26.000 ns : parallel load -> qout = a5c3
+#   t=36.000 ns : shift left -> qout = 4b86
+#   t=46.000 ns : shift right -> qout = 25c3
+#   t=56.000 ns : hold -> qout = 25c3
+#   checks = 5 , errors = 0
+# TEST_PASSED : tb_sr16 completed
+# ** Note: $finish    : ../tb/tb_sr16.v(99)
+#    Time: 56 ns  Iteration: 0  Instance: /tb_sr16
+# Break in Module tb_sr16 at ../tb/tb_sr16.v line 99
+# Stopped at ../tb/tb_sr16.v line 99
+   the RTL verdict : PASS
+# End time: 21:29:28 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+  ---- the gate level run ----
+Reading pref.tcl
+
+# 2026.1
+
+# do run_gls.do
+# cnt4
+# tb_sr16
+====================================================================
+ LAB 08 : the gate level run of sr16
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:31 on Nov 18,2026
+# vlog -work work ../cells/sg13g2_stdcell.v 
+# -- Compiling module sg13g2_a21o_1
+# -- Compiling module sg13g2_a21o_2
+# -- Compiling module sg13g2_a21oi_1
+# -- Compiling module sg13g2_a21oi_2
+# -- Compiling module sg13g2_a221oi_1
+# -- Compiling module sg13g2_a22oi_1
+# -- Compiling module sg13g2_and2_1
+# -- Compiling module sg13g2_and2_2
+# -- Compiling module sg13g2_and3_1
+# -- Compiling module sg13g2_and3_2
+# -- Compiling module sg13g2_and4_1
+# -- Compiling module sg13g2_and4_2
+# -- Compiling module sg13g2_antennanp
+# -- Compiling module sg13g2_buf_1
+# -- Compiling module sg13g2_buf_16
+# -- Compiling module sg13g2_buf_2
+# -- Compiling module sg13g2_buf_4
+# -- Compiling module sg13g2_buf_8
+# -- Compiling module sg13g2_decap_4
+# -- Compiling module sg13g2_decap_8
+# -- Compiling module sg13g2_dfrbp_1
+# -- Compiling module sg13g2_dfrbp_2
+# -- Compiling module sg13g2_dfrbpq_1
+# -- Compiling module sg13g2_dfrbpq_2
+# -- Compiling module sg13g2_dlhq_1
+# -- Compiling module sg13g2_dlhr_1
+# -- Compiling module sg13g2_dlhrq_1
+# -- Compiling module sg13g2_dllr_1
+# -- Compiling module sg13g2_dllrq_1
+# -- Compiling module sg13g2_dlygate4sd1_1
+# -- Compiling module sg13g2_dlygate4sd2_1
+# -- Compiling module sg13g2_dlygate4sd3_1
+# -- Compiling module sg13g2_ebufn_2
+# -- Compiling module sg13g2_ebufn_4
+# -- Compiling module sg13g2_ebufn_8
+# -- Compiling module sg13g2_einvn_2
+# -- Compiling module sg13g2_einvn_4
+# -- Compiling module sg13g2_einvn_8
+# -- Compiling module sg13g2_fill_1
+# -- Compiling module sg13g2_fill_2
+# -- Compiling module sg13g2_fill_4
+# -- Compiling module sg13g2_fill_8
+# -- Compiling module sg13g2_inv_1
+# -- Compiling module sg13g2_inv_16
+# -- Compiling module sg13g2_inv_2
+# -- Compiling module sg13g2_inv_4
+# -- Compiling module sg13g2_inv_8
+# -- Compiling module sg13g2_lgcp_1
+# -- Compiling module sg13g2_mux2_1
+# -- Compiling module sg13g2_mux2_2
+# -- Compiling module sg13g2_mux4_1
+# -- Compiling module sg13g2_nand2_1
+# -- Compiling module sg13g2_nand2_2
+# -- Compiling module sg13g2_nand2b_1
+# -- Compiling module sg13g2_nand2b_2
+# -- Compiling module sg13g2_nand3_1
+# -- Compiling module sg13g2_nand3b_1
+# -- Compiling module sg13g2_nand4_1
+# -- Compiling module sg13g2_nor2_1
+# -- Compiling module sg13g2_nor2_2
+# -- Compiling module sg13g2_nor2b_1
+# -- Compiling module sg13g2_nor2b_2
+# -- Compiling module sg13g2_nor3_1
+# -- Compiling module sg13g2_nor3_2
+# -- Compiling module sg13g2_nor4_1
+# -- Compiling module sg13g2_nor4_2
+# -- Compiling module sg13g2_o21ai_1
+# -- Compiling module sg13g2_or2_1
+# -- Compiling module sg13g2_or2_2
+# -- Compiling module sg13g2_or3_1
+# -- Compiling module sg13g2_or3_2
+# -- Compiling module sg13g2_or4_1
+# -- Compiling module sg13g2_or4_2
+# -- Compiling module sg13g2_sdfbbp_1
+# -- Compiling module sg13g2_sdfrbp_1
+# -- Compiling module sg13g2_sdfrbp_2
+# -- Compiling module sg13g2_sdfrbpq_1
+# -- Compiling module sg13g2_sdfrbpq_2
+# -- Compiling module sg13g2_sighold
+# -- Compiling module sg13g2_slgcp_1
+# -- Compiling module sg13g2_tiehi
+# -- Compiling module sg13g2_tielo
+# -- Compiling module sg13g2_xnor2_1
+# -- Compiling module sg13g2_xor2_1
+# -- Compiling UDP ihp_latch
+# -- Compiling UDP ihp_dff_err
+# -- Compiling UDP ihp_dff
+# -- Compiling UDP ihp_dff_r_err
+# -- Compiling UDP ihp_dff_r
+# -- Compiling UDP ihp_dff_s_err
+# -- Compiling UDP ihp_dff_s
+# -- Compiling UDP ihp_dff_sr_err
+# -- Compiling UDP ihp_dff_sr_0
+# -- Compiling UDP ihp_dff_sr_1
+# -- Compiling UDP ihp_latch_r
+# -- Compiling UDP ihp_latch_s
+# -- Compiling UDP ihp_latch_sr_0
+# -- Compiling UDP ihp_latch_sr_1
+# -- Compiling UDP ihp_mux2
+# -- Compiling UDP ihp_mux4
+# -- Compiling UDP ihp_mux8
+# 
+# Top level modules:
+# 	sg13g2_a21o_1
+# 	sg13g2_a21o_2
+# 	sg13g2_a21oi_1
+# 	sg13g2_a21oi_2
+# 	sg13g2_a221oi_1
+# 	sg13g2_a22oi_1
+# 	sg13g2_and2_1
+# 	sg13g2_and2_2
+# 	sg13g2_and3_1
+# 	sg13g2_and3_2
+# 	sg13g2_and4_1
+# 	sg13g2_and4_2
+# 	sg13g2_antennanp
+# 	sg13g2_buf_1
+# 	sg13g2_buf_16
+# 	sg13g2_buf_2
+# 	sg13g2_buf_4
+# 	sg13g2_buf_8
+# 	sg13g2_decap_4
+# 	sg13g2_decap_8
+# 	sg13g2_dfrbp_1
+# 	sg13g2_dfrbp_2
+# 	sg13g2_dfrbpq_1
+# 	sg13g2_dfrbpq_2
+# 	sg13g2_dlhq_1
+# 	sg13g2_dlhr_1
+# 	sg13g2_dlhrq_1
+# 	sg13g2_dllr_1
+# 	sg13g2_dllrq_1
+# 	sg13g2_dlygate4sd1_1
+# 	sg13g2_dlygate4sd2_1
+# 	sg13g2_dlygate4sd3_1
+# 	sg13g2_ebufn_2
+# 	sg13g2_ebufn_4
+# 	sg13g2_ebufn_8
+# 	sg13g2_einvn_2
+# 	sg13g2_einvn_4
+# 	sg13g2_einvn_8
+# 	sg13g2_fill_1
+# 	sg13g2_fill_2
+# 	sg13g2_fill_4
+# 	sg13g2_fill_8
+# 	sg13g2_inv_1
+# 	sg13g2_inv_16
+# 	sg13g2_inv_2
+# 	sg13g2_inv_4
+# 	sg13g2_inv_8
+# 	sg13g2_lgcp_1
+# 	sg13g2_mux2_1
+# 	sg13g2_mux2_2
+# 	sg13g2_mux4_1
+# 	sg13g2_nand2_1
+# 	sg13g2_nand2_2
+# 	sg13g2_nand2b_1
+# 	sg13g2_nand2b_2
+# 	sg13g2_nand3_1
+# 	sg13g2_nand3b_1
+# 	sg13g2_nand4_1
+# 	sg13g2_nor2_1
+# 	sg13g2_nor2_2
+# 	sg13g2_nor2b_1
+# 	sg13g2_nor2b_2
+# 	sg13g2_nor3_1
+# 	sg13g2_nor3_2
+# 	sg13g2_nor4_1
+# 	sg13g2_nor4_2
+# 	sg13g2_o21ai_1
+# 	sg13g2_or2_1
+# 	sg13g2_or2_2
+# 	sg13g2_or3_1
+# 	sg13g2_or3_2
+# 	sg13g2_or4_1
+# 	sg13g2_or4_2
+# 	sg13g2_sdfbbp_1
+# 	sg13g2_sdfrbp_1
+# 	sg13g2_sdfrbp_2
+# 	sg13g2_sdfrbpq_1
+# 	sg13g2_sdfrbpq_2
+# 	sg13g2_sighold
+# 	sg13g2_slgcp_1
+# 	sg13g2_tiehi
+# 	sg13g2_tielo
+# 	sg13g2_xnor2_1
+# 	sg13g2_xor2_1
+# End time: 21:29:31 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:32 on Nov 18,2026
+# vlog -work work ../netlist/sr16_net.v 
+# -- Compiling module sr16
+# 
+# Top level modules:
+# 	sr16
+# End time: 21:29:32 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vlog 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 21:29:32 on Nov 18,2026
+# vlog -work work ../tb/tb_sr16.v 
+# -- Compiling module tb_sr16
+# 
+# Top level modules:
+# 	tb_sr16
+# End time: 21:29:32 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -voptargs="+acc" work.tb_sr16 "+GATE" "+tracefile=results/sr16_gls.txt" "+resultfile=results/sr16_res_gls.txt" 
+# Start time: 21:29:33 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_sr16
+# Loading work.sr16
+# Loading work.sg13g2_inv_1
+# Loading work.sg13g2_nor2b_1
+# Loading work.sg13g2_nand2b_1
+# Loading work.sg13g2_nand3_1
+# Loading work.sg13g2_a22oi_1
+# Loading work.sg13g2_o21ai_1
+# Loading work.sg13g2_nand4_1
+# Loading work.sg13g2_nand2_1
+# Loading work.sg13g2_nand3b_1
+# Loading work.sg13g2_a21o_1
+# Loading work.sg13g2_and2_1
+# Loading work.sg13g2_a221oi_1
+# Loading work.sg13g2_nor2_1
+# Loading work.sg13g2_dfrbpq_1
+# Loading work.ihp_dff_r_err
+# Loading work.ihp_dff_r
+# === tb_sr16 : GATE LEVEL ===
+#   t=16.000 ns : after reset -> qout = 0000
+#   t=26.000 ns : parallel load -> qout = a5c3
+#   t=36.000 ns : shift left -> qout = 4b86
+#   t=46.000 ns : shift right -> qout = 25c3
+#   t=56.000 ns : hold -> qout = 25c3
+#   checks = 5 , errors = 0
+# TEST_PASSED : tb_sr16 completed
+# ** Note: $finish    : ../tb/tb_sr16.v(99)
+#    Time: 56 ns  Iteration: 0  Instance: /tb_sr16
+# Break in Module tb_sr16 at ../tb/tb_sr16.v line 99
+# Stopped at ../tb/tb_sr16.v line 99
+# PASS
+# PASS
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+# 6
+   6 trace lines , 0 difference(s)
+RESULT: PASS
+# End time: 21:29:35 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+  [PASS] sr16
+
+=====================================================================
+ total = 3   passed = 3   failed = 0
+=====================================================================
+[RESULT] PASS
