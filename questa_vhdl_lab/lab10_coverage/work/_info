@@ -1,0 +1,191 @@
+m255
+K4
+z2
+!s11e vcom 2026.1 2026.01, Jan 25 2026
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/000148/Documents/MiniMax/eda-tools/questa_vhdl_lab/lab10_coverage
+Ealu_fsm
+Z1 w1794984172
+Z2 DPx4 ieee 11 numeric_std 0 22 m=kP7jRZW]kY;6MU;0z<22
+Z3 DPx3 std 6 textio 0 22 <UlP6K1@RDQa_MJ[:UEnP2
+Z4 DPx4 ieee 14 std_logic_1164 0 22 TDbGXLH=YSoj9JRY2gkNY0
+!i122 8
+R0
+Z5 8src/alu_fsm.vhd
+Z6 Fsrc/alu_fsm.vhd
+l0
+L25 1
+V@kOV5<GMg<3_04E1bU9=?2
+!s100 6lDPdA6mlg26FJneJek>b2
+Z7 OP;C;2026.1;84
+33
+Z8 !s110 1794989667
+!i10b 1
+Z9 !s108 1794989667.000000
+Z10 !s90 -2008|src/alu_fsm.vhd|+cover=bcesft|
+Z11 !s107 src/alu_fsm.vhd|
+!i113 1
+Z12 !s102 +cover=bcesft
+Z13 o-2008 +cover=bcesft
+Z14 tExplicit 1 CvgOpt 0 defaultOptions 1083485664
+Artl
+R2
+R3
+R4
+Z15 DEx4 work 7 alu_fsm 0 22 @kOV5<GMg<3_04E1bU9=?2
+!i122 8
+l67
+L40 169
+V3lYba62GY:h_E4RZT5zJX0
+!s100 VRaijlKf<om?F>6ZSfCH^2
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+R14
+Etb_alu_fsm
+Z16 w1794984235
+R2
+R3
+R4
+!i122 9
+R0
+Z17 8tb/tb_alu_fsm.vhd
+Z18 Ftb/tb_alu_fsm.vhd
+l0
+Z19 L22 1
+V1OA3>]WZY3VEg12ghZcI82
+!s100 YeWN>cUQP=8@@SmjN>h>J0
+R7
+33
+R8
+!i10b 1
+R9
+Z20 !s90 -2008|tb/tb_alu_fsm.vhd|
+Z21 !s107 tb/tb_alu_fsm.vhd|
+!i113 1
+Z22 o-2008
+R14
+Asim
+Z23 DPx3 std 3 env 0 22 mJj^M]e`oP>;WoZ=b<O3C0
+R15
+R2
+R3
+R4
+Z24 DEx4 work 10 tb_alu_fsm 0 22 1OA3>]WZY3VEg12ghZcI82
+!i122 9
+l42
+Z25 L28 187
+Z26 Vd6H<_^=U@DM;WDL`B;QTd3
+Z27 !s100 J<VF>ibHjOLIo02zkccbA3
+R7
+33
+R8
+!i10b 1
+R9
+R20
+R21
+!i113 1
+R22
+R14
+Etb_alu_fsm_alt
+Z28 w1794984496
+R2
+R3
+R4
+!i122 2
+R0
+Z29 8tb/pitfall/tb_alu_fsm_alt.vhd
+Z30 Ftb/pitfall/tb_alu_fsm_alt.vhd
+l0
+R19
+VeKbeam:FHdV1``;gOG3O21
+!s100 05B7>hY2;AT:PJHT2__Sb1
+R7
+33
+Z31 !s110 1794989629
+!i10b 1
+Z32 !s108 1794989629.000000
+Z33 !s90 -2008|tb/pitfall/tb_alu_fsm_alt.vhd|
+Z34 !s107 tb/pitfall/tb_alu_fsm_alt.vhd|
+!i113 1
+R22
+R14
+Asim
+R23
+R15
+R2
+R3
+R4
+DEx4 work 14 tb_alu_fsm_alt 0 22 eKbeam:FHdV1``;gOG3O21
+!i122 2
+l42
+L28 48
+VJCgQYV=Lhd0YHMOYeTDBf1
+!s100 Pncf@cFZj9dT^i=BYE^k@1
+R7
+33
+R31
+!i10b 1
+R32
+R33
+R34
+!i113 1
+R22
+R14
+Etb_alu_fsm_finish
+R28
+R2
+R3
+R4
+!i122 3
+R0
+Z35 8tb/pitfall/tb_alu_fsm_finish.vhd
+Z36 Ftb/pitfall/tb_alu_fsm_finish.vhd
+l0
+R19
+V;eT6<C7C<j18Q652JDkEA3
+!s100 EdK7DK@fHb:F]NLXW1dlP0
+R7
+33
+Z37 !s110 1794989630
+!i10b 1
+R32
+Z38 !s90 -2008|tb/pitfall/tb_alu_fsm_finish.vhd|
+Z39 !s107 tb/pitfall/tb_alu_fsm_finish.vhd|
+!i113 1
+R22
+R14
+Asim
+R23
+R15
+R2
+R3
+R4
+DEx4 work 17 tb_alu_fsm_finish 0 22 ;eT6<C7C<j18Q652JDkEA3
+!i122 3
+l38
+L25 47
+V0MGeiW4a7hYSfo@nMBBm:3
+!s100 XgYCYme_UiM=LSZG9WC2_3
+R7
+33
+R37
+!i10b 1
+R32
+R38
+R39
+!i113 1
+R22
+R14
