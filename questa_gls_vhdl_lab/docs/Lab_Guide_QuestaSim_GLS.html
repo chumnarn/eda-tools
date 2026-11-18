@@ -1,0 +1,3695 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>QuestaSim GLS (Gate-Level Simulation) เธเธเธฑเธ VHDL - Lab Guide</title>
+  <style>
+
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">
+@page {
+size: A4;
+margin: 18mm 16mm;
+}
+:root {
+--ink: #1b1f24;
+--muted: #5a6570;
+--rule: #d7dde3;
+--accent: #0b5fa5;
+--accent2: #8a4b08;
+--code-bg: #f4f6f8;
+--head-bg: #eef2f6;
+--note-bg: #fff8e6;
+--warn-bg: #fdecec;
+}
+html {
+font-size: 11pt;
+}
+body {
+max-width: 210mm;
+margin: 0 auto;
+padding: 12mm 8mm 20mm;
+color: var(--ink);
+background: #fff;
+font-family: "Leelawadee UI", "Sarabun", "Noto Sans Thai", "Tahoma",
+"Segoe UI", system-ui, sans-serif;
+line-height: 1.65;
+-webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4 {
+font-weight: 700;
+line-height: 1.3;
+color: var(--accent);
+margin: 1.6em 0 0.6em;
+page-break-after: avoid;
+}
+h1 {
+font-size: 1.85rem;
+margin-top: 0;
+padding-bottom: .35em;
+border-bottom: 3px solid var(--accent);
+}
+h2 {
+font-size: 1.45rem;
+margin-top: 1.9em;
+padding-bottom: .25em;
+border-bottom: 1px solid var(--rule);
+}
+h3 { font-size: 1.18rem; color: var(--accent2); }
+h4 { font-size: 1.05rem; color: var(--ink); }
+p { margin: .55em 0; }
+
+#TOC, nav#TOC {
+background: var(--head-bg);
+border: 1px solid var(--rule);
+border-radius: 6px;
+padding: 1em 1.4em;
+margin: 1.4em 0 2em;
+font-size: .95rem;
+}
+#TOC ul { margin: .25em 0; padding-left: 1.2em; }
+#TOC > ul > li > a { font-weight: 600; }
+
+table {
+border-collapse: collapse;
+width: 100%;
+margin: 1em 0 1.3em;
+font-size: .93rem;
+page-break-inside: avoid;
+}
+thead { background: var(--head-bg); }
+th, td {
+border: 1px solid var(--rule);
+padding: .42em .6em;
+text-align: left;
+vertical-align: top;
+}
+th {
+font-weight: 700;
+color: var(--accent);
+white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: #fafbfc; }
+
+code {
+font-family: "Cascadia Mono", "Consolas", "DejaVu Sans Mono", monospace;
+font-size: .88em;
+background: var(--code-bg);
+padding: .1em .32em;
+border-radius: 3px;
+color: #0a3d62;
+}
+pre {
+background: var(--code-bg);
+border: 1px solid var(--rule);
+border-left: 4px solid var(--accent);
+border-radius: 4px;
+padding: .75em 1em;
+overflow-x: auto;
+page-break-inside: avoid;
+font-size: .86rem;
+line-height: 1.5;
+}
+pre code {
+background: none;
+padding: 0;
+color: #1b1f24;
+font-size: 1em;
+}
+
+blockquote {
+margin: 1em 0;
+padding: .7em 1.1em;
+background: var(--note-bg);
+border-left: 4px solid var(--accent2);
+color: #3d3226;
+}
+blockquote p { margin: .35em 0; }
+blockquote > p:first-child strong { color: var(--accent2); }
+
+ul, ol { margin: .5em 0 .8em; padding-left: 1.6em; }
+li { margin: .22em 0; }
+li > ul, li > ol { margin: .25em 0; }
+
+hr {
+border: none;
+border-top: 1px solid var(--rule);
+margin: 2em 0;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+@media print {
+body {
+max-width: none;
+padding: 0;
+font-size: 10pt;
+}
+h1 { page-break-before: always; }
+h1:first-of-type { page-break-before: avoid; }
+pre, table, blockquote { page-break-inside: avoid; }
+a { color: var(--ink); }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">QuestaSim GLS (Gate-Level Simulation) เธเธเธฑเธ VHDL -
+Lab Guide</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#ภาคนำ" id="toc-ภาคนำ">ภาคนำ</a>
+<ul>
+<li><a href="#คู่มือนี้คืออะไร" id="toc-คู่มือนี้คืออะไร">คู่มือนี้คืออะไร</a></li>
+<li><a href="#จุดต่างสำคัญของฉบับนี้-rtl-เขียนด้วย-vhdl" id="toc-จุดต่างสำคัญของฉบับนี้-rtl-เขียนด้วย-vhdl">จุดต่างสำคัญของฉบับนี้: <strong>RTL
+เขียนด้วย VHDL</strong></a></li>
+<li><a href="#ผู้เรียนจะได้อะไร" id="toc-ผู้เรียนจะได้อะไร">ผู้เรียนจะได้อะไร</a></li>
+<li><a href="#วิธีใช้คู่มือนี้" id="toc-วิธีใช้คู่มือนี้">วิธีใช้คู่มือนี้</a></li>
+<li><a href="#ข้อตกลงเบื้องต้น" id="toc-ข้อตกลงเบื้องต้น">ข้อตกลงเบื้องต้น</a></li>
+</ul></li>
+<li><a href="#บทที่-1--เตรียมเครื่องมือ" id="toc-บทที่-1--เตรียมเครื่องมือ">บทที่ 1 —
+เตรียมเครื่องมือ</a>
+<ul>
+<li><a href="#11-เครื่องมือที่ใช้-ทุกตัววัดจริงบนเครื่องนี้" id="toc-11-เครื่องมือที่ใช้-ทุกตัววัดจริงบนเครื่องนี้">1.1 เครื่องมือที่ใช้
+(ทุกตัววัดจริงบนเครื่องนี้)</a></li>
+<li><a href="#12--เรื่องใบอนุญาต-license--อ่านให้เข้าใจก่อนทำ-lab" id="toc-12--เรื่องใบอนุญาต-license--อ่านให้เข้าใจก่อนทำ-lab">1.2 ⚠ เรื่องใบอนุญาต
+(license) — อ่านให้เข้าใจก่อนทำ lab</a></li>
+<li><a href="#13-โครงสร้างโฟลเดอร์ของคู่มือ" id="toc-13-โครงสร้างโฟลเดอร์ของคู่มือ">1.3 โครงสร้างโฟลเดอร์ของคู่มือ</a></li>
+<li><a href="#14-rtl-กับ-gate-level-ต่างกันอย่างไร" id="toc-14-rtl-กับ-gate-level-ต่างกันอย่างไร">1.4 RTL กับ gate level
+ต่างกันอย่างไร</a></li>
+<li><a href="#15-gls-จับอะไรได้ที่-rtl-ไม่จับ" id="toc-15-gls-จับอะไรได้ที่-rtl-ไม่จับ">1.5 GLS จับอะไรได้ที่ RTL ไม่จับ</a></li>
+<li><a href="#16-คำสั่งพื้นฐานที่ใช้บ่อย" id="toc-16-คำสั่งพื้นฐานที่ใช้บ่อย">1.6
+คำสั่งพื้นฐานที่ใช้บ่อย</a></li>
+<li><a href="#17-หัวใจของคู่มือนี้--testbench-ชุดเดียว-ขับทั้งสองระดับ" id="toc-17-หัวใจของคู่มือนี้--testbench-ชุดเดียว-ขับทั้งสองระดับ">1.7 หัวใจของคู่มือนี้ —
+testbench ชุดเดียว ขับทั้งสองระดับ</a></li>
+<li><a href="#18-กฎการผสม-vhdl-กับ-verilog-วัดแล้วพลาดได้จริง" id="toc-18-กฎการผสม-vhdl-กับ-verilog-วัดแล้วพลาดได้จริง">1.8 กฎการผสม VHDL กับ
+Verilog (วัดแล้วพลาดได้จริง)</a></li>
+<li><a href="#19--ข้อผิดพลาดที่ต้องรู้ก่อนเริ่ม-vsim-3693" id="toc-19--ข้อผิดพลาดที่ต้องรู้ก่อนเริ่ม-vsim-3693">1.9 ⚠ ข้อผิดพลาดที่ต้องรู้ก่อนเริ่ม:
+<code>vsim-3693</code></a></li>
+</ul></li>
+<li><a href="#บทที่-2--สังเคราะห์-netlist-จาก-vhdl" id="toc-บทที่-2--สังเคราะห์-netlist-จาก-vhdl">บทที่ 2 — สังเคราะห์ netlist จาก
+VHDL</a>
+<ul>
+<li><a href="#21-สายการผลิต" id="toc-21-สายการผลิต">2.1 สายการผลิต</a></li>
+<li><a href="#22-เตรียม-wsl" id="toc-22-เตรียม-wsl">2.2 เตรียม WSL</a></li>
+<li><a href="#23-ขั้นที่-1-ghdl-แปลง-vhdl-เป็น-verilog" id="toc-23-ขั้นที่-1-ghdl-แปลง-vhdl-เป็น-verilog">2.3 ขั้นที่ 1: GHDL แปลง VHDL
+เป็น Verilog</a></li>
+<li><a href="#24-ขั้นที่-2-yosys--liberty" id="toc-24-ขั้นที่-2-yosys--liberty">2.4 ขั้นที่ 2: Yosys + Liberty</a></li>
+<li><a href="#25-ผลลัพธ์จริงของทั้ง-4-ดีไซน์" id="toc-25-ผลลัพธ์จริงของทั้ง-4-ดีไซน์">2.5 ผลลัพธ์จริงของทั้ง 4 ดีไซน์</a></li>
+<li><a href="#26-อ่าน-netlist-ที่ได้" id="toc-26-อ่าน-netlist-ที่ได้">2.6 อ่าน
+netlist ที่ได้</a></li>
+<li><a href="#27-รันสังเคราะห์ใหม่เอง" id="toc-27-รันสังเคราะห์ใหม่เอง">2.7
+รันสังเคราะห์ใหม่เอง</a></li>
+</ul></li>
+<li><a href="#บทที่-3--lab-01-rtl-baseline-vhdl" id="toc-บทที่-3--lab-01-rtl-baseline-vhdl">บทที่ 3 — LAB 01: RTL baseline
+(VHDL)</a>
+<ul>
+<li><a href="#เป้าหมาย" id="toc-เป้าหมาย">เป้าหมาย</a></li>
+<li><a href="#ขั้นที่-1--เข้าโฟลเดอร์-lab" id="toc-ขั้นที่-1--เข้าโฟลเดอร์-lab">ขั้นที่
+1 — เข้าโฟลเดอร์ lab</a></li>
+<li><a href="#ขั้นที่-2--รัน" id="toc-ขั้นที่-2--รัน">ขั้นที่ 2 — รัน</a></li>
+<li><a href="#ผลลัพธ์จริง" id="toc-ผลลัพธ์จริง">ผลลัพธ์จริง</a></li>
+<li><a href="#ขั้นที่-3--ตรวจสอบเอง" id="toc-ขั้นที่-3--ตรวจสอบเอง">ขั้นที่ 3 —
+ตรวจสอบเอง</a></li>
+<li><a href="#เก็บความรู้จาก-lab-นี้" id="toc-เก็บความรู้จาก-lab-นี้">เก็บความรู้จาก
+LAB นี้</a></li>
+</ul></li>
+<li><a href="#บทที่-4--lab-02-netlist-ที่สังเคราะห์ได้" id="toc-บทที่-4--lab-02-netlist-ที่สังเคราะห์ได้">บทที่ 4 — LAB 02: netlist
+ที่สังเคราะห์ได้</a>
+<ul>
+<li><a href="#เป้าหมาย-1" id="toc-เป้าหมาย-1">เป้าหมาย</a></li>
+<li><a href="#รัน" id="toc-รัน">รัน</a></li>
+<li><a href="#ผลลัพธ์จริง-ส่วนสำคัญ" id="toc-ผลลัพธ์จริง-ส่วนสำคัญ">ผลลัพธ์จริง
+(ส่วนสำคัญ)</a></li>
+<li><a href="#-กับดัก-tcl-ที่เจอระหว่างทำ-lab-นี้" id="toc--กับดัก-tcl-ที่เจอระหว่างทำ-lab-นี้">⚠ กับดัก Tcl ที่เจอระหว่างทำ lab
+นี้</a></li>
+</ul></li>
+<li><a href="#บทที่-5--lab-03-เซลล์มาตรฐานของ-sg13g2" id="toc-บทที่-5--lab-03-เซลล์มาตรฐานของ-sg13g2">บทที่ 5 — LAB 03:
+เซลล์มาตรฐานของ SG13G2</a>
+<ul>
+<li><a href="#เป้าหมาย-2" id="toc-เป้าหมาย-2">เป้าหมาย</a></li>
+<li><a href="#รัน-1" id="toc-รัน-1">รัน</a></li>
+<li><a href="#ผลลัพธ์จริง-1" id="toc-ผลลัพธ์จริง-1">ผลลัพธ์จริง</a></li>
+<li><a href="#ตารางสรุป" id="toc-ตารางสรุป">ตารางสรุป</a></li>
+<li><a href="#-อ่าน-ชนิด-ของเซลล์ให้ถูกวิธี" id="toc--อ่าน-ชนิด-ของเซลล์ให้ถูกวิธี">⚠
+อ่าน &quot;ชนิด&quot; ของเซลล์ให้ถูกวิธี</a></li>
+<li><a href="#เซลล์-latch-ในไลบรารี--ทำไมต้องรู้" id="toc-เซลล์-latch-ในไลบรารี--ทำไมต้องรู้">เซลล์ latch ในไลบรารี —
+ทำไมต้องรู้</a></li>
+</ul></li>
+<li><a href="#บทที่-6--lab-04-การจำลองระดับ-gate-ครั้งแรก" id="toc-บทที่-6--lab-04-การจำลองระดับ-gate-ครั้งแรก">บทที่ 6 — LAB 04:
+การจำลองระดับ gate ครั้งแรก</a>
+<ul>
+<li><a href="#เป้าหมาย-3" id="toc-เป้าหมาย-3">เป้าหมาย</a></li>
+<li><a href="#ขั้นที่-1--ลองทำผิดวิธีก่อน-ตั้งใจให้ผิด" id="toc-ขั้นที่-1--ลองทำผิดวิธีก่อน-ตั้งใจให้ผิด">ขั้นที่ 1 — ลองทำผิดวิธีก่อน
+(ตั้งใจให้ผิด)</a></li>
+<li><a href="#ผลลัพธ์จริง-2" id="toc-ผลลัพธ์จริง-2">ผลลัพธ์จริง</a></li>
+<li><a href="#สิ่งที่ต้องสังเกตจาก-error-นี้" id="toc-สิ่งที่ต้องสังเกตจาก-error-นี้">สิ่งที่ต้องสังเกตจาก error นี้</a></li>
+<li><a href="#ขั้นที่-2--ทำให้ถูก" id="toc-ขั้นที่-2--ทำให้ถูก">ขั้นที่ 2 —
+ทำให้ถูก</a></li>
+<li><a href="#ผลลัพธ์จริง-3" id="toc-ผลลัพธ์จริง-3">ผลลัพธ์จริง</a></li>
+<li><a href="#เปรียบเทียบ-trace-สองไฟล์" id="toc-เปรียบเทียบ-trace-สองไฟล์">เปรียบเทียบ trace สองไฟล์</a></li>
+<li><a href="#เก็บความรู้จาก-lab-นี้-1" id="toc-เก็บความรู้จาก-lab-นี้-1">เก็บความรู้จาก LAB นี้</a></li>
+</ul></li>
+<li><a href="#บทที่-7--lab-05-rtl-กับ-gate-level-เทียบกัน" id="toc-บทที่-7--lab-05-rtl-กับ-gate-level-เทียบกัน">บทที่ 7 — LAB 05: RTL กับ
+gate level เทียบกัน</a>
+<ul>
+<li><a href="#เป้าหมาย-4" id="toc-เป้าหมาย-4">เป้าหมาย</a></li>
+<li><a href="#โครงสร้างของ-lab-นี้" id="toc-โครงสร้างของ-lab-นี้">โครงสร้างของ
+lab นี้</a></li>
+<li><a href="#-ทำไมต้องแยกสอง-process" id="toc--ทำไมต้องแยกสอง-process">⚠
+ทำไมต้องแยกสอง process</a></li>
+<li><a href="#รัน-2" id="toc-รัน-2">รัน</a></li>
+<li><a href="#ผลลัพธ์จริง-4" id="toc-ผลลัพธ์จริง-4">ผลลัพธ์จริง</a></li>
+<li><a href="#trace-ทั้งสองไฟล์" id="toc-trace-ทั้งสองไฟล์">trace
+ทั้งสองไฟล์</a></li>
+<li><a href="#กลไกการเทียบ-trace" id="toc-กลไกการเทียบ-trace">กลไกการเทียบ
+trace</a></li>
+<li><a href="#เก็บความรู้จาก-lab-นี้-2" id="toc-เก็บความรู้จาก-lab-นี้-2">เก็บความรู้จาก LAB นี้</a></li>
+</ul></li>
+<li><a href="#บทที่-8--lab-06-การแพร่ของค่า-x" id="toc-บทที่-8--lab-06-การแพร่ของค่า-x">บทที่ 8 — LAB 06: การแพร่ของค่า
+<code>x</code></a>
+<ul>
+<li><a href="#เป้าหมาย-5" id="toc-เป้าหมาย-5">เป้าหมาย</a></li>
+<li><a href="#เรื่องที่เกิดขึ้น" id="toc-เรื่องที่เกิดขึ้น">เรื่องที่เกิดขึ้น</a></li>
+<li><a href="#ฝั่ง-rtl-vhdl" id="toc-ฝั่ง-rtl-vhdl">ฝั่ง RTL (VHDL)</a></li>
+<li><a href="#ฝั่ง-gate-verilog-ที่-ghdl-สร้าง" id="toc-ฝั่ง-gate-verilog-ที่-ghdl-สร้าง">ฝั่ง gate (Verilog ที่ GHDL
+สร้าง)</a></li>
+<li><a href="#รัน-3" id="toc-รัน-3">รัน</a></li>
+<li><a href="#ผลลัพธ์จริง-5" id="toc-ผลลัพธ์จริง-5">ผลลัพธ์จริง</a></li>
+<li><a href="#ตีความผลลัพธ์" id="toc-ตีความผลลัพธ์">ตีความผลลัพธ์</a></li>
+<li><a href="#-ข้อควรระวังเรื่อง-x-optimism" id="toc--ข้อควรระวังเรื่อง-x-optimism">⚠ ข้อควรระวังเรื่อง X-optimism</a></li>
+<li><a href="#เก็บความรู้จาก-lab-นี้-3" id="toc-เก็บความรู้จาก-lab-นี้-3">เก็บความรู้จาก LAB นี้</a></li>
+</ul></li>
+<li><a href="#บทที่-9--lab-07-บั๊กที่ซ่อนอยู่ใน-netlist" id="toc-บทที่-9--lab-07-บั๊กที่ซ่อนอยู่ใน-netlist">บทที่ 9 — LAB 07: บั๊กที่ซ่อนอยู่ใน
+netlist</a>
+<ul>
+<li><a href="#เป้าหมาย-6" id="toc-เป้าหมาย-6">เป้าหมาย</a></li>
+<li><a href="#บั๊กที่ถูกฉีด" id="toc-บั๊กที่ถูกฉีด">บั๊กที่ถูกฉีด</a></li>
+<li><a href="#รัน-4" id="toc-รัน-4">รัน</a></li>
+<li><a href="#ผลลัพธ์จริง-6" id="toc-ผลลัพธ์จริง-6">ผลลัพธ์จริง</a></li>
+<li><a href="#trace-ทั้งสองฝั่ง" id="toc-trace-ทั้งสองฝั่ง">trace
+ทั้งสองฝั่ง</a></li>
+<li><a href="#อธิบายว่าทำไมถึงเป็นแบบนี้" id="toc-อธิบายว่าทำไมถึงเป็นแบบนี้">อธิบายว่าทำไมถึงเป็นแบบนี้</a></li>
+<li><a href="#-เก็บความรู้ที่สำคัญ" id="toc--เก็บความรู้ที่สำคัญ">⚠
+เก็บความรู้ที่สำคัญ</a></li>
+</ul></li>
+<li><a href="#บทที่-10--lab-08-regression-ของทั้งชุด" id="toc-บทที่-10--lab-08-regression-ของทั้งชุด">บทที่ 10 — LAB 08: regression
+ของทั้งชุด</a>
+<ul>
+<li><a href="#เป้าหมาย-7" id="toc-เป้าหมาย-7">เป้าหมาย</a></li>
+<li><a href="#สองส่วนของ-lab-08" id="toc-สองส่วนของ-lab-08">สองส่วนของ LAB
+08</a></li>
+<li><a href="#รันทั้งชุด" id="toc-รันทั้งชุด">รันทั้งชุด</a></li>
+<li><a href="#ผลลัพธ์จริง-7" id="toc-ผลลัพธ์จริง-7">ผลลัพธ์จริง</a></li>
+<li><a href="#ส่วนที่สอง-สามดีไซน์เพิ่ม" id="toc-ส่วนที่สอง-สามดีไซน์เพิ่ม">ส่วนที่สอง:
+สามดีไซน์เพิ่ม</a></li>
+<li><a href="#ผลลัพธ์จริง-8" id="toc-ผลลัพธ์จริง-8">ผลลัพธ์จริง</a></li>
+<li><a href="#trace-จริงของทั้งสามดีไซน์" id="toc-trace-จริงของทั้งสามดีไซน์">trace จริงของทั้งสามดีไซน์</a></li>
+<li><a href="#ตัวอย่างที่โหลดเพิ่มขึ้นในระดับ-gate" id="toc-ตัวอย่างที่โหลดเพิ่มขึ้นในระดับ-gate">ตัวอย่างที่โหลดเพิ่มขึ้นในระดับ
+gate</a></li>
+<li><a href="#-กับดักของสคริปต์-cmd-ที่เจอระหว่างทำ-lab-นี้" id="toc--กับดักของสคริปต์-cmd-ที่เจอระหว่างทำ-lab-นี้">⚠ กับดักของสคริปต์
+<code>.cmd</code> ที่เจอระหว่างทำ lab นี้</a></li>
+<li><a href="#เก็บความรู้จาก-lab-นี้-4" id="toc-เก็บความรู้จาก-lab-นี้-4">เก็บความรู้จาก LAB นี้</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-a--คลังข้อความ-error-จริง" id="toc-ภาคผนวก-a--คลังข้อความ-error-จริง">ภาคผนวก A — คลังข้อความ error
+จริง</a>
+<ul>
+<li><a href="#a1-vsim-3693--ไม่ได้ใส่--t-10ps" id="toc-a1-vsim-3693--ไม่ได้ใส่--t-10ps">A.1 <code>vsim-3693</code> —
+ไม่ได้ใส่ <code>-t 10ps</code></a></li>
+<li><a href="#a2-vsim-3033--เซลล์อยู่คนละไลบรารี" id="toc-a2-vsim-3033--เซลล์อยู่คนละไลบรารี">A.2 <code>vsim-3033</code> —
+เซลล์อยู่คนละไลบรารี</a></li>
+<li><a href="#a3-vsim-7--โฟลเดอร์ของไฟล์-trace-ไม่มีอยู่" id="toc-a3-vsim-7--โฟลเดอร์ของไฟล์-trace-ไม่มีอยู่">A.3 <code>vsim-7</code> —
+โฟลเดอร์ของไฟล์ trace ไม่มีอยู่</a></li>
+<li><a href="#a4-license-ไม่ว่าง" id="toc-a4-license-ไม่ว่าง">A.4 License
+ไม่ว่าง</a></li>
+<li><a href="#a5-เปิดไฟล์-do-ที่ไม่มีอยู่" id="toc-a5-เปิดไฟล์-do-ที่ไม่มีอยู่">A.5
+เปิดไฟล์ <code>.do</code> ที่ไม่มีอยู่</a></li>
+<li><a href="#a6-สรุป-exit-code-ของ-vsim-ที่วัดได้จริง" id="toc-a6-สรุป-exit-code-ของ-vsim-ที่วัดได้จริง">A.6 สรุป exit code ของ
+<code>vsim</code> ที่วัดได้จริง</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-b--กับดักที่วัดได้จริง" id="toc-ภาคผนวก-b--กับดักที่วัดได้จริง">ภาคผนวก B — กับดักที่วัดได้จริง</a>
+<ul>
+<li><a href="#b1-กับดักฝั่ง-vhdl" id="toc-b1-กับดักฝั่ง-vhdl">B.1 กับดักฝั่ง
+VHDL</a></li>
+<li><a href="#b2-กับดักฝั่ง-verilog--yosys" id="toc-b2-กับดักฝั่ง-verilog--yosys">B.2 กับดักฝั่ง Verilog / Yosys</a></li>
+<li><a href="#b3-กับดักฝั่ง-tcl--modelsim" id="toc-b3-กับดักฝั่ง-tcl--modelsim">B.3 กับดักฝั่ง Tcl / ModelSim</a></li>
+<li><a href="#b4-กับดักฝั่ง-wsl--linux" id="toc-b4-กับดักฝั่ง-wsl--linux">B.4
+กับดักฝั่ง WSL / Linux</a></li>
+<li><a href="#b5-กับดักฝั่ง-windows-batch" id="toc-b5-กับดักฝั่ง-windows-batch">B.5 กับดักฝั่ง Windows batch</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-c--ตรวจโค้ดด้วย-ghdl-ไม่ต้องมี-modelsim" id="toc-ภาคผนวก-c--ตรวจโค้ดด้วย-ghdl-ไม่ต้องมี-modelsim">ภาคผนวก C —
+ตรวจโค้ดด้วย GHDL (ไม่ต้องมี ModelSim)</a>
+<ul>
+<li><a href="#ผลลัพธ์จริง-9" id="toc-ผลลัพธ์จริง-9">ผลลัพธ์จริง</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-d--แบบฝึกหัด-เฉลยทุกข้อรันจริงแล้ว" id="toc-ภาคผนวก-d--แบบฝึกหัด-เฉลยทุกข้อรันจริงแล้ว">ภาคผนวก D — แบบฝึกหัด
+(เฉลยทุกข้อรันจริงแล้ว)</a>
+<ul>
+<li><a href="#d1---ggate-เปลี่ยนพฤติกรรมจริงหรือไม่" id="toc-d1---ggate-เปลี่ยนพฤติกรรมจริงหรือไม่">D.1 — <code>-gGATE</code>
+เปลี่ยนพฤติกรรมจริงหรือไม่?</a></li>
+<li><a href="#d2--ลืม--t-10ps-เกิดอะไรขึ้น" id="toc-d2--ลืม--t-10ps-เกิดอะไรขึ้น">D.2 — ลืม <code>-t 10ps</code>
+เกิดอะไรขึ้น?</a></li>
+<li><a href="#d3--บั๊กสลับ-d-ของ-q0-กับ-q1" id="toc-d3--บั๊กสลับ-d-ของ-q0-กับ-q1">D.3 — บั๊กสลับ D ของ q[0] กับ
+q[1]</a></li>
+<li><a href="#d4--บั๊กสลับ-d-ของ-q2-กับ-q3" id="toc-d4--บั๊กสลับ-d-ของ-q2-กับ-q3">D.4 — บั๊กสลับ D ของ q[2] กับ
+q[3]</a></li>
+<li><a href="#d5--เปรียบเทียบบั๊กทั้งสามแบบ" id="toc-d5--เปรียบเทียบบั๊กทั้งสามแบบ">D.5 — เปรียบเทียบบั๊กทั้งสามแบบ</a></li>
+<li><a href="#d6--จำนวนเซลล์และ-flip-flop-ของแต่ละดีไซน์" id="toc-d6--จำนวนเซลล์และ-flip-flop-ของแต่ละดีไซน์">D.6 — จำนวนเซลล์และ
+flip-flop ของแต่ละดีไซน์</a></li>
+<li><a href="#d7--ชนิดเซลล์ในไลบรารี-sg13g2" id="toc-d7--ชนิดเซลล์ในไลบรารี-sg13g2">D.7 — ชนิดเซลล์ในไลบรารี
+SG13G2</a></li>
+<li><a href="#d8--ลบโฟลเดอร์-results-แล้วรัน" id="toc-d8--ลบโฟลเดอร์-results-แล้วรัน">D.8 — ลบโฟลเดอร์
+<code>results/</code> แล้วรัน</a></li>
+<li><a href="#d9--entity-workcnt4-ต่างจาก-component-cnt4-อย่างไร" id="toc-d9--entity-workcnt4-ต่างจาก-component-cnt4-อย่างไร">D.9 —
+<code>entity work.cnt4</code> ต่างจาก <code>component cnt4</code>
+อย่างไร?</a></li>
+<li><a href="#d10--เขียน-tcl-หาเซลล์ใน-netlist" id="toc-d10--เขียน-tcl-หาเซลล์ใน-netlist">D.10 — เขียน Tcl หาเซลล์ใน
+netlist</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-e--ตัวเลขอ้างอิงทั้งหมด" id="toc-ภาคผนวก-e--ตัวเลขอ้างอิงทั้งหมด">ภาคผนวก E — ตัวเลขอ้างอิงทั้งหมด</a>
+<ul>
+<li><a href="#e1-เครื่องมือ" id="toc-e1-เครื่องมือ">E.1 เครื่องมือ</a></li>
+<li><a href="#e2-ไฟล์ชุดเซลล์" id="toc-e2-ไฟล์ชุดเซลล์">E.2 ไฟล์ชุดเซลล์</a></li>
+<li><a href="#e3-ไลบรารีเซลล์-lab-03" id="toc-e3-ไลบรารีเซลล์-lab-03">E.3
+ไลบรารีเซลล์ (LAB 03)</a></li>
+<li><a href="#e4-netlist-ทั้ง-4-ดีไซน์" id="toc-e4-netlist-ทั้ง-4-ดีไซน์">E.4
+netlist ทั้ง 4 ดีไซน์</a></li>
+<li><a href="#e5-ผลการรันทุก-lab" id="toc-e5-ผลการรันทุก-lab">E.5 ผลการรันทุก
+lab</a></li>
+<li><a href="#e6-trace-มาตรฐานที่ใช้เทียบ" id="toc-e6-trace-มาตรฐานที่ใช้เทียบ">E.6 trace มาตรฐานที่ใช้เทียบ</a></li>
+<li><a href="#e7-exit-code-ของ-vsim" id="toc-e7-exit-code-ของ-vsim">E.7
+exit code ของ <code>vsim</code></a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-f--ไฟล์ทั้งหมดในโปรเจกต์" id="toc-ภาคผนวก-f--ไฟล์ทั้งหมดในโปรเจกต์">ภาคผนวก F — ไฟล์ทั้งหมดในโปรเจกต์</a>
+<ul>
+<li><a href="#แผนผัง-lab" id="toc-แผนผัง-lab">แผนผัง lab</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-g--วิธีแก้ปัญหาแบบเร็ว" id="toc-ภาคผนวก-g--วิธีแก้ปัญหาแบบเร็ว">ภาคผนวก G — วิธีแก้ปัญหาแบบเร็ว</a>
+<ul>
+<li><a href="#ขั้นที่-1--ดูว่า-fail-ที่ไหน" id="toc-ขั้นที่-1--ดูว่า-fail-ที่ไหน">ขั้นที่ 1
+— ดูว่า fail ที่ไหน</a></li>
+<li><a href="#ขั้นที่-2--เช็คว่าเรียกจากโฟลเดอร์ถูก" id="toc-ขั้นที่-2--เช็คว่าเรียกจากโฟลเดอร์ถูก">ขั้นที่ 2 —
+เช็คว่าเรียกจากโฟลเดอร์ถูก</a></li>
+<li><a href="#ขั้นที่-3--ตรวจ-license" id="toc-ขั้นที่-3--ตรวจ-license">ขั้นที่ 3 —
+ตรวจ license</a></li>
+<li><a href="#ขั้นที่-4--ดูว่า-design-ผูกกับอะไร" id="toc-ขั้นที่-4--ดูว่า-design-ผูกกับอะไร">ขั้นที่ 4 — ดูว่า design ผูกกับอะไร</a></li>
+<li><a href="#ขั้นที่-5--เทียบกับ-trace-มาตรฐาน-ภาคผนวก-e6" id="toc-ขั้นที่-5--เทียบกับ-trace-มาตรฐาน-ภาคผนวก-e6">ขั้นที่ 5 — เทียบกับ trace
+มาตรฐาน (ภาคผนวก E.6)</a></li>
+<li><a href="#ขั้นที่-6--ถ้ายังไม่ออก-ให้รัน-ghdl" id="toc-ขั้นที่-6--ถ้ายังไม่ออก-ให้รัน-ghdl">ขั้นที่ 6 — ถ้ายังไม่ออก ให้รัน GHDL</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-h--สรุปสิ่งที่ต้องจำ" id="toc-ภาคผนวก-h--สรุปสิ่งที่ต้องจำ">ภาคผนวก H — สรุปสิ่งที่ต้องจำ</a></li>
+</ul>
+</nav>
+<h2 id="ภาคนำ">ภาคนำ</h2>
+<h3 id="คู่มือนี้คืออะไร">คู่มือนี้คืออะไร</h3>
+<p>คู่มือนี้สอน <strong>การจำลองระดับ gate (Gate-Level Simulation,
+GLS)</strong> ด้วย QuestaSim / ModelSim
+ตั้งแต่พื้นฐานจนถึงระดับที่เอาไปใช้ต่อในงานจริงได้ แยกเป็น <strong>8 lab
+แบบทีละขั้น</strong> ที่ทำตามแล้วรันได้จริงทุกขั้น</p>
+<p>จุดต่างของคู่มือนี้คือ
+<strong>ตัวเลขและข้อความทุกตัวมาจากการรันจริงบนเครื่อง</strong> ไม่ใช่ตัวอย่างที่แต่งขึ้น
+— ทำซ้ำตามคู่มือแล้วจะได้ผลชุดเดียวกัน</p>
+<h3 id="จุดต่างสำคัญของฉบับนี้-rtl-เขียนด้วย-vhdl">จุดต่างสำคัญของฉบับนี้: <strong>RTL
+เขียนด้วย VHDL</strong></h3>
+<p>โค้ดทั้งหมดในคู่มือนี้เริ่มต้นจาก <strong>VHDL</strong> ทั้งหมด</p>
+<pre class="text"><code>RTL (VHDL)  --ghdl synth--&gt;  Verilog  --Yosys+Liberty--&gt;  gate netlist (Verilog)
+     |                                                              |
+     +--------------- testbench VHDL ชุดเดียวกัน --------------------+</code></pre>
+<p>นี่คือสถานการณ์ที่พบบ่อยที่สุดในอุตสาหกรรม ASIC จริง: <strong>RTL เขียนด้วย VHDL
+แต่สังเคราะห์และจำลองระดับ gate ด้วย Verilog</strong>
+เครื่องมือที่ต้องใช้จึงมีทั้งสองภาษา</p>
+<p>คู่มือนี้จึงต้องสอนเรื่องที่หลายคู่มือข้ามไป คือ <strong>การทำให้ testbench VHDL
+ชุดเดียว ขับได้ทั้งระดับ RTL (VHDL) และระดับ gate (Verilog)</strong> —
+ซึ่งเป็นหัวใจของ LAB 01 ถึง LAB 05</p>
+<h3 id="ผู้เรียนจะได้อะไร">ผู้เรียนจะได้อะไร</h3>
+<p>เมื่อทำครบทุก lab ผู้เรียนจะทำสิ่งเหล่านี้ได้ด้วยตัวเอง</p>
+<ol type="1">
+<li>เขียน <strong>RTL ภาษา VHDL</strong> และแปลงเป็น Verilog ด้วย
+<code>ghdl synth</code> แล้วสังเคราะห์ต่อเป็น gate netlist ด้วย Yosys +
+Liberty ของ IHP SG13G2</li>
+<li>ใช้ <strong>testbench VHDL ชุดเดียวกัน</strong> ขับทั้งระดับ RTL และระดับ
+gate โดยเปลี่ยนแค่ไฟล์ที่คอมไพล์เข้าไลบรารี <code>work</code></li>
+<li>อธิบายได้ว่า <strong>RTL simulation กับ gate level simulation
+ต่างกันอย่างไร</strong> และอะไรที่ gate level จับได้แต่ RTL จับไม่ได้</li>
+<li>อ่าน <strong>เซลล์มาตรฐาน</strong> ของ SG13G2 และเข้าใจว่า Liberty,
+Verilog model และ timing check ของแต่ละเซลล์เป็นอย่างไร</li>
+<li>จับ <strong>บั๊กใน netlist</strong> ที่การจำลองระดับ RTL มองไม่เห็น</li>
+<li>สร้าง <strong>regression</strong> ของการจำลองระดับ gate
+ที่รันซ้ำได้และรหัสจบนำไปใช้กับ CI ได้</li>
+</ol>
+<h3 id="วิธีใช้คู่มือนี้">วิธีใช้คู่มือนี้</h3>
+<p>ทุก lab มีโครงสร้างเดียวกัน</p>
+<pre class="text"><code>labNN_xxx/
+├── run.cmd          ตัวรันแบบ Windows  (เลือกเครื่องมือ + ตัดสิน PASS/FAIL)
+├── run_batch.do     สคริปต์ Tcl ที่ vsim จะทำงาน
+├── run_rtl.do       สคริปต์จำลองระดับ RTL   (มีใน lab ที่เทียบสองระดับ)
+├── run_gls.do       สคริปต์จำลองระดับ gate (มีใน lab ที่เทียบสองระดับ)
+└── results/         ผลลัพธ์จากการรัน</code></pre>
+<p>รัน lab เดียวด้วย</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> questa_gls_vhdl_lab\lab05_rtl_vs_gate</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p>แล้วดูรหัสจบของ <code>cmd.exe</code></p>
+<table>
+<thead>
+<tr>
+<th>รหัส</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>ผ่าน (PASS)</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>ไม่ผ่าน (FAIL)</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>หาเครื่องมือหรือโฟลเดอร์ไม่เจอ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ข้อตกลงเบื้องต้น">ข้อตกลงเบื้องต้น</h3>
+<ul>
+<li>ต้องมี <strong>QuestaSim หรือ ModelSim 2026.1</strong> (วิธีติดตั้งและ
+license อยู่ในหัวข้อ 1.2)</li>
+<li>ต้องมี <strong>IHP SG13G2</strong> (ไฟล์ Verilog model และ Liberty อยู่ใน
+<code>cells/</code> แล้ว ไม่ต้องติดตั้งอะไรเพิ่ม)</li>
+<li><strong>Yosys และ GHDL ใช้เฉพาะตอนสังเคราะห์ netlist ใหม่</strong>
+และต้องรันใน WSL (หัวข้อ 2.2) netlist ที่สังเคราะห์ไว้แล้วอยู่ใน
+<code>netlist/</code> ของคู่มือนี้ ดังนั้น <strong>ทุก lab ที่เป็นการจำลอง รันได้บน
+Windows ล้วน ๆ</strong></li>
+<li>ถ้าไม่มี ModelSim เลย <strong>ยังตรวจโค้ด VHDL ทั้งหมดได้ด้วย GHDL</strong>
+(ภาคผนวก C)</li>
+</ul>
+<hr />
+<h2 id="บทที่-1--เตรียมเครื่องมือ">บทที่ 1 — เตรียมเครื่องมือ</h2>
+<h3 id="11-เครื่องมือที่ใช้-ทุกตัววัดจริงบนเครื่องนี้">1.1 เครื่องมือที่ใช้
+(ทุกตัววัดจริงบนเครื่องนี้)</h3>
+<table>
+<thead>
+<tr>
+<th>เครื่องมือ</th>
+<th>เวอร์ชันที่วัดได้</th>
+<th>ใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ModelSim DE-64</td>
+<td><code>vsim 2026.1 Simulator 2026.01 Jan 25 2026</code></td>
+<td>จำลองระดับ RTL และระดับ gate</td>
+</tr>
+<tr>
+<td>Questa Sim-64</td>
+<td><code>vsim 2026.1 Simulator 2026.01 Jan 25 2026</code></td>
+<td>เหมือนกัน (เป็นชุดเต็ม)</td>
+</tr>
+<tr>
+<td>GHDL</td>
+<td><code>5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]</code></td>
+<td>แปลง VHDL เป็น Verilog (<code>ghdl synth</code>)</td>
+</tr>
+<tr>
+<td>GNAT (ตัวหลัง GHDL)</td>
+<td><code>14.2.0</code></td>
+<td>คอมไพล์ VHDL</td>
+</tr>
+<tr>
+<td>Yosys</td>
+<td><code>0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)</code></td>
+<td>สังเคราะห์ Verilog → netlist</td>
+</tr>
+<tr>
+<td>ABC (ใน Yosys)</td>
+<td>เป็นส่วนหนึ่งของ Yosys 0.52</td>
+<td>map logic เข้าเซลล์จริงตาม Liberty</td>
+</tr>
+<tr>
+<td>Icarus Verilog</td>
+<td><code>12.0 (stable)</code></td>
+<td>ใช้ตรวจ netlist เบา ๆ (ไม่จำเป็น)</td>
+</tr>
+<tr>
+<td>IHP SG13G2</td>
+<td><code>sg13g2_stdcell_typ_1p20V_25C</code></td>
+<td>ชุดเซลล์มาตรฐาน: Liberty + Verilog model</td>
+</tr>
+</tbody>
+</table>
+<p>ไฟล์ชุดเซลล์ที่ใช้จริง</p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>ขนาด</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cells/sg13g2_stdcell.v</code></td>
+<td>56,308 bytes</td>
+<td>โมเดลการจำลองของเซลล์ทั้งหมด 84 เซลล์</td>
+</tr>
+<tr>
+<td><code>cells/sg13g2_udp.v</code></td>
+<td>13,561 bytes</td>
+<td>user defined primitives ที่เซลล์อ้างถึง</td>
+</tr>
+<tr>
+<td><code>cells/sg13g2_stdcell_typ_1p20V_25C.lib</code></td>
+<td>1,748,984 bytes</td>
+<td>Liberty ของ corner typ (1.20 V / 25 °C)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>ไฟล์เซลล์ทั้งสองเป็นของ IHP PDK Authors แบบ Apache License 2.0
+(มีหัวข้อลิขสิทธิ์อยู่ในไฟล์ต้นฉบับ)</p>
+</blockquote>
+<h3 id="12--เรื่องใบอนุญาต-license--อ่านให้เข้าใจก่อนทำ-lab">1.2 ⚠ เรื่องใบอนุญาต
+(license) — อ่านให้เข้าใจก่อนทำ lab</h3>
+<p>ใบอนุญาตของเครื่องนี้เป็น <strong>node-locked แบบ session เดียว</strong> คือ
+<strong>จำลองได้ทีละ session เท่านั้น</strong></p>
+<p>ถ้ามี <strong>QuestaSim GUI</strong> เปิดค้างอยู่
+(<code>vish.exe -gui</code>) มันจะถือ seat ของชุด QuestaSim
+การรันแบบบรรทัดคำสั่งด้วยชุดนั้นจะถูกปฏิเสธว่า</p>
+<pre class="text"><code>** Error: License checkout has been disallowed because
+only one session is allowed to run on an uncounted nodelocked
+license and an instance of QuestaSim is already running with a
+nodelocked license on this machine.</code></pre>
+<p>แต่ <strong>ModelSim DE-64 ยังรันได้ตามปกติ</strong> เพราะเป็นอีก seat
+หนึ่ง</p>
+<p>ทางแก้ที่คู่มือนี้ใช้: <strong>ไม่ hardcode path ของชุดติดตั้งเลย</strong> แต่ให้
+<code>tools/pick_tool.cmd</code> ไล่ทดสอบ license จริงของแต่ละชุด (คอมไพล์
+design จิ๋วแล้วโหลดจริง — เพราะ license ถูกเช็คตอน &quot;โหลด design&quot; เท่านั้น)
+แล้วเลือกชุดแรกที่ใช้ได้</p>
+<p>ผลที่วัดได้จริงขณะที่ QuestaSim GUI ยังเปิดค้างอยู่</p>
+<pre class="text"><code> tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe</code></pre>
+<p>ถ้าอยากบังคับให้ใช้ชุดใดชุดหนึ่ง ให้ตั้ง <code>QUESTASIM_HOME</code> หรือ
+<code>MODELSIM_HOME</code></p>
+<h3 id="13-โครงสร้างโฟลเดอร์ของคู่มือ">1.3 โครงสร้างโฟลเดอร์ของคู่มือ</h3>
+<pre class="text"><code>questa_gls_vhdl_lab/
+├── docs/                     คู่มือฉบับนี้ (Markdown / HTML / PDF)
+├── tools/
+│   ├── pick_tool.cmd          เลือกชุดติดตั้งที่ยังมี license ว่าง (ใช้ร่วมกันทุก lab)
+│   ├── run_template.cmd       เทมเพลต run.cmd ของ lab ที่จำลองครั้งเดียว
+│   ├── run_template_2step.cmd เทมเพลต run.cmd ของ lab ที่ต้องรันสองครั้ง
+│   ├── make-runners.ps1       ตัวสร้าง run.cmd ของทุก lab
+│   ├── gls_common.do          proc ช่วยเหลือที่ทุก lab ใช้ร่วมกัน
+│   ├── check_vhdl.sh          ตรวจ VHDL ทั้งหมดด้วย GHDL (รันใน WSL)
+│   ├── synth/synth.sh         สคริปต์สังเคราะห์ VHDL -&gt; netlist (รันใน WSL)
+│   ├── build-docs.ps1         รวม Markdown แล้วสร้าง HTML + PDF
+│   └── probe/probe_top.vhd    design จิ๋วสำหรับ license probe
+├── rtl/                       โค้ด RTL ที่ใช้ในคู่มือ (VHDL)
+│   ├── cnt4.vhd               ตัวนับ 4 บิต
+│   ├── alu4.vhd               ALU 4 บิต
+│   ├── fsm_light.vhd          FSM ไฟสัญญาณจราจร
+│   └── sr16.vhd               shift register 16 บิต
+├── netlist/                   gate netlist ที่สังเคราะห์ไว้แล้ว
+│   ├── cnt4_net.v             netlist ปกติ
+│   ├── cnt4_bug_net.v         netlist ที่ใส่บั๊กไว้ (LAB 07)
+│   ├── vhdl2verilog/          Verilog กลางที่ GHDL สร้างแล้ว Yosys อ่านเข้าไป
+│   ├── *_stat.txt             สถิติจาก Yosys
+│   └── *_synth.log            log ฉบับเต็มของการสังเคราะห์
+├── cells/                     โมเดลเซลล์ + Liberty ของ SG13G2
+├── tb/                        testbench VHDL ที่ใช้ร่วมกันทุก lab
+├── lab01_rtl_baseline/        ... lab08_gls_regression/
+└── lab08_gls_regression/results/   ผลรวมของทั้งชุด</code></pre>
+<blockquote>
+<p><strong>จุดสำคัญของโครงสร้างนี้</strong> <code>rtl/</code>,
+<code>netlist/</code>, <code>cells/</code> และ <code>tb/</code>
+อยู่ระดับเดียวกัน และแต่ละ lab อ้างถึงด้วยพาธแบบสัมพัทธ์
+(<code>../rtl/cnt4.vhd</code>) ทำให้ <strong>testbench
+ชุดเดียวกันถูกใช้ได้ทั้งระดับ RTL และระดับ gate</strong> ซึ่งเป็นหัวใจของคู่มือนี้</p>
+</blockquote>
+<h3 id="14-rtl-กับ-gate-level-ต่างกันอย่างไร">1.4 RTL กับ gate level
+ต่างกันอย่างไร</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>RTL simulation</th>
+<th>Gate level simulation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>สิ่งที่จำลอง</td>
+<td>พฤติกรรมที่เขียนไว้ (<code>process (clk, rst_n)</code>)</td>
+<td>โครงสร้างจริงของวงจร (ทรานซิสเตอร์ → เกต → เซลล์)</td>
+</tr>
+<tr>
+<td>โมเดลของ flip-flop</td>
+<td>ตัวแปร <code>unsigned</code> ที่มีพฤติกรรมตามโค้ด</td>
+<td><code>sg13g2_dfrbpq_1</code> ที่มี timing check และ specify block</td>
+</tr>
+<tr>
+<td>ค่า <code>x</code></td>
+<td>มักถูกกลืนหายไป</td>
+<td>แพร่ผ่านเกตตามธรรมชาติ</td>
+</tr>
+<tr>
+<td>เวลาที่ใช้</td>
+<td>เวลาจำลองเท่ากันหมด (delta cycle)</td>
+<td>เวลาหน่วงจริงของเซลล์ (ถ้าใส่ SDF)</td>
+</tr>
+<tr>
+<td>ขนาด</td>
+<td>เล็ก</td>
+<td>ใหญ่กว่ามาก (นับจาก 11 เซลล์ ถึงหลายพัน)</td>
+</tr>
+<tr>
+<td>จับบั๊กได้</td>
+<td>บั๊กเชิงตรรกะ</td>
+<td>บั๊กเชิงตรรกะ <strong>และ</strong> บั๊กของตัวสังเคราะห์/ของ netlist</td>
+</tr>
+</tbody>
+</table>
+<h3 id="15-gls-จับอะไรได้ที่-rtl-ไม่จับ">1.5 GLS จับอะไรได้ที่ RTL ไม่จับ</h3>
+<p>คู่มือนี้จะให้พิสูจน์ด้วยการรันจริง 3 เรื่อง</p>
+<ol type="1">
+<li><strong>ค่า <code>x</code> ที่ RTL กลืนไว้ แต่ gate level จับได้</strong> —
+LAB 06</li>
+<li><strong>บั๊กใน netlist ที่ไม่มีใน RTL</strong> — LAB 07</li>
+<li><strong>ความจริงของโครงสร้างวงจร</strong> — จำนวนเซลล์จริง, ชนิดเซลล์จริง,
+flip-flop จริง — LAB 02</li>
+</ol>
+<h3 id="16-คำสั่งพื้นฐานที่ใช้บ่อย">1.6 คำสั่งพื้นฐานที่ใช้บ่อย</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>vlib work                 <span class="op">::</span> สร้างไลบรารีชื่อ work</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vmap work work            <span class="op">::</span> ผูกชื่อ work ให้โฟลเดอร์ work</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work work x.vhd <span class="op">::</span> คอมไพล์ VHDL เข้าไลบรารี work</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>vlog -work work x.v       <span class="op">::</span> คอมไพล์ Verilog เข้าไลบรารี work</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>vsim -t <span class="dv">10</span>ps -voptargs<span class="op">=+</span>acc work.tb_cnt4 <span class="op">::</span> โหลด design (<span class="op">+</span>acc ถ้าจะดูค่าใน hierarchy)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>run -all                  <span class="op">::</span> จำลองจนจบ</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>quit -f                   <span class="op">::</span> ออกจากตัวจำลอง</span></code></pre></div>
+<p>ส่วน VHDL ที่ใช้ในคู่มือนี้</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>vsim -t <span class="dv">10</span>ps work.tb_cnt4 -gTRACEFILE<span class="op">=</span>results<span class="op">/</span>trace.txt -gRESULTFILE<span class="op">=</span>results<span class="op">/</span>result.txt</span></code></pre></div>
+<p>คำสั่ง <code>-g&lt;ชื่อ&gt;=&lt;ค่า&gt;</code> ส่งค่าเข้าไปใน <strong>generic
+ของ entity</strong> ของ testbench คู่มือนี้ใช้ generic 3 ตัวกับทุก testbench</p>
+<table>
+<thead>
+<tr>
+<th>generic</th>
+<th>ชนิด</th>
+<th>ค่าเริ่มต้น</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TRACEFILE</code></td>
+<td><code>string</code></td>
+<td><code>&quot;trace.txt&quot;</code></td>
+<td>ไฟล์ที่จะเขียน trace</td>
+</tr>
+<tr>
+<td><code>RESULTFILE</code></td>
+<td><code>string</code></td>
+<td><code>&quot;result.txt&quot;</code></td>
+<td>ไฟล์ที่จะเขียนคำตัดสิน <code>PASS</code> / <code>FAIL</code></td>
+</tr>
+<tr>
+<td><code>GATE</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td><code>true</code> = บอก testbench ว่านี่คือการรันระดับ gate</td>
+</tr>
+</tbody>
+</table>
+<h3 id="17-หัวใจของคู่มือนี้--testbench-ชุดเดียว-ขับทั้งสองระดับ">1.7 หัวใจของคู่มือนี้ —
+testbench ชุดเดียว ขับทั้งสองระดับ</h3>
+<p>นี่คือปัญหาหลักของการผสม VHDL กับ Verilog: <strong>ถ้า testbench เขียน
+<code>entity work.cnt4</code> มันจะผูกกับ entity ของ VHDL เท่านั้น
+และจะไม่มีทางขับ Verilog netlist ได้เลย</strong></p>
+<p>วิธีแก้คือ <strong>ประกาศ DUT เป็น <code>component</code></strong> แทน
+<code>entity</code> แล้วปล่อยให้ ModelSim ทำ <strong>default
+binding</strong> ซึ่งจะผูก <code>component</code> ที่มีชื่อเดียวกัน เข้ากับ design
+unit ที่ชื่อนั้นในไลบรารี <code>work</code> ไม่ว่าจะเป็น VHDL entity หรือ Verilog
+module</p>
+<p><code>tb/tb_cnt4.vhd</code> (ตัดเฉพาะส่วนสำคัญ)</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">library</span> ieee;</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> ieee<span class="ot">.</span>std_logic_1164<span class="ot">.</span><span class="kw">all</span>;</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> ieee<span class="ot">.</span>numeric_std<span class="ot">.</span><span class="kw">all</span>;</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="cf">entity</span> <span class="dv">tb_cnt4</span> <span class="kw">is</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">generic</span> (</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    TRACEFILE  <span class="ot">:</span> <span class="dt">string</span>  <span class="ot">:=</span> <span class="st">&quot;trace.txt&quot;</span>;</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    RESULTFILE <span class="ot">:</span> <span class="dt">string</span>  <span class="ot">:=</span> <span class="st">&quot;result.txt&quot;</span>;</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    GATE       <span class="ot">:</span> <span class="dt">boolean</span> <span class="ot">:=</span> <span class="kw">false</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  );</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="cf">end entity tb_cnt4;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="cf">architecture</span> <span class="dv">sim</span> <span class="kw">of</span> <span class="fu">tb_cnt4</span> <span class="kw">is</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="ot">constant</span> CYCLE <span class="ot">:</span> <span class="dt">time</span> <span class="ot">:=</span> <span class="dv">10</span> <span class="dt">ns</span>;</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="ot">signal</span> clk   <span class="ot">:</span> <span class="dt">std_logic</span> <span class="ot">:=</span> <span class="bn">&#39;0&#39;</span>;</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="ot">signal</span> rst_n <span class="ot">:</span> <span class="dt">std_logic</span> <span class="ot">:=</span> <span class="bn">&#39;0&#39;</span>;</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="ot">signal</span> en    <span class="ot">:</span> <span class="dt">std_logic</span> <span class="ot">:=</span> <span class="bn">&#39;1&#39;</span>;</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="ot">signal</span> q     <span class="ot">:</span> <span class="dt">std_logic_vector</span>(<span class="dv">3</span> <span class="ot">downto</span> <span class="dv">0</span>);</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- ประกาศเป็น COMPONENT ไม่ใช่ entity work.cnt4</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">component</span> <span class="dv">cnt4</span> <span class="kw">is</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">port</span> (</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>      clk   <span class="ot">:</span> <span class="kw">in</span>  <span class="dt">std_logic</span>;</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>      rst_n <span class="ot">:</span> <span class="kw">in</span>  <span class="dt">std_logic</span>;</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>      en    <span class="ot">:</span> <span class="kw">in</span>  <span class="dt">std_logic</span>;</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>      q     <span class="ot">:</span> <span class="kw">out</span> <span class="dt">std_logic_vector</span>(<span class="dv">3</span> <span class="ot">downto</span> <span class="dv">0</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    );</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">end component cnt4;</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="cf">begin</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  clk <span class="ot">&lt;=</span> <span class="kw">not</span> clk <span class="kw">after</span> CYCLE <span class="ot">/</span> <span class="dv">2</span>;</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="dv">dut</span> <span class="ot">:</span> <span class="fu">cnt4</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">port map </span>(</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>      clk   <span class="ot">=&gt;</span> clk<span class="ot">,</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>      rst_n <span class="ot">=&gt;</span> rst_n<span class="ot">,</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>      en    <span class="ot">=&gt;</span> en<span class="ot">,</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>      q     <span class="ot">=&gt;</span> q</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    );</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- ... ส่วน stimulus ...</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="cf">end architecture sim;</span></span></code></pre></div>
+<p>จากนั้นสลับแค่ <strong>ไฟล์ที่คอมไพล์เข้า <code>work</code></strong> ก็พอ</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- ระดับ RTL : VHDL entity ---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work work ..<span class="op">/</span>rtl<span class="op">/</span>cnt4.vhd</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work work ..<span class="op">/</span>tb<span class="op">/</span>tb_cnt4.vhd</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>vsim -t <span class="dv">10</span>ps work.tb_cnt4 -gTRACEFILE<span class="op">=</span>results<span class="op">/</span>trace_rtl.txt -gGATE<span class="op">=</span>false</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># --- ระดับ gate : Verilog module ---</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>vlog -work work ..<span class="op">/</span>cells<span class="op">/</span>sg13g2_stdcell.v</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>vlog -work work ..<span class="op">/</span>netlist<span class="op">/</span>cnt4_net.v</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>vcom -<span class="dv">2008</span> -work work ..<span class="op">/</span>tb<span class="op">/</span>tb_cnt4.vhd</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>vsim -t <span class="dv">10</span>ps work.tb_cnt4 -gTRACEFILE<span class="op">=</span>results<span class="op">/</span>trace_gls.txt -gGATE<span class="op">=</span>true</span></code></pre></div>
+<p>ข้อสังเกตสำคัญจากการรันจริง: <strong>ข้อความใน console ของ ModelSim
+บอกได้ว่าผูกกับอะไร</strong></p>
+<pre class="text"><code># RTL  : Loading work.cnt4(rtl)      &lt;- ผูกกับ entity ของ VHDL
+# GLS  : Loading work.cnt4            &lt;- ผูกกับ module ของ Verilog</code></pre>
+<h4 id="อีกทางหนึ่งที่ใช้ได้-แต่คู่มือนี้เลือกไม่ใช้">อีกทางหนึ่งที่ใช้ได้ แต่คู่มือนี้เลือกไม่ใช้</h4>
+<p>การทดลองจริงพบว่า ModelSim 2026.1 <strong>ผูก entity declaration ของ
+VHDL เข้ากับ Verilog module ที่ชื่อเดียวกันได้เลย</strong> (mixed-language
+default binding)</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- รูปแบบที่ใช้ได้ใน ModelSim แต่ไม่ใช้ในคู่มือนี้</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>dut <span class="ot">:</span> <span class="cf">entity</span> <span class="dv">work</span><span class="ot">.</span>cnt4 <span class="kw">port</span> <span class="kw">map</span> ( <span class="ot">...</span> );</span></code></pre></div>
+<p>เมื่อทดลองให้ <code>entity work.cnt4</code> ไปขับ netlist ของ Verilog
+ModelSim ผูกได้จริง และเซลล์ทั้งหมดถูกโหลดเข้ามา</p>
+<pre class="text"><code># Loading work.tb_cnt4_entity(sim)
+# Loading work.cnt4
+# Loading work.sg13g2_nand3_1
+# Loading work.sg13g2_dfrbpq_1
+# Loading work.ihp_dff_r</code></pre>
+<p>และ trace ที่ได้คือ <code>q=1,2,3,4,5,6,7,8,9</code> — ตัวนับเดินจริง</p>
+<p><strong>แต่คู่มือนี้ยังเลือกใช้ <code>component</code></strong>
+เพราะเหตุผลสามข้อ</p>
+<ol type="1">
+<li><strong>เป็นวิธีมาตรฐานและ portable</strong> — กฎ default binding ของ
+LRM ให้ผูกได้ทั้งสองภาษา วิธี <code>entity work.x</code> ผูก Verilog module
+เป็นความสามารถเฉพาะของ ModelSim เมื่อย้ายไปใช้ Questa/ตัวจำลองอื่น หรือเอา
+testbench ไปใช้กับ GHDL วิธี <code>component</code> ยังทำงาน ส่วน
+<code>entity work.x</code> ไม่แน่นอน</li>
+<li><strong>อ่านง่ายกว่า</strong> — เห็นชัดว่ากำลังผูกกับ &quot;ชื่อ&quot; ไม่ใช่ &quot;entity ใด
+entity หนึ่ง&quot;</li>
+<li><strong>ถ้าชื่อไม่ตรง จะได้ข้อความ error ที่ชัดเจน</strong> ตอนคอมไพล์ ไม่ใช่
+error ลอย ๆ ตอนโหลด design</li>
+</ol>
+<blockquote>
+<p>บทเรียนที่ควรจำ: <strong>ชื่อ entity และชื่อ module ต้องตรงกัน</strong>
+นี่คือเหตุผลที่ <code>rtl/*.vhd</code> และ <code>netlist/*_net.v</code>
+ต้องตั้งชื่อให้เหมือนกันทุกตัวอักษร</p>
+</blockquote>
+<h3 id="18-กฎการผสม-vhdl-กับ-verilog-วัดแล้วพลาดได้จริง">1.8 กฎการผสม VHDL กับ
+Verilog (วัดแล้วพลาดได้จริง)</h3>
+<ol type="1">
+<li><p><strong>ชื่อ entity/module
+ต้องตรงกันทุกตัวอักษรและเป็นตัวพิมพ์เล็กทั้งหมด</strong> Verilog เป็น case-sensitive
+และ VHDL ก็ case-sensitive เช่นกัน ชื่อ <code>fsm_light</code> ต้องตรงกันจริง ๆ
+ไม่ใช่ <code>FSM_Light</code> หรือ <code>fsm_Light</code></p></li>
+<li><p><strong>ชื่อ port ต้องตรงกันและเป็นตัวพิมพ์เล็ก</strong> เมื่อ GHDL แปลง
+VHDL เป็น Verilog มันจะ <strong>แปลงชื่อ port ทั้งหมดเป็นตัวพิมพ์เล็ก</strong> ดังนั้น
+<code>rst_n</code> ต้องเป็น <code>rst_n</code> ไม่ใช่ <code>RST_N</code>
+แม้ในไฟล์ VHDL จะเขียนตัวใหญ่ก็ได้</p></li>
+<li><p><strong>ชนิดของ port ต้องเข้ากันได้</strong>
+<code>std_logic_vector</code> ↔︎ Verilog <code>[3:0]</code> ผสมกันได้ แต่
+<code>unsigned</code> ต้องแปลงเป็น <code>std_logic_vector</code> ก่อนออกจาก
+entity</p></li>
+<li><p><strong><code>numeric_std</code> ไม่มี
+<code>std_logic_vector + integer</code></strong> ต้องใช้
+<code>unsigned</code> หรือ <code>unsigned_vector</code> ภายใน
+แล้วค่อยแปลงกลับที่ port</p></li>
+<li><p><strong>ค่าเริ่มต้นของ signal ต้องเป็น <code>:=</code> ใน
+declaration</strong> <code>signal clk : std_logic := &#39;0&#39;;</code> —
+ถ้าไม่ใส่ <code>:= &#39;0&#39;</code> นาฬิกาจะเริ่มเป็น <code>&#39;U&#39;</code> และ
+<code>not &#39;U&#39;</code> ก็ยังเป็น <code>&#39;U&#39;</code> →
+<strong>นาฬิกาจะไม่เดินเลย</strong> ตลอดการจำลอง</p></li>
+<li><p><strong><code>trim</code> และ <code>time&#39;image</code> ไม่มีใน GHDL
+VHDL-2008</strong> <code>integer&#39;image(5)</code> จะพิมพ์ <code>&quot; 5&quot;</code>
+(มีช่องว่างนำหน้า) ต้องตัดออก <code>time&#39;image</code> จะพิมพ์หน่วยตาม resolution
+ของตัวจำลอง ซึ่งต่างกันระหว่าง ModelSim กับ GHDL คู่มือนี้มี helper
+<code>nospace()</code> และ <code>timestr()</code> ใน testbench
+ทุกไฟล์เพื่อแก้ปัญหานี้</p></li>
+<li><p><strong>VHDL ใช้ <code>wait until rising_edge(clk)</code> ไม่ได้ถ้า
+clock เป็น <code>&#39;U&#39;</code></strong> ต้องประกาศ
+<code>signal clk : std_logic := &#39;0&#39;;</code> เสมอ (ข้อ 5)</p></li>
+</ol>
+<h3 id="19--ข้อผิดพลาดที่ต้องรู้ก่อนเริ่ม-vsim-3693">1.9 ⚠ ข้อผิดพลาดที่ต้องรู้ก่อนเริ่ม:
+<code>vsim-3693</code></h3>
+<p>ถ้าคอมไพล์เซลล์ Verilog ของ SG13G2 แล้วโหลด design <strong>โดยไม่ใส่
+<code>-t 10ps</code></strong> จะได้ข้อความนี้</p>
+<pre class="text"><code>** Fatal: (vsim-3693) The minimum time resolution limit (10ps)
+in the Verilog source is smaller than the one chosen for SystemC or VHDL
+units in the design. Use the vsim -t option to set the resolution.</code></pre>
+<p><strong>สาเหตุ:</strong> โมเดลเซลล์ของ SG13G2 ประกาศ
+<code>timescale 1ns/10ps</code> แต่ค่าเริ่มต้นของ ModelSim คือ 1 ps
+ซึ่ง<strong>ละเอียดกว่า</strong> 10 ps ModelSim จึงห้ามและให้เลือก resolution
+ที่หยาบพอ</p>
+<p><strong>วิธีแก้:</strong> ใส่ <code>-t 10ps</code> ในทุกคำสั่ง
+<code>vsim</code> ของโปรเจกต์นี้</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>vsim -t <span class="dv">10</span>ps -voptargs<span class="op">=+</span>acc work.tb_cnt4 ...</span></code></pre></div>
+<blockquote>
+<p>ข้อความนี้เป็นของจริงที่เจอระหว่างทำคู่มือนี้ ไม่ใช่ตัวอย่างสมมติ
+และเป็นข้อผิดพลาดที่มักพบบ่อยที่สุดเมื่อข้ามจาก Verilog มาใช้ VHDL</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-2--สังเคราะห์-netlist-จาก-vhdl">บทที่ 2 — สังเคราะห์ netlist จาก
+VHDL</h2>
+<h3 id="21-สายการผลิต">2.1 สายการผลิต</h3>
+<pre class="text"><code>rtl/cnt4.vhd  (VHDL)
+      │
+      │  ghdl synth --std=08 --out=verilog
+      ▼
+netlist/vhdl2verilog/cnt4_rtl.v  (Verilog)
+      │
+      │  yosys + sg13g2_stdcell_typ_1p20V_25C.lib
+      ▼
+netlist/cnt4_net.v  (gate netlist, Verilog)</code></pre>
+<p>จุดที่ต้องเข้าใจ: <strong>Yosys ไม่รู้จัก VHDL</strong> การใช้
+<code>yosys-ghdl</code> plugin ก็ยังยุ่งกว่าการให้ GHDL แปลงเป็น Verilog ก่อน
+เพราะ GHDL เป็นตัวแปลงที่เข้าใจ semantics ของ VHDL ดีกว่า (เช่น
+<code>std_logic_vector</code> ที่มีค่า <code>&#39;X&#39;</code> และ
+<code>&#39;Z&#39;</code>)</p>
+<p>คู่มือนี้เลือกวิธีที่ <strong>ตรวจสอบได้ง่ายที่สุด</strong> คือเก็บไฟล์ Verilog
+กลางไว้ให้ดู (<code>netlist/vhdl2verilog/</code>) เพื่อให้เห็นชัดว่า Yosys &quot;เห็น&quot;
+อะไร</p>
+<h3 id="22-เตรียม-wsl">2.2 เตรียม WSL</h3>
+<p>สคริปต์สังเคราะห์ต้องรันใน Linux (WSL) เพราะ Yosys และ GHDL ที่ติดตั้งอยู่ในนั้น</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wsl</span> <span class="at">-d</span> Ubuntu <span class="at">-u</span> root <span class="at">--</span> bash /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tools/synth/probe_env.sh</span></code></pre></div>
+<p>ผลจริงที่วัดได้</p>
+<pre class="text"><code>--- ghdl ---
+ghdl (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+ Compiled with GNAT Version: 14.2.0
+ static elaboration, mcode JIT code generator
+--- yosys ---
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+--- ghdl plugin ---
+ghdl.so
+--- liberty ---
+-rw-r--r-- 1 root root 1748984 ... sg13g2_stdcell_typ_1p20V_25C.lib
+--- iverilog / verilator ---
+Icarus Verilog version 12.0 (stable) ()</code></pre>
+<blockquote>
+<p><strong>หมายเหตุเรื่อง PATH</strong> <code>yosys-ghdl</code> plugin
+ที่ใช้จริงอยู่ที่
+<code>/nix/store/55al5ccngwgjgigi20jh6d3my8h9x0i2-yosys-ghdl-2026-01-11/share/yosys/plugins/ghdl.so</code>
+แต่ใน WSL แบบ non-interactive <strong>nix profile จะไม่ถูกโหลดใน PATH
+อัตโนมัติ</strong> สคริปต์จึงต้องมีบรรทัดนี้ทุกครั้ง</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PATH</span><span class="op">=</span><span class="st">&quot;/root/.nix-profile/bin:</span><span class="va">$PATH</span><span class="st">&quot;</span></span></code></pre></div>
+<p>ถ้าไม่ใส่ จะเจอ <code>librelane: command not found</code> หรือ
+<code>yosys: command not found</code> แม้ทั้งสองโปรแกรมจะมีอยู่จริง</p>
+</blockquote>
+<h3 id="23-ขั้นที่-1-ghdl-แปลง-vhdl-เป็น-verilog">2.3 ขั้นที่ 1: GHDL แปลง VHDL
+เป็น Verilog</h3>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ghdl</span> <span class="at">-a</span> <span class="at">--std</span><span class="op">=</span>08 rtl/cnt4.vhd</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="ex">ghdl</span> synth <span class="at">--std</span><span class="op">=</span>08 <span class="at">--out</span><span class="op">=</span>verilog cnt4 <span class="op">&gt;</span> netlist/vhdl2verilog/cnt4_rtl.v</span></code></pre></div>
+<blockquote>
+<p>⚠ <strong>ลำดับ option สำคัญ</strong> ต้องเป็น
+<code>ghdl synth --std=08 --out=verilog &lt;top&gt;</code> เท่านั้น
+ถ้าสลับลำดับ (<code>--out=verilog</code> ก่อน <code>--std=08</code>) จะได้
+<code>unknown command</code> และต้อง redirect เองด้วย <code>&gt;</code>
+เพราะ GHDL ไม่มีตัวเลือกชื่อไฟล์</p>
+</blockquote>
+<p>ผลที่ได้คือ Verilog 30 บรรทัด (วัดได้จริง) ดูไฟล์เต็มได้ที่
+<code>netlist/vhdl2verilog/cnt4_rtl.v</code></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> cnt4</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">(</span><span class="dt">input</span>  clk<span class="op">,</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>   <span class="dt">input</span>  rst_n<span class="op">,</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>   <span class="dt">input</span>  en<span class="op">,</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>   <span class="dt">output</span> <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> q<span class="op">);</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reg</span> <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> cq<span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">wire</span> n4_o<span class="op">;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">wire</span> <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> n7_o<span class="op">;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">wire</span> <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> n13_o<span class="op">;</span></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reg</span> <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> n14_q<span class="op">;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">assign</span> q <span class="op">=</span> cq<span class="op">;</span> <span class="co">//(module output)</span></span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* rtl/cnt4.vhd:18:10  */</span></span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">always</span> <span class="op">@</span>*</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    cq <span class="op">=</span> n14_q<span class="op">;</span> <span class="co">// (isignal)</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  <span class="kw">initial</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    cq <span class="op">=</span> <span class="bn">4&#39;b0000</span><span class="op">;</span></span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* rtl/cnt4.vhd:23:14  */</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  <span class="kw">assign</span> n4_o <span class="op">=</span> <span class="op">~</span>rst_n<span class="op">;</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* rtl/cnt4.vhd:27:18  */</span></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">assign</span> n7_o <span class="op">=</span> cq <span class="op">+</span> <span class="bn">4&#39;b0001</span><span class="op">;</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* rtl/cnt4.vhd:25:5  */</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">assign</span> n13_o <span class="op">=</span> en <span class="op">?</span> n7_o <span class="op">:</span> cq<span class="op">;</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* rtl/cnt4.vhd:25:5  */</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk <span class="dt">or</span> <span class="kw">posedge</span> n4_o<span class="op">)</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> <span class="op">(</span>n4_o<span class="op">)</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>      n14_q <span class="op">&lt;=</span> <span class="bn">4&#39;b0000</span><span class="op">;</span></span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>    <span class="kw">else</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>      n14_q <span class="op">&lt;=</span> n13_o<span class="op">;</span></span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p>สังเกตสิ่งที่น่าสนใจมากในบรรทัดนี้</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> n13_o <span class="op">=</span> en <span class="op">?</span> n7_o <span class="op">:</span> cq<span class="op">;</span></span></code></pre></div>
+<p>นี่คือจุดที่ <strong>semantics ของ VHDL กับ Verilog
+ต่างกันอย่างมีนัยสำคัญ</strong> และเป็นแก่นของ LAB 06</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>VHDL ต้นฉบับ</th>
+<th>Verilog ที่ GHDL สร้าง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>เงื่อนไข</td>
+<td><code>if en = &#39;1&#39; then</code></td>
+<td><code>en ? n7_o : cq</code></td>
+</tr>
+<tr>
+<td><code>en = &#39;X&#39;</code></td>
+<td><code>&#39;X&#39; = &#39;1&#39;</code> → <strong>false</strong> → ทำ else
+(คงค่าเดิม)</td>
+<td><code>?:</code> → <strong>propagate X</strong> → ผลเป็น
+<code>X</code></td>
+</tr>
+<tr>
+<td><code>en = &#39;0&#39;</code></td>
+<td>false → else</td>
+<td>false → else</td>
+</tr>
+</tbody>
+</table>
+<p>คู่มือนี้จะพิสูจน์ความต่างนี้ด้วยการรันจริงใน LAB 06</p>
+<h3 id="24-ขั้นที่-2-yosys--liberty">2.4 ขั้นที่ 2: Yosys + Liberty</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">yosys</span> <span class="at">-l</span> netlist/cnt4_synth.log <span class="at">-p</span> <span class="st">&quot;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="st">  read_verilog netlist/vhdl2verilog/cnt4_rtl.v</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="st">  hierarchy -check -top cnt4</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="st">  proc</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="st">  opt</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="st">  fsm</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="st">  opt</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="st">  memory</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="st">  opt</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="st">  techmap</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="st">  opt</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="st">  dfflibmap -liberty </span><span class="va">$PDK_LIB</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="st">  abc -liberty </span><span class="va">$PDK_LIB</span></span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="st">  setundef -zero</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="st">  splitnets</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="st">  opt_clean</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="st">  write_verilog -noattr netlist/cnt4_net.v</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a><span class="st">  tee -o netlist/cnt4_stat.txt stat</span></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;</span></span></code></pre></div>
+<p>จุดที่ต้องระวัง (วัดแล้วพลาดมาแล้ว)</p>
+<ul>
+<li><strong><code>dfflibmap -liberty</code> ต้องมาก่อน
+<code>abc -liberty</code> เสมอ</strong> ไม่งั้น ABC จะไม่เห็นฟลิป-flop ที่ map
+แล้ว</li>
+<li><strong><code>abc</code> ไม่รองรับ gate type <code>NOT</code></strong>
+— โค้ดจะสร้าง inverter ให้อัตโนมัติ</li>
+<li><strong>Yosys <code>fsm</code> pass แปลง FSM แบบ binary เป็น one-hot
+โดยอัตโนมัติ</strong> <code>fsm_light</code> มี 4 สถานะ → เป็น one-hot →
+flip-flop เพิ่มจาก 2 เป็น 5 (ถ้าต้องการคุมเอง ใช้ <code>fsm -norecode</code>
+หรือเขียน FSM เป็น one-hot ตั้งแต่ RTL)</li>
+<li><strong><code>/usr/share/yosys/cells.lib</code> ที่มากับ distro มีแต่ DFF
+ไม่มี gate</strong> map logic ที่เป็น combinational ไม่ได้ ต้องใช้ Liberty ของ
+PDK เสมอ</li>
+</ul>
+<h3 id="25-ผลลัพธ์จริงของทั้ง-4-ดีไซน์">2.5 ผลลัพธ์จริงของทั้ง 4 ดีไซน์</h3>
+<p>ตัวเลขทั้งหมดในตารางนี้มาจาก <code>netlist/*_stat.txt</code> ที่ Yosys
+เขียนออกมาจริง</p>
+<table>
+<thead>
+<tr>
+<th>ดีไซน์</th>
+<th>เซลล์ทั้งหมด</th>
+<th>ชนิดเซลล์</th>
+<th>flip-flop</th>
+<th>ขนาด Verilog กลาง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cnt4</code></td>
+<td><strong>11</strong></td>
+<td>7</td>
+<td>4</td>
+<td>30 บรรทัด</td>
+</tr>
+<tr>
+<td><code>alu4</code></td>
+<td><strong>59</strong></td>
+<td>19</td>
+<td>4</td>
+<td>77 บรรทัด</td>
+</tr>
+<tr>
+<td><code>fsm_light</code></td>
+<td><strong>11</strong></td>
+<td>4</td>
+<td>5</td>
+<td>97 บรรทัด</td>
+</tr>
+<tr>
+<td><code>sr16</code></td>
+<td><strong>100</strong></td>
+<td>14</td>
+<td>16</td>
+<td>57 บรรทัด</td>
+</tr>
+</tbody>
+</table>
+<p>รายละเอียดรายเซลล์ของ <code>cnt4</code> (จาก
+<code>netlist/cnt4_stat.txt</code>)</p>
+<pre class="text"><code>   Number of cells:                 11
+     sg13g2_a21o_1                   1
+     sg13g2_and2_1                   1
+     sg13g2_dfrbpq_1                 4
+     sg13g2_nand3_1                  1
+     sg13g2_nand4_1                  1
+     sg13g2_xnor2_1                  2
+     sg13g2_xor2_1                   1</code></pre>
+<p>รายละเอียดรายเซลล์ของ <code>sr16</code> (100 เซลล์ — ใหญ่ที่สุดในชุดนี้)</p>
+<pre class="text"><code>   Number of cells:                100
+     sg13g2_a21o_1                   5
+     sg13g2_a221oi_1                 8
+     sg13g2_a22oi_1                  3
+     sg13g2_and2_1                   3
+     sg13g2_dfrbpq_1                16
+     sg13g2_inv_1                    6
+     sg13g2_nand2_1                  6
+     sg13g2_nand2b_1                 2
+     sg13g2_nand3_1                  7
+     sg13g2_nand3b_1                 8
+     sg13g2_nand4_1                 11
+     sg13g2_nor2_1                   5
+     sg13g2_nor2b_1                 10
+     sg13g2_o21ai_1                 10</code></pre>
+<h3 id="26-อ่าน-netlist-ที่ได้">2.6 อ่าน netlist ที่ได้</h3>
+<p><code>netlist/cnt4_net.v</code> (เหลือเฉพาะส่วนที่น่าสนใจ)</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> cnt4<span class="op">(</span>clk<span class="op">,</span> rst_n<span class="op">,</span> en<span class="op">,</span> q<span class="op">);</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  sg13g2_nand3_1 _07_ <span class="op">(</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    .A<span class="op">(</span>en<span class="op">),</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    .B<span class="op">(</span>\n14_q<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">),</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    .C<span class="op">(</span>\n14_q<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">),</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    .Y<span class="op">(</span>_04_<span class="op">)</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="op">);</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  sg13g2_dfrbpq_1 _16_ <span class="op">(</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    .CLK<span class="op">(</span>clk<span class="op">),</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    .D<span class="op">(</span>_02_<span class="op">),</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    .Q<span class="op">(</span>\n14_q<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">),</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    .RESET_B<span class="op">(</span>rst_n<span class="op">)</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">);</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">assign</span> q <span class="op">=</span> <span class="op">{</span> \n14_q<span class="op">[</span><span class="dv">3</span><span class="op">]</span> <span class="op">,</span> \n14_q<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">,</span> \n14_q<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">,</span> \n14_q<span class="op">[</span><span class="dv">0</span><span class="op">]</span>  <span class="op">};</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
+<p>สิ่งที่ควรสังเกต</p>
+<ul>
+<li>ชื่อสัญญาณภายในของ Yosys เป็นรูปแบบ <code>\n14_q[1] </code> (มี
+<strong>เว้นวรรคท้าย</strong> เพราะ Yosys escape ชื่อที่มี <code>[</code> ด้วย
+backslash แล้วเติมช่องว่างปิดท้าย)</li>
+<li>flip-flop คือ <code>sg13g2_dfrbpq_1</code> มีพอร์ต <code>RESET_B</code>
+(reset แบบ active-low และ asynchronous) ตรงกับ
+<code>if rst_n = &#39;0&#39; then</code> ใน RTL พอดี</li>
+<li>ชนิดเซลล์ทั้งหมดเป็น <code>sg13g2_..._1</code> คือ <strong>ความแรงขับ
+(drive strength) ระดับ 1</strong></li>
+</ul>
+<h3 id="27-รันสังเคราะห์ใหม่เอง">2.7 รันสังเคราะห์ใหม่เอง</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wsl</span> <span class="at">-d</span> Ubuntu <span class="at">-u</span> root <span class="at">--</span> bash /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tools/synth/synth.sh</span></code></pre></div>
+<p>หรือสังเคราะห์เฉพาะบางดีไซน์</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wsl</span> <span class="at">-d</span> Ubuntu <span class="at">-u</span> root <span class="at">--</span> bash /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tools/synth/synth.sh cnt4 alu4</span></code></pre></div>
+<blockquote>
+<p><strong>ต้องแก้ path ของ Liberty ให้ตรงกับเครื่อง</strong> ค่า default ใน
+<code>tools/synth/synth.sh</code> คือ
+<code>/mnt/e/lab/pdks/IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib</code>
+ถ้า PDK อยู่ที่อื่น ให้แก้ตัวแปร <code>PDK_LIB</code> ในสคริปต์
+(สคริปต์จะเช็คและหยุดพร้อมข้อความชัดเจนถ้าไม่เจอไฟล์)</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-3--lab-01-rtl-baseline-vhdl">บทที่ 3 — LAB 01: RTL baseline
+(VHDL)</h2>
+<h3 id="เป้าหมาย">เป้าหมาย</h3>
+<p>สร้าง <strong>จุดอ้างอิง</strong> ของทั้งคู่มือ testbench ไฟล์นี้จะถูกใช้ซ้ำใน LAB
+04 ถึง LAB 08 โดยไม่แก้แม้แต่บรรทัดเดียว และ trace ที่ได้ต้องเหมือนกันทุกบรรทัด</p>
+<h3 id="ขั้นที่-1--เข้าโฟลเดอร์-lab">ขั้นที่ 1 — เข้าโฟลเดอร์ lab</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab01_rtl_baseline</span></code></pre></div>
+<h3 id="ขั้นที่-2--รัน">ขั้นที่ 2 — รัน</h3>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง">ผลลัพธ์จริง</h3>
+<pre class="text"><code>====================================================================
+ LAB 01 : RTL baseline (VHDL)
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab01_rtl_baseline
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS -- 9 checks, 0 errors
+====================================================================
+...
+# ** Note: === tb_cnt4 : RTL ===
+# ** Note:   t=20 ns : after reset         q = 0
+# ** Note:   t=26 ns : count up 1            q = 1
+# ** Note:   t=36 ns : count up 2            q = 2
+# ** Note:   t=46 ns : count up 3            q = 3
+# ** Note:   t=56 ns : count up 4            q = 4
+# ** Note:   t=66 ns : count up 5            q = 5
+# ** Note:   t=76 ns : count up 6            q = 6
+# ** Note:   t=106 ns : hold (en = &#39;0&#39;)     q = 6
+# ** Note:   t=136 ns : count up again     q = 9
+# ** Note:  checks = 9 , errors = 0
+   the RTL verdict : PASS
+   the trace file  : results/trace_rtl.txt
+RESULT: PASS
+[RESULT] PASS</code></pre>
+<p><code>results/trace_rtl.txt</code> มี 9 บรรทัด</p>
+<pre class="text"><code>q=0
+q=1
+q=2
+q=3
+q=4
+q=5
+q=6
+q=6
+q=9</code></pre>
+<p>อ่านให้เข้าใจ trace นี้ — มันคือสิ่งที่ testbench ทำ (คอลัมน์ &quot;เวลา&quot; มาจากข้อความ
+<code>report</code> ที่ testbench พิมพ์ออกมา วัดจริง)</p>
+<table>
+<thead>
+<tr>
+<th>บรรทัด</th>
+<th>เวลา</th>
+<th>เหตุการณ์</th>
+<th>ค่า <code>q</code> ที่ถูกต้อง</th>
+<th><code>q</code> จริง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>20 ns</td>
+<td>หลัง reset</td>
+<td><code>0</code></td>
+<td><code>0</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>26 ns</td>
+<td>นับขึ้นครั้งที่ 1</td>
+<td><code>1</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>36 ns</td>
+<td>นับขึ้นครั้งที่ 2</td>
+<td><code>2</code></td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>46 ns</td>
+<td>นับขึ้นครั้งที่ 3</td>
+<td><code>3</code></td>
+<td><code>3</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>56 ns</td>
+<td>นับขึ้นครั้งที่ 4</td>
+<td><code>4</code></td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td>66 ns</td>
+<td>นับขึ้นครั้งที่ 5</td>
+<td><code>5</code></td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td>76 ns</td>
+<td>นับขึ้นครั้งที่ 6</td>
+<td><code>6</code></td>
+<td><code>6</code></td>
+</tr>
+<tr>
+<td>8</td>
+<td>106 ns</td>
+<td><code>en = &#39;0&#39;</code> → คงค่า</td>
+<td><code>6</code></td>
+<td><code>6</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>136 ns</td>
+<td>นับต่อ 3 ครั้ง</td>
+<td><code>9</code></td>
+<td><code>9</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ตรวจสอบเวลาด้วยตัวเองได้</strong> — นาฬิกามีคาบ 10 ns และขอบขึ้นที่ 5,
+15, 25, … ns</p>
+<ul>
+<li>reset จบที่ <code>2 × CYCLE</code> = 20 ns → ตรวจครั้งแรกที่ 20 ns</li>
+<li>นับขึ้น: รอขอบขึ้น (25, 35, 45, …) แล้วรออีก 1 ns → 26, 36, 46, … ns</li>
+<li><code>en = &#39;0&#39;</code> ค้างไว้ 3 รอบนาฬิกา = 30 ns → 76 + 30 = 106
+ns</li>
+<li>นับต่อ 3 ครั้ง: 115 + 125 + 135 แล้วรออีก 1 ns → <strong>136 ns</strong>
+ซึ่งตรงกับ <code>Time: 136 ns</code> ที่ ModelSim พิมพ์ตอนจบการจำลอง</li>
+</ul>
+<blockquote>
+<p>สังเกตว่าค่า hex เป็น <strong>ตัวพิมพ์ใหญ่</strong> เพราะ VHDL ใช้
+<code>to_hstring()</code> ใน Verilog จะได้ตัวพิมพ์เล็กจาก <code>%h</code>
+นี่เป็นความต่างที่ต้องรู้เมื่อเปรียบเทียบ trace ข้ามภาษา</p>
+</blockquote>
+<h3 id="ขั้นที่-3--ตรวจสอบเอง">ขั้นที่ 3 — ตรวจสอบเอง</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> results\trace_rtl.txt</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> result.txt</span></code></pre></div>
+<p><code>result.txt</code> ต้องเป็น <code>PASS</code> และ
+<code>run.cmd</code> ต้องจบด้วยรหัส 0</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="pp">%</span><span class="va">ERRORLEVEL</span><span class="pp">%</span></span></code></pre></div>
+<h3 id="เก็บความรู้จาก-lab-นี้">เก็บความรู้จาก LAB นี้</h3>
+<ul>
+<li>testbench เขียน <code>component cnt4</code> ไม่ใช่
+<code>entity work.cnt4</code> → <strong>คัดลอกไฟล์นี้ไปใช้ได้ทั้งระดับ
+gate</strong></li>
+<li>ใช้ generic <code>GATE</code> เป็นตัวบอก testbench ว่าตอนนี้อยู่ระดับไหน ทำให้
+testbench เดียวกันพิมพ์ข้อความหัวข้างว่าเป็น RTL หรือ GATE ได้</li>
+</ul>
+<hr />
+<h2 id="บทที่-4--lab-02-netlist-ที่สังเคราะห์ได้">บทที่ 4 — LAB 02: netlist
+ที่สังเคราะห์ได้</h2>
+<h3 id="เป้าหมาย-1">เป้าหมาย</h3>
+<p>ตรวจว่า <strong>netlist ที่ Yosys สร้างใช้เซลล์ที่มีอยู่จริงในไลบรารี</strong>
+และเห็นความจริงของโครงสร้างวงจร — ตัวนับ 4 บิตต้องมี 4 flip-flop พอดี</p>
+<h3 id="รัน">รัน</h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab02_synth_netlist</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-ส่วนสำคัญ">ผลลัพธ์จริง (ส่วนสำคัญ)</h3>
+<pre class="text"><code>---- 1. the statistics file ----
+Number of wires:                 19
+Number of ports:                  4
+Number of cells:                11
+   sg13g2_a21o_1            1
+   sg13g2_and2_1            1
+   sg13g2_dfrbpq_1          4
+   sg13g2_nand3_1           1
+   sg13g2_nand4_1           1
+   sg13g2_xnor2_1           2
+   sg13g2_xor2_1            1
+---- 2. the cells used by the netlist ----
+   sg13g2_nand3_1
+   sg13g2_nand4_1
+   sg13g2_xnor2_1
+   sg13g2_xor2_1
+   sg13g2_a21o_1
+   sg13g2_and2_1
+   sg13g2_dfrbpq_1
+---- 11 instances, 7 different cell types ----
+---- 3. check every cell against the library ----
+   OK : every cell of the netlist exists in ../cells/sg13g2_stdcell.v
+---- 4. the Verilog that Yosys actually read ----
+module cnt4
+input  rst_n,
+input  en,
+output [3:0] q);
+reg [3:0] cq;
+wire n4_o;
+wire [3:0] n7_o;
+wire [3:0] n13_o;
+reg [3:0] n14_q;
+always @*
+always @(posedge clk or posedge n4_o)
+endmodule
+---- 5. the design needs 4 flip-flops (a 4 bit counter needs 4) ----
+   the netlist has 4 flip-flop(s)
+RESULT: PASS</code></pre>
+<blockquote>
+<p>สังเกตว่า transcript จะมีบรรทัดที่ขึ้นต้นด้วย <code>#</code> เป็นการ
+<strong>echo คำสั่ง Tcl ที่กำลังทำงาน</strong> เช่น
+<code># ../netlist/cnt4_net.v</code> คือการ echo ค่าในตัวแปร และตอนขั้นที่ 3
+จะเห็นเนื้อหาไฟล์เซลล์ทั้งไฟล์ถูก echo ออกมาเป็น <code># ...</code> <strong>นั่นไม่ใช่
+error</strong> แค่ข้อความใน console</p>
+</blockquote>
+<p>ตัวเลขที่ต้องจำไว้</p>
+<table>
+<thead>
+<tr>
+<th>สิ่งที่วัด</th>
+<th>ค่า</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>instance ทั้งหมดใน netlist</td>
+<td><strong>11</strong></td>
+</tr>
+<tr>
+<td>ชนิดเซลล์ที่ต่างกัน</td>
+<td><strong>7</strong></td>
+</tr>
+<tr>
+<td>flip-flop</td>
+<td><strong>4</strong></td>
+</tr>
+<tr>
+<td>เซลล์ที่หาไม่พบในไลบรารี</td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="-กับดัก-tcl-ที่เจอระหว่างทำ-lab-นี้">⚠ กับดัก Tcl ที่เจอระหว่างทำ lab นี้</h3>
+<p>ตอนตรวจว่าเซลล์มีอยู่ในไลบรารีจริง ต้องใช้ regex</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> found <span class="kw">[regexp</span> <span class="kw">[format</span> <span class="kw">{</span>module<span class="ch">\s</span><span class="op">+%</span>s<span class="ch">\s</span><span class="op">*</span><span class="ch">\(</span><span class="kw">}</span> <span class="dt">$c</span><span class="kw">]</span> <span class="dt">$libtxt</span><span class="kw">]</span></span></code></pre></div>
+<blockquote>
+<p><strong>ห้ามเขียน <code>&quot;\s&quot;</code> ใน double quotes</strong> ใน Tcl
+เมื่ออยู่ใน double quotes แล้ว <code>\s</code> จะกลายเป็น <code>s</code>
+(backslash หายไป) pattern จะกลายเป็น <code>modules+...</code> แล้วไม่มีทาง
+match ทางแก้คือใช้ <strong>braces</strong> <code>{...}</code> หรือ
+<code>format {...}</code> เสมอ</p>
+</blockquote>
+<p>คู่มือนี้แก้ให้เรียบร้อยแล้วใน
+<code>lab02_synth_netlist/run_batch.do</code></p>
+<hr />
+<h2 id="บทที่-5--lab-03-เซลล์มาตรฐานของ-sg13g2">บทที่ 5 — LAB 03:
+เซลล์มาตรฐานของ SG13G2</h2>
+<h3 id="เป้าหมาย-2">เป้าหมาย</h3>
+<p>ก่อนจะจำลอง netlist ได้ ตัวจำลองต้อง &quot;รู้จัก&quot; เซลล์แต่ละตัวว่าคืออะไร lab
+นี้จะคอมไพล์โมเดลเซลล์ทั้ง 84 ตัว แล้วจำแนกให้ดู</p>
+<h3 id="รัน-1">รัน</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab03_cell_library</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-1">ผลลัพธ์จริง</h3>
+<pre class="text"><code>---- 1. compile the cell models into the library &#39;sg13g2&#39; ----
+---- 2. the cells of the library ----
+   84 modules
+
+   flip-flops (sequential)  : 9
+        sg13g2_dfrbp_1
+        sg13g2_dfrbp_2
+        sg13g2_dfrbpq_1
+        sg13g2_dfrbpq_2
+        sg13g2_sdfbbp_1
+        sg13g2_sdfrbp_1
+        sg13g2_sdfrbp_2
+        sg13g2_sdfrbpq_1
+        sg13g2_sdfrbpq_2
+   latches + latch clocks   : 7
+        sg13g2_dlhq_1
+        sg13g2_dlhr_1
+        sg13g2_dlhrq_1
+        sg13g2_dllr_1
+        sg13g2_dllrq_1
+        sg13g2_lgcp_1
+        sg13g2_slgcp_1
+   delay cells              : 3
+        sg13g2_dlygate4sd1_1
+        sg13g2_dlygate4sd2_1
+        sg13g2_dlygate4sd3_1
+   utility / physical only  : 10
+        sg13g2_antennanp
+        sg13g2_decap_4
+        sg13g2_decap_8
+        sg13g2_fill_1
+        sg13g2_fill_2
+        sg13g2_fill_4
+        sg13g2_fill_8
+        sg13g2_sighold
+        sg13g2_tiehi
+        sg13g2_tielo
+   combinational gates      : 55
+   sum of the 5 groups      : 84  (total 84)
+
+---- 3. the Liberty file ----
+   library (sg13g2_stdcell_typ_1p20V_25C) {
+   capacitive_load_unit (1,pf);
+   current_unit : &quot;1uA&quot;;
+   time_unit : &quot;1ns&quot;;
+   voltage_unit : &quot;1V&quot;;
+   size of the Liberty file : 1748984 bytes
+RESULT: PASS</code></pre>
+<h3 id="ตารางสรุป">ตารางสรุป</h3>
+<table>
+<thead>
+<tr>
+<th>กลุ่ม</th>
+<th>จำนวน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flip-flop (sequential)</td>
+<td>9</td>
+</tr>
+<tr>
+<td>latch + latch clock</td>
+<td>7</td>
+</tr>
+<tr>
+<td>delay cell</td>
+<td>3</td>
+</tr>
+<tr>
+<td>utility / physical only</td>
+<td>10</td>
+</tr>
+<tr>
+<td>combinational gate</td>
+<td>55</td>
+</tr>
+<tr>
+<td><strong>รวม</strong></td>
+<td><strong>84</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="-อ่าน-ชนิด-ของเซลล์ให้ถูกวิธี">⚠ อ่าน &quot;ชนิด&quot; ของเซลล์ให้ถูกวิธี</h3>
+<p><code>run_batch.do</code> ของ lab นี้ <strong>ไม่ได้</strong>
+จำแนกจากชื่อเซลล์ แต่อ่านคอมเมนต์ <code>// type: XXX</code> ที่อยู่เหนือ
+<code>module</code> ในไฟล์ <code>sg13g2_stdcell.v</code></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{[regexp</span> <span class="kw">{</span>^<span class="ch">\s</span><span class="op">*//</span><span class="ch">\s</span><span class="op">*</span>type<span class="op">:</span><span class="ch">\s</span><span class="op">*</span>(<span class="ch">\S</span><span class="op">+</span>)<span class="ch">\s</span><span class="op">*</span>$<span class="kw">}</span> <span class="dt">$line</span> -<span class="op">&gt;</span> t<span class="kw">]}</span> <span class="kw">{</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">set</span> curtype <span class="dt">$t</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">continue</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{[regexp</span> <span class="kw">{</span>^<span class="ch">\s</span><span class="op">*</span>module<span class="ch">\s</span><span class="op">+</span>(<span class="kw">[</span>A-Za-z0-9_<span class="kw">]</span><span class="op">+</span>)<span class="ch">\s</span><span class="op">*</span><span class="ch">\(</span><span class="kw">}</span> <span class="dt">$line</span> -<span class="op">&gt;</span> <span class="ot">name</span><span class="kw">]}</span> <span class="kw">{</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lappend</span> mods <span class="dt">$name</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">lappend</span> <span class="ot">types</span> <span class="dt">$curtype</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">set</span> curtype <span class="st">&quot;&quot;</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p><strong>ทำไมต้องอ่าน <code>// type:</code></strong>
+เพราะชื่อเซลล์หลอกตาได้มาก</p>
+<table>
+<thead>
+<tr>
+<th>ชื่อเซลล์</th>
+<th>ดูเหมือนจะเป็น</th>
+<th>จริง ๆ แล้วเป็น</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sg13g2_dfrbp_1</code></td>
+<td>flip-flop</td>
+<td>✅ flip-flop</td>
+</tr>
+<tr>
+<td><code>sg13g2_decap_4</code></td>
+<td>อะไรซักอย่าง</td>
+<td>❌ <strong>decapacitor</strong> (ใช้ไฟล์เฉพาะทาง ไม่ใช่เกต)</td>
+</tr>
+<tr>
+<td><code>sg13g2_dlygate4sd1_1</code></td>
+<td>gate</td>
+<td>❌ <strong>delay cell</strong></td>
+</tr>
+<tr>
+<td><code>sg13g2_dlhr_1</code></td>
+<td>&quot;d-l-h-r&quot;</td>
+<td>❌ <strong>latch</strong></td>
+</tr>
+<tr>
+<td><code>sg13g2_tiehi</code></td>
+<td>gate</td>
+<td>❌ <strong>tie cell</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>คู่มือฉบับ Verilog รุ่นแรกจำแนกจาก <strong>ชื่อเซลล์</strong> แล้วได้ตัวเลขผิด
+ต้องแก้มาใช้ <code>// type:</code> จึงได้ 9 / 7 / 3 / 10 / 55 = 84 ที่ถูกต้อง
+<strong>เป็นบทเรียนที่ควรจำ: อย่าตัดสินเซลล์จากชื่อ</strong></p>
+</blockquote>
+<h3 id="เซลล์-latch-ในไลบรารี--ทำไมต้องรู้">เซลล์ latch ในไลบรารี —
+ทำไมต้องรู้</h3>
+<p>ในไลบรารีมี latch 7 ตัว ถ้า Yosys map ล็อกให้เป็น latch เมื่อออกแบบไม่ดี (เช่น
+case statement ที่ไม่ครบ) การจำลองระดับ gate จะเผยอาการ
+<strong>ล็อกค้าง</strong> ที่ RTL จะไม่เห็น เพราะ RTL จะเขียน
+<code>if ... then ... else ...</code> เสมอ</p>
+<blockquote>
+<p>ข้อเท็จจริงที่วัดได้: <strong><code>dfflibmap</code> ของ Yosys map ได้แต่
+flip-flop แต่ map latch ไม่ได้</strong> ถ้าเจอ latch ใน netlist ให้ระวัง</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-6--lab-04-การจำลองระดับ-gate-ครั้งแรก">บทที่ 6 — LAB 04:
+การจำลองระดับ gate ครั้งแรก</h2>
+<h3 id="เป้าหมาย-3">เป้าหมาย</h3>
+<p>รัน <strong>testbench ไฟล์เดียวกันจาก LAB 01</strong> กับ gate netlist
+และได้ trace ที่เหมือนกันทุกบรรทัด</p>
+<h3 id="ขั้นที่-1--ลองทำผิดวิธีก่อน-ตั้งใจให้ผิด">ขั้นที่ 1 — ลองทำผิดวิธีก่อน
+(ตั้งใจให้ผิด)</h3>
+<p>คู่มือนี้ให้ลองผิดวิธีก่อน เพื่อให้เห็นข้อความ error จริงด้วยตาตัวเอง</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab04_gls_first</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>run_wrong.cmd</span></code></pre></div>
+<p><code>run_wrong.cmd</code> นี้ทำสิ่งที่ผิดอย่างตั้งใจ: คอมไพล์เซลล์เข้าไลบรารี
+<code>cells_lib</code> แต่คอมไพล์ netlist เข้า <code>work</code> ผลคือโหลด
+design ไม่ได้</p>
+<h3 id="ผลลัพธ์จริง-2">ผลลัพธ์จริง</h3>
+<pre class="text"><code># ** Error: (vsim-3033) Instantiation of &#39;sg13g2_nand3_1&#39; failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cnt4/dut File: ../netlist/cnt4_net.v Line: 34
+#         Searched libraries:
+#             C:/Users/.../questa_gls_vhdl_lab/lab04_gls_first/work
+# ** Error: (vsim-3033) Instantiation of &#39;sg13g2_nand4_1&#39; failed. The design unit was not found.
+...
+# ** Error: (vsim-3033) Instantiation of &#39;sg13g2_dfrbpq_1&#39; failed. The design unit was not found.
+# Error loading design
+# Errors: 11, Warnings: 0
+
+---- the error that was expected ----
+  the transcript contains 11 line(s) with &quot;vsim-3033&quot;
+  (one line per instance of a cell that could not be found)
+  the exit code of vsim itself was 12
+  NOTE : a .do file that cannot be opened gives exit code 0 too
+         (measured on this machine).  A build system that only looks at
+         the exit code will NOT notice that failure -- always read the
+         transcript.
+
+[RESULT] AS EXPECTED -- the simulator refused the design</code></pre>
+<h3 id="สิ่งที่ต้องสังเกตจาก-error-นี้">สิ่งที่ต้องสังเกตจาก error นี้</h3>
+<ol type="1">
+<li><p><strong>จำนวนบรรทัด error = จำนวน instance พอดี (11 = 11)</strong>
+คุณสามารถนับ instance จาก netlist แล้วรู้ล่วงหน้าว่าจะได้ error กี่บรรทัด</p></li>
+<li><p><strong><code>Searched libraries:</code>
+บอกว่าเครื่องมือหาเซลล์ไปที่ไหน</strong> ในกรณีนี้มันหาแค่ใน <code>work</code> เพราะ
+<code>cells_lib</code> ไม่ได้ถูก <code>vmap</code></p></li>
+<li><p><strong>exit code ของ <code>vsim</code> คือ 12 แต่การเปิด
+<code>.do</code> ที่ไม่มีไฟล์ให้ exit code 0</strong> (วัดจริงทั้งสองกรณี) →
+<strong>ระบบ CI ต้องอ่าน transcript ไม่ใช่พึ่ง exit code
+อย่างเดียว</strong></p></li>
+<li><p><strong>การโหลด design ที่ล้มเหลวเป็น FATAL — session จบทันที</strong>
+คำสั่ง Tcl หลังจากนั้นไม่ถูกทำเลย นี่เป็นเหตุผลที่ <code>run_wrong.cmd</code> (ที่เป็น
+<code>.cmd</code>) เป็นคนตัดสิน ไม่ใช่สคริปต์ <code>.do</code></p></li>
+</ol>
+<h3 id="ขั้นที่-2--ทำให้ถูก">ขั้นที่ 2 — ทำให้ถูก</h3>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-3">ผลลัพธ์จริง</h3>
+<pre class="text"><code>---- 1. compile the cells, the netlist and the testbench ----
+---- 2. simulate ----
+# vsim -t 10ps -voptargs=&quot;+acc&quot; work.tb_cnt4 -gGATE=true ...
+# ** Note:  checks = 9 , errors = 0
+---- 3. the verdict ----
+   the GLS verdict : PASS
+   the trace file  : results/trace_gls.txt
+RESULT: PASS
+[RESULT] PASS</code></pre>
+<h3 id="เปรียบเทียบ-trace-สองไฟล์">เปรียบเทียบ trace สองไฟล์</h3>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">fc</span> <span class="at">/b</span> results\trace_rtl.txt ..\lab01_rtl_baseline\results\trace_rtl.txt</span></code></pre></div>
+<p>หรือด้วย PowerShell</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Compare-Object</span> <span class="op">(</span><span class="fu">Get-Content</span> <span class="op">..</span>\lab01_rtl_baseline\results\trace_rtl<span class="op">.</span><span class="fu">txt</span><span class="op">)</span> `</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>             <span class="op">(</span><span class="fu">Get-Content</span> results\trace_gls<span class="op">.</span><span class="fu">txt</span><span class="op">)</span></span></code></pre></div>
+<p>ผลคือ <strong>ไม่มีอะไรต่าง</strong> — trace ทั้งสองไฟล์เหมือนกันทุกบรรทัด</p>
+<pre class="text"><code>q=0
+q=1
+q=2
+q=3
+q=4
+q=5
+q=6
+q=6
+q=9</code></pre>
+<h3 id="เก็บความรู้จาก-lab-นี้-1">เก็บความรู้จาก LAB นี้</h3>
+<ul>
+<li><strong>เซลล์และ netlist ต้องอยู่ในไลบรารีเดียวกัน</strong> กับ testbench
+(หรืออย่างน้อยต้อง <code>vmap</code> ให้มองเห็นกัน)</li>
+<li>ถ้าอยู่คนละไลบรารี ต้อง <code>vmap</code> ไลบรารีเซลล์ด้วย เช่น</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>vmap cells_lib cells_lib</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>vlog -work cells_lib ..<span class="op">/</span>cells<span class="op">/</span>sg13g2_stdcell.v</span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>vlog -work work       ..<span class="op">/</span>netlist<span class="op">/</span>cnt4_net.v</span></code></pre></div>
+<p>ในคู่มือนี้เลือกวิธีง่ายกว่า: <strong>คอมไพล์ทุกอย่างเข้า <code>work</code>
+เหมือนกัน</strong></p>
+<ul>
+<li><strong>ต้องใส่ <code>-t 10ps</code></strong> (หัวข้อ 1.9)</li>
+<li><strong>testbench เดิมไม่ต้องแก้แม้แต่บรรทัดเดียว</strong></li>
+</ul>
+<h2 id="บทที่-7--lab-05-rtl-กับ-gate-level-เทียบกัน">บทที่ 7 — LAB 05: RTL กับ
+gate level เทียบกัน</h2>
+<h3 id="เป้าหมาย-4">เป้าหมาย</h3>
+<p>พิสูจน์ว่า <strong>testbench ไฟล์เดียวกันให้ผลเหมือนกันทั้งสองระดับ</strong>
+และผลลัพธ์ปกติของ GLS คือ <strong>trace เหมือนกันทุกบรรทัด</strong></p>
+<h3 id="โครงสร้างของ-lab-นี้">โครงสร้างของ lab นี้</h3>
+<p>lab นี้ต้องรัน <strong>สอง process ของ <code>vsim</code></strong>
+แยกกัน</p>
+<pre class="text"><code>lab05_rtl_vs_gate/
+├── run_rtl.do    process ที่ 1 : คอมไพล์ VHDL RTL แล้วจำลอง
+├── run_gls.do    process ที่ 2 : คอมไพล์เซลล์ + netlist แล้วจำลอง + เทียบ trace
+└── run.cmd       ตัวห่อทั้งสอง process</code></pre>
+<h3 id="-ทำไมต้องแยกสอง-process">⚠ ทำไมต้องแยกสอง process</h3>
+<blockquote>
+<p><strong>ModelSim session เดียวจำลองได้แค่ครั้งเดียว</strong> ถ้า testbench
+จบด้วย <code>std.env.finish</code> แล้วเราโหลด design ใหม่ใน session เดิม
+สคริปต์ <code>.do</code> จะ <strong>หยุดเงียบ ๆ โดยไม่มี error</strong> —
+ไม่มีข้อความอะไรให้เห็นเลย</p>
+<p>วิธีแก้คือใช้ <strong>process แยกสองตัว</strong> ทำทีละอัน ข้อดีเพิ่มคือแต่ละรอบได้
+transcript ของตัวเอง และใช้ license แบบ session เดียวทีละรอบได้พอดี</p>
+</blockquote>
+<h3 id="รัน-2">รัน</h3>
+<div class="sourceCode" id="cb50"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab05_rtl_vs_gate</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-4">ผลลัพธ์จริง</h3>
+<pre class="text"><code>[STEP 1] the RTL level run
+...
+# Loading work.tb_cnt4(sim)
+# Loading work.cnt4(rtl)              &lt;- ผูกกับ entity ของ VHDL
+# ** Note: === tb_cnt4 : RTL ===
+# ** Note:  checks = 9 , errors = 0
+   the RTL verdict : PASS
+
+[STEP 2] the gate level run
+...
+# Loading work.tb_cnt4(sim)
+# Loading work.cnt4                   &lt;- ผูกกับ module ของ Verilog
+# ** Note: === tb_cnt4 : GATE LEVEL ===
+# ** Note:  checks = 9 , errors = 0
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+
+---- compare the two traces line by line ----
+   the RTL trace has 10 lines
+   OK : the two traces are IDENTICAL
+RESULT: PASS
+[RESULT] PASS</code></pre>
+<blockquote>
+<p>บรรทัด <code>Loading work.cnt4(rtl)</code> กับ
+<code>Loading work.cnt4</code> คือหลักฐานว่า <strong>default binding
+ทำงานข้ามภาษาได้จริง</strong> มีวงเล็บ <code>(rtl)</code> คือ architecture ของ
+VHDL ไม่มีวงเล็บคือ Verilog module (Verilog ไม่มี concept นี้)</p>
+</blockquote>
+<h3 id="trace-ทั้งสองไฟล์">trace ทั้งสองไฟล์</h3>
+<p><code>results/trace_rtl.txt</code> และ
+<code>results/trace_gls.txt</code> เหมือนกันทุกบรรทัด</p>
+<pre class="text"><code>q=0
+q=1
+q=2
+q=3
+q=4
+q=5
+q=6
+q=6
+q=9</code></pre>
+<blockquote>
+<p>ตัวเลข <code>10 lines</code> ในผลลัพธ์มาจาก <code>split</code> ที่แยกด้วย
+<code>\n</code> ซึ่งเก็นสัญญาณจบบรรทัดไปหนึ่งช่องว่าง <strong>ไฟล์ trace จริงมี 9
+บรรทัด</strong> (ตรวจด้วย <code>type</code> แล้วเห็น 9 บรรทัด)</p>
+</blockquote>
+<h3 id="กลไกการเทียบ-trace">กลไกการเทียบ trace</h3>
+<p><code>tools/gls_common.do</code> มี proc นี้</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">proc</span> gls_diff_lines <span class="kw">{</span>file_a file_b<span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">set</span> a <span class="kw">[split</span> <span class="kw">[</span>gls_read_file <span class="dt">$file_a</span><span class="kw">]</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span><span class="kw">]</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">set</span> b <span class="kw">[split</span> <span class="kw">[</span>gls_read_file <span class="dt">$file_b</span><span class="kw">]</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span><span class="kw">]</span></span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">set</span> diff <span class="kw">{}</span></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">set</span> n <span class="kw">[expr</span> <span class="kw">{[llength</span> <span class="dt">$a</span><span class="kw">]</span> <span class="op">&gt;</span> <span class="kw">[llength</span> <span class="dt">$b</span><span class="kw">]</span> ? <span class="kw">[llength</span> <span class="dt">$a</span><span class="kw">]</span> <span class="op">:</span> <span class="kw">[llength</span> <span class="dt">$b</span><span class="kw">]}]</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">{set</span> i <span class="dv">0</span><span class="kw">}</span> <span class="kw">{</span><span class="dt">$i</span> <span class="op">&lt;</span> <span class="dt">$n</span><span class="kw">}</span> <span class="kw">{incr</span> i<span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">set</span> la <span class="kw">[lindex</span> <span class="dt">$a</span> <span class="dt">$i</span><span class="kw">]</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">set</span> lb <span class="kw">[lindex</span> <span class="dt">$b</span> <span class="dt">$i</span><span class="kw">]</span></span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">{</span><span class="dt">$la</span> ne <span class="dt">$lb</span><span class="kw">}</span> <span class="kw">{</span> <span class="kw">lappend</span> diff <span class="kw">[list</span> <span class="dt">$i</span> <span class="dt">$la</span> <span class="dt">$lb</span><span class="kw">]</span> <span class="kw">}</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dt">$diff</span></span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p>ถ้า <code>diff</code> ว่าง = trace เหมือนกันหมด</p>
+<h3 id="เก็บความรู้จาก-lab-นี้-2">เก็บความรู้จาก LAB นี้</h3>
+<ul>
+<li><strong>ผลลัพธ์ปกติของ GLS คือ &quot;เหมือนกัน&quot;</strong> ไม่ใช่ &quot;ต่างกัน&quot;
+ถ้าต่างกันแปลว่ามีปัญหา (เซลล์ผิด, netlist ผิด, หรือ timing check ทำงาน)</li>
+<li>ขั้นตอนที่ต้องทำ <strong>คือการเปลี่ยนแค่ไฟล์ที่คอมไพล์</strong> ไม่ต้องแตะ
+testbench เลย</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ระดับ RTL</th>
+<th>ระดับ gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>คอมไพล์</td>
+<td><code>vcom ../rtl/cnt4.vhd</code></td>
+<td><code>vlog ../cells/sg13g2_stdcell.v</code> +
+<code>vlog ../netlist/cnt4_net.v</code></td>
+</tr>
+<tr>
+<td>testbench</td>
+<td><code>vcom ../tb/tb_cnt4.vhd</code></td>
+<td><code>vcom ../tb/tb_cnt4.vhd</code>
+(<strong>เหมือนกันเป๊ะ</strong>)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="บทที่-8--lab-06-การแพร่ของค่า-x">บทที่ 8 — LAB 06: การแพร่ของค่า
+<code>x</code></h2>
+<h3 id="เป้าหมาย-5">เป้าหมาย</h3>
+<p>พิสูจน์เรื่องที่สำคัญที่สุดของ GLS: <strong>RTL กับ gate level
+ให้คำตอบไม่เหมือนกันเมื่ออินพุตมีค่า <code>x</code></strong></p>
+<h3 id="เรื่องที่เกิดขึ้น">เรื่องที่เกิดขึ้น</h3>
+<p>ทั้งสองระดับได้ netlist จาก <strong>โค้ดชุดเดียวกัน</strong> แต่มีความหมายของ
+<code>x</code> ต่างกัน</p>
+<h3 id="ฝั่ง-rtl-vhdl">ฝั่ง RTL (VHDL)</h3>
+<div class="sourceCode" id="cb54"><pre class="sourceCode vhdl"><code class="sourceCode vhdl"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="kw">elsif</span> <span class="kw">rising_edge</span>(clk) <span class="kw">then</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">if</span> en <span class="ot">=</span> <span class="bn">&#39;1&#39;</span> <span class="kw">then</span></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    cq <span class="ot">&lt;=</span> cq <span class="ot">+</span> <span class="dv">1</span>;</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span> <span class="kw">if</span>;</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span> <span class="kw">process</span>;</span></code></pre></div>
+<p>เมื่อ <code>en = &#39;X&#39;</code>:</p>
+<ul>
+<li>ใน VHDL ตัวดำเนินการ <code>&#39;X&#39; = &#39;1&#39;</code> ให้ผลเป็น
+<strong>false</strong></li>
+<li>จึงเข้าไปใน <code>else</code> → <strong>ไม่ทำอะไร →
+คงค่าเดิม</strong></li>
+</ul>
+<h3 id="ฝั่ง-gate-verilog-ที่-ghdl-สร้าง">ฝั่ง gate (Verilog ที่ GHDL สร้าง)</h3>
+<div class="sourceCode" id="cb55"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> n13_o <span class="op">=</span> en <span class="op">?</span> n7_o <span class="op">:</span> cq<span class="op">;</span></span></code></pre></div>
+<p>เมื่อ <code>en = &#39;X&#39;</code>:</p>
+<ul>
+<li>ใน Verilog ตัวดำเนินการ <code>?:</code> <strong>propagate ค่า
+<code>x</code></strong></li>
+<li>ผลคือ <code>n13_o = &#39;X&#39;</code> → <strong>D ของ flip-flop เป็น
+<code>X</code> → ฟลิป-flopจับ <code>X</code></strong></li>
+</ul>
+<h3 id="รัน-3">รัน</h3>
+<div class="sourceCode" id="cb56"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab06_x_propagation</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-5">ผลลัพธ์จริง</h3>
+<pre class="text"><code>[STEP 1] the RTL level run
+# ** Note: === tb_cnt4_x : RTL ===
+# ** Note: note : this testbench only observes, it does not judge
+# ** Note:   t=46 ns : before the &#39;x&#39;      q = 3
+# ** Note:   t=66 ns : after  en = &#39;x&#39;     q = 3
+   the RTL verdict : PASS
+
+[STEP 2] the gate level run
+# ** Note: === tb_cnt4_x : GATE LEVEL ===
+# ** Note: note : this testbench only observes, it does not judge
+# ** Note:   t=46 ns : before the &#39;x&#39;      q = 3
+# ** Note:   t=66 ns : after  en = &#39;x&#39;     q = X
+   the RTL saw : observed=3
+   the GLS saw : observed=X
+---- the difference ----
+   the RTL run produced an &#39;x&#39; : 0   (expected : 0)
+   the GLS run produced an &#39;x&#39; : 1   (expected : 1)
+   OK : the gate level simulation sees what the RTL hides
+RESULT: PASS
+[RESULT] PASS</code></pre>
+<blockquote>
+<p>บรรทัดที่สำคัญที่สุดคือ <strong>บรรทัดเวลาเดียวกัน (66 ns) แต่ค่าต่างกัน</strong> ค่า
+<code>q = 3</code> กับ <code>q = X</code> — ระดับ gate เห็นว่าผลลัพธ์
+&quot;ไม่รู้จัก&quot;</p>
+</blockquote>
+<h3 id="ตีความผลลัพธ์">ตีความผลลัพธ์</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ค่าที่เห็น</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RTL</td>
+<td><code>observed=3</code></td>
+<td>ตัวนับ <strong>คงค่า 3</strong> เพราะ <code>&#39;X&#39; = &#39;1&#39;</code> เป็น false
+→ ไม่นับ</td>
+</tr>
+<tr>
+<td>GLS</td>
+<td><code>observed=X</code></td>
+<td><code>x</code> แพร่ผ่านเกต → flip-flop จับ <code>x</code> →
+<strong>ผลลัพธ์ไม่รู้จัก</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⚠ <strong>นี่คือเหตุผลที่ต้องเขียน testbench ให้ดี</strong> ถ้า testbench เขียน
+<code>assert q = &quot;0011&quot;</code> ตอนนั้น</p>
+<ul>
+<li>RTL จะผ่าน (เพราะ <code>q</code> เป็น <code>3</code>)</li>
+<li>GLS จะ <strong>ไม่ผ่าน</strong> เพราะ <code>q</code> เป็น
+<code>X</code> และ <code>X</code> ไม่เท่ากับ <code>0011</code></li>
+</ul>
+<p>ในงานจริง นี่อาจเป็น <strong>ผลดี</strong> เพราะบอกว่า design
+มีความเสี่ยงจะทำงานผิดเมื่อสัญญาณเข้ามาเป็น <code>X</code> แต่ก็อาจเป็น
+<strong>ผลร้าย</strong> เพราะบอกว่า design ไม่มี reset ที่ดีพอ</p>
+</blockquote>
+<h3 id="-ข้อควรระวังเรื่อง-x-optimism">⚠ ข้อควรระวังเรื่อง X-optimism</h3>
+<p>ตัวจำลองหลายตัว (รวมถึง ModelSim) มี <strong>X-optimism</strong> โดย
+default คือเมื่อเจอ <code>X</code> ในสัญญาณ ตัวจำลองจะพยายาม &quot;เดา&quot; ค่าที่ทำให้
+simulation เดินต่อได้ ซึ่งทำให้ผลการจำลอง <strong>ไม่ใช่ค่าที่แท้จริง</strong></p>
+<p>ถ้าต้องการผลแบบ &quot;ปลอดภัย&quot; ให้ใช้</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>vsim -t <span class="dv">10</span>ps -voptargs<span class="op">=+</span>acc -nooptargs? work.tb_cnt4_x</span></code></pre></div>
+<p>หรือเพิ่ม <code>+acc</code> ร่วมกับ <code>vsim -x</code> /
+ตัวเลือกที่เข้มงวดกว่า คู่มือนี้ยังไม่ได้วัดผลของตัวเลือกเหล่านี้
+จึงไม่ใส่ตัวเลขที่ไม่ได้มาจากการรันจริง แต่ควรรู้ไว้ว่าเป็นประเด็นที่ต้องควบคุมใน flow
+จริง</p>
+<h3 id="เก็บความรู้จาก-lab-นี้-3">เก็บความรู้จาก LAB นี้</h3>
+<ul>
+<li><code>std_logic_vector</code> ใน VHDL มี 9 ค่า (<code>U</code>,
+<code>X</code>, <code>0</code>, <code>1</code>, <code>Z</code>,
+<code>W</code>, <code>L</code>, <code>H</code>, <code>-</code>) แต่
+<code>to_hstring</code> จะพิมพ์ <code>X</code> เป็นตัวพิมพ์ใหญ่</li>
+<li><strong>การเปรียบเทียบใน testbench ต้องระวัง <code>X</code></strong>
+<code>q = &quot;0011&quot;</code> เป็น false เมื่อ <code>q</code> มี <code>X</code>
+ถ้าต้องการให้ผ่านกับ <code>X</code> ต้องใช้ <code>q ?= &quot;0011&quot;</code>
+(ตัวดำเนินการ <code>?=</code>)</li>
+<li><strong>ความต่างระหว่าง VHDL กับ Verilog ไม่ใช่เรื่องเล็ก</strong>
+โค้ดเดียวกันแปลงเป็น Verilog แล้วอาจให้ผลจำลองต่างกันจริง
+นี่เป็นเหตุผลที่ทีมที่สังเคราะห์ต้องทดสอบทั้งสองภาษา</li>
+</ul>
+<hr />
+<h2 id="บทที่-9--lab-07-บั๊กที่ซ่อนอยู่ใน-netlist">บทที่ 9 — LAB 07: บั๊กที่ซ่อนอยู่ใน
+netlist</h2>
+<h3 id="เป้าหมาย-6">เป้าหมาย</h3>
+<p>พิสูจน์ว่า <strong>GLS จับบั๊กที่ RTL จับไม่ได้</strong> แบบที่ชัดเจนที่สุด โดยการ
+<strong>แก้แค่ netlist</strong> โดยไม่แตะ RTL เลย</p>
+<h3 id="บั๊กที่ถูกฉีด">บั๊กที่ถูกฉีด</h3>
+<p><code>netlist/cnt4_bug_net.v</code> เป็นสำเนาของ
+<code>netlist/cnt4_net.v</code> ที่มีการ <strong>สลับ D ของฟลิป-flop q[1] กับ
+q[2]</strong></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* ต้นฉบับ : q[1] ใช้ D = _02_ , q[2] ใช้ D = _03_ */</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>sg13g2_dfrbpq_1 _16_ <span class="op">(</span></span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>  .CLK<span class="op">(</span>clk<span class="op">),</span></span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>  .D<span class="op">(</span>_02_<span class="op">),</span>          <span class="co">/* แก้เป็น _03_ */</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  .Q<span class="op">(</span>\n14_q<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">),</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>  .RESET_B<span class="op">(</span>rst_n<span class="op">)</span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>sg13g2_dfrbpq_1 _17_ <span class="op">(</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>  .CLK<span class="op">(</span>clk<span class="op">),</span></span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>  .D<span class="op">(</span>_03_<span class="op">),</span>          <span class="co">/* แก้เป็น _02_ */</span></span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>  .Q<span class="op">(</span>\n14_q<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">),</span></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>  .RESET_B<span class="op">(</span>rst_n<span class="op">)</span></span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div>
+<p><strong>ทุกอย่างอื่นเหมือนเดิมทุกประการ</strong>: ชนิดเซลล์เดียวกัน
+สัญญาณนาฬิกาเดียวกัน reset เดียวกัน ไฟล์ RTL <code>rtl/cnt4.vhd</code>
+ไม่ถูกแตะเลย</p>
+<h3 id="รัน-4">รัน</h3>
+<div class="sourceCode" id="cb60"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab07_netlist_bug</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-6">ผลลัพธ์จริง</h3>
+<pre class="text"><code>[STEP 1] the RTL level run
+   the RTL verdict : PASS
+
+[STEP 2] the gate level run with the broken netlist
+   the RTL verdict : PASS   (expected : PASS)
+   the GLS verdict : FAIL   (expected : FAIL)
+---- the two traces next to each other ----
+   line 3 : RTL &#39;q=2&#39;   vs   GLS &#39;q=4&#39;
+   line 5 : RTL &#39;q=4&#39;   vs   GLS &#39;q=2&#39;
+RESULT: PASS
+  -&gt; the RTL simulation cannot see the defect, the gate level simulation can
+[RESULT] PASS</code></pre>
+<h3 id="trace-ทั้งสองฝั่ง">trace ทั้งสองฝั่ง</h3>
+<table>
+<thead>
+<tr>
+<th>บรรทัด</th>
+<th>RTL</th>
+<th>GLS (มีบั๊ก)</th>
+<th>ค่าที่ถูกต้อง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>q=0</code></td>
+<td><code>q=0</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>q=1</code></td>
+<td><code>q=1</code></td>
+<td>1</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>q=2</code></td>
+<td><strong><code>q=4</code></strong></td>
+<td>2</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>q=3</code></td>
+<td><code>q=3</code></td>
+<td>3</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>q=4</code></td>
+<td><strong><code>q=2</code></strong></td>
+<td>4</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>q=5</code></td>
+<td><code>q=5</code></td>
+<td>5</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>q=6</code></td>
+<td><code>q=6</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>q=6</code></td>
+<td><code>q=6</code></td>
+<td>6</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>q=9</code></td>
+<td><code>q=9</code></td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<h3 id="อธิบายว่าทำไมถึงเป็นแบบนี้">อธิบายว่าทำไมถึงเป็นแบบนี้</h3>
+<p>สมการของตัวนับ (ที่ Yosys สังเคราะห์ได้)</p>
+<pre class="text"><code>q[0]_next = q[0] XOR en
+q[1]_next = q[1] XOR (q[0] AND en)
+q[2]_next = q[2] XOR (q[1] AND q[0] AND en)</code></pre>
+<p>ใน netlist</p>
+<table>
+<thead>
+<tr>
+<th>สัญญาณ</th>
+<th>นิยาม</th>
+<th>ของจริง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_02_</code></td>
+<td><code>AND(_04_, _06_)</code> =
+<code>q[1] XOR (q[0] AND en)</code></td>
+<td>D ของ q[1]</td>
+</tr>
+<tr>
+<td><code>_03_</code></td>
+<td><code>XNOR(q[2], _04_)</code> =
+<code>q[2] XOR (q[1] AND q[0] AND en)</code></td>
+<td>D ของ q[2]</td>
+</tr>
+</tbody>
+</table>
+<p>พอสลับกัน</p>
+<pre class="text"><code>q[1]_next = q[2] XOR (q[1] AND q[0] AND en)   &lt;- ผิด
+q[2]_next = q[1] XOR (q[0] AND en)            &lt;- ผิด</code></pre>
+<p>ลองไล่ด้วยมือจาก <code>q = 0001</code> (นับไป 1 ครั้งแล้ว) โดย
+<code>en = 1</code></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>q[0]</th>
+<th>q[1]</th>
+<th>q[2]</th>
+<th>ผล</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ค่าปัจจุบัน</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td><code>q = 0001</code></td>
+</tr>
+<tr>
+<td>ของจริง</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td><code>q = 0010</code> ✅</td>
+</tr>
+<tr>
+<td>ของเสีย</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td><code>q = 0100</code> ❌</td>
+</tr>
+</tbody>
+</table>
+<p>จากนั้นรอบถัดไปก็สลับกลับ ทำให้ได้ <code>q = 0011</code> → <code>0100</code>
+→ <code>0011</code> → ... จึงเห็น trace ที่สลับไปมา <code>2, 4</code>
+ตามที่ข้อความ error บอก</p>
+<h3 id="-เก็บความรู้ที่สำคัญ">⚠ เก็บความรู้ที่สำคัญ</h3>
+<ol type="1">
+<li><p><strong>RTL ผ่าน 100%</strong> — เพราะ RTL ไม่เคยถูกแก้ ถ้าคุณมีแต่ RTL
+regression คุณจะไม่มีทางรู้ว่ามีบั๊กนี้</p></li>
+<li><p><strong>บั๊กแบบนี้เกิดได้จริงในงานจริง</strong></p>
+<ul>
+<li>การสลับสัญญาณระหว่างการวางตำแหน่ง (placement) ผิด</li>
+<li>การผิด pin assignment ใน constraint file</li>
+<li>บั๊กจากการแก้ netlist ด้วยมือ</li>
+<li>บั๊กจากเครื่องมือสังเคราะห์เอง</li>
+</ul></li>
+<li><p><strong>นี่คือเหตุผลที่ GLS ยังต้องมีอยู่แม้จะมี formal
+verification</strong></p>
+<ul>
+<li>formal ต้องเขียน property ให้ถูก ถ้าไม่มี property ก็จับบั๊กนี้ไม่ได้</li>
+<li>GLS ใช้ testbench ที่มีอยู่แล้ว จับบั๊กได้ทันทีโดยไม่ต้องเขียนอะไรเพิ่ม</li>
+</ul></li>
+<li><p><strong>บั๊กนี้ &quot;หาย&quot; ไปเมื่อนำไปวางตำแหน่งและ route จริง</strong>
+เพราะมันเป็นบั๊กเชิงตรรกะในระดับ netlist การตรวจ DRC/LVS จะไม่จับได้เลย</p></li>
+</ol>
+<hr />
+<h2 id="บทที่-10--lab-08-regression-ของทั้งชุด">บทที่ 10 — LAB 08: regression
+ของทั้งชุด</h2>
+<h3 id="เป้าหมาย-7">เป้าหมาย</h3>
+<p>ทำให้ชุด lab ทั้งหมดรันได้ใน <strong>คำสั่งเดียว</strong> และได้รหัสจบที่ใช้ใน CI
+ได้</p>
+<h3 id="สองส่วนของ-lab-08">สองส่วนของ LAB 08</h3>
+<ol type="1">
+<li><strong>regression ของทุก lab</strong> — รัน lab01 ถึง lab07
+ตามลำดับแล้วสรุปผล</li>
+<li><strong>การเทียบสามดีไซน์เพิ่ม</strong> — <code>alu4</code>,
+<code>fsm_light</code>, <code>sr16</code></li>
+</ol>
+<h3 id="รันทั้งชุด">รันทั้งชุด</h3>
+<div class="sourceCode" id="cb64"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab08_gls_regression</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>regression.cmd</span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-7">ผลลัพธ์จริง</h3>
+<pre class="text"><code>====================================================================
+ LAB 08 : GLS regression -- running every gate level lab
+ root    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_gls_vhdl_lab\lab08_gls_regression\..
+====================================================================
+[PASS] lab01_rtl_baseline
+[PASS] lab02_synth_netlist
+[PASS] lab03_cell_library
+[PASS] lab04_gls_first
+[PASS] lab05_rtl_vs_gate
+[PASS] lab06_x_propagation
+[PASS] lab07_netlist_bug
+[PASS] lab08_multi_design
+
+====================================================================
+ REGRESSION SUMMARY
+ total = 8   passed = 8   failed = 0
+ summary file : ...\lab08_gls_regression\results\regression_summary.txt
+====================================================================
+PASS  lab01_rtl_baseline
+PASS  lab02_synth_netlist
+PASS  lab03_cell_library
+PASS  lab04_gls_first
+PASS  lab05_rtl_vs_gate
+PASS  lab06_x_propagation
+PASS  lab07_netlist_bug
+PASS  lab08_multi_design
+[REGRESSION] ALL GREEN</code></pre>
+<p><strong>8 lab ผ่านหมด รหัสจบ = 0</strong></p>
+<h3 id="ส่วนที่สอง-สามดีไซน์เพิ่ม">ส่วนที่สอง: สามดีไซน์เพิ่ม</h3>
+<p><code>run.cmd</code> ใน <code>lab08_gls_regression</code> จะวนลูปผ่าน
+<code>alu4</code>, <code>fsm_light</code>, <code>sr16</code>
+โดยส่งชื่อดีไซน์ผ่าน plusarg <code>+TOP=</code></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>vsim <span class="at">-c</span> <span class="at">-onfinish</span> stop +TOP=alu4 <span class="at">-do</span> <span class="st">&quot;do run_rtl.do&quot;</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>vsim <span class="at">-c</span> <span class="at">-onfinish</span> stop +TOP=alu4 <span class="at">-do</span> <span class="st">&quot;do run_gls.do&quot;</span></span></code></pre></div>
+<p>และใน <code>run_rtl.do</code> / <code>run_gls.do</code>
+อ่านค่านี้มาเลือกชื่อไฟล์</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> top <span class="st">&quot;cnt4&quot;</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="cf">foreach</span> a <span class="kw">[split</span> <span class="dt">$::argv</span> <span class="st">&quot; &quot;</span><span class="kw">]</span> <span class="kw">{</span></span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">{[regexp</span> <span class="kw">{</span>^<span class="ch">\+</span>TOP<span class="op">=</span>(.<span class="op">*</span>)$<span class="kw">}</span> <span class="dt">$a</span> -<span class="op">&gt;</span> v<span class="kw">]}</span> <span class="kw">{</span> <span class="kw">set</span> top <span class="dt">$v</span> <span class="kw">}</span></span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> tb <span class="st">&quot;tb_</span><span class="dt">$top</span><span class="st">&quot;</span></span></code></pre></div>
+<h3 id="ผลลัพธ์จริง-8">ผลลัพธ์จริง</h3>
+<pre class="text"><code>[DESIGN] alu4
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+   7 trace lines , 0 difference(s)
+  [PASS] alu4
+[DESIGN] fsm_light
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+   6 trace lines , 0 difference(s)
+  [PASS] fsm_light
+[DESIGN] sr16
+   the RTL verdict : PASS
+   the GLS verdict : PASS
+   6 trace lines , 0 difference(s)
+  [PASS] sr16
+
+ total = 3   passed = 3   failed = 0
+[RESULT] PASS</code></pre>
+<h3 id="trace-จริงของทั้งสามดีไซน์">trace จริงของทั้งสามดีไซน์</h3>
+<p><code>alu4</code> (6 บรรทัด)</p>
+<pre class="text"><code>op=0 a=7 b=5 y=C zero=0
+op=1 a=7 b=5 y=2 zero=0
+op=2 a=C b=A y=8 zero=0
+op=3 a=C b=A y=E zero=0
+op=4 a=C b=A y=6 zero=0
+op=0 a=F b=1 y=0 zero=1</code></pre>
+<p>อ่าน <code>alu4</code> (op: 0=add, 1=sub, 2=and, 3=or, 4=xor)</p>
+<table>
+<thead>
+<tr>
+<th>op</th>
+<th>a</th>
+<th>b</th>
+<th>y</th>
+<th>ความหมาย</th>
+<th>zero</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>7</td>
+<td>5</td>
+<td>C</td>
+<td>7 + 5 = 12 = <code>C</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>7</td>
+<td>5</td>
+<td>2</td>
+<td>7 − 5 = 2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>C</td>
+<td>A</td>
+<td>8</td>
+<td><code>1100</code> AND <code>1010</code> = <code>1000</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C</td>
+<td>A</td>
+<td>E</td>
+<td><code>1100</code> OR <code>1010</code> = <code>1110</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>C</td>
+<td>A</td>
+<td>6</td>
+<td><code>1100</code> XOR <code>1010</code> = <code>0110</code></td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>F</td>
+<td>1</td>
+<td>0</td>
+<td>15 + 1 = 16 → ตัดเหลือ 0 (4 บิต)</td>
+<td><strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+<p><code>fsm_light</code> (5 บรรทัด)</p>
+<pre class="text"><code>state=0 red=1 green=0 yellow=0
+state=1 red=0 green=1 yellow=0
+state=2 red=0 green=0 yellow=1
+state=0 red=1 green=0 yellow=0
+state=1 red=0 green=1 yellow=0</code></pre>
+<p><code>sr16</code> (5 บรรทัด)</p>
+<pre class="text"><code>qout=0000
+qout=A5C3
+qout=4B86
+qout=25C3
+qout=25C3</code></pre>
+<p>ตรวจด้วยมือ</p>
+<table>
+<thead>
+<tr>
+<th>ขั้น</th>
+<th>ค่า</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reset</td>
+<td><code>0000</code></td>
+<td>ล้างเป็น 0</td>
+</tr>
+<tr>
+<td>load <code>A5C3</code></td>
+<td><code>A5C3</code></td>
+<td>โหลดคู่ขนาน</td>
+</tr>
+<tr>
+<td>shift left (<code>sh=10</code>)</td>
+<td><code>4B86</code></td>
+<td><code>A5C3</code> &lt;&lt; 1 = <code>14B86</code> → ตัดทิ้งบิตบน =
+<code>4B86</code> ✅</td>
+</tr>
+<tr>
+<td>shift right (<code>sh=01</code>)</td>
+<td><code>25C3</code></td>
+<td><code>4B86</code> &gt;&gt; 1 = <code>25C3</code> ✅</td>
+</tr>
+<tr>
+<td>hold (<code>sh=00</code>)</td>
+<td><code>25C3</code></td>
+<td>คงค่าเดิม ✅</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>ทั้งสามดีไซน์ ใช้ <strong>testbench ไฟล์เดียวกับ RTL</strong>
+และผลลัพธ์เหมือนกันทุกบรรทัด ยืนยันว่าเทคนิคในหัวข้อ 1.7 ใช้ได้กับทุกดีไซน์ ไม่ใช่แค่ตัวนับ</p>
+</blockquote>
+<h3 id="ตัวอย่างที่โหลดเพิ่มขึ้นในระดับ-gate">ตัวอย่างที่โหลดเพิ่มขึ้นในระดับ gate</h3>
+<p>เทียบสองรายการ <code>Loading</code> จาก log จริง</p>
+<pre class="text"><code># ระดับ RTL
+# Loading work.tb_sr16(sim)
+# Loading work.sr16(rtl)
+
+# ระดับ gate
+# Loading work.tb_sr16(sim)
+# Loading work.sr16
+# Loading work.sg13g2_inv_1
+# Loading work.sg13g2_nor2b_1
+# Loading work.sg13g2_nand2b_1
+# Loading work.sg13g2_nand3_1
+# Loading work.sg13g2_a22oi_1
+# Loading work.sg13g2_o21ai_1
+# Loading work.sg13g2_nand4_1
+# Loading work.sg13g2_nand2_1
+# Loading work.sg13g2_nand3b_1
+# Loading work.sg13g2_a21o_1
+# Loading work.sg13g2_and2_1
+# Loading work.sg13g2_a221oi_1
+# Loading work.sg13g2_nor2_1
+# Loading work.sg13g2_dfrbpq_1
+# Loading work.ihp_dff_r_err
+# Loading work.ihp_dff_r</code></pre>
+<p>เห็นชัดว่า:</p>
+<ul>
+<li>ระดับ gate โหลด <strong>เซลล์จริง</strong> เข้ามาด้วย</li>
+<li>และโหลด <strong>UDP</strong> (<code>ihp_dff_r</code>,
+<code>ihp_dff_r_err</code>) ที่เป็น primitive ภายในเซลล์
+<code>sg13g2_dfrbpq_1</code></li>
+</ul>
+<blockquote>
+<p><code>ihp_dff_r</code> คือ user defined primitive ที่อยู่ในไฟล์
+<code>cells/sg13g2_stdcell.v</code> เอง (บรรทัด 1974 เป็นต้นไป มี primitive
+ทั้ง 17 ตัว ซ่อนอยู่หลังโมเดล 84 เซลล์ โดยแต่ละตัวถูกห่อด้วย
+<code>`ifdef _udp_def_..._</code>) ไฟล์ <code>cells/sg13g2_udp.v</code>
+เป็นไฟล์แยกที่มีเฉพาะ UDP ชุดเดียวกันสำหรับ flow ที่ต้องแยกคอมไพล์</p>
+</blockquote>
+<h3 id="-กับดักของสคริปต์-cmd-ที่เจอระหว่างทำ-lab-นี้">⚠ กับดักของสคริปต์
+<code>.cmd</code> ที่เจอระหว่างทำ lab นี้</h3>
+<ol type="1">
+<li><strong><code>&lt;</code> redirection ใน <code>for</code> block ของ
+<code>.cmd</code> ใช้ไม่ได้</strong> ต้องอ่าน verdict ด้วย <code>for /f</code>
+แทน</li>
+</ol>
+<div class="sourceCode" id="cb73"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="at">/f</span> <span class="st">&quot;usebackq delims=&quot;</span> <span class="va">%%V</span> <span class="kw">in</span> <span class="kw">(</span><span class="st">&quot;results\</span><span class="sc">%%</span><span class="va">D_verdict</span><span class="st">.txt&quot;</span><span class="kw">)</span> <span class="kw">do</span> <span class="bu">set</span> <span class="st">&quot;</span><span class="va">R</span>=<span class="sc">%%</span><span class="va">V</span><span class="st">&quot;</span></span></code></pre></div>
+<ol start="2" type="1">
+<li><p><strong>ใน <code>for %%V in (...)</code> ตัว <code>=</code>
+จะถูกตีความเป็นตัวคั่น var=value</strong> จึงห้ามใช้ <code>=</code>
+เป็นตัวคั่นข้อมูล</p></li>
+<li><p><strong>ต้องเปิด delayed expansion</strong>
+เมื่อต้องการอ่านตัวแปรที่เพิ่งถูกตั้งใน loop</p></li>
+</ol>
+<div class="sourceCode" id="cb74"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="bu">setlocal</span> enabledelayedexpansion</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">&quot;</span><span class="pp">!</span><span class="va">R</span><span class="pp">!</span><span class="st">&quot;</span><span class="kw">==</span><span class="st">&quot;PASS&quot;</span> <span class="kw">(</span></span></code></pre></div>
+<ol start="4" type="1">
+<li><p><strong><code>.cmd</code> ต้องเป็น ASCII ล้วน</strong>
+ถ้าใส่ข้อความไทยหรือ UTF-8 <code>cmd.exe</code> จะอ่านโครงสร้างบรรทัดผิด
+(คอมเมนต์บรรทัดหนึ่งจะกลืนตัวอักษรแรกของบรรทัดถัดไป: <code>echo</code> กลายเป็น
+<code>cho</code>)</p></li>
+<li><p><strong>ห้ามเว้นวรรคในวงเล็บก่อน <code>(</code> หรือ <code>)</code>
+ในบรรทัด <code>echo</code> ที่อยู่ใน if-block</strong> <code>cmd.exe</code>
+จะหยุดสคริปต์แบบเงียบ</p></li>
+</ol>
+<h3 id="เก็บความรู้จาก-lab-นี้-4">เก็บความรู้จาก LAB นี้</h3>
+<ul>
+<li><strong>regression ต้องมี exit code ที่ CI ใช้ได้</strong> คู่มือนี้ใช้ 0 =
+ผ่านหมด, 1 = มีบางอันไม่ผ่าน</li>
+<li><strong>แต่ละ lab ต้องเขียน verdict เป็นไฟล์</strong> ไม่ใช่ดูแค่ console
+เพราะ <code>vsim</code> คืน 0 แม้จะล้มเหลว (หัวข้อ 6.1)</li>
+<li><strong>เก็บ log ของแต่ละ lab แยกกัน</strong> เพื่อให้หาที่ผิดได้เร็ว</li>
+</ul>
+<pre class="text"><code>lab08_gls_regression/results/
+├── regression_summary.txt
+├── lab01_rtl_baseline.log
+├── lab02_synth_netlist.log
+├── lab03_cell_library.log
+├── lab04_gls_first.log
+├── lab05_rtl_vs_gate.log
+├── lab06_x_propagation.log
+├── lab07_netlist_bug.log
+└── lab08_multi_design.log</code></pre>
+<h2 id="ภาคผนวก-a--คลังข้อความ-error-จริง">ภาคผนวก A — คลังข้อความ error
+จริง</h2>
+<p>ทุกข้อความในภาคผนวกนี้ถูก <strong>คัดลอกมาจากการรันจริงบนเครื่อง</strong>
+ไม่มีการแต่งขึ้น</p>
+<h3 id="a1-vsim-3693--ไม่ได้ใส่--t-10ps">A.1 <code>vsim-3693</code> —
+ไม่ได้ใส่ <code>-t 10ps</code></h3>
+<p>เกิดเมื่อคอมไพล์เซลล์ Verilog ของ SG13G2 แล้วโหลด design โดยลืมใส่
+<code>-t 10ps</code></p>
+<pre class="text"><code># ** Fatal: (vsim-3693) The minimum time resolution limit (10ps) in the Verilog source is smaller than the one chosen
+for SystemC or VHDL units in the design. Use the vsim -t option to specify the desired resolution.
+# FATAL ERROR while loading design
+# Errors: 1, Warnings: 0</code></pre>
+<p>exit code = <strong>12</strong></p>
+<p><strong>สาเหตุ:</strong> โมเดลเซลล์ประกาศ
+<code>`timescale 1ns/10ps</code> แต่ค่าเริ่มต้นของ ModelSim คือ 1 ps
+ซึ่งละเอียดกว่า → ModelSim ห้าม</p>
+<p><strong>แก้:</strong> <code>vsim -t 10ps ...</code></p>
+<hr />
+<h3 id="a2-vsim-3033--เซลล์อยู่คนละไลบรารี">A.2 <code>vsim-3033</code> —
+เซลล์อยู่คนละไลบรารี</h3>
+<pre class="text"><code># Loading work.cnt4
+# ** Error: (vsim-3033) Instantiation of &#39;sg13g2_nand3_1&#39; failed. The design unit was not found.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cnt4/dut File: ../netlist/cnt4_net.v Line: 27
+#         Searched libraries:
+#             C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/lab04_gls_first/work
+# ** Error: (vsim-3033) Instantiation of &#39;sg13g2_nand4_1&#39; failed. The design unit was not found.
+...
+# Error loading design
+# Errors: 11, Warnings: 0</code></pre>
+<ul>
+<li><strong>จำนวนบรรทัด error = จำนวน instance พอดี (11 =
+11)</strong></li>
+<li><code>Searched libraries:</code> บอกว่าหาเซลล์ไปที่ไหน — ที่นี่มีแค่
+<code>work</code></li>
+<li>exit code = <strong>12</strong></li>
+<li><strong>การโหลด design ที่ล้มเหลวเป็น FATAL → session จบทันที</strong>
+คำสั่ง Tcl หลังจากนั้นไม่ถูกทำเลย</li>
+</ul>
+<p><strong>แก้:</strong> คอมไพล์เซลล์เข้า <code>work</code> เหมือนกัน หรือ
+<code>vmap cells_lib cells_lib</code> ให้มองเห็นกัน</p>
+<hr />
+<h3 id="a3-vsim-7--โฟลเดอร์ของไฟล์-trace-ไม่มีอยู่">A.3 <code>vsim-7</code> —
+โฟลเดอร์ของไฟล์ trace ไม่มีอยู่</h3>
+<p>เกิดเมื่อ VHDL <code>file_open</code> เปิดไฟล์ที่อยู่ในโฟลเดอร์ที่ยังไม่ถูกสร้าง</p>
+<pre class="text"><code># ** Warning: (vsim-7) Failed to open VHDL file &quot;results/trace_gateflag.txt&quot; in r+ mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cnt4
+# ** Note: === tb_cnt4 : GATE LEVEL ===
+#    Time: 0 ps  Iteration: 0  Instance: /tb_cnt4
+# ** Fatal: (vsim-7) Failed to open VHDL file &quot;results/trace_gateflag.txt&quot; in r+ mode.
+# No such file or directory. (errno = ENOENT)
+#    Time: 20 ns  Iteration: 0  Process: /tb_cnt4/stim File: .../tb/tb_cnt4.vhd line 99
+# Fatal error in Process stim at .../tb/tb_cnt4.vhd line 99
+# Errors: 1, Warnings: 1</code></pre>
+<p>สังเกตว่า error แรกเป็น <strong>Warning</strong> แต่ครั้งที่สองเป็น
+<strong>Fatal</strong> เพราะ VHDL เปิดไฟล์ตอนเริ่ม process
+แล้วเปิดซ้ำตอนเขียน</p>
+<p><strong>แก้:</strong> <code>file mkdir results</code> ก่อนเรียก
+<code>vsim</code> ทุกครั้ง</p>
+<hr />
+<h3 id="a4-license-ไม่ว่าง">A.4 License ไม่ว่าง</h3>
+<pre class="text"><code>** Error: License checkout has been disallowed because
+only one session is allowed to run on an uncounted nodelocked
+license and an instance of QuestaSim is already running with a
+nodelocked license on this machine.</code></pre>
+<p><strong>แก้:</strong> ปิด QuestaSim GUI ที่เปิดค้างอยู่ หรือให้
+<code>tools/pick_tool.cmd</code> เลือก ModelSim DE ที่ยังว่าง</p>
+<hr />
+<h3 id="a5-เปิดไฟล์-do-ที่ไม่มีอยู่">A.5 เปิดไฟล์ <code>.do</code> ที่ไม่มีอยู่</h3>
+<pre class="text"><code># Cannot open macro file: this_file_does_not_exist.do
+ModelSim&gt; #
+# &lt;EOF&gt;</code></pre>
+<p>exit code = <strong>0</strong> (!)</p>
+<p><strong>นี่คือกับดักที่อันตรายที่สุด</strong> — ระบบ CI ที่ดูแค่ exit code
+จะไม่เห็นความล้มเหลว ต้องอ่าน transcript เสมอ</p>
+<hr />
+<h3 id="a6-สรุป-exit-code-ของ-vsim-ที่วัดได้จริง">A.6 สรุป exit code ของ
+<code>vsim</code> ที่วัดได้จริง</h3>
+<table>
+<thead>
+<tr>
+<th>สถานการณ์</th>
+<th>exit code</th>
+<th>มี error ใน transcript?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>รันจบปกติ</td>
+<td>0</td>
+<td>ไม่มี</td>
+</tr>
+<tr>
+<td>เปิดไฟล์ <code>.do</code> ไม่เจอ</td>
+<td><strong>0</strong></td>
+<td>มี (<code>Cannot open macro file</code>)</td>
+</tr>
+<tr>
+<td>โหลด design ไม่สำเร็จ (<code>vsim-3033</code>)</td>
+<td><strong>12</strong></td>
+<td>มี</td>
+</tr>
+<tr>
+<td>ไม่ใส่ <code>-t 10ps</code> (<code>vsim-3693</code>)</td>
+<td><strong>12</strong></td>
+<td>มี</td>
+</tr>
+<tr>
+<td>สคริปต์ Tcl ตาย (<code>onerror</code> →
+<code>quit -code 90</code>)</td>
+<td><strong>90</strong></td>
+<td>มี</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>สรุป: อย่าเชื่อ exit code อย่างเดียว</strong> ให้อ่านไฟล์ verdict ที่
+testbench เขียน แล้วค่อยตัดสิน นี่คือสิ่งที่ <code>tools/gls_common.do</code> +
+<code>run_template.cmd</code> ทำในคู่มือนี้</p>
+</blockquote>
+<hr />
+<h2 id="ภาคผนวก-b--กับดักที่วัดได้จริง">ภาคผนวก B — กับดักที่วัดได้จริง</h2>
+<h3 id="b1-กับดักฝั่ง-vhdl">B.1 กับดักฝั่ง VHDL</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>กับดัก</th>
+<th>อาการ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>นาฬิกาไม่มีค่าเริ่มต้น</td>
+<td><code>clk</code> เป็น <code>&#39;U&#39;</code> → <code>not &#39;U&#39;</code> =
+<code>&#39;U&#39;</code> → <strong>นาฬิกาไม่เดินเลย</strong></td>
+<td><code>signal clk : std_logic := &#39;0&#39;;</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>std_logic_vector + integer</code></td>
+<td>compile error (<code>numeric_std</code> ไม่มี operator นี้)</td>
+<td>ใช้ <code>unsigned</code> ภายใน แล้ว <code>std_logic_vector(cq)</code>
+ที่ port</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>trim</code> ไม่มีใน GHDL VHDL-2008</td>
+<td>compile error</td>
+<td>เขียน helper <code>nospace()</code> เอง</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>time&#39;image</code> พิมพ์หน่วยตาม resolution</td>
+<td>ได้ <code>26000000 fs</code> ใน GHDL แต่ <code>26 ns</code> ใน
+ModelSim</td>
+<td>เขียน helper <code>timestr()</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>integer&#39;image(5)</code> มีช่องว่างนำหน้า</td>
+<td>ได้ <code>&quot; 5&quot;</code> ไม่ใช่ <code>&quot;5&quot;</code></td>
+<td>ใช้ helper <code>nospace()</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>to_hstring</code> พิมพ์ <strong>ตัวพิมพ์ใหญ่</strong></td>
+<td><code>C</code> ไม่ใช่ <code>c</code> (ต่างจาก Verilog
+<code>%h</code>)</td>
+<td>ระวังเมื่อเทียบ trace ข้ามภาษา</td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>wait until rising_edge(clk)</code> ไม่ทำงาน</td>
+<td>ถ้า <code>clk</code> เป็น <code>&#39;U&#39;</code></td>
+<td>แก้ข้อ 1</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>file_open</code> ล้มเหลว</td>
+<td><code>vsim-7</code> ถ้าโฟลเดอร์ไม่มี</td>
+<td><code>file mkdir results</code></td>
+</tr>
+<tr>
+<td>9</td>
+<td>ชื่อ port ของ VHDL ถูก GHDL แปลงเป็นตัวพิมพ์เล็ก</td>
+<td>ไม่ match กับ Verilog module</td>
+<td>ตั้งชื่อ port เป็นตัวพิมพ์เล็กตั้งแต่ต้น</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b2-กับดักฝั่ง-verilog--yosys">B.2 กับดักฝั่ง Verilog / Yosys</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>กับดัก</th>
+<th>อาการ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>abc -g</code> ไม่รองรับ gate type <code>NOT</code></td>
+<td><code>ERROR: Unsupported gate type</code></td>
+<td>ปล่อยให้ Yosys สร้าง inverter ให้เอง</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>dfflibmap</code> ต้องมาก่อน <code>abc</code></td>
+<td>ABC ไม่เห็นฟลิป-flop</td>
+<td>เรียงลำดับให้ถูก</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>cells.lib</code> ของ distro มีแต่ DFF</td>
+<td>map combinational ไม่ได้</td>
+<td>ใช้ Liberty ของ PDK เสมอ</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>fsm</code> recode เป็น one-hot</td>
+<td>จำนวน FF เปลี่ยน (fsm_light: 2 → 5)</td>
+<td><code>fsm -norecode</code> หรือเขียน one-hot เอง</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>write_verilog</code> เขียน <code>$_DFF*</code> กลับเป็น
+<code>always</code></td>
+<td>ไม่ใช่ gate level จริง</td>
+<td>ใช้ <code>dfflibmap</code> + <code>abc</code> ให้ครบก่อน
+<code>write_verilog</code></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>dfflibmap</code> map latch ไม่ได้</td>
+<td>latch หลุดเป็น <code>$_DLATCH*</code></td>
+<td>ออกแบบให้ไม่มี latch</td>
+</tr>
+<tr>
+<td>7</td>
+<td>ชื่อสัญญาณที่ escape มีช่องว่างท้าย</td>
+<td><code>\n14_q[1] </code></td>
+<td>อย่า parse ชื่อสัญญาณด้วย regex แบบตรงไปตรงมา</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b3-กับดักฝั่ง-tcl--modelsim">B.3 กับดักฝั่ง Tcl / ModelSim</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>กับดัก</th>
+<th>อาการ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>&quot;\s&quot;</code> ใน double quotes</td>
+<td>backslash หาย → pattern พัง</td>
+<td>ใช้ braces <code>{...}</code> หรือ <code>format {...}</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>$finish</code> ตัดคำสั่งที่เหลือใน <code>-do</code></td>
+<td><code>coverage save</code> ไม่ทำงาน แต่ไม่มี error</td>
+<td>ใส่ <code>-onfinish stop</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>โหลด design ครั้งที่สองใน session เดียว</td>
+<td><code>.do</code> หยุดเงียบ ๆ</td>
+<td>ใช้ <strong>process แยก</strong> สองตัว</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>vsim</code> คืน 0 แม้ล้มเหลว</td>
+<td>CI ผ่านทั้งที่พัง</td>
+<td>อ่าน transcript / ไฟล์ verdict</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>[info script]</code> คืน path ของ vsim</td>
+<td>simulator crash</td>
+<td>อย่าใช้ ให้ <code>source</code> ด้วยพาธสัมพัทธ์</td>
+</tr>
+<tr>
+<td>6</td>
+<td>console echo พิมพ์ argument ขนาดใหญ่</td>
+<td>เห็นบรรทัด <code>#</code> เต็มจอ</td>
+<td>ไม่ใช่ error — สคริปต์ที่อ่านไฟล์เซลล์ต้องหลีกเลี่ยง</td>
+</tr>
+<tr>
+<td>7</td>
+<td>ไม่มี <code>vsim-3033</code> แต่มี error</td>
+<td>จำนวน error ไม่เท่าจำนวน instance</td>
+<td>มักเป็นเรื่องอื่น — อ่าน transcript ให้ครบ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b4-กับดักฝั่ง-wsl--linux">B.4 กับดักฝั่ง WSL / Linux</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>กับดัก</th>
+<th>อาการ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>nix profile ไม่ถูกโหลดใน non-interactive shell</td>
+<td><code>yosys: command not found</code></td>
+<td><code>export PATH=&quot;/root/.nix-profile/bin:$PATH&quot;</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>ghdl synth</code> สลับลำดับ option</td>
+<td><code>unknown command</code></td>
+<td><code>ghdl synth --std=08 --out=verilog &lt;top&gt;</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>ghdl synth</code> ไม่มีตัวเลือกชื่อไฟล์</td>
+<td>ไม่มีไฟล์เกิด</td>
+<td>redirect เองด้วย <code>&gt;</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>path ของ PDK ใน Windows</td>
+<td><code>Liberty file not found</code></td>
+<td>แก้ <code>PDK_LIB</code> ใน <code>tools/synth/synth.sh</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td>PowerShell + WSL + quote ซ้อน</td>
+<td><code>syntax error near unexpected token</code></td>
+<td>เขียนเป็นไฟล์ <code>.sh</code> แล้วเรียกด้วย
+<code>bash &lt;file&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b5-กับดักฝั่ง-windows-batch">B.5 กับดักฝั่ง Windows batch</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>กับดัก</th>
+<th>อาการ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>ข้อความไทย/UTF-8 ใน <code>.cmd</code></td>
+<td><code>echo</code> กลายเป็น <code>cho</code></td>
+<td>ใช้ <strong>ASCII ล้วน</strong></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>&lt;</code> redirection ใน <code>for</code> block</td>
+<td>ใช้ไม่ได้</td>
+<td>ใช้ <code>for /f</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>=</code> เป็นตัวคั่นใน <code>for %%V in (...)</code></td>
+<td>ถูกตีความเป็น var=value</td>
+<td>ห้ามใช้ <code>=</code> เป็นตัวคั่น</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ต้องอ่านตัวแปรที่เพิ่งตั้งใน loop</td>
+<td>ได้ค่าว่าง</td>
+<td><code>setlocal enabledelayedexpansion</code> +
+<code>!VAR!</code></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>(</code> หรือ <code>)</code> ในบรรทัด <code>echo</code> ที่อยู่ใน
+if-block</td>
+<td>script หยุดเงียบ</td>
+<td>escape หรือย้ายออกจาก if-block</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>cd</code> แล้วสั่งลบ</td>
+<td>ไม่ผ่านการตรวจความปลอดภัย</td>
+<td>ใช้ <code>mavis-trash</code> หรือ <code>rm --</code>
+โดยไม่เปลี่ยนโฟลเดอร์</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ภาคผนวก-c--ตรวจโค้ดด้วย-ghdl-ไม่ต้องมี-modelsim">ภาคผนวก C —
+ตรวจโค้ดด้วย GHDL (ไม่ต้องมี ModelSim)</h2>
+<p>ถ้าเครื่องยังไม่มี license ของ ModelSim คุณยังตรวจความถูกต้องของ VHDL ได้ ด้วย
+GHDL ซึ่งเป็นตัวจำลองโอเพนซอร์ส</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wsl</span> <span class="at">-d</span> Ubuntu <span class="at">-u</span> root <span class="at">--</span> bash /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tools/check_vhdl.sh</span></code></pre></div>
+<p>สคริปต์นี้ทำ 3 อย่าง</p>
+<ol type="1">
+<li>คอมไพล์ <code>rtl/*.vhd</code> และ <code>tb/*.vhd</code> ทั้งหมดด้วย
+<code>ghdl -a --std=08</code> ลงในไดเรกทอรีชั่วคราว (ไฟล์
+<code>work-obj08.cf</code> ของโปรเจกต์ไม่ถูกแตะ)</li>
+<li>elaborate และ <strong>รัน testbench ทั้ง 5 ตัวจริง</strong></li>
+<li>รัน <code>ghdl synth</code> เพื่อพิสูจน์ว่าสังเคราะห์เป็น Verilog ที่ Yosys
+อ่านต่อได้</li>
+</ol>
+<h3 id="ผลลัพธ์จริง-9">ผลลัพธ์จริง</h3>
+<pre class="text"><code>---- ghdl version ----
+ghdl (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]
+ Compiled with GNAT Version: 14.2.0
+ static elaboration, mcode JIT code generator
+
+== rtl/alu4.vhd
+== rtl/cnt4.vhd
+== rtl/fsm_light.vhd
+== rtl/sr16.vhd
+== tb/tb_alu4.vhd
+== tb/tb_cnt4.vhd
+== tb/tb_cnt4_x.vhd
+== tb/tb_fsm_light.vhd
+== tb/tb_sr16.vhd
+---- ghdl --dir --std=08 ----
+VHDL SIGNATURE FILE START
+-- --[readme]--
+-- Library    ieee:
+--     [vhdl.files]--
+--      [units]--
+--        ieee.std_logic_1164
+--        ieee.numeric_std
+...
+---- compile errors : 0 ----
+
+=====================================================================
+ RUN : tb_cnt4
+=====================================================================
+tb/tb_cnt4.vhd:109:7:@0ms:(report note): === tb_cnt4 : RTL ===
+tb/tb_cnt4.vhd:123:5:@20ns:(report note):   t=20 ns : after reset         q = 0
+tb/tb_cnt4.vhd:138:7:@26ns:(report note):   t=26 ns : count up 1            q = 1
+tb/tb_cnt4.vhd:138:7:@36ns:(report note):   t=36 ns : count up 2            q = 2
+tb/tb_cnt4.vhd:138:7:@46ns:(report note):   t=46 ns : count up 3            q = 3
+tb/tb_cnt4.vhd:138:7:@56ns:(report note):   t=56 ns : count up 4            q = 4
+tb/tb_cnt4.vhd:138:7:@66ns:(report note):   t=66 ns : count up 5            q = 5
+tb/tb_cnt4.vhd:138:7:@76ns:(report note):   t=76 ns : count up 6            q = 6
+tb/tb_cnt4.vhd:153:5:@106ns:(report note):   t=106 ns : hold (en = &#39;0&#39;)     q = 6
+tb/tb_cnt4.vhd:170:5:@136ns:(report note):   t=136 ns : count up again     q = 9
+tb/tb_cnt4.vhd:175:5:@136ns:(report note):  checks = 9 , errors = 0
+tb/tb_cnt4.vhd:179:7:@136ns:(report note): TEST_PASSED : tb_cnt4 completed
+---- tb_cnt4.trace ----
+q=0
+q=1
+q=2
+q=3
+q=4
+q=5
+q=6
+q=6
+q=9
+---- tb_cnt4.result ----
+PASS
+
+---- ghdl synth : cnt4 ----
+SYNTH_OK cnt4  (30 lines of Verilog)
+---- ghdl synth : alu4 ----
+SYNTH_OK alu4  (77 lines of Verilog)
+---- ghdl synth : fsm_light ----
+SYNTH_OK fsm_light  (97 lines of Verilog)
+---- ghdl synth : sr16 ----
+SYNTH_OK sr16  (57 lines of Verilog)
+---- total errors : 0 ----</code></pre>
+<p><strong>ข้อสังเกตที่น่าสนใจ:</strong> trace จาก GHDL กับจาก ModelSim
+<strong>เหมือนกันทุกบรรทัด</strong> รวมถึง <strong>เวลาที่วัดได้ด้วย</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GHDL</th>
+<th>ModelSim</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>เวลาหลัง reset</td>
+<td>20 ns</td>
+<td>20 ns</td>
+</tr>
+<tr>
+<td>นับขึ้นครั้งที่ 1…6</td>
+<td>26, 36, 46, 56, 66, 76 ns</td>
+<td>เหมือนกัน</td>
+</tr>
+<tr>
+<td>คงค่า</td>
+<td>106 ns</td>
+<td>เหมือนกัน</td>
+</tr>
+<tr>
+<td>นับต่อ</td>
+<td>136 ns</td>
+<td>เหมือนกัน</td>
+</tr>
+<tr>
+<td>checks / errors</td>
+<td>9 / 0</td>
+<td>9 / 0</td>
+</tr>
+</tbody>
+</table>
+<p>นี่เป็นหลักฐานว่า testbench ถูกต้องจริง ไม่ใช่แค่ &quot;ผ่าน&quot; บน ModelSim และยืนยันว่า
+helper <code>timestr()</code> ทำให้สองตัวจำลองให้ผลตรงกัน</p>
+<blockquote>
+<p><strong>ข้อจำกัดของ GHDL</strong></p>
+<ul>
+<li>อ่าน Verilog ไม่ได้ → ตรวจได้แค่ระดับ RTL ไม่ได้ตรวจระดับ gate</li>
+<li><code>trim</code> และ <code>time&#39;image</code> ไม่มี → ต้องใช้ helper
+ที่คู่มือนี้เตรียมไว้</li>
+<li>ความละเอียดเวลาต่างจาก ModelSim → ต้องมี helper
+<code>timestr()</code></li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="ภาคผนวก-d--แบบฝึกหัด-เฉลยทุกข้อรันจริงแล้ว">ภาคผนวก D — แบบฝึกหัด
+(เฉลยทุกข้อรันจริงแล้ว)</h2>
+<blockquote>
+<p>ทุกเฉลยในภาคผนวกนี้ได้มาจาก <strong>การทดลองจริงบนเครื่อง</strong>
+ไม่ใช่การคาดเดา</p>
+</blockquote>
+<h3 id="d1---ggate-เปลี่ยนพฤติกรรมจริงหรือไม่">D.1 — <code>-gGATE</code>
+เปลี่ยนพฤติกรรมจริงหรือไม่?</h3>
+<p><strong>คำถาม:</strong> ถ้าเรียก <code>vsim ... -gGATE=true</code>
+แต่ยังคอมไพล์ <strong>RTL</strong> อยู่ ผลลัพธ์จะต่างจากการรัน RTL ปกติหรือไม่?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong> <strong>ไม่ต่าง</strong>
+เกิดแค่ข้อความประจำการจำลองเปลี่ยนไป</p>
+<pre class="text"><code># ** Note: === tb_cnt4 : GATE LEVEL ===      &lt;- banner เปลี่ยน
+# ** Note:  checks = 9 , errors = 0
+   the verdict : PASS
+q=0
+q=1
+q=2
+q=3
+q=4
+q=5
+q=6
+q=6
+q=9</code></pre>
+<p>trace เหมือนกันทุกบรรทัดกับการรัน RTL ปกติ</p>
+<p><strong>เหตุผล:</strong> generic <code>GATE</code>
+ถูกใช้แค่เลือกข้อความที่พิมพ์ ส่วน &quot;ระดับการจำลอง&quot; จริง ๆ ถูกกำหนดโดย
+<strong>ไฟล์ที่คอมไพล์เข้า <code>work</code></strong> ไม่ใช่โดย generic</p>
+<blockquote>
+<p>บทเรียน: อย่าใช้ข้อความในบรรทัดเดียวกันเป็นหลักฐานว่าจำลองระดับไหน ดู
+<code>Loading work.xxx(rtl)</code> กับ <code>Loading work.xxx</code>
+แทน</p>
+</blockquote>
+<hr />
+<h3 id="d2--ลืม--t-10ps-เกิดอะไรขึ้น">D.2 — ลืม <code>-t 10ps</code>
+เกิดอะไรขึ้น?</h3>
+<p><strong>คำถาม:</strong> ถ้าโหลด gate netlist โดยไม่ใส่
+<code>-t 10ps</code> จะเกิดอะไรขึ้น?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong> โหลด design ไม่ได้เลย</p>
+<pre class="text"><code># ** Fatal: (vsim-3693) The minimum time resolution limit (10ps) in the Verilog source is smaller than the one chosen
+for SystemC or VHDL units in the design. Use the vsim -t option to specify the desired resolution.
+# FATAL ERROR while loading design
+# Errors: 1, Warnings: 0</code></pre>
+<p>exit code = <strong>12</strong></p>
+<hr />
+<h3 id="d3--บั๊กสลับ-d-ของ-q0-กับ-q1">D.3 — บั๊กสลับ D ของ q[0] กับ q[1]</h3>
+<p><strong>คำถาม:</strong> แก้ <code>netlist/cnt4_net.v</code> ให้สลับ
+<code>D</code> ของฟลิป-flop q[0] กับ q[1] แล้วจำลองระดับ gate จะได้ trace
+อะไร และ testbench จะตรวจจับกี่จุด?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong></p>
+<pre class="text"><code>q=0
+q=2
+q=3
+q=4
+q=6
+q=7
+q=8
+q=8
+q=C</code></pre>
+<pre class="text"><code># ** Error: FAIL count up : expected 1 but got 2
+# ** Error: FAIL count up : expected 2 but got 3
+# ** Error: FAIL count up : expected 3 but got 4
+# ** Error: FAIL count up : expected 4 but got 6
+# ** Error: FAIL count up : expected 5 but got 7
+# ** Error: FAIL count up : expected 6 but got 8
+# ** Error: FAIL hold : expected 6 but got 8
+# ** Error: FAIL count up again : expected 9 but got C
+# ** Note:  checks = 9 , errors = 8</code></pre>
+<p><strong>checks = 9, errors = 8</strong> — เป็นกรณีที่แย่ที่สุด
+เพราะสลับบิตเล็กสุด ทำให้ตัวนับนับผิดตั้งแต่จังหวะแรก</p>
+<hr />
+<h3 id="d4--บั๊กสลับ-d-ของ-q2-กับ-q3">D.4 — บั๊กสลับ D ของ q[2] กับ q[3]</h3>
+<p><strong>คำถาม:</strong> ถ้าสลับ <code>D</code> ของ q[2] กับ q[3] ล่ะ?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong></p>
+<pre class="text"><code>q=0
+q=1
+q=2
+q=3
+q=8
+q=5
+q=A
+q=6
+q=D</code></pre>
+<pre class="text"><code># ** Error: FAIL count up : expected 4 but got 8
+# ** Error: FAIL count up : expected 6 but got A
+# ** Error: FAIL count up again : expected 9 but got D
+# ** Note:  checks = 9 , errors = 3</code></pre>
+<p><strong>checks = 9, errors = 3</strong></p>
+<hr />
+<h3 id="d5--เปรียบเทียบบั๊กทั้งสามแบบ">D.5 — เปรียบเทียบบั๊กทั้งสามแบบ</h3>
+<table>
+<thead>
+<tr>
+<th>บั๊ก</th>
+<th>trace</th>
+<th>errors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>สลับ q[0]↔︎q[1]</td>
+<td><code>0,2,3,4,6,7,8,8,C</code></td>
+<td><strong>8 / 9</strong></td>
+</tr>
+<tr>
+<td>สลับ q[1]↔︎q[2] (LAB 07)</td>
+<td><code>0,1,4,3,2,5,6,6,9</code></td>
+<td><strong>2 / 9</strong></td>
+</tr>
+<tr>
+<td>สลับ q[2]↔︎q[3]</td>
+<td><code>0,1,2,3,8,5,A,6,D</code></td>
+<td><strong>3 / 9</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>ข้อสังเกต:</strong> ยิ่งสลับบิตที่ &quot;สูง&quot; ยิ่งตรวจจับยาก
+เพราะบิตสูงเปลี่ยนค่าน้อยครั้งในช่วงทดสอบสั้น ๆ</p>
+<blockquote>
+<p><strong>บทเรียนสำคัญ:</strong> testbench ที่สั้นเกินไปจะจับบั๊กระดับ gate ไม่ครบ
+การออกแบบ stimulus ให้ครอบคลุมจึงสำคัญไม่แพ้การออกแบบ RTL</p>
+</blockquote>
+<hr />
+<h3 id="d6--จำนวนเซลล์และ-flip-flop-ของแต่ละดีไซน์">D.6 — จำนวนเซลล์และ
+flip-flop ของแต่ละดีไซน์</h3>
+<p><strong>คำถาม:</strong> อ่านจาก <code>netlist/*_stat.txt</code>
+ว่าแต่ละดีไซน์มีเซลล์กี่ตัวและมี flip-flop กี่ตัว?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong></p>
+<table>
+<thead>
+<tr>
+<th>ดีไซน์</th>
+<th>เซลล์ทั้งหมด</th>
+<th>ชนิดเซลล์</th>
+<th>flip-flop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cnt4</code></td>
+<td>11</td>
+<td>7</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>alu4</code></td>
+<td>59</td>
+<td>19</td>
+<td>4</td>
+</tr>
+<tr>
+<td><code>fsm_light</code></td>
+<td>11</td>
+<td>4</td>
+<td><strong>5</strong></td>
+</tr>
+<tr>
+<td><code>sr16</code></td>
+<td>100</td>
+<td>14</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ทำไม <code>fsm_light</code> มี 5 flip-flop ไม่ใช่
+2?</strong></p>
+<p>เพราะ Yosys pass <code>fsm</code> แปลง FSM แบบ binary เป็น
+<strong>one-hot</strong> โดยอัตโนมัติ</p>
+<ul>
+<li>binary encoding: 2 บิต = 2 flip-flop</li>
+<li>one-hot encoding: 3 สถานะ → 3 flip-flop สำหรับ state + 2 ตัวสำหรับ
+output register (red/green/yellow) = 5</li>
+</ul>
+<p>ถ้าอยากได้ 2 ให้ใช้ <code>fsm -norecode</code> หรือเขียน FSM เป็น one-hot
+ตั้งแต่ RTL</p>
+<hr />
+<h3 id="d7--ชนิดเซลล์ในไลบรารี-sg13g2">D.7 — ชนิดเซลล์ในไลบรารี SG13G2</h3>
+<p><strong>คำถาม:</strong> ไลบรารีมีกี่เซลล์ และแบ่งเป็นกี่กลุ่ม?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong> <strong>84 เซลล์</strong></p>
+<table>
+<thead>
+<tr>
+<th>กลุ่ม</th>
+<th>จำนวน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flip-flop</td>
+<td>9</td>
+</tr>
+<tr>
+<td>latch + latch clock</td>
+<td>7</td>
+</tr>
+<tr>
+<td>delay cell</td>
+<td>3</td>
+</tr>
+<tr>
+<td>utility / physical only</td>
+<td>10</td>
+</tr>
+<tr>
+<td>combinational gate</td>
+<td>55</td>
+</tr>
+<tr>
+<td><strong>รวม</strong></td>
+<td><strong>84</strong></td>
+</tr>
+</tbody>
+</table>
+<p>ต้องอ่านจากคอมเมนต์ <code>// type:</code> ไม่ใช่จากชื่อเซลล์ (หัวข้อ 5)</p>
+<hr />
+<h3 id="d8--ลบโฟลเดอร์-results-แล้วรัน">D.8 — ลบโฟลเดอร์
+<code>results/</code> แล้วรัน</h3>
+<p><strong>คำถาม:</strong> ถ้าลบโฟลเดอร์ <code>results/</code> ในโฟลเดอร์
+lab แล้วรัน <code>run.cmd</code> จะเกิดอะไรขึ้น?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong> จำลองจะตายทันที</p>
+<pre class="text"><code># ** Warning: (vsim-7) Failed to open VHDL file &quot;results/trace_rtl.txt&quot; in r+ mode.
+# No such file or directory. (errno = ENOENT)
+...
+# ** Fatal: (vsim-7) Failed to open VHDL file &quot;results/trace_rtl.txt&quot; in r+ mode.
+# Fatal error in Process stim at .../tb/tb_cnt4.vhd line 99</code></pre>
+<p><strong>แก้:</strong> สคริปต์ทุก lab ต้องมี <code>file mkdir results</code>
+ก่อนเรียก <code>vsim</code></p>
+<hr />
+<h3 id="d9--entity-workcnt4-ต่างจาก-component-cnt4-อย่างไร">D.9 —
+<code>entity work.cnt4</code> ต่างจาก <code>component cnt4</code>
+อย่างไร?</h3>
+<p><strong>คำถาม:</strong> ถ้าเปลี่ยน testbench จาก
+<code>component cnt4</code> เป็น <code>entity work.cnt4</code> แล้วขับ gate
+netlist จะเกิดอะไรขึ้น?</p>
+<p><strong>เฉลย (จากการรันจริง):</strong> <strong>ใช้ได้ใน ModelSim</strong>
+ModelSim ผูก entity declaration ของ VHDL เข้ากับ Verilog module
+ที่ชื่อเดียวกันได้</p>
+<pre class="text"><code># Loading work.tb_cnt4_entity(sim)
+# Loading work.cnt4
+# Loading work.sg13g2_nand3_1
+# Loading work.sg13g2_dfrbpq_1
+# Loading work.ihp_dff_r
+# ** Note: ENTITY TRACE DONE</code></pre>
+<p>และ trace ที่ได้คือ</p>
+<pre class="text"><code>q=1
+q=2
+q=3
+q=4
+q=5
+q=6
+q=7
+q=8
+q=9</code></pre>
+<p>ตัวนับเดินจริง → binding สำเร็จ</p>
+<p><strong>แต่คู่มือนี้เลือก <code>component</code></strong> เพราะเป็นวิธีมาตรฐานที่
+portable กว่า (ดูหัวข้อ 1.7 สำหรับเหตุผลทั้งสามข้อ)</p>
+<hr />
+<h3 id="d10--เขียน-tcl-หาเซลล์ใน-netlist">D.10 — เขียน Tcl หาเซลล์ใน
+netlist</h3>
+<p><strong>คำถาม:</strong> เขียน Tcl ที่อ่าน <code>netlist/cnt4_net.v</code>
+แล้วพิมพ์ชื่อเซลล์ที่ใช้ โดยไม่ผิดพลาดเรื่อง backslash</p>
+<p><strong>เฉลย (จากการรันจริง):</strong></p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> used <span class="kw">{}</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="cf">foreach</span> line <span class="kw">[split</span> <span class="kw">[</span>gls_read_file <span class="dt">$netfile</span><span class="kw">]</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span><span class="kw">]</span> <span class="kw">{</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">{[regexp</span> <span class="kw">{</span>^<span class="ch">\s</span><span class="op">*</span>(sg13g2_<span class="kw">[</span>A-Za-z0-9_<span class="kw">]</span><span class="op">+</span>)<span class="ch">\s</span><span class="op">+</span><span class="ch">\S</span><span class="op">+</span><span class="ch">\s</span><span class="op">*</span><span class="ch">\(</span><span class="kw">}</span> <span class="dt">$line</span> -<span class="op">&gt;</span> <span class="ot">name</span><span class="kw">]}</span> <span class="kw">{</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lappend</span> used <span class="dt">$name</span></span>
+<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="kw">puts</span> <span class="st">&quot;[llength </span><span class="dt">$used</span><span class="st">] instances, [llength [lsort -unique </span><span class="dt">$used</span><span class="st">]] different cell types&quot;</span></span></code></pre></div>
+<p>ผล</p>
+<pre class="text"><code>11 instances, 7 different cell types</code></pre>
+<blockquote>
+<p>ห้ามเขียน <code>&quot;^\s*(sg13g2_...)&quot;</code> ใน double quotes
+<code>\s</code> จะกลายเป็น <code>s</code> แล้ว pattern จะไม่ match ต้องใช้
+braces <code>{...}</code> เสมอ</p>
+</blockquote>
+<hr />
+<h2 id="ภาคผนวก-e--ตัวเลขอ้างอิงทั้งหมด">ภาคผนวก E — ตัวเลขอ้างอิงทั้งหมด</h2>
+<p>ทุกตัวเลขในตารางนี้มาจากการรันจริงบนเครื่องนี้</p>
+<h3 id="e1-เครื่องมือ">E.1 เครื่องมือ</h3>
+<table>
+<thead>
+<tr>
+<th>เครื่องมือ</th>
+<th>เวอร์ชัน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ModelSim DE-64</td>
+<td><code>vsim 2026.1 Simulator 2026.01 Jan 25 2026</code></td>
+</tr>
+<tr>
+<td>Questa Sim-64</td>
+<td><code>vsim 2026.1 Simulator 2026.01 Jan 25 2026</code></td>
+</tr>
+<tr>
+<td>GHDL</td>
+<td><code>5.0.1 (Ubuntu 5.0.1+dfsg-1ubuntu1) [Dunoon edition]</code></td>
+</tr>
+<tr>
+<td>GNAT</td>
+<td><code>14.2.0</code></td>
+</tr>
+<tr>
+<td>Yosys</td>
+<td><code>0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)</code></td>
+</tr>
+<tr>
+<td>Icarus Verilog</td>
+<td><code>12.0 (stable)</code></td>
+</tr>
+<tr>
+<td>yosys-ghdl plugin</td>
+<td><code>/nix/store/55al5ccngwgjgigi20jh6d3my8h9x0i2-yosys-ghdl-2026-01-11/share/yosys/plugins/ghdl.so</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="e2-ไฟล์ชุดเซลล์">E.2 ไฟล์ชุดเซลล์</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>ขนาด (bytes)</th>
+<th>จำนวน design unit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cells/sg13g2_stdcell.v</code></td>
+<td>56,308</td>
+<td>84 module + 17 primitive</td>
+</tr>
+<tr>
+<td><code>cells/sg13g2_udp.v</code></td>
+<td>13,561</td>
+<td>17 primitive</td>
+</tr>
+<tr>
+<td><code>cells/sg13g2_stdcell_typ_1p20V_25C.lib</code></td>
+<td>1,748,984</td>
+<td>corner typ (1.20 V / 25 °C)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="e3-ไลบรารีเซลล์-lab-03">E.3 ไลบรารีเซลล์ (LAB 03)</h3>
+<table>
+<thead>
+<tr>
+<th>กลุ่ม</th>
+<th>จำนวน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>flip-flop</td>
+<td>9</td>
+</tr>
+<tr>
+<td>latch + latch clock</td>
+<td>7</td>
+</tr>
+<tr>
+<td>delay cell</td>
+<td>3</td>
+</tr>
+<tr>
+<td>utility / physical only</td>
+<td>10</td>
+</tr>
+<tr>
+<td>combinational gate</td>
+<td>55</td>
+</tr>
+<tr>
+<td><strong>รวม</strong></td>
+<td><strong>84</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Liberty: <code>time_unit : &quot;1ns&quot;</code> /
+<code>voltage_unit : &quot;1V&quot;</code> / <code>current_unit : &quot;1uA&quot;</code> /
+<code>capacitive_load_unit (1,pf)</code></p>
+<h3 id="e4-netlist-ทั้ง-4-ดีไซน์">E.4 netlist ทั้ง 4 ดีไซน์</h3>
+<table>
+<thead>
+<tr>
+<th>ดีไซน์</th>
+<th>เซลล์</th>
+<th>ชนิดเซลล์</th>
+<th>flip-flop</th>
+<th>ports</th>
+<th>wires</th>
+<th>ขนาด Verilog กลาง</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cnt4</code></td>
+<td>11</td>
+<td>7</td>
+<td>4</td>
+<td>4</td>
+<td>19</td>
+<td>30 บรรทัด</td>
+</tr>
+<tr>
+<td><code>alu4</code></td>
+<td>59</td>
+<td>19</td>
+<td>4</td>
+<td>7</td>
+<td>81</td>
+<td>77 บรรทัด</td>
+</tr>
+<tr>
+<td><code>fsm_light</code></td>
+<td>11</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>23</td>
+<td>97 บรรทัด</td>
+</tr>
+<tr>
+<td><code>sr16</code></td>
+<td>100</td>
+<td>14</td>
+<td>16</td>
+<td>6</td>
+<td>188</td>
+<td>57 บรรทัด</td>
+</tr>
+</tbody>
+</table>
+<h3 id="e5-ผลการรันทุก-lab">E.5 ผลการรันทุก lab</h3>
+<table>
+<thead>
+<tr>
+<th>Lab</th>
+<th>ผล</th>
+<th>ตัวเลขสำคัญ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LAB 01</td>
+<td>PASS</td>
+<td>checks = 9, errors = 0, trace 9 บรรทัด</td>
+</tr>
+<tr>
+<td>LAB 02</td>
+<td>PASS</td>
+<td>11 instance, 7 ชนิด, 4 FF, เซลล์หาไม่พบ 0</td>
+</tr>
+<tr>
+<td>LAB 03</td>
+<td>PASS</td>
+<td>84 เซลล์, 5 กลุ่ม, ผลรวม 84</td>
+</tr>
+<tr>
+<td>LAB 04</td>
+<td>PASS</td>
+<td>11 บรรทัด <code>vsim-3033</code> (ตั้งใจให้ผิด), GLS PASS</td>
+</tr>
+<tr>
+<td>LAB 05</td>
+<td>PASS</td>
+<td>trace ทั้งสองระดับเหมือนกัน, 0 ความต่าง</td>
+</tr>
+<tr>
+<td>LAB 06</td>
+<td>PASS</td>
+<td>RTL <code>observed=3</code>, GLS <code>observed=X</code></td>
+</tr>
+<tr>
+<td>LAB 07</td>
+<td>PASS</td>
+<td>RTL PASS / GLS FAIL, checks = 9, errors = 2</td>
+</tr>
+<tr>
+<td>LAB 08</td>
+<td>PASS</td>
+<td>3 ดีไซน์ผ่านหมด (alu4 6, fsm_light 5, sr16 5 บรรทัด)</td>
+</tr>
+<tr>
+<td><strong>regression</strong></td>
+<td><strong>ALL GREEN</strong></td>
+<td><strong>total = 8, passed = 8, failed = 0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="e6-trace-มาตรฐานที่ใช้เทียบ">E.6 trace มาตรฐานที่ใช้เทียบ</h3>
+<pre class="text"><code># cnt4
+q=0
+q=1
+q=2
+q=3
+q=4
+q=5
+q=6
+q=6
+q=9
+
+# alu4
+op=0 a=7 b=5 y=C zero=0
+op=1 a=7 b=5 y=2 zero=0
+op=2 a=C b=A y=8 zero=0
+op=3 a=C b=A y=E zero=0
+op=4 a=C b=A y=6 zero=0
+op=0 a=F b=1 y=0 zero=1
+
+# fsm_light
+state=0 red=1 green=0 yellow=0
+state=1 red=0 green=1 yellow=0
+state=2 red=0 green=0 yellow=1
+state=0 red=1 green=0 yellow=0
+state=1 red=0 green=1 yellow=0
+
+# sr16
+qout=0000
+qout=A5C3
+qout=4B86
+qout=25C3
+qout=25C3</code></pre>
+<h3 id="e7-exit-code-ของ-vsim">E.7 exit code ของ <code>vsim</code></h3>
+<table>
+<thead>
+<tr>
+<th>สถานการณ์</th>
+<th>exit code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>รันจบปกติ</td>
+<td>0</td>
+</tr>
+<tr>
+<td>เปิดไฟล์ <code>.do</code> ไม่เจอ</td>
+<td>0</td>
+</tr>
+<tr>
+<td><code>vsim-3033</code> / <code>vsim-3693</code></td>
+<td>12</td>
+</tr>
+<tr>
+<td>Tcl <code>onerror</code> → <code>quit -code 90</code></td>
+<td>90</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ภาคผนวก-f--ไฟล์ทั้งหมดในโปรเจกต์">ภาคผนวก F — ไฟล์ทั้งหมดในโปรเจกต์</h2>
+<pre class="text"><code>questa_gls_vhdl_lab/
+├── README.md
+├── docs/
+│   ├── Lab_Guide_QuestaSim_GLS.md
+│   ├── Lab_Guide_QuestaSim_GLS.html
+│   ├── Lab_Guide_QuestaSim_GLS.pdf
+│   ├── lab_style.css
+│   └── parts/
+│       ├── 01_intro_lab01-04.md
+│       ├── 02_lab05-08.md
+│       └── 03_appendix.md
+├── tools/
+│   ├── pick_tool.cmd              เลือกชุดติดตั้งที่ license ว่าง
+│   ├── run_template.cmd           เทมเพลต run.cmd (จำลอง 1 ครั้ง)
+│   ├── run_template_2step.cmd     เทมเพลต run.cmd (จำลอง 2 ครั้ง)
+│   ├── make-runners.ps1           สร้าง run.cmd ของทุก lab
+│   ├── make-zip.ps1               สร้างไฟล์ ZIP
+│   ├── build-docs.ps1             รวม Markdown -&gt; HTML -&gt; PDF
+│   ├── gls_common.do              proc ช่วยเหลือร่วมกัน
+│   ├── check_vhdl.sh              ตรวจ VHDL ด้วย GHDL (WSL)
+│   ├── synth/synth.sh             VHDL -&gt; netlist (WSL)
+│   ├── synth/probe_env.sh         รายงานสภาพแวดล้อม (WSL)
+│   └── probe/probe_top.vhd        design จิ๋วสำหรับ license probe
+├── rtl/
+│   ├── cnt4.vhd      (903 B)
+│   ├── alu4.vhd      (2,049 B)
+│   ├── fsm_light.vhd (2,125 B)
+│   └── sr16.vhd      (1,740 B)
+├── tb/
+│   ├── tb_cnt4.vhd      (6,899 B)
+│   ├── tb_cnt4_x.vhd    (4,771 B)
+│   ├── tb_alu4.vhd      (5,524 B)
+│   ├── tb_fsm_light.vhd (5,743 B)
+│   └── tb_sr16.vhd      (5,381 B)
+├── netlist/
+│   ├── cnt4_net.v       (1,650 B)
+│   ├── cnt4_bug_net.v   (2,389 B)
+│   ├── alu4_net.v       (6,786 B)
+│   ├── fsm_light_net.v  (1,806 B)
+│   ├── sr16_net.v       (15,472 B)
+│   ├── *_stat.txt
+│   ├── *_synth.log
+│   └── vhdl2verilog/
+│       ├── cnt4_rtl.v      (614 B)
+│       ├── alu4_rtl.v      (1,777 B)
+│       ├── fsm_light_rtl.v (2,217 B)
+│       └── sr16_rtl.v      (1,315 B)
+├── cells/
+│   ├── sg13g2_stdcell.v
+│   ├── sg13g2_udp.v
+│   └── sg13g2_stdcell_typ_1p20V_25C.lib
+├── lab01_rtl_baseline/     ... lab08_gls_regression/
+└── lab08_gls_regression/results/   log + สรุปของทั้งชุด</code></pre>
+<h3 id="แผนผัง-lab">แผนผัง lab</h3>
+<table>
+<thead>
+<tr>
+<th>Lab</th>
+<th>ชื่อโฟลเดอร์</th>
+<th>จำนวน process</th>
+<th>สิ่งที่พิสูจน์</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td><code>lab01_rtl_baseline</code></td>
+<td>1</td>
+<td>จุดอ้างอิงระดับ RTL (9 checks)</td>
+</tr>
+<tr>
+<td>02</td>
+<td><code>lab02_synth_netlist</code></td>
+<td>1</td>
+<td>netlist ถูกต้องและเซลล์มีอยู่จริง</td>
+</tr>
+<tr>
+<td>03</td>
+<td><code>lab03_cell_library</code></td>
+<td>1</td>
+<td>ไลบรารี 84 เซลล์ แบ่งเป็น 5 กลุ่ม</td>
+</tr>
+<tr>
+<td>04</td>
+<td><code>lab04_gls_first</code></td>
+<td>1 (+ <code>run_wrong.cmd</code>)</td>
+<td>GLS ครั้งแรก + ดู error จริงจากการทำผิด</td>
+</tr>
+<tr>
+<td>05</td>
+<td><code>lab05_rtl_vs_gate</code></td>
+<td>2</td>
+<td>trace สองระดับเหมือนกัน</td>
+</tr>
+<tr>
+<td>06</td>
+<td><code>lab06_x_propagation</code></td>
+<td>2</td>
+<td>RTL กลืน <code>x</code> แต่ GLS จับได้</td>
+</tr>
+<tr>
+<td>07</td>
+<td><code>lab07_netlist_bug</code></td>
+<td>2</td>
+<td>GLS จับบั๊กที่ RTL จับไม่ได้</td>
+</tr>
+<tr>
+<td>08</td>
+<td><code>lab08_gls_regression</code></td>
+<td>6</td>
+<td>รวมทั้งชุด + สามดีไซน์เพิ่ม</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ภาคผนวก-g--วิธีแก้ปัญหาแบบเร็ว">ภาคผนวก G — วิธีแก้ปัญหาแบบเร็ว</h2>
+<p>เมื่อ lab ไม่ผ่าน ให้ไล่ตามลำดับนี้</p>
+<h3 id="ขั้นที่-1--ดูว่า-fail-ที่ไหน">ขั้นที่ 1 — ดูว่า fail ที่ไหน</h3>
+<div class="sourceCode" id="cb96"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> result.txt</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> transcript <span class="kw">|</span> <span class="kw">findstr</span> <span class="at">/C:</span><span class="st">&quot;Error&quot;</span> <span class="at">/C:</span><span class="st">&quot;Fatal&quot;</span></span></code></pre></div>
+<h3 id="ขั้นที่-2--เช็คว่าเรียกจากโฟลเดอร์ถูก">ขั้นที่ 2 — เช็คว่าเรียกจากโฟลเดอร์ถูก</h3>
+<p>ทุก lab script มี guard นี้</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb97-1"><a href="#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{</span><span class="op">!</span><span class="kw">[file</span> <span class="ot">exists</span> ..<span class="op">/</span>netlist<span class="op">/</span>cnt4_net.v<span class="kw">]}</span> <span class="kw">{</span></span>
+<span id="cb97-2"><a href="#cb97-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">puts</span> <span class="st">&quot;!! wrong folder : [pwd]&quot;</span></span>
+<span id="cb97-3"><a href="#cb97-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">puts</span> <span class="st">&quot;!! this script must be run from lab04_gls_first&quot;</span></span>
+<span id="cb97-4"><a href="#cb97-4" aria-hidden="true" tabindex="-1"></a>    quit -code <span class="dv">2</span></span>
+<span id="cb97-5"><a href="#cb97-5" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p>ถ้าเห็นข้อความนี้ แปลว่าเรียกจากผิดโฟลเดอร์</p>
+<h3 id="ขั้นที่-3--ตรวจ-license">ขั้นที่ 3 — ตรวจ license</h3>
+<div class="sourceCode" id="cb98"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="bu">call</span> <span class="ot">..\tools\pick_tool.cmd</span></span>
+<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="pp">%</span><span class="va">MT</span><span class="pp">%</span></span></code></pre></div>
+<p>ถ้า <code>MT</code> ว่าง แปลว่า license ไม่ว่างทั้งหมด</p>
+<h3 id="ขั้นที่-4--ดูว่า-design-ผูกกับอะไร">ขั้นที่ 4 — ดูว่า design ผูกกับอะไร</h3>
+<div class="sourceCode" id="cb99"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb99-1"><a href="#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span> transcript <span class="kw">|</span> <span class="kw">findstr</span> <span class="at">/C:</span><span class="st">&quot;Loading work&quot;</span></span></code></pre></div>
+<ul>
+<li><code>Loading work.cnt4(rtl)</code> → ผูกกับ VHDL entity</li>
+<li><code>Loading work.cnt4</code> → ผูกกับ Verilog module</li>
+</ul>
+<h3 id="ขั้นที่-5--เทียบกับ-trace-มาตรฐาน-ภาคผนวก-e6">ขั้นที่ 5 — เทียบกับ trace
+มาตรฐาน (ภาคผนวก E.6)</h3>
+<h3 id="ขั้นที่-6--ถ้ายังไม่ออก-ให้รัน-ghdl">ขั้นที่ 6 — ถ้ายังไม่ออก ให้รัน GHDL</h3>
+<div class="sourceCode" id="cb100"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="ex">wsl</span> <span class="at">-d</span> Ubuntu <span class="at">-u</span> root <span class="at">--</span> bash /mnt/c/.../tools/check_vhdl.sh</span></code></pre></div>
+<p>จะบอกว่าปัญหาอยู่ที่ VHDL หรือที่ netlist</p>
+<hr />
+<h2 id="ภาคผนวก-h--สรุปสิ่งที่ต้องจำ">ภาคผนวก H — สรุปสิ่งที่ต้องจำ</h2>
+<ol type="1">
+<li><strong>testbench VHDL ชุดเดียว ขับได้ทั้ง RTL และ gate</strong> โดยประกาศ
+DUT เป็น <code>component</code> และเปลี่ยนแค่ไฟล์ที่คอมไพล์</li>
+<li><strong>ต้องใส่ <code>-t 10ps</code></strong> ทุกครั่งที่โหลด gate
+netlist</li>
+<li><strong>ชื่อ entity/module และชื่อ port ต้องตรงกันทุกตัวอักษร</strong></li>
+<li><strong>ModelSim session เดียวจำลองได้ครั้งเดียว</strong> ให้แยกเป็นสอง
+process</li>
+<li><strong><code>vsim</code> คืน 0 แม้ล้มเหลว</strong> ให้อ่าน verdict
+จากไฟล์เสมอ</li>
+<li><strong>อ่านชนิดเซลล์จาก <code>// type:</code></strong>
+ไม่ใช่จากชื่อเซลล์</li>
+<li><strong>VHDL กับ Verilog มี semantics ของ <code>x</code>
+ต่างกัน</strong> และนั่นคือหัวใดของ GLS</li>
+<li><strong>GLS จับบั๊กที่ RTL จับไม่ได้</strong> และนั่นคือเหตุผลที่ต้องมี GLS</li>
+<li><strong>ใน Tcl ห้ามใช้ <code>&quot;\s&quot;</code> ใน double quotes</strong>
+ให้ใช้ <code>{...}</code></li>
+<li><strong>ใน <code>.cmd</code> ห้ามมีข้อความไทยหรือ UTF-8</strong> ให้เป็น
+ASCII ล้วน</li>
+</ol>
+</body>
+</html>

@@ -1,0 +1,565 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2025  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+
+-- Running command `
+    read_verilog /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v
+    hierarchy -check -top fsm_light
+    proc
+    opt
+    fsm
+    opt
+    memory
+    opt
+    techmap
+    opt
+    dfflibmap -liberty /mnt/e/lab/pdks/IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib
+    abc -liberty /mnt/e/lab/pdks/IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib
+    setundef -zero
+    splitnets
+    opt_clean
+    write_verilog -noattr /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/fsm_light_net.v
+    tee -o /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/fsm_light_stat.txt stat
+  ' --
+
+1. Executing Verilog-2005 frontend: /mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v
+Parsing Verilog input from `/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v' to AST representation.
+Generating RTLIL representation for module `\fsm_light'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \fsm_light
+
+2.2. Analyzing design hierarchy..
+Top module:  \fsm_light
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:91$13 in module fsm_light.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:85$12 in module fsm_light.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:79$11 in module fsm_light.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:73$10 in module fsm_light.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:65$9 in module fsm_light.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:57$8 in module fsm_light.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:49$7 in module fsm_light.
+Marked 1 switch rules as full_case in process $proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:41$6 in module fsm_light.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 4 redundant assignments.
+Promoted 6 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:0$14'.
+  Set init value: \cstate = 2'00
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \n7_o in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:91$13'.
+Found async reset \n7_o in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:85$12'.
+Found async reset \n7_o in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:79$11'.
+Found async reset \n7_o in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:73$10'.
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~4 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:0$14'.
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:91$13'.
+     1/1: $0\n52_q[0:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:85$12'.
+     1/1: $0\n51_q[0:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:79$11'.
+     1/1: $0\n50_q[0:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:73$10'.
+     1/1: $0\n49_q[1:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:65$9'.
+     1/1: $1\n35_o[1:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:57$8'.
+     1/1: $1\n30_o[0:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:49$7'.
+     1/1: $1\n25_o[0:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:41$6'.
+     1/1: $1\n20_o[0:0]
+Creating decoders for process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:27$1'.
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `\fsm_light.\n35_o' from process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:65$9'.
+No latch inferred for signal `\fsm_light.\n30_o' from process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:57$8'.
+No latch inferred for signal `\fsm_light.\n25_o' from process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:49$7'.
+No latch inferred for signal `\fsm_light.\n20_o' from process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:41$6'.
+No latch inferred for signal `\fsm_light.\cstate' from process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:27$1'.
+Removing init bit 1'0 for non-memory siginal `\fsm_light.\cstate [0]` in process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:27$1`.
+Removing init bit 1'0 for non-memory siginal `\fsm_light.\cstate [1]` in process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:27$1`.
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\fsm_light.\n52_q' using process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:91$13'.
+  created $adff cell `$procdff$32' with positive edge clock and positive level reset.
+Creating register for signal `\fsm_light.\n51_q' using process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:85$12'.
+  created $adff cell `$procdff$35' with positive edge clock and positive level reset.
+Creating register for signal `\fsm_light.\n50_q' using process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:79$11'.
+  created $adff cell `$procdff$38' with positive edge clock and positive level reset.
+Creating register for signal `\fsm_light.\n49_q' using process `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:73$10'.
+  created $adff cell `$procdff$41' with positive edge clock and positive level reset.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:0$14'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:91$13'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:85$12'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:79$11'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:73$10'.
+Found and cleaned up 1 empty switch in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:65$9'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:65$9'.
+Found and cleaned up 1 empty switch in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:57$8'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:57$8'.
+Found and cleaned up 1 empty switch in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:49$7'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:49$7'.
+Found and cleaned up 1 empty switch in `\fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:41$6'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:41$6'.
+Removing empty process `fsm_light.$proc$/mnt/c/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/netlist/vhdl2verilog/fsm_light_rtl.v:27$1'.
+Cleaned up 4 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+<suppressed ~9 debug messages>
+
+4. Executing OPT pass (performing simple optimizations).
+
+4.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+4.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+<suppressed ~12 debug messages>
+Removed a total of 4 cells.
+
+4.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_light..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_light.
+    New ctrl vector for $pmux cell $procmux$27: $auto$opt_reduce.cc:137:opt_pmux$43
+  Optimizing cells in module \fsm_light.
+Performed a total of 1 changes.
+
+4.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+4.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+Removed 1 unused cells and 31 unused wires.
+<suppressed ~3 debug messages>
+
+4.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+4.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_light..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+4.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_light.
+Performed a total of 0 changes.
+
+4.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+4.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+4.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+
+4.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+4.16. Finished OPT passes. (There is nothing left to do.)
+
+5. Executing FSM pass (extract and optimize FSM).
+
+5.1. Executing FSM_DETECT pass (finding FSMs in design).
+Not marking fsm_light.n49_q as FSM state register:
+    Register is connected to module port.
+    Users of register don't seem to benefit from recoding.
+    Circuit seems to be self-resetting.
+
+5.2. Executing FSM_EXTRACT pass (extracting FSM from design).
+
+5.3. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+
+5.5. Executing FSM_OPT pass (simple optimizations of FSMs).
+
+5.6. Executing FSM_RECODE pass (re-assigning FSM state encoding).
+
+5.7. Executing FSM_INFO pass (dumping all available information on FSM cells).
+
+5.8. Executing FSM_MAP pass (mapping FSMs to basic logic).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_light..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_light.
+Performed a total of 0 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+6.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+
+6.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+6.9. Finished OPT passes. (There is nothing left to do.)
+
+7. Executing MEMORY pass.
+
+7.1. Executing OPT_MEM pass (optimize memories).
+Performed a total of 0 transformations.
+
+7.2. Executing OPT_MEM_PRIORITY pass (removing unnecessary memory write priority relations).
+Performed a total of 0 transformations.
+
+7.3. Executing OPT_MEM_FEEDBACK pass (finding memory read-to-write feedback paths).
+
+7.4. Executing MEMORY_BMUX2ROM pass (converting muxes to ROMs).
+
+7.5. Executing MEMORY_DFF pass (merging $dff cells to $memrd).
+
+7.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+
+7.7. Executing MEMORY_SHARE pass (consolidating $memrd/$memwr cells).
+
+7.8. Executing OPT_MEM_WIDEN pass (optimize memories where all ports are wide).
+Performed a total of 0 transformations.
+
+7.9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+
+7.10. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+7.11. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_light..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~4 debug messages>
+
+8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_light.
+Performed a total of 0 changes.
+
+8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+8.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+
+8.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+8.9. Finished OPT passes. (There is nothing left to do.)
+
+9. Executing TECHMAP pass (map to technology primitives).
+
+9.1. Executing Verilog-2005 frontend: /usr/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/usr/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `\$__div_mod_u'.
+Generating RTLIL representation for module `\$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `\$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Successfully finished Verilog frontend.
+
+9.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $reduce_or.
+Using template $paramod$521ce43182eecb9f60c72393a788160d2c356bf5\_90_pmux for cells of type $pmux.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $adff.
+Using extmapper simplemap for cells of type $and.
+No more expansions possible.
+<suppressed ~108 debug messages>
+
+10. Executing OPT pass (performing simple optimizations).
+
+10.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+<suppressed ~20 debug messages>
+
+10.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
+
+10.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_light..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_light.
+Performed a total of 0 changes.
+
+10.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+10.6. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+Removed 0 unused cells and 30 unused wires.
+<suppressed ~1 debug messages>
+
+10.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+10.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+10.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \fsm_light..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+
+10.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \fsm_light.
+Performed a total of 0 changes.
+
+10.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\fsm_light'.
+Removed a total of 0 cells.
+
+10.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+10.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+
+10.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module fsm_light.
+
+10.16. Finished OPT passes. (There is nothing left to do.)
+
+11. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell sg13g2_dfrbpq_1 (noninv, pins=4, area=48.99) is a direct match for cell type $_DFF_PN0_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    unmapped dff cell: $_DFF_P_
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    \sg13g2_dfrbpq_1 _DFF_PN0_ (.CLK( C), .D( D), .Q( Q), .RESET_B( R));
+    unmapped dff cell: $_DFF_PN1_
+    unmapped dff cell: $_DFF_PP0_
+    unmapped dff cell: $_DFF_PP1_
+    unmapped dff cell: $_DFFE_NN_
+    unmapped dff cell: $_DFFE_NP_
+    unmapped dff cell: $_DFFE_PN_
+    unmapped dff cell: $_DFFE_PP_
+    unmapped dff cell: $_DFFSR_NNN_
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    unmapped dff cell: $_DFFSR_PPP_
+
+11.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+<suppressed ~4 debug messages>
+Mapping DFF cells in module `\fsm_light':
+  mapped 5 $_DFF_PN0_ cells to \sg13g2_dfrbpq_1 cells.
+
+12. Executing ABC pass (technology mapping using ABC).
+
+12.1. Extracting gate netlist of module `\fsm_light' to `<abc-temp-dir>/input.blif'..
+Extracted 20 gates and 24 wires to a netlist network with 3 inputs and 6 outputs.
+
+12.1.1. Executing ABC.
+Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
+ABC: ABC command line: "source <abc-temp-dir>/abc.script".
+ABC: 
+ABC: + read_blif <abc-temp-dir>/input.blif 
+ABC: + read_lib -w /mnt/e/lab/pdks/IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib 
+ABC: Parsing finished successfully.  Parsing time =     0.02 sec
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_antennanp" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_decap_4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_decap_8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dfrbpq_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dfrbpq_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dlhq_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dlhr_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dlhrq_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dllr_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_dllrq_1".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sg13g2_ebufn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sg13g2_ebufn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sg13g2_ebufn_8".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sg13g2_einvn_2".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sg13g2_einvn_4".
+ABC: Scl_LibertyReadGenlib() skipped three-state cell "sg13g2_einvn_8".
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_fill_1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_fill_2" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_fill_4" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_fill_8" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_lgcp_1" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_sdfbbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_sdfrbp_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_sdfrbp_2".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_sdfrbpq_1".
+ABC: Scl_LibertyReadGenlib() skipped sequential cell "sg13g2_sdfrbpq_2".
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_sighold" due to dont_use attribute.
+ABC: Scl_LibertyReadGenlib() skipped cell "sg13g2_slgcp_1" due to dont_use attribute.
+ABC: Library "sg13g2_stdcell_typ_1p20V_25C" from "/mnt/e/lab/pdks/IHP-Open-PDK/ihp-sg13g2/libs.ref/sg13g2_stdcell/lib/sg13g2_stdcell_typ_1p20V_25C.lib" has 54 cells (20 skipped: 14 seq; 6 tri-state; 0 no func; 10 dont_use).  Time =     0.02 sec
+ABC: Memory =    2.88 MB. Time =     0.02 sec
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &fraig -x 
+ABC: + &put 
+ABC: + scorr 
+ABC: Warning: The network is combinational (run "fraig" or "fraig_sweep").
+ABC: + dc2 
+ABC: + dretime 
+ABC: + strash 
+ABC: + &get -n 
+ABC: + &dch -f 
+ABC: + &nf 
+ABC: + &put 
+ABC: + write_blif <abc-temp-dir>/output.blif 
+
+12.1.2. Re-integrating ABC results.
+ABC RESULTS:      sg13g2_inv_1 cells:        2
+ABC RESULTS:     sg13g2_nor2_1 cells:        2
+ABC RESULTS:    sg13g2_nor2b_1 cells:        2
+ABC RESULTS:        internal signals:       15
+ABC RESULTS:           input signals:        3
+ABC RESULTS:          output signals:        6
+Removing temp directory.
+
+13. Executing SETUNDEF pass (replace undef values with defined constants).
+
+14. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+15. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \fsm_light..
+Removed 0 unused cells and 22 unused wires.
+<suppressed ~4 debug messages>
+
+16. Executing Verilog backend.
+
+16.1. Executing BMUXMAP pass.
+
+16.2. Executing DEMUXMAP pass.
+Dumping module `\fsm_light'.
+
+17. Printing statistics.
+
+=== fsm_light ===
+
+   Number of wires:                 23
+   Number of wire bits:             24
+   Number of public wires:          21
+   Number of public wire bits:      22
+   Number of ports:                  6
+   Number of port bits:              7
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 11
+     sg13g2_dfrbpq_1                 5
+     sg13g2_inv_1                    2
+     sg13g2_nor2_1                   2
+     sg13g2_nor2b_1                  2
+
+End of script. Logfile hash: ead441411c, CPU: user 0.04s system 0.02s, MEM: 19.91 MB peak
+Yosys 0.52 (git sha1 fee39a3284c90249e1d9684cf6944ffbbcbb8f90)
+Time spent: 48% 1x abc (0 sec), 12% 1x dfflibmap (0 sec), ...

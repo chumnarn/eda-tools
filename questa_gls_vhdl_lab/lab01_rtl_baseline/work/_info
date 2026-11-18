@@ -1,0 +1,98 @@
+m255
+K4
+z2
+!s11e vcom 2026.1 2026.01, Jan 25 2026
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/lab01_rtl_baseline
+Ecnt4
+Z1 w1795031805
+Z2 DPx4 ieee 11 numeric_std 0 22 m=kP7jRZW]kY;6MU;0z<22
+Z3 DPx3 std 6 textio 0 22 <UlP6K1@RDQa_MJ[:UEnP2
+Z4 DPx4 ieee 14 std_logic_1164 0 22 TDbGXLH=YSoj9JRY2gkNY0
+!i122 0
+R0
+Z5 8C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/rtl/cnt4.vhd
+Z6 FC:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/rtl/cnt4.vhd
+l0
+L8 1
+VnG@M1jMAEVjImHJ5O4ICB3
+!s100 Vdi9e=:m5M;Saaz<NVPI<0
+Z7 OP;C;2026.1;84
+33
+Z8 !s110 1795035645
+!i10b 1
+Z9 !s108 1795035645.000000
+Z10 !s90 -2008|-work|work|C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/rtl/cnt4.vhd|
+Z11 !s107 C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/rtl/cnt4.vhd|
+!i113 1
+Z12 o-2008 -work work
+Z13 tExplicit 1 CvgOpt 0 defaultOptions 1083485664
+Artl
+R2
+R3
+R4
+DEx4 work 4 cnt4 0 22 nG@M1jMAEVjImHJ5O4ICB3
+!i122 0
+l19
+L17 18
+VbFGX:0EM<1b<F=Tn=ZhPR2
+!s100 2M0=mL>Gl:[`0cA?5>DCm1
+R7
+33
+R8
+!i10b 1
+R9
+R10
+R11
+!i113 1
+R12
+R13
+Etb_cnt4
+Z14 w1795035172
+R2
+R3
+R4
+!i122 1
+R0
+Z15 8C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd
+Z16 FC:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd
+l0
+L27 1
+V6@z1o_hz?Y0[g;AcP?Yb]0
+!s100 m9?0LG8S0nl[m>i0>jjfP0
+R7
+33
+R8
+!i10b 1
+R9
+Z17 !s90 -2008|-work|work|C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd|
+!s107 C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd|
+!i113 1
+R12
+R13
+Asim
+DPx3 std 3 env 0 22 mJj^M]e`oP>;WoZ=b<O3C0
+R2
+R3
+R4
+DEx4 work 7 tb_cnt4 0 22 6@z1o_hz?Y0[g;AcP?Yb]0
+!i122 1
+l85
+L35 156
+VKXh3ZUFMX4A=PPi[oWN3U0
+!s100 m_C4Z04VR^i8mcnaeU]mh0
+R7
+33
+R8
+!i10b 1
+R9
+R17
+Z18 !s107 C:/Users/000148/Documents/MiniMax/eda-tools/questa_gls_vhdl_lab/tb/tb_cnt4.vhd|
+!i113 1
+R12
+R13
