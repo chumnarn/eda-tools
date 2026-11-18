@@ -1,0 +1,8 @@
+Reading pref.tcl
+
+# 2026.1
+
+# coverage read -dataset merged results/merged.ucdb
+# ** Error: (vish-7) Failed to open UCDB file "results/merged.ucdb" in read mode.
+Failed to open UCDB file "results/merged.ucdb" in read mode.
+Load of ucdb file failed: results/merged.ucdb

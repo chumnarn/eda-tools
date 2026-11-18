@@ -1,0 +1,10 @@
+PASS  lab01_first_simulation  script=run.cmd  
+PASS  lab02_libraries  script=run.cmd  
+PASS  lab03_selfchecking_tb  script=run.cmd  
+PASS  lab04_waveform  script=run.cmd  
+PASS  lab05_debugging  script=run_debug.cmd  
+PASS  lab06_dataflow  script=run.cmd  
+PASS  lab07_memory  script=run.cmd  
+PASS  lab08_stimulus  script=run.cmd  
+PASS  lab09_psl  script=run.cmd  
+PASS  lab10_coverage  script=run.cmd  

@@ -1,0 +1,1160 @@
+=====================================================================
+ LAB 10 : code coverage for VHDL
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_vhdl_lab\lab10_coverage
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS
+=====================================================================
+[STEP 1] compile
+Reading pref.tcl
+
+# 2026.1
+
+# do compile.do
+====================================================================
+ LAB 10 : compile
+ cwd    : C:/Users/000148/Documents/MiniMax/eda-tools/questa_vhdl_lab/lab10_coverage
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:13:47 on Nov 18,2026
+# vcom -2008 src/alu_fsm.vhd "+cover=bcesft" 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity alu_fsm
+# -- Compiling architecture rtl of alu_fsm
+# ** Note: (vcom-143) Recognized 1 FSM in architecture body "alu_fsm(rtl)".
+# End time: 15:13:47 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:13:48 on Nov 18,2026
+# vcom -2008 tb/tb_alu_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_alu_fsm
+# -- Compiling architecture sim of tb_alu_fsm
+# -- Loading entity alu_fsm
+# -- Loading package ENV
+# End time: 15:13:48 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:13:49 on Nov 18,2026
+# vcom -2008 tb/pitfall/tb_alu_fsm_alt.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_alu_fsm_alt
+# -- Compiling architecture sim of tb_alu_fsm_alt
+# -- Loading entity alu_fsm
+# -- Loading package ENV
+# End time: 15:13:49 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:13:49 on Nov 18,2026
+# vcom -2008 tb/pitfall/tb_alu_fsm_finish.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_alu_fsm_finish
+# -- Compiling architecture sim of tb_alu_fsm_finish
+# -- Loading entity alu_fsm
+# -- Loading package ENV
+# End time: 15:13:50 on Nov 18,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+== LAB 10 : compile done ==
+#  quit -f
+[STEP 2] test basic
+Reading pref.tcl
+
+# 2026.1
+
+# do test_basic.do
+====================================================================
+ LAB 10 : test 'basic'
+====================================================================
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:13:52 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9f66a50
+# do test_basic.do
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:13:52 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9f66a50
+# 
+# file9f7df30
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:13:54 on Nov 18,2026
+# vcover report -summary -codeAll -output results/basic_report.txt results/basic.ucdb 
+# End time: 15:13:55 on Nov 18,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+
+---- coverage of test 'basic' alone ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:13:55 on Nov 18,2026
+vcover report -summary -codeAll results/basic.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                        61        57         4         1    93.44%
+    Conditions                       2         2         0         1   100.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         5         3         1    62.50%
+    Statements                      60        56         4         1    93.33%
+    Toggles                        146        93        53         1    63.69%
+Total coverage (filtered view): 85.49%
+
+End time: 15:13:55 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+== LAB 10 : test 'basic' done ==
+#  quit -f
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 15:13:55 on Nov 18,2026, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0
+[STEP 3] test extra
+Reading pref.tcl
+
+# 2026.1
+
+# do test_extra.do
+====================================================================
+ LAB 10 : test 'extra'
+====================================================================
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=extra 
+# Start time: 15:13:57 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'extra' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=2 a=F0 b=3C -> dout=30 state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=3 a=FF b=0F -> dout=F0 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=03 b=0A -> dout=F9 state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 226 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'extra' : finished ===
+#    Time: 236 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'extra' finished without errors
+#    Time: 236 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9e7b9a0
+# do test_extra.do
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=extra 
+# Start time: 15:13:57 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'extra' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=2 a=F0 b=3C -> dout=30 state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=3 a=FF b=0F -> dout=F0 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=03 b=0A -> dout=F9 state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 226 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'extra' : finished ===
+#    Time: 236 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'extra' finished without errors
+#    Time: 236 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9e7b9a0
+# 
+# file9e7b220
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:00 on Nov 18,2026
+# vcover report -summary -codeAll -output results/extra_report.txt results/extra.ucdb 
+# End time: 15:14:00 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+---- coverage of test 'extra' alone ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:14:00 on Nov 18,2026
+vcover report -summary -codeAll results/extra.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                        61        57         4         1    93.44%
+    Conditions                       2         0         2         1     0.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         5         3         1    62.50%
+    Statements                      60        56         4         1    93.33%
+    Toggles                        146       124        22         1    84.93%
+Total coverage (filtered view): 72.36%
+
+End time: 15:14:00 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+== LAB 10 : test 'extra' done ==
+#  quit -f
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 15:14:00 on Nov 18,2026, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0
+[STEP 4] test edge
+Reading pref.tcl
+
+# 2026.1
+
+# do test_edge.do
+====================================================================
+ LAB 10 : test 'edge'
+====================================================================
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=edge 
+# Start time: 15:14:02 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'edge' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: abort transaction done, state=0
+#    Time: 66 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=FF b=01 -> dout=FC state=4
+#    Time: 106 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=3 a=00 b=FF -> dout=FF state=4
+#    Time: 156 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: reset in the middle of a transaction, state=0
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'edge' : finished ===
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'edge' finished without errors
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9ef21c0
+# do test_edge.do
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=edge 
+# Start time: 15:14:02 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'edge' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: abort transaction done, state=0
+#    Time: 66 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=FF b=01 -> dout=FC state=4
+#    Time: 106 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=3 a=00 b=FF -> dout=FF state=4
+#    Time: 156 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: reset in the middle of a transaction, state=0
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'edge' : finished ===
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'edge' finished without errors
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9ef21c0
+# 
+# file9f050d0
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:05 on Nov 18,2026
+# vcover report -summary -codeAll -output results/edge_report.txt results/edge.ucdb 
+# End time: 15:14:05 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+---- coverage of test 'edge' alone ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:14:05 on Nov 18,2026
+vcover report -summary -codeAll results/edge.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                        61        59         2         1    96.72%
+    Conditions                       2         2         0         1   100.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         6         2         1    75.00%
+    Statements                      60        58         2         1    96.66%
+    Toggles                        146       136        10         1    93.15%
+Total coverage (filtered view): 93.58%
+
+End time: 15:14:05 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+== LAB 10 : test 'edge' done ==
+#  quit -f
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 15:14:05 on Nov 18,2026, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0
+[STEP 5] merge
+Reading pref.tcl
+
+# 2026.1
+
+# do merge.do
+====================================================================
+ LAB 10 : merge
+====================================================================
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:07 on Nov 18,2026
+# vcover merge results/merged.ucdb results/basic.ucdb results/extra.ucdb results/edge.ucdb 
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Merging file results/basic.ucdb
+# Merging file results/extra.ucdb
+# Merging file results/edge.ucdb
+# Writing merged result to results/merged.ucdb
+# 
+# End time: 15:14:07 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+---- coverage after merging the three tests ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:14:08 on Nov 18,2026
+vcover report -summary -codeAll results/merged.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                        61        60         1         1    98.36%
+    Conditions                       2         2         0         1   100.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         6         2         1    75.00%
+    Statements                      60        59         1         1    98.33%
+    Toggles                        146       139         7         1    95.20%
+Total coverage (filtered view): 94.48%
+
+End time: 15:14:08 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+== LAB 10 : merge done ==
+#  quit -f
+[STEP 6] report
+Reading pref.tcl
+
+# 2026.1
+
+# do report.do
+====================================================================
+ LAB 10 : reports
+====================================================================
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:11 on Nov 18,2026
+# vcover report -summary -codeAll -output results/merged_report.txt results/merged.ucdb 
+# End time: 15:14:11 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+---- [1] summary report ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:14:11 on Nov 18,2026
+vcover report -summary -codeAll results/merged.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                        61        60         1         1    98.36%
+    Conditions                       2         2         0         1   100.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         6         2         1    75.00%
+    Statements                      60        59         1         1    98.33%
+    Toggles                        146       139         7         1    95.20%
+Total coverage (filtered view): 94.48%
+
+End time: 15:14:11 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:12 on Nov 18,2026
+# vcover report -details -codeAll -output results/merged_detail.txt results/merged.ucdb 
+# End time: 15:14:12 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+---- [2] detailed report -> results/merged_detail.txt ----
+       (open that file to see which bin was NOT covered)
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:13 on Nov 18,2026
+# vcover report -html -codeAll -output results/html_report results/merged.ucdb 
+# ** Note: (vcover-19060) Personal Edition doesn't support verification plan feature. Testplan data won't be included in the report.
+# End time: 15:14:15 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+
+---- [3] HTML report -> results/html_report/index.html ----
+== LAB 10 : reports done ==
+#  quit -f
+[STEP 7] pitfall 1 -- the default spec of +cover
+Reading pref.tcl
+
+# 2026.1
+
+# do pitfall_a_cover_spec.do
+====================================================================
+ LAB 10 : PITFALL 1 -- the default spec of the +cover plusarg
+====================================================================
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:14:19 on Nov 18,2026
+# vcom -2008 src/alu_fsm.vhd "+cover=bcesft" 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity alu_fsm
+# -- Compiling architecture rtl of alu_fsm
+# ** Note: (vcom-143) Recognized 1 FSM in architecture body "alu_fsm(rtl)".
+# End time: 15:14:19 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:14:19 on Nov 18,2026
+# vcom -2008 tb/tb_alu_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_alu_fsm
+# -- Compiling architecture sim of tb_alu_fsm
+# -- Loading entity alu_fsm
+# -- Loading package ENV
+# End time: 15:14:19 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:14:20 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:22 on Nov 18,2026
+# vcover report -summary -codeAll -output results/pitfall_explicit_spec.txt results/pitfall_explicit_spec.ucdb 
+# End time: 15:14:22 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:14:23 on Nov 18,2026
+# vcom -2008 src/alu_fsm.vhd "+cover" 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity alu_fsm
+# -- Compiling architecture rtl of alu_fsm
+# ** Note: (vcom-143) Recognized 1 FSM in architecture body "alu_fsm(rtl)".
+# End time: 15:14:23 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:14:23 on Nov 18,2026
+# vcom -2008 tb/tb_alu_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_alu_fsm
+# -- Compiling architecture sim of tb_alu_fsm
+# -- Loading entity alu_fsm
+# -- Loading package ENV
+# End time: 15:14:23 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 15:14:23 on Nov 18,2026, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:14:24 on Nov 18,2026
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:26 on Nov 18,2026
+# vcover report -summary -codeAll -output results/pitfall_default_spec.txt results/pitfall_default_spec.ucdb 
+# End time: 15:14:26 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:14:27 on Nov 18,2026
+# vcom -2008 src/alu_fsm.vhd "+cover=bcesft" 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity alu_fsm
+# -- Compiling architecture rtl of alu_fsm
+# ** Note: (vcom-143) Recognized 1 FSM in architecture body "alu_fsm(rtl)".
+# End time: 15:14:27 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:14:27 on Nov 18,2026
+# vcom -2008 tb/tb_alu_fsm.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_alu_fsm
+# -- Compiling architecture sim of tb_alu_fsm
+# -- Loading entity alu_fsm
+# -- Loading package ENV
+# End time: 15:14:27 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# filebd529a0
+# Coverage Report Totals BY INSTANCES: Number of Instances 2
+# 
+#     Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+#     ----------------              ----      ----    ------    ------  --------
+#     Branches                        61        57         4         1    93.44%
+#     Conditions                       2         2         0         1   100.00%
+#     FSM States                       5         5         0         1   100.00%
+#     FSM Transitions                  8         5         3         1    62.50%
+#     Statements                      60        56         4         1    93.33%
+#     Toggles                        146        93        53         1    63.69%
+# Total coverage (filtered view): 85.49%
+# 
+# 
+# filec77d6a0
+# Coverage Report Totals BY INSTANCES: Number of Instances 2
+# 
+#     Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+#     ----------------              ----      ----    ------    ------  --------
+#     Branches                        61        57         4         1    93.44%
+#     Conditions                       2         2         0         1   100.00%
+#     FSM States                       5         5         0         1   100.00%
+#     FSM Transitions                  8         5         3         1    62.50%
+#     Statements                      60        56         4         1    93.33%
+#     Toggles                        146        93        53         1    63.69%
+# Total coverage (filtered view): 85.49%
+# 
+# 
+# Branches                        61        57         4         1    93.44%
+# Conditions                       2         2         0         1   100.00%
+# FSM States                       5         5         0         1   100.00%
+# FSM Transitions                  8         5         3         1    62.50%
+# Statements                      60        56         4         1    93.33%
+# Toggles                        146        93        53         1    63.69%
+# Total coverage (filtered view): 85.49%
+# Branches                        61        57         4         1    93.44%
+# Conditions                       2         2         0         1   100.00%
+# FSM States                       5         5         0         1   100.00%
+# FSM Transitions                  8         5         3         1    62.50%
+# Statements                      60        56         4         1    93.33%
+# Toggles                        146        93        53         1    63.69%
+# Total coverage (filtered view): 85.49%
+# filebd4dad0
+
+---- PITFALL 1 : comparison ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:14:28 on Nov 18,2026
+vcover report -summary -codeAll results/pitfall_default_spec.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                        61        57         4         1    93.44%
+    Conditions                       2         2         0         1   100.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         5         3         1    62.50%
+    Statements                      60        56         4         1    93.33%
+    Toggles                        146        93        53         1    63.69%
+Total coverage (filtered view): 85.49%
+
+End time: 15:14:28 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+---- the full comparison is in results/pitfall_cover_spec_comparison.txt ----
+== LAB 10 : pitfall 1 done ==
+#  quit -f
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 15:14:28 on Nov 18,2026, Elapsed time: 0:00:04
+# Errors: 0, Warnings: 0
+[STEP 8] pitfall 3 -- coverage goal
+Reading pref.tcl
+
+# 2026.1
+
+# do pitfall_c_goal.do
+====================================================================
+ LAB 10 : PITFALL 3 -- 'coverage goal' outside the Coverage View
+====================================================================
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:14:31 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+
+---- now calling 'coverage goal' in a NORMAL simulation ----
+# ** Error: Coverage sub-command 'goal' may be used in viewcov mode only.
+# Executing ONERROR command at macro ./pitfall_c_goal.do line 39
+---- 'coverage goal' is not available here -- that is the point of this lab ----
+# file9c9a0e0
+# do pitfall_c_goal.do
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:14:31 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# ** Error: Coverage sub-command 'goal' may be used in viewcov mode only.
+# Executing ONERROR command at macro ./pitfall_c_goal.do line 39
+# file9c9a0e0
+# 
+# file9e95e10
+
+---- the exact answer is stored in results/pitfall_goal_normal.txt ----
+== LAB 10 : pitfall 3 done ==
+#  quit -f
+# End time: 15:14:33 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 1, Warnings: 0
+[STEP 9] pitfall 4 -- two instance paths
+Reading pref.tcl
+
+# 2026.1
+
+# do pitfall_d_instance.do
+====================================================================
+ LAB 10 : PITFALL 4 -- merging two different instance paths
+====================================================================
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm_alt 
+# Start time: 15:14:35 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm_alt(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === ALT testbench, instance path is /tb_alu_fsm_alt/dut ===
+#    Time: 30 ns  Iteration: 0  Instance: /tb_alu_fsm_alt
+# ** Note: TEST_PASSED : alt testbench finished without errors
+#    Time: 30 ns  Iteration: 0  Instance: /tb_alu_fsm_alt
+# Break in Process stim at tb/pitfall/tb_alu_fsm_alt.vhd line 71
+# Stopped at tb/pitfall/tb_alu_fsm_alt.vhd line 71
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:38 on Nov 18,2026
+# vcover merge results/pitfall_two_instances.ucdb results/basic.ucdb results/pitfall_alt.ucdb 
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Merging file results/basic.ucdb
+# Merging file results/pitfall_alt.ucdb
+# Writing merged result to results/pitfall_two_instances.ucdb
+# 
+# End time: 15:14:38 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+# Start time: 15:14:38 on Nov 18,2026
+# vcover report -summary -codeAll -output results/pitfall_two_instances.txt results/pitfall_two_instances.ucdb 
+# End time: 15:14:38 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+
+---- WRONG : merged from two different testbench names ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:14:39 on Nov 18,2026
+vcover report -summary -codeAll results/pitfall_two_instances.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 4
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                       122        70        52         1    57.37%
+    Conditions                       4         2         2         1    50.00%
+    FSM States                      10         6         4         1    60.00%
+    FSM Transitions                 16         5        11         1    31.25%
+    Statements                     120        88        32         1    73.33%
+    Toggles                        292        95       197         1    32.53%
+Total coverage (filtered view): 50.74%
+
+End time: 15:14:39 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+
+---- RIGHT : merged from ONE testbench, three generics ----
+Model Technology ModelSim DE-64 vcover 2026.1 Coverage Utility 2026.01 Jan 25 2026
+Start time: 15:14:39 on Nov 18,2026
+vcover report -summary -codeAll results/merged.ucdb 
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+
+    Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+    ----------------              ----      ----    ------    ------  --------
+    Branches                        61        60         1         1    98.36%
+    Conditions                       2         2         0         1   100.00%
+    FSM States                       5         5         0         1   100.00%
+    FSM Transitions                  8         6         2         1    75.00%
+    Statements                      60        59         1         1    98.33%
+    Toggles                        146       139         7         1    95.20%
+Total coverage (filtered view): 94.48%
+
+End time: 15:14:39 on Nov 18,2026, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+== LAB 10 : pitfall 4 done ==
+#  quit -f
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 15:14:39 on Nov 18,2026, Elapsed time: 0:00:04
+# Errors: 0, Warnings: 0
+[STEP 10] pitfall 2 -- std.env.finish without -onfinish stop
+Reading pref.tcl
+
+# 2026.1
+
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -c -coverage work.tb_alu_fsm_finish -do "run -all; coverage save results/pitfall_finish_nostop.ucdb -codeAll -testname nostop; quit -f" 
+# Start time: 15:14:41 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm_finish(sim)
+# Loading work.alu_fsm(rtl)
+# run -all
+# ** Note: PITFALL : calling std.env.finish now -- without -onfinish stop
+#    Time: 130 ns  Iteration: 0  Instance: /tb_alu_fsm_finish
+# ** Note:           the whole vsim session ends here
+#    Time: 130 ns  Iteration: 0  Instance: /tb_alu_fsm_finish
+# End time: 15:14:43 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+[STEP 11] pitfall 2 -- std.env.finish with -onfinish stop
+Reading pref.tcl
+
+# 2026.1
+
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -c -onfinish stop -coverage work.tb_alu_fsm_finish -do "run -all; coverage save results/pitfall_finish_stop.ucdb -codeAll -testname stop; quit -f" 
+# Start time: 15:14:45 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm_finish(sim)
+# Loading work.alu_fsm(rtl)
+# run -all
+# ** Note: PITFALL : calling std.env.finish now -- without -onfinish stop
+#    Time: 130 ns  Iteration: 0  Instance: /tb_alu_fsm_finish
+# ** Note:           the whole vsim session ends here
+#    Time: 130 ns  Iteration: 0  Instance: /tb_alu_fsm_finish
+# Break in Process stim at tb/pitfall/tb_alu_fsm_finish.vhd line 67
+# Stopped at tb/pitfall/tb_alu_fsm_finish.vhd line 67
+#  coverage save results/pitfall_finish_stop.ucdb -codeAll -testname stop
+#  quit -f
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 15:14:47 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+[STEP 12] pitfall 3 -- coverage goal in the Coverage View
+[STEP 13] pitfall summary
+Reading pref.tcl
+
+# 2026.1
+
+# do pitfall_summary.do
+# filea2b1a10
+# 0
+# 1
+# do pitfall_c_goal.do
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:14:31 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# ** Error: Coverage sub-command 'goal' may be used in viewcov mode only.
+# Executing ONERROR command at macro ./pitfall_c_goal.do line 39
+# file9c9a0e0
+# 
+# Reading pref.tcl
+# 
+# 2026.1
+# 
+# coverage read -dataset merged results/merged.ucdb
+# results/merged.ucdb opened as coverage dataset "merged"
+# coverage goal
+#     Goal: 100.0	Coverage Type: Assertion directive passes, per instance
+#     Goal: 100.0	Coverage Type: Assertion directives that never failed, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive failures, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive vacuous passes, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive disabled, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive attempted, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive active, per instance
+#     Goal: 100.0	Coverage Type: Branch coverage, per instance
+#     Goal: 100.0	Coverage Type: Branch coverage, per design unit
+#     Goal: 100.0	Coverage Type: UDP Condition coverage, per instance
+#     Goal: 100.0	Coverage Type: UDP Condition coverage, per design unit
+#     Goal: 100.0	Coverage Type: Focused Condition coverage, per instance
+#     Goal: 100.0	Coverage Type: Focused Condition coverage, per design unit
+#     Goal: 100.0	Coverage Type: Condition coverage, per instance
+#     Goal: 100.0	Coverage Type: Condition coverage, per design unit
+#     Goal: 100.0	Coverage Type: UDP Expression coverage, per instance
+#     Goal: 100.0	Coverage Type: UDP Expression coverage, per design unit
+#     Goal: 100.0	Coverage Type: Focused Expression coverage, per instance
+#     Goal: 100.0	Coverage Type: Focused Expression coverage, per design unit
+#     Goal: 100.0	Coverage Type: Expression coverage, per instance
+#     Goal: 100.0	Coverage Type: Expression coverage, per design unit
+#     Goal: 100.0	Coverage Type: Statement coverage, per instance
+#     Goal: 100.0	Coverage Type: Statement coverage, per design unit
+#     Goal: 100.0	Coverage Type: FSM state coverage, per instance
+#     Goal: 100.0	Coverage Type: FSM state coverage, per design unit
+#     Goal: 100.0	Coverage Type: FSM transition coverage, per instance
+#     Goal: 100.0	Coverage Type: FSM transition coverage, per design unit
+#     Goal: 100.0	Coverage Type: FSM coverage, per instance
+#     Goal: 100.0	Coverage Type: FSM coverage, per design unit
+#     Goal: 100.0	Coverage Type: Toggle coverage, per instance
+#     Goal: 100.0	Coverage Type: Toggle coverage, per design unit
+#     Goal: 100.0	Coverage Type: Covergroup per instance, if any, weighted average
+#     Goal: 100.0	Coverage Type: Covergroup type coverage
+#     Goal: 100.0	Coverage Type: Coverpoint per instance, if any, weighted average
+#     Goal: 100.0	Coverage Type: Cover directive, weighted average, per instance
+#     Goal: 100.0	Coverage Type: SystemC functional coverage, per instance
+#     Goal: 100.0	Coverage Type: User-defined coverage, per instance
+#     Goal: 100.0	Coverage Type: 0-In checkerware coverage, per instance
+# 
+#  quit -f
+# 
+# 0
+---- results/pitfall_report.txt written ----
+== LAB 10 : pitfall summary done ==
+#  quit -f
+[STEP 14] verdict
+Reading pref.tcl
+
+# 2026.1
+
+# do run_batch.do
+====================================================================
+ LAB 10 : verdict
+ cwd    : C:/Users/000148/Documents/MiniMax/eda-tools/questa_vhdl_lab/lab10_coverage
+====================================================================
+# 1
+
+---- the measured coverage ----
+  test 'basic' : Total coverage (filtered view): 85.49%
+  test 'extra' : Total coverage (filtered view): 72.36%
+  test 'edge'  : Total coverage (filtered view): 93.58%
+  MERGED       : Total coverage (filtered view): 94.48%
+
+# file9ed0b90
+RESULT: PASS
+[RESULT] PASS

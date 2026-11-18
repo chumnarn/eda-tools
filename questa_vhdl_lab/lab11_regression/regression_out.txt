@@ -1,0 +1,31 @@
+﻿=====================================================================
+ LAB 11 : regression -- running every lab
+ root    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_vhdl_lab\lab11_regression\..
+=====================================================================
+[PASS] lab01_first_simulation
+[PASS] lab02_libraries
+[PASS] lab03_selfchecking_tb
+[PASS] lab04_waveform
+[PASS] lab05_debugging
+[PASS] lab06_dataflow
+[PASS] lab07_memory
+[FAIL] lab08_stimulus  exit=1
+[PASS] lab09_psl
+[FAIL] lab10_coverage  exit=1
+
+=====================================================================
+ REGRESSION SUMMARY
+ total = 10   passed = 8   failed = 2
+ summary file : C:\Users\000148\Documents\MiniMax\eda-tools\questa_vhdl_lab\lab11_regression\results\regression_summary.txt
+=====================================================================
+PASS  lab01_first_simulation  script=run.cmd  
+PASS  lab02_libraries  script=run.cmd  
+PASS  lab03_selfchecking_tb  script=run.cmd  
+PASS  lab04_waveform  script=run.cmd  
+PASS  lab05_debugging  script=run_debug.cmd  
+PASS  lab06_dataflow  script=run.cmd  
+PASS  lab07_memory  script=run.cmd  
+FAIL  lab08_stimulus  script=run.cmd  exit=1  
+PASS  lab09_psl  script=run.cmd  
+FAIL  lab10_coverage  script=run.cmd  exit=1  
+[REGRESSION] FAILED -- 2 lab(s) did not pass

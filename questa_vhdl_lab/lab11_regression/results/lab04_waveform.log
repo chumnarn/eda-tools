@@ -1,0 +1,90 @@
+=====================================================================
+ LAB 04 : waveform analysis
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_vhdl_lab\lab04_waveform
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS
+=====================================================================
+Reading pref.tcl
+
+# 2026.1
+
+# do run_batch.do
+====================================================================
+ LAB 04 : waveform analysis
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:12:10 on Nov 18,2026
+# vcom -2008 src/clock_div.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity clock_div
+# -- Compiling architecture rtl of clock_div
+# End time: 15:12:10 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:12:11 on Nov 18,2026
+# vcom -2008 tb/tb_divider.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_divider
+# -- Compiling architecture sim of tb_divider
+# -- Loading entity clock_div
+# -- Loading package ENV
+# End time: 15:12:11 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim work.tb_divider 
+# Start time: 15:12:12 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_divider(sim)
+# Loading work.clock_div(rtl)
+# ** Note:   [mon] t=65 ns div_clk rising #1
+#    Time: 65 ns  Iteration: 2  Instance: /tb_divider
+# ** Note:   [mon] t=145 ns div_clk rising #2
+#    Time: 145 ns  Iteration: 2  Instance: /tb_divider
+# ** Note:   [mon] t=225 ns div_clk rising #3
+#    Time: 225 ns  Iteration: 2  Instance: /tb_divider
+# ** Note:   [mon] t=305 ns div_clk rising #4
+#    Time: 305 ns  Iteration: 2  Instance: /tb_divider
+# ** Note:   [mon] t=385 ns div_clk rising #5
+#    Time: 385 ns  Iteration: 2  Instance: /tb_divider
+# ** Note: --------------------------------------------------
+#    Time: 430 ns  Iteration: 0  Instance: /tb_divider
+# ** Note:  simulation finished at 430 ns
+#    Time: 430 ns  Iteration: 0  Instance: /tb_divider
+# ** Note: --------------------------------------------------
+#    Time: 430 ns  Iteration: 0  Instance: /tb_divider
+# ** Note: TEST_PASSED : lab04_waveform
+#    Time: 430 ns  Iteration: 0  Instance: /tb_divider
+# Break in Process stim at tb/tb_divider.vhd line 100
+# Stopped at tb/tb_divider.vhd line 100
+  vsim.wlf                              49152 bytes
+  results/waveform.vcd                   3219 bytes
+RESULT: PASS
+# End time: 15:12:14 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+[RESULT] PASS

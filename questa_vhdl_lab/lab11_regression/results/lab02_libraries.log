@@ -1,0 +1,130 @@
+=====================================================================
+ LAB 02 : design libraries
+ cwd    : C:\Users\000148\Documents\MiniMax\eda-tools\questa_vhdl_lab\lab02_libraries
+ tool   : C:\Siemens\modelsim_dlx64_2026.1\win64pe
+ expect : PASS
+=====================================================================
+Reading pref.tcl
+
+# 2026.1
+
+# do run_batch.do
+====================================================================
+ LAB 02 : design libraries
+====================================================================
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap ip_lib lib/ip_lib 
+# Modifying modelsim.ini
+---- mappings in modelsim.ini ----
+# filebfbed20
+# 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:28 on Nov 18,2026
+# vcom -2008 -work work src/adder_pkg.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling package adder_pkg
+# -- Compiling package body adder_pkg
+# -- Loading package adder_pkg
+# End time: 15:11:28 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:28 on Nov 18,2026
+# vcom -2008 -work ip_lib src/ip_core.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity ip_core
+# -- Compiling architecture rtl of ip_core
+# End time: 15:11:29 on Nov 18,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:29 on Nov 18,2026
+# vcom -2008 -work work src/counter_top.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package adder_pkg
+# -- Compiling entity counter_top
+# -- Compiling architecture rtl of counter_top
+# -- Loading entity ip_core
+# End time: 15:11:29 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:30 on Nov 18,2026
+# vcom -2008 -work work tb/tb_libraries.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package adder_pkg
+# -- Compiling entity tb_libraries
+# -- Compiling architecture sim of tb_libraries
+# -- Loading entity counter_top
+# -- Loading package ENV
+# End time: 15:11:30 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+---- contents of ip_lib ----
+Library vendor : Model Technology
+Maximum unnamed designs : 3
+ENTITY ip_core
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim work.tb_libraries 
+# Start time: 15:11:32 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.adder_pkg(body)
+# Loading std.env(body)
+# Loading work.tb_libraries(sim)
+# Loading work.counter_top(rtl)
+# Loading ip_lib.ip_core(rtl)
+# ** Note: ==============================================
+#    Time: 0 ns  Iteration: 0  Instance: /tb_libraries
+# ** Note:  adder_pkg version = 1.0.0
+#    Time: 0 ns  Iteration: 0  Instance: /tb_libraries
+# ** Note: ==============================================
+#    Time: 0 ns  Iteration: 0  Instance: /tb_libraries
+# ** Note:   [mon] t=0 ns value=00 parity='0'
+#    Time: 0 ns  Iteration: 2  Instance: /tb_libraries
+# ** Note:   [mon] t=25 ns value=01 parity='1'
+#    Time: 25 ns  Iteration: 3  Instance: /tb_libraries
+# ** Note:   [mon] t=45 ns value=03 parity='0'
+#    Time: 45 ns  Iteration: 3  Instance: /tb_libraries
+# ** Note:   [mon] t=55 ns value=04 parity='1'
+#    Time: 55 ns  Iteration: 3  Instance: /tb_libraries
+# ** Note:   [mon] t=65 ns value=05 parity='0'
+#    Time: 65 ns  Iteration: 3  Instance: /tb_libraries
+# ** Note: value  = 06
+#    Time: 76 ns  Iteration: 0  Instance: /tb_libraries
+# ** Note: parity = '0'
+#    Time: 76 ns  Iteration: 0  Instance: /tb_libraries
+# ** Note: TEST_PASSED : lab02_libraries
+#    Time: 76 ns  Iteration: 0  Instance: /tb_libraries
+# Break in Process stim at tb/tb_libraries.vhd line 81
+# Stopped at tb/tb_libraries.vhd line 81
+RESULT: PASS
+# End time: 15:11:34 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
+[RESULT] PASS
