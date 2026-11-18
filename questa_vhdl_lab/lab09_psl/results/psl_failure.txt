@@ -1,0 +1,6 @@
+# ** Error: Assertion failed
+#    Time: 45 ns Started: 35 ns  Scope: /tb_handshake/dut/req_ack File: src/handshake.vhd Line: 59
+# ** Error: Assertion failed
+#    Time: 85 ns Started: 75 ns  Scope: /tb_handshake/dut/req_ack File: src/handshake.vhd Line: 59
+# ** Error: Assertion failed
+#    Time: 125 ns Started: 115 ns  Scope: /tb_handshake/dut/req_ack File: src/handshake.vhd Line: 59

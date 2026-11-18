@@ -1,0 +1,72 @@
+# do run_nopsl_batch.do
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:02:02 on Nov 18,2026
+# vcom -2008 -nopsl src/handshake.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity handshake
+# -- Compiling architecture rtl of handshake
+# End time: 15:02:02 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:02:02 on Nov 18,2026
+# vcom -2008 tb/tb_handshake.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity tb_handshake
+# -- Compiling architecture sim of tb_handshake
+# -- Loading package NUMERIC_STD
+# -- Loading entity handshake
+# -- Loading package ENV
+# End time: 15:02:02 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim work.tb_handshake -gBUGGY=true 
+# Start time: 15:02:03 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_handshake(sim)
+# Loading work.handshake(rtl)
+# ** Note: reset released, BUGGY=true
+#    Time: 30 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: transaction 1 : ack on cycle 2 (late)
+#    Time: 50 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: transaction 1 : ack latency = 2 cycle(s)
+#    Time: 50 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: transaction 2 : ack on cycle 2 (late)
+#    Time: 90 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: transaction 2 : ack latency = 2 cycle(s)
+#    Time: 90 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: transaction 3 : ack on cycle 2 (late)
+#    Time: 130 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: transaction 3 : ack latency = 2 cycle(s)
+#    Time: 130 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: TEST_PASSED : 3/3 handshakes answered within the latency bound
+#    Time: 150 ns  Iteration: 0  Instance: /tb_handshake
+# ** Note: === handshake testbench finished ===
+#    Time: 150 ns  Iteration: 0  Instance: /tb_handshake
+# Break in Process stim at tb/tb_handshake.vhd line 112
+# Stopped at tb/tb_handshake.vhd line 112
+# filedd44c90
