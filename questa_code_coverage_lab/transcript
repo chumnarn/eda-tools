@@ -1,0 +1,38 @@
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -c -coverage -onfinish stop work.tb_cmd_fsm_extra -do "run -all; coverage save results/pit_extra.ucdb -codeAll -testname pit_extra; quit -f" 
+# Start time: 10:00:38 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading work.tb_cmd_fsm_extra
+# Loading work.cmd_fsm
+# run -all
+# === TB_CMD_FSM_EXTRA : start ===
+# [40000] cmd=3 a=6 b=3 en=1 -> result=5 zero=1 parity=1 state=1 done=0
+# [60000] cmd=4 a=c b=3 en=1 -> result=3 zero=1 parity=1 state=1 done=0
+# [80000] cmd=5 a=2 b=7 en=1 -> result=0 zero=0 parity=1 state=1 done=0
+# [100000] cmd=0 a=0 b=0 en=0 -> result=0 zero=0 parity=0 state=2 done=0
+# [120000] cmd=0 a=5 b=5 en=1 -> result=0 zero=1 parity=0 state=3 done=1
+# [140000] cmd=0 a=0 b=0 en=0 -> result=0 zero=0 parity=0 state=0 done=0
+# === TB_CMD_FSM_EXTRA : finished ===
+# ** Note: $finish    : tb/pitfall/tb_cmd_fsm_extra.v(66)
+#    Time: 140 ns  Iteration: 1  Instance: /tb_cmd_fsm_extra
+# Break in Module tb_cmd_fsm_extra at tb/pitfall/tb_cmd_fsm_extra.v line 66
+# Stopped at tb/pitfall/tb_cmd_fsm_extra.v line 66
+#  coverage save results/pit_extra.ucdb -codeAll -testname pit_extra
+#  quit -f
+# 
+# Coverage saving has been started
+# Coverage database has been saved successfully.
+# End time: 10:00:40 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0

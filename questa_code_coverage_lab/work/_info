@@ -1,0 +1,128 @@
+m255
+K4
+z2
+!s11f vlog 2026.1 2026.01, Jan 25 2026
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/000148/Documents/MiniMax/eda-tools/questa_code_coverage_lab
+vcmd_fsm
+2rtl/cmd_fsm.v
+Z1 !s110 1794970814
+!i10b 1
+!s100 08z3VSmBX6H=mM61LlF::3
+IbYiU?@BcU5mT>fc4j71mh0
+R0
+w1794968176
+8rtl/cmd_fsm.v
+Frtl/cmd_fsm.v
+!i122 33
+L0 18 88
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 OP;L;2026.1;84
+r1
+!s85 0
+31
+Z4 !s108 1794970814.000000
+!s107 rtl/cmd_fsm.v|
+!s90 -work|work|rtl/cmd_fsm.v|+cover=bcesft|
+!i113 1
+Z5 !s102 +cover=bcesft
+Z6 o-work work +cover=bcesft
+Z7 tCvgOpt 0 defaultOptions 1086078448
+vpragma_test
+2_pragma_test.v
+!s110 1794969608
+!i10b 1
+!s100 ?^eRmWO7OOhzAHW^hD6`h0
+I@99ZmQ^6l7P3o8FzDBXGK3
+R0
+w1794969601
+8_pragma_test.v
+F_pragma_test.v
+!i122 22
+L0 2 12
+R2
+R3
+r1
+!s85 0
+31
+!s108 1794969608.000000
+!s107 _pragma_test.v|
+!s90 -work|work|_pragma_test.v|+cover=bcesft|
+!i113 1
+R5
+R6
+R7
+vtb_cmd_fsm
+2tb/tb_cmd_fsm.v
+R1
+!i10b 1
+!s100 4a4;VJSjB;Ll9YSSakePb1
+I[71CnoShU67hP5V?_AY<a3
+R0
+w1794969151
+8tb/tb_cmd_fsm.v
+Ftb/tb_cmd_fsm.v
+!i122 34
+L0 28 156
+R2
+R3
+r1
+!s85 0
+31
+R4
+!s107 tb/tb_cmd_fsm.v|
+!s90 -work|work|tb/tb_cmd_fsm.v|
+!i113 1
+Z8 o-work work
+R7
+vtb_cmd_fsm_basic
+2tb/pitfall/tb_cmd_fsm_basic.v
+Z9 !s110 1794970815
+!i10b 1
+!s100 gBi6EhHG>BPODVQL1iklh3
+I>TlDk9NmjKnT2mAWGU?>z0
+R0
+Z10 w1794968687
+8tb/pitfall/tb_cmd_fsm_basic.v
+Ftb/pitfall/tb_cmd_fsm_basic.v
+!i122 35
+L0 21 56
+R2
+R3
+r1
+!s85 0
+31
+Z11 !s108 1794970815.000000
+!s107 tb/pitfall/tb_cmd_fsm_basic.v|
+!s90 -work|work|tb/pitfall/tb_cmd_fsm_basic.v|
+!i113 1
+R8
+R7
+vtb_cmd_fsm_extra
+2tb/pitfall/tb_cmd_fsm_extra.v
+R9
+!i10b 1
+!s100 ANAo]k?JDdT@WU4GCSINc0
+IeE?oAAV>nCGRL<zXJa`Ca3
+R0
+R10
+8tb/pitfall/tb_cmd_fsm_extra.v
+Ftb/pitfall/tb_cmd_fsm_extra.v
+!i122 36
+L0 13 57
+R2
+R3
+r1
+!s85 0
+31
+R11
+!s107 tb/pitfall/tb_cmd_fsm_extra.v|
+!s90 -work|work|tb/pitfall/tb_cmd_fsm_extra.v|
+!i113 1
+R8
+R7

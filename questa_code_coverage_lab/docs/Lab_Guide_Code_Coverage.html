@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Using Code Coverage in QuestaSim - Lab Guide</title>
+  <style>
+
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">
+@page {
+size: A4;
+margin: 18mm 16mm;
+}
+:root {
+--ink: #1b1f24;
+--muted: #5a6570;
+--rule: #d7dde3;
+--accent: #0b5fa5;
+--accent2: #8a4b08;
+--code-bg: #f4f6f8;
+--head-bg: #eef2f6;
+--note-bg: #fff8e6;
+--warn-bg: #fdecec;
+}
+html {
+font-size: 11pt;
+}
+body {
+max-width: 210mm;
+margin: 0 auto;
+padding: 12mm 8mm 20mm;
+color: var(--ink);
+background: #fff;
+font-family: "Leelawadee UI", "Sarabun", "Noto Sans Thai", "Tahoma",
+"Segoe UI", system-ui, sans-serif;
+line-height: 1.65;
+-webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4 {
+font-weight: 700;
+line-height: 1.3;
+color: var(--accent);
+margin: 1.6em 0 0.6em;
+page-break-after: avoid;
+}
+h1 {
+font-size: 1.85rem;
+margin-top: 0;
+padding-bottom: .35em;
+border-bottom: 3px solid var(--accent);
+}
+h2 {
+font-size: 1.45rem;
+margin-top: 1.9em;
+padding-bottom: .25em;
+border-bottom: 1px solid var(--rule);
+}
+h3 { font-size: 1.18rem; color: var(--accent2); }
+h4 { font-size: 1.05rem; color: var(--ink); }
+p { margin: .55em 0; }
+
+#TOC, nav#TOC {
+background: var(--head-bg);
+border: 1px solid var(--rule);
+border-radius: 6px;
+padding: 1em 1.4em;
+margin: 1.4em 0 2em;
+font-size: .95rem;
+}
+#TOC ul { margin: .25em 0; padding-left: 1.2em; }
+#TOC > ul > li > a { font-weight: 600; }
+
+table {
+border-collapse: collapse;
+width: 100%;
+margin: 1em 0 1.3em;
+font-size: .93rem;
+page-break-inside: avoid;
+}
+thead { background: var(--head-bg); }
+th, td {
+border: 1px solid var(--rule);
+padding: .42em .6em;
+text-align: left;
+vertical-align: top;
+}
+th {
+font-weight: 700;
+color: var(--accent);
+white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: #fafbfc; }
+
+code {
+font-family: "Cascadia Mono", "Consolas", "DejaVu Sans Mono", monospace;
+font-size: .88em;
+background: var(--code-bg);
+padding: .1em .32em;
+border-radius: 3px;
+color: #0a3d62;
+}
+pre {
+background: var(--code-bg);
+border: 1px solid var(--rule);
+border-left: 4px solid var(--accent);
+border-radius: 4px;
+padding: .75em 1em;
+overflow-x: auto;
+page-break-inside: avoid;
+font-size: .86rem;
+line-height: 1.5;
+}
+pre code {
+background: none;
+padding: 0;
+color: #1b1f24;
+font-size: 1em;
+}
+
+blockquote {
+margin: 1em 0;
+padding: .7em 1.1em;
+background: var(--note-bg);
+border-left: 4px solid var(--accent2);
+color: #3d3226;
+}
+blockquote p { margin: .35em 0; }
+blockquote > p:first-child strong { color: var(--accent2); }
+
+ul, ol { margin: .5em 0 .8em; padding-left: 1.6em; }
+li { margin: .22em 0; }
+li > ul, li > ol { margin: .25em 0; }
+
+hr {
+border: none;
+border-top: 1px solid var(--rule);
+margin: 2em 0;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+@media print {
+body {
+max-width: none;
+padding: 0;
+font-size: 10pt;
+}
+h1 { page-break-before: always; }
+h1:first-of-type { page-break-before: avoid; }
+pre, table, blockquote { page-break-inside: avoid; }
+a { color: var(--ink); }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Using Code Coverage in QuestaSim - Lab Guide</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#คู่มือปฏิบัติการ-lab-guide-using-code-coverage-in-questasim" id="toc-คู่มือปฏิบัติการ-lab-guide-using-code-coverage-in-questasim">คู่มือปฏิบัติการ
+(Lab Guide): Using Code Coverage in QuestaSim</a>
+<ul>
+<li><a href="#ภาพรวม-overview" id="toc-ภาพรวม-overview">ภาพรวม
+(Overview)</a>
+<ul>
+<li><a href="#ผลการเรียนรู้-learning-objectives" id="toc-ผลการเรียนรู้-learning-objectives">ผลการเรียนรู้ (Learning
+Objectives)</a></li>
+<li><a href="#สิ่งที่ต้องเตรียม-prerequisites" id="toc-สิ่งที่ต้องเตรียม-prerequisites">สิ่งที่ต้องเตรียม (Prerequisites)</a></li>
+<li><a href="#โครงสร้างไฟล์ของแลป-lab-files" id="toc-โครงสร้างไฟล์ของแลป-lab-files">โครงสร้างไฟล์ของแลป (Lab
+Files)</a></li>
+</ul></li>
+<li><a href="#บทที่-1--introduction-to-code-coverage" id="toc-บทที่-1--introduction-to-code-coverage">บทที่ 1 — Introduction to
+Code Coverage</a>
+<ul>
+<li><a href="#11-code-coverage-คืออะไร" id="toc-11-code-coverage-คืออะไร">1.1 Code coverage คืออะไร</a></li>
+<li><a href="#12-code-coverage-ต่างจาก-functional-coverage-อย่างไร" id="toc-12-code-coverage-ต่างจาก-functional-coverage-อย่างไร">1.2 Code
+coverage ต่างจาก Functional coverage อย่างไร</a></li>
+<li><a href="#13-ข้อดีและข้อจำกัด" id="toc-13-ข้อดีและข้อจำกัด">1.3
+ข้อดีและข้อจำกัด</a></li>
+<li><a href="#14-ศัพท์พื้นฐาน-vocabulary" id="toc-14-ศัพท์พื้นฐาน-vocabulary">1.4 ศัพท์พื้นฐาน (Vocabulary)</a></li>
+<li><a href="#15-รู้จัก-dut-ของแลป-อ่านก่อนลงมือ" id="toc-15-รู้จัก-dut-ของแลป-อ่านก่อนลงมือ">1.5 รู้จัก DUT ของแลป
+(อ่านก่อนลงมือ)</a></li>
+</ul></li>
+<li><a href="#บทที่-2--types-of-code-coverage" id="toc-บทที่-2--types-of-code-coverage">บทที่ 2 — Types of Code
+Coverage</a>
+<ul>
+<li><a href="#21-statement-coverage-s" id="toc-21-statement-coverage-s">2.1 Statement Coverage
+(<code>s</code>)</a></li>
+<li><a href="#22-branch-coverage-b" id="toc-22-branch-coverage-b">2.2
+Branch Coverage (<code>b</code>)</a></li>
+<li><a href="#23-condition-coverage-c" id="toc-23-condition-coverage-c">2.3 Condition Coverage
+(<code>c</code>)</a></li>
+<li><a href="#24-expression-coverage-e" id="toc-24-expression-coverage-e">2.4 Expression Coverage
+(<code>e</code>)</a></li>
+<li><a href="#25-toggle-coverage-t--x" id="toc-25-toggle-coverage-t--x">2.5 Toggle Coverage (<code>t</code> /
+<code>x</code>)</a></li>
+<li><a href="#26-fsm-coverage-f" id="toc-26-fsm-coverage-f">2.6 FSM
+Coverage (<code>f</code>)</a></li>
+<li><a href="#27-ตารางสรุป-metric-ทั้งหมด" id="toc-27-ตารางสรุป-metric-ทั้งหมด">2.7 ตารางสรุป metric ทั้งหมด</a></li>
+</ul></li>
+<li><a href="#บทที่-3--using-code-coverage-in-questasim" id="toc-บทที่-3--using-code-coverage-in-questasim">บทที่ 3 — Using Code
+Coverage in QuestaSim</a>
+<ul>
+<li><a href="#31-flow-แบบ-2-ขั้นตอน-two-step-flow" id="toc-31-flow-แบบ-2-ขั้นตอน-two-step-flow">3.1 Flow แบบ 2 ขั้นตอน
+(Two-step flow)</a></li>
+<li><a href="#32-แลป-0--compile-เตรียมก่อนทุกอย่าง" id="toc-32-แลป-0--compile-เตรียมก่อนทุกอย่าง">3.2 แลป 0 — Compile
+(เตรียมก่อนทุกอย่าง)</a></li>
+<li><a href="#33-แลป-1--เปิดดูผล-coverage-สด" id="toc-33-แลป-1--เปิดดูผล-coverage-สด">3.3 แลป 1 — เปิดดูผล coverage
+สด</a></li>
+<li><a href="#34-ดู-coverage-รายบรรทัดในหน้าต่าง-source" id="toc-34-ดู-coverage-รายบรรทัดในหน้าต่าง-source">3.4 ดู coverage
+รายบรรทัดในหน้าต่าง Source</a></li>
+<li><a href="#35-ดู-fsm-และ-toggle-แยก" id="toc-35-ดู-fsm-และ-toggle-แยก">3.5 ดู FSM และ Toggle แยก</a></li>
+<li><a href="#36-ตั้งเป้าหมาย-coverage-goal" id="toc-36-ตั้งเป้าหมาย-coverage-goal">3.6 ตั้งเป้าหมาย (Coverage
+Goal)</a></li>
+<li><a href="#37-ตัดรายการที่ไม่สามารถ-cover-ออก-exclude" id="toc-37-ตัดรายการที่ไม่สามารถ-cover-ออก-exclude">3.7 ตัดรายการที่ไม่สามารถ
+cover ออก (Exclude)</a></li>
+</ul></li>
+<li><a href="#บทที่-4--merging-code-coverage-from-different-tests" id="toc-บทที่-4--merging-code-coverage-from-different-tests">บทที่ 4 —
+Merging Code Coverage from different tests</a>
+<ul>
+<li><a href="#41-ทำไมต้อง-merge" id="toc-41-ทำไมต้อง-merge">4.1 ทำไมต้อง
+merge</a></li>
+<li><a href="#42-บันทึก-coverage-ของแต่ละ-test-เป็น-ucdb" id="toc-42-บันทึก-coverage-ของแต่ละ-test-เป็น-ucdb">4.2 บันทึก coverage
+ของแต่ละ test เป็น UCDB</a></li>
+<li><a href="#43-merge-ด้วย-vcover" id="toc-43-merge-ด้วย-vcover">4.3
+Merge ด้วย vcover</a></li>
+<li><a href="#44-merge-จาก-gui" id="toc-44-merge-จาก-gui">4.4 Merge จาก
+GUI</a></li>
+<li><a href="#45--pitfall-instance-path-ไม่ตรงกัน" id="toc-45--pitfall-instance-path-ไม่ตรงกัน">4.5 ⚠ PITFALL: instance path
+ไม่ตรงกัน</a></li>
+<li><a href="#46-วิธีแก้ไข" id="toc-46-วิธีแก้ไข">4.6 วิธีแก้ไข</a></li>
+<li><a href="#47-จัดอันดับว่า-test-ไหนคุ้มที่สุด-rank-test" id="toc-47-จัดอันดับว่า-test-ไหนคุ้มที่สุด-rank-test">4.7 จัดอันดับว่า test ไหนคุ้มที่สุด
+(Rank Test)</a></li>
+</ul></li>
+<li><a href="#บทที่-5--generating-code-coverage-reports" id="toc-บทที่-5--generating-code-coverage-reports">บทที่ 5 — Generating Code
+Coverage Reports</a>
+<ul>
+<li><a href="#51-รายงานแบบสรุป-summary-report" id="toc-51-รายงานแบบสรุป-summary-report">5.1 รายงานแบบสรุป (Summary
+report)</a></li>
+<li><a href="#52-รายงานแบบรายละเอียด-detailed-report" id="toc-52-รายงานแบบรายละเอียด-detailed-report">5.2 รายงานแบบรายละเอียด
+(Detailed report)</a></li>
+<li><a href="#53-รายงานแบบ-html" id="toc-53-รายงานแบบ-html">5.3
+รายงานแบบ HTML</a></li>
+<li><a href="#54-เปิดดูแบบ-coverage-view-mode" id="toc-54-เปิดดูแบบ-coverage-view-mode">5.4 เปิดดูแบบ Coverage View
+mode</a></li>
+<li><a href="#55-รายงานจาก-gui" id="toc-55-รายงานจาก-gui">5.5 รายงานจาก
+GUI</a></li>
+</ul></li>
+<li><a href="#บทที่-6--ผลลัพธ์จริงทั้งหมด-reference-results" id="toc-บทที่-6--ผลลัพธ์จริงทั้งหมด-reference-results">บทที่ 6 — ผลลัพธ์จริงทั้งหมด
+(Reference Results)</a>
+<ul>
+<li><a href="#61-ผลของแต่ละ-test-verilog" id="toc-61-ผลของแต่ละ-test-verilog">6.1 ผลของแต่ละ test (Verilog)</a></li>
+<li><a href="#62-ผลของภาษา-vhdl-ภาคผนวก-d" id="toc-62-ผลของภาษา-vhdl-ภาคผนวก-d">6.2 ผลของภาษา VHDL (ภาคผนวก
+D)</a></li>
+</ul></li>
+<li><a href="#บทที่-7--แบบฝึกหัด-exercises" id="toc-บทที่-7--แบบฝึกหัด-exercises">บทที่ 7 — แบบฝึกหัด (Exercises)</a>
+<ul>
+<li><a href="#แบบฝึกหัดที่-1--ทำนายจำนวน-bin" id="toc-แบบฝึกหัดที่-1--ทำนายจำนวน-bin">แบบฝึกหัดที่ 1 — ทำนายจำนวน bin</a></li>
+<li><a href="#แบบฝึกหัดที่-2--อ่านรายงานและหาสาเหตุ" id="toc-แบบฝึกหัดที่-2--อ่านรายงานและหาสาเหตุ">แบบฝึกหัดที่ 2 —
+อ่านรายงานและหาสาเหตุ</a></li>
+<li><a href="#แบบฝึกหัดที่-3--เขียน-test-ที่-3-ให้ปิด-coverage-ให้ครบ" id="toc-แบบฝึกหัดที่-3--เขียน-test-ที่-3-ให้ปิด-coverage-ให้ครบ">แบบฝึกหัดที่ 3 — เขียน
+test ที่ 3 ให้ปิด coverage ให้ครบ</a></li>
+<li><a href="#แบบฝึกหัดที่-4--จัดการกรณี-instance-path-ไม่ตรง" id="toc-แบบฝึกหัดที่-4--จัดการกรณี-instance-path-ไม่ตรง">แบบฝึกหัดที่ 4 — จัดการกรณี
+instance path ไม่ตรง</a></li>
+<li><a href="#แบบฝึกหัดที่-5--ออกแบบ-testbench-สำหรับงานจริง" id="toc-แบบฝึกหัดที่-5--ออกแบบ-testbench-สำหรับงานจริง">แบบฝึกหัดที่ 5 — ออกแบบ
+testbench สำหรับงานจริง</a></li>
+</ul></li>
+<li><a href="#บทที่-8--ปัญหาที่พบบ่อย-troubleshooting" id="toc-บทที่-8--ปัญหาที่พบบ่อย-troubleshooting">บทที่ 8 — ปัญหาที่พบบ่อย
+(Troubleshooting)</a></li>
+<li><a href="#ภาคผนวก-a--คำสั่งทั้งหมด-command-reference" id="toc-ภาคผนวก-a--คำสั่งทั้งหมด-command-reference">ภาคผนวก A — คำสั่งทั้งหมด
+(Command Reference)</a>
+<ul>
+<li><a href="#a1-คอมไพล์" id="toc-a1-คอมไพล์">A.1 คอมไพล์</a></li>
+<li><a href="#a2-รันและบันทึก" id="toc-a2-รันและบันทึก">A.2 รันและบันทึก</a></li>
+<li><a href="#a3-รายงาน" id="toc-a3-รายงาน">A.3 รายงาน</a></li>
+<li><a href="#a4-merge-และวิเคราะห์" id="toc-a4-merge-และวิเคราะห์">A.4
+Merge และวิเคราะห์</a></li>
+<li><a href="#a5-exclude-และ-goal" id="toc-a5-exclude-และ-goal">A.5
+Exclude และ Goal</a></li>
+<li><a href="#a6-เรียกดูหน้าต่างในโหมด-gui" id="toc-a6-เรียกดูหน้าต่างในโหมด-gui">A.6 เรียกดูหน้าต่างในโหมด GUI</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก-b--เทียบ-gui-กับ-command-line" id="toc-ภาคผนวก-b--เทียบ-gui-กับ-command-line">ภาคผนวก B — เทียบ GUI กับ
+Command line</a></li>
+<li><a href="#ภาคผนวก-c--การทำซ้ำทั้งหมด-reproduce" id="toc-ภาคผนวก-c--การทำซ้ำทั้งหมด-reproduce">ภาคผนวก C — การทำซ้ำทั้งหมด
+(Reproduce)</a></li>
+<li><a href="#ภาคผนวก-d--เวอร์ชันภาษา-vhdl" id="toc-ภาคผนวก-d--เวอร์ชันภาษา-vhdl">ภาคผนวก D — เวอร์ชันภาษา VHDL</a></li>
+<li><a href="#ภาคผนวก-e--ข้อควรจำสรุป-checklist" id="toc-ภาคผนวก-e--ข้อควรจำสรุป-checklist">ภาคผนวก E — ข้อควรจำสรุป
+(Checklist)</a></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="คู่มือปฏิบัติการ-lab-guide-using-code-coverage-in-questasim">คู่มือปฏิบัติการ
+(Lab Guide): Using Code Coverage in QuestaSim</h1>
+<p><strong>หลักสูตร:</strong> Questa Tool Usage — Module 3: Introduction
+to Code-Coverage <strong>ระดับ:</strong> เป็นคู่มือปฏิบัติการแบบ hands-on
+(workshop) สำหรับผู้เรียนที่ผ่าน Module 1–2 แล้ว <strong>ภาษา:</strong>
+อธิบายเป็นภาษาไทย ศัพท์เทคนิคคงศัพท์อังกฤษตามที่ปรากฏในเครื่องมือ
+<strong>เวลาที่แนะนำ:</strong> 4–6 ชั่วโมง (บทที่ 1–2: 2 ชม., บทที่ 3–5: 2–4
+ชม.)</p>
+<hr />
+<h2 id="ภาพรวม-overview">ภาพรวม (Overview)</h2>
+<p>คู่มือนี้จัดลำดับหัวข้อตามโครงสร้าง Module-3 ของเอกสารประกอบการสอน
+โดยแต่ละหัวข้อจะแบ่งเป็น 3 ส่วนเสมอ:</p>
+<table>
+<thead>
+<tr>
+<th>ส่วน</th>
+<th>รูปแบบ</th>
+<th>เวลาโดยประมาณ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ทฤษฎี (Theory)</strong></td>
+<td>อธิบายแนวคิด ศัพท์ และสิ่งที่เครื่องมือวัดจริง</td>
+<td>20–30 นาที</td>
+</tr>
+<tr>
+<td><strong>ปฏิบัติ (Lab)</strong></td>
+<td>ขั้นตอนทำตาม มีภาพผลลัพธ์ที่วัดได้จริงเปรียบเทียบ</td>
+<td>30–60 นาที</td>
+</tr>
+<tr>
+<td><strong>แบบฝึกหัด (Exercise)</strong></td>
+<td>ให้ผู้เรียนทำเอง มีเฉลยท้ายบท</td>
+<td>30–45 นาที</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>หลักการของคู่มือนี้</strong> —
+ตัวเลขทุกตัวที่ปรากฏในคู่มือได้มาจากการรันจริงบนเครื่อง <strong>ModelSim DE-64 /
+QuestaSim 2026.1</strong> ด้วยไฟล์ที่แนบมากับคู่มือ ไม่ใช่ตัวอย่างที่แต่งขึ้น
+ผู้เรียนจึงสามารถทำซ้ำแล้วได้ตัวเลขชุดเดียวกัน</p>
+</blockquote>
+<h3 id="ผลการเรียนรู้-learning-objectives">ผลการเรียนรู้ (Learning
+Objectives)</h3>
+<p>เมื่อจบคู่มือนี้ ผู้เรียนจะสามารถ:</p>
+<ol type="1">
+<li>อธิบายว่า code coverage คืออะไร และเหตุใดจึงต้องใช้ร่วมกับ functional
+coverage</li>
+<li>แยกแยะ coverage metric ทั้ง 6 ชนิด (<code>s b c e t f</code>) ว่าวัดอะไร
+และดูผลได้จากหน้าต่างใด</li>
+<li>เปิดใช้งาน code coverage แบบ 2-step flow ทั้งจาก GUI และจาก command
+line</li>
+<li>อ่านรายงาน coverage ระดับ summary และระดับ detail แล้วระบุได้ว่า
+<em>อะไรยังไม่ถูก cover และเพราะอะไร</em></li>
+<li>บันทึก coverage ของแต่ละ test เป็นฐานข้อมูล UCDB แล้ว
+<strong>merge</strong> ให้เป็นผลรวม</li>
+<li>สร้างรายงาน coverage ได้ทั้งแบบ text, HTML และเปิดดูแบบ Coverage View
+mode</li>
+<li>อธิบายข้อผิดพลาดที่พบบ่อยที่สุดของการ merge coverage และวิธีแก้ไข</li>
+</ol>
+<h3 id="สิ่งที่ต้องเตรียม-prerequisites">สิ่งที่ต้องเตรียม (Prerequisites)</h3>
+<table>
+<thead>
+<tr>
+<th>รายการ</th>
+<th>ข้อกำหนด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Simulator</td>
+<td>ModelSim DE / QuestaSim (ทดสอบกับ <strong>2026.1</strong>)</td>
+</tr>
+<tr>
+<td>License</td>
+<td>ต้องมีสิทธิ์ใช้ Code Coverage (ModelSim DE มีให้อยู่แล้ว)</td>
+</tr>
+<tr>
+<td>ภาษา</td>
+<td>Verilog-2001 (หลัก) และ VHDL-2008 (ภาคผนวก D)</td>
+</tr>
+<tr>
+<td>ความรู้พื้นฐาน</td>
+<td>รู้จัก <code>vlog</code>/<code>vcom</code>, <code>vsim</code>,
+<code>vlib</code>/<code>vmap</code>, การสร้าง testbench</td>
+</tr>
+</tbody>
+</table>
+<h3 id="โครงสร้างไฟล์ของแลป-lab-files">โครงสร้างไฟล์ของแลป (Lab Files)</h3>
+<pre><code>questa_code_coverage_lab/
+├── rtl/
+│   └── cmd_fsm.v              # DUT (Verilog) — มีโครงสร้างครบทั้ง 6 metric
+├── tb/
+│   ├── tb_cmd_fsm.v           # testbench เดียว เลือก test ด้วย +TEST= plusarg
+│   └── pitfall/               # testbench 2 ชุด สำหรับสาธิต &quot;ข้อผิดพลาด&quot; ในบทที่ 4
+│       ├── tb_cmd_fsm_basic.v
+│       └── tb_cmd_fsm_extra.v
+├── vhdl/
+│   ├── cmd_fsm.vhd            # DUT (VHDL) — ภาคผนวก D
+│   └── tb_cmd_fsm.vhd
+├── scripts/
+│   ├── compile.do             # Lab 0 : คอมไพล์
+│   ├── lab1_test_basic.do     # Lab 1 : test basic
+│   ├── lab2_test_extra.do     # Lab 2 : test extra
+│   ├── lab3_merge.do          # Lab 3 : merge
+│   ├── lab4_report.do         # Lab 4 : รายงาน
+│   ├── run_all.cmd            # รันทั้ง flow อัตโนมัติ (Verilog)
+│   └── run_vhdl.cmd           # รันทั้ง flow อัตโนมัติ (VHDL)
+├── results/                   # ผลลัพธ์ UCDB และรายงาน (สร้างโดยสคริปต์)
+└── docs/
+    └── Lab_Guide_Code_Coverage.md   # คู่มือนี้</code></pre>
+<hr />
+<h2 id="บทที่-1--introduction-to-code-coverage">บทที่ 1 — Introduction to
+Code Coverage</h2>
+<h3 id="11-code-coverage-คืออะไร">1.1 Code coverage คืออะไร</h3>
+<p><strong>Code coverage</strong> คือการวัดว่า <em>ส่วนใดของซอร์สโค้ด HDL
+ถูกเรียกใช้งานจริง</em> ระหว่างการ simulate และ <em>ส่วนใดไม่เคยถูกเรียก</em>
+ผลลัพธ์ที่ได้คือ <strong>coverage bins</strong> ซึ่งแต่ละ bin จะ
+ถูกทำเครื่องหมายว่า</p>
+<table>
+<thead>
+<tr>
+<th>สถานะ</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hit</strong></td>
+<td>มีการเรียกใช้งานอย่างน้อย 1 ครั้ง</td>
+</tr>
+<tr>
+<td><strong>Miss</strong></td>
+<td>ไม่เคยถูกเรียกใช้งานเลย</td>
+</tr>
+<tr>
+<td><strong>Excluded</strong></td>
+<td>ถูกตัดออกจากการคำนวณด้วยคำสั่ง exclude (ดูบทที่ 3.7)</td>
+</tr>
+</tbody>
+</table>
+<p>ความสำคัญของมันอยู่ที่ <strong>&quot;สิ่งที่ไม่เคยถูกทดสอบ&quot; คือบริเวณที่ยังอาจมีบั๊ก</strong>
+— ถ้าบรรทัดใดของโมดูลไหนไม่เคยถูกเรียกเลย เรายังไม่รู้ว่ามันทำงานถูกหรือไม่</p>
+<h3 id="12-code-coverage-ต่างจาก-functional-coverage-อย่างไร">1.2 Code
+coverage ต่างจาก Functional coverage อย่างไร</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Code coverage</th>
+<th>Functional coverage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>วัดอะไร</strong></td>
+<td>โครงสร้างของซอร์สโค้ด (บรรทัด, branch, condition…)</td>
+<td>พฤติกรรม/สเปกของดีไซน์ที่ประกาศไว้เอง (covergroup, assertion)</td>
+</tr>
+<tr>
+<td><strong>ใครเป็นเจ้าของ</strong></td>
+<td>เครื่องมือวิเคราะห์โค้ดอัตโนมัติ</td>
+<td>ผู้ออกแบบ verification ประกาศไว้เอง</td>
+</tr>
+<tr>
+<td><strong>ตัวอย่าง</strong></td>
+<td><code>if (a &gt; b)</code> สาขไหนไม่เคยเป็นจริง</td>
+<td>&quot;ต้องเคยรับ packet ยาว 64–128 ไบต์&quot;</td>
+</tr>
+<tr>
+<td><strong>ข้อจำกัด</strong></td>
+<td>บอกได้แค่ &quot;โค้ดยังไม่ถูกรันครบ&quot; ไม่ได้บอกว่าสเปกถูกตรวจแล้ว</td>
+<td>บอกได้ว่าสเปกครบ แต่ไม่ได้บอกว่าตรรกะภายในถูกรันครบ</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ข้อควรจำ (จุดที่ผู้เรียนมักสับสน)</strong> — code coverage 100%
+<strong>ไม่ได้แปลว่า</strong> ดีไซน์ถูกต้อง และ functional coverage 100%
+<strong>ไม่ได้แปลว่า</strong> โค้ดถูกรันครบ ทั้งสองอย่างต้องได้ 100%
+ควบคู่กันจึงจะเรียกว่ามีความมั่นใจในระดับที่ยอมรับได้</p>
+</blockquote>
+<h3 id="13-ข้อดีและข้อจำกัด">1.3 ข้อดีและข้อจำกัด</h3>
+<p><strong>ข้อดี</strong></p>
+<ul>
+<li>ติดตั้งและใช้งานได้ทันที ไม่ต้องแก้ซอร์สโค้ด ไม่ต้องเขียน covergroup เพิ่ม</li>
+<li>รองรับ VHDL, Verilog และ SystemVerilog ทั้งหมด</li>
+<li>เห็นผล &quot;สด&quot; ระหว่าง simulation
+และตรวจย้อนกลับไปยังบรรทัดที่ยังไม่ถูกรันได้ทันที</li>
+<li>บันทึกเป็นฐานข้อมูล UCDB แยกต่างหากได้ → merge ข้าม regression ได้</li>
+</ul>
+<p><strong>ข้อจำกัด</strong></p>
+<ul>
+<li>มี overhead ประมาณ <strong>5–10%</strong> ของเวลา simulate
+(ตัวเลขจากเอกสารประกอบการสอน)</li>
+<li>เป็น <em>static</em> coverage ของโค้ด
+บอกไม่ได้ว่าสเปกที่ตั้งใจทดสอบครบหรือยัง</li>
+<li>การได้ 100% บางครั้งเป็นผลของ testbench ที่ &quot;บังคับ&quot; ค่าสัญญาณเข้าไปใน DUT
+ซึ่งไม่ได้ทดสอบพฤติกรรมจริง → ต้องอ่านรายงานร่วมกับ waveform เสมอ</li>
+</ul>
+<h3 id="14-ศัพท์พื้นฐาน-vocabulary">1.4 ศัพท์พื้นฐาน (Vocabulary)</h3>
+<table>
+<thead>
+<tr>
+<th>ศัพท์</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>bin</strong></td>
+<td>หน่วยนับเล็กที่สุดของ coverage (เช่น 1 branch = 1 bin)</td>
+</tr>
+<tr>
+<td><strong>hit / miss</strong></td>
+<td>bin ที่ถูก / ไม่ถูกเรียกใช้</td>
+</tr>
+<tr>
+<td><strong>coverage %</strong></td>
+<td>(จำนวน bin ที่ hit) ÷ (จำนวน bin ทั้งหมด) × 100</td>
+</tr>
+<tr>
+<td><strong>weight</strong></td>
+<td>น้ำหนักของ bin ในการคำนวณสรุป (ปกติ = 1 ทุก bin)</td>
+</tr>
+<tr>
+<td><strong>dataset</strong></td>
+<td>ชุดข้อมูล coverage หนึ่งชุด ในที่นี้คือไฟล์ UCDB หนึ่งไฟล์</td>
+</tr>
+<tr>
+<td><strong>UCDB</strong></td>
+<td>Unified Coverage Database — รูปแบบฐานข้อมูล coverage ของ Siemens
+EDA</td>
+</tr>
+<tr>
+<td><strong>instance path</strong></td>
+<td>พาธเต็มของ instance เช่น <code>/tb_cmd_fsm/dut</code> —
+<strong>สำคัญมากในบทที่ 4</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="15-รู้จัก-dut-ของแลป-อ่านก่อนลงมือ">1.5 รู้จัก DUT ของแลป
+(อ่านก่อนลงมือ)</h3>
+<p>DUT ของแลปคือ <code>rtl/cmd_fsm.v</code> — โมดูล Command Decoder +
+Response FSM เล็ก ๆ ที่ออกแบบมาให้มี โครงสร้างครบทุก metric ที่วัดได้
+ผู้เรียนควรอ่านโค้ดก่อนเริ่ม และทำนายจำนวน bin ด้วยมือ (แบบฝึกหัดที่ 1)</p>
+<p>โครงสร้างของโมดูล (หมายเลขบรรทัดตรงกับไฟล์จริง):</p>
+<table>
+<thead>
+<tr>
+<th>บรรทัด</th>
+<th>โค้ด</th>
+<th>ให้ coverage metric อะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>47–52</td>
+<td><code>case (state)</code> + <code>if</code> ในแต่ละสถานะ</td>
+<td><strong>Branch</strong>, <strong>FSM</strong></td>
+</tr>
+<tr>
+<td>48</td>
+<td><code>ST_IDLE : if (en)</code></td>
+<td>Branch (2 สาข)</td>
+</tr>
+<tr>
+<td>49</td>
+<td><code>ST_EXEC : if (!en)</code></td>
+<td>Branch (2 สาข)</td>
+</tr>
+<tr>
+<td>50</td>
+<td><code>ST_WAIT : if (a == b)</code></td>
+<td>Branch (2 สาข) + <strong>Condition</strong> (UDP)</td>
+</tr>
+<tr>
+<td>51</td>
+<td><code>ST_DONE : if (!en)</code></td>
+<td>Branch (2 สาข)</td>
+</tr>
+<tr>
+<td>52</td>
+<td><code>default : next_state = ST_IDLE;</code></td>
+<td>Branch (case item)</td>
+</tr>
+<tr>
+<td>59–61</td>
+<td>process ของ register <code>state</code></td>
+<td><strong>Statement</strong>, Branch (reset)</td>
+</tr>
+<tr>
+<td>64</td>
+<td><code>assign state_o = state;</code></td>
+<td><strong>Toggle</strong></td>
+</tr>
+<tr>
+<td>65</td>
+<td><code>assign done = (state == ST_DONE);</code></td>
+<td><strong>Expression</strong></td>
+</tr>
+<tr>
+<td>73–84</td>
+<td>decoder: <code>if (en)</code> + <code>case (cmd)</code> + 5
+ข้อความ</td>
+<td><strong>Statement</strong>, <strong>Branch</strong>,
+<strong>Expression</strong></td>
+</tr>
+<tr>
+<td>90–95</td>
+<td>compare: <code>if/elsif/else</code> 3 ทาง</td>
+<td><strong>Branch</strong>, <strong>Condition</strong></td>
+</tr>
+<tr>
+<td>101–103</td>
+<td><code>parity = (a[0]^b[0]) &amp; (a[1]|b[1]);</code></td>
+<td><strong>Expression</strong>, <strong>Toggle</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>จุดที่ต้องสังเกต</strong> — บรรทัด 50 (<code>if (a == b)</code>)
+และบรรทัด 65 (<code>state == ST_DONE</code>) จะกลายเป็น
+<em>บรรทัดที่ยากที่สุด</em> ที่จะ cover ได้ เพราะต้องอยู่ในสถานะที่ถูกต้อง
+พร้อมกับค่าอินพุตที่ถูกต้อง ซึ่งจะได้แก้ในบทที่ 4</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-2--types-of-code-coverage">บทที่ 2 — Types of Code
+Coverage</h2>
+<p>QuestaSim/ModelSim วัด code coverage ได้ <strong>6 ชนิด</strong> (หรือ 7
+ถ้านับ extended toggle แยก) ควบคุมกันด้วยสวิตช์
+<code>+cover=&lt;spec&gt;</code> ที่ตัวอักษรแต่ละตัวเป็นตัวเลือก:</p>
+<table>
+<thead>
+<tr>
+<th>ตัวอักษร</th>
+<th>Metric</th>
+<th>วัดอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>s</code></td>
+<td><strong>Statement</strong></td>
+<td>คำสั่งแต่ละบรรทัดถูกเรียกครบหรือไม่</td>
+</tr>
+<tr>
+<td><code>b</code></td>
+<td><strong>Branch</strong></td>
+<td>ทุกทางเลือกของ <code>if</code>/<code>else</code> และทุก item ของ
+<code>case</code></td>
+</tr>
+<tr>
+<td><code>c</code></td>
+<td><strong>Condition</strong></td>
+<td>ทุกแถวในตารางความจริง (UDP) ของเงื่อนไข boolean</td>
+</tr>
+<tr>
+<td><code>e</code></td>
+<td><strong>Expression</strong></td>
+<td>นิพจน์ทางขวาของ assignment ทุก sub-expression</td>
+</tr>
+<tr>
+<td><code>f</code></td>
+<td><strong>FSM</strong></td>
+<td>สถานะและ transition ของ state machine</td>
+</tr>
+<tr>
+<td><code>t</code></td>
+<td><strong>Toggle</strong></td>
+<td>สัญญาณเปลี่ยนค่า 0→1 และ 1→0</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td><strong>Extended toggle</strong></td>
+<td>Toggle แบบ 3-state (รวมการเข้า/ออกจาก Z) — <code>x</code> มีผลเหนือ
+<code>t</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ค่า default ของเครื่องมือ</strong> — ถ้าไม่ระบุ
+<code>&lt;spec&gt;</code> เครื่องมือจะใช้ <code>sbceft</code> (ตรวจสอบจาก
+<code>vlog -help Coverage</code> บน 2026.1) <em>หมายเหตุ:</em>
+เอกสารประกอบการสอนระบุ <code>bcesft</code> ซึ่งเป็นค่าที่โรงเรียนใช้ในตัวอย่าง
+ในคู่มือนี้จะระบุ <code>+cover=bcesft</code> <strong>เต็มไปตลอด</strong>
+เพื่อไม่ให้ผลขึ้นกับค่า default</p>
+</blockquote>
+<h3 id="21-statement-coverage-s">2.1 Statement Coverage
+(<code>s</code>)</h3>
+<p>ทุกๆ คำสั่งที่มีการ assign ค่า จะถูกนับเป็น 1 statement</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span>*<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    result <span class="op">=</span> <span class="bn">4&#39;h0</span><span class="op">;</span>                 <span class="co">// ← นับเป็น 1 statement</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> <span class="op">(</span>en<span class="op">)</span> <span class="kw">begin</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="kw">case</span> <span class="op">(</span>cmd<span class="op">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="bn">4&#39;h1</span><span class="op">:</span>    result <span class="op">=</span> a <span class="op">+</span> b<span class="op">;</span>   <span class="co">// ← นับเป็น 1 statement</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            ...</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">endcase</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
+<p><strong>ข้อควรระวัง:</strong> คำสั่งที่อยู่ภายใน <code>if</code> จะถูกนับเป็น
+statement <strong>เฉพาะเมื่อเงื่อนไขเป็นจริง</strong> เท่านั้น
+เช่นเดียวกับตัวอย่างในสไลด์ <code>if (x == 0) z = 1;</code> — ถ้า
+<code>x</code> ไม่เท่ากับ 0 คำสั่งนั้นจะไม่ถูก hit ดังนั้น statement coverage
+จึงต่ำกว่า branch coverage เสมอ</p>
+<p><strong>ข้อจำกัดของ statement coverage:</strong> มันบอกได้แค่ว่า
+&quot;บรรทัดนี้ถูกรัน&quot; ไม่ได้บอกว่า &quot;รันในสถานการณ์ที่ถูกต้องหรือไม่&quot; — จึงต้องใช้ร่วมกับ
+branch/condition เสมอ</p>
+<h3 id="22-branch-coverage-b">2.2 Branch Coverage (<code>b</code>)</h3>
+<p>วัดว่า <strong>ทุกทางเลือก</strong> ของโครงสร้างการตัดสินใจถูกเดินครบหรือไม่</p>
+<p><strong>a) <code>if</code> / <code>else</code></strong> — 2 สาข (จริง
+/ เท็จ)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="op">(</span>x <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> z <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span>       z <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span></code></pre></div>
+<p>→ 2 bins: สาขจริง และสาขเท็จ</p>
+<p><strong>b) <code>case</code></strong> — 1 bin ต่อ case item
+<strong>และ</strong> แต่ละ item ยังถูกนับเป็น branch แยกอีกชุด</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">case</span> <span class="op">(</span>x<span class="op">)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">:</span> z <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>      <span class="co">// เป็น 1 case item แต่แตกเป็น 2 เงื่อนไข</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dv">3</span><span class="op">:</span>   z <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">endcase</span></span></code></pre></div>
+<p>→ Statement coverage: บรรทัด <code>1,2: z = 1;</code> ถูก hit ถ้า
+<code>x</code> เป็น 1 หรือ 2 → Branch coverage: รายงานแยกว่า
+<code>x == 1</code> ถูกทดสอบหรือยัง, <code>x == 2</code> ถูกทดสอบหรือยัง, และ
+<code>x == 3</code> ถูกทดสอบหรือยัง → <strong>branch coverage
+ให้ข้อมูลที่ละเอียดกว่า</strong></p>
+<p><strong>ใน DUT ของแลป</strong> — <code>case (cmd)</code> ที่บรรทัด 76–82
+มี 5 items (<code>4&#39;h1</code>, <code>4&#39;h2</code>, <code>4&#39;h3</code>,
+<code>4&#39;h4</code>, <code>default</code>) → 5 branch bins รวมกับ
+<code>if (en)</code> ที่บรรทัด 75 อีก 2 bins → decoder ให้ 7 bins</p>
+<h3 id="23-condition-coverage-c">2.3 Condition Coverage
+(<code>c</code>)</h3>
+<p>เป็นส่วนขยายของ branch coverage ที่วิเคราะห์เงื่อนไขแบบ <strong>boolean
+(UDP)</strong> โดยสร้างตารางความจริงขึ้นมาเอง
+แล้วนับจำนวนครั้งที่แต่ละแถวถูกเดินผ่าน</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span> <span class="op">(</span>en <span class="op">&amp;&amp;</span> <span class="op">(</span>a <span class="op">&gt;</span> b<span class="op">))</span> zero <span class="op">=</span> <span class="bn">1&#39;b1</span><span class="op">;</span></span></code></pre></div>
+<p>→ เงื่อนไขนี้ถูกแตกเป็น 2 input term (<code>en</code>,
+<code>a &gt; b</code>) และแต่ละ term มีแถว <code>_0</code> และ
+<code>_1</code> → ต้อง hit <strong>ครบทั้ง 4 แถว</strong> จึงจะถือว่า
+condition นี้ covered</p>
+<blockquote>
+<p><strong>ความต่างจาก branch:</strong> branch ถามว่า <em>&quot;if นี้เป็นจริงบ้าง
+เป็นเท็จบ้าง&quot;</em> condition ถามว่า <em>&quot;แต่ละ combination
+ของตัวแปรย่อยถูกลองครบหรือยัง&quot;</em> เงื่อนไขแบบ <code>a &amp;&amp; b</code>
+ต้องการ 4 แถว ขณะที่ branch ต้องการแค่ 2 สาข</p>
+</blockquote>
+<p>ใน DUT ของแลป มีเงื่อนไขที่ต้องวัด 5 เงื่อนไข:</p>
+<ol type="1">
+<li>บรรทัด 50 — <code>(a == b)</code> ใน <code>ST_WAIT</code></li>
+<li>บรรทัด 92 — <code>(en &amp;&amp; (a &gt; b))</code></li>
+<li>บรรทัด 93 — <code>(en &amp;&amp; (a == b))</code></li>
+<li>บรรทัด 75 — <code>(en)</code> (เงื่อนไขเดี่ยว)</li>
+<li>บรรทัด 48/49/51 — เงื่อนไขเดี่ยวใน FSM</li>
+</ol>
+<h3 id="24-expression-coverage-e">2.4 Expression Coverage
+(<code>e</code>)</h3>
+<p>วิเคราะห์ <strong>นิพจน์ทางขวาของ assignment</strong> แล้วแตกเป็น
+sub-expression โดยแต่ละ sub-expression จะมีตารางความจริงของตัวเอง</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>parity <span class="op">=</span> <span class="op">(</span>a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">^</span> b<span class="op">[</span><span class="dv">0</span><span class="op">])</span> <span class="op">&amp;</span> <span class="op">(</span>a<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">|</span> b<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span></code></pre></div>
+<p>→ นิพจน์นี้มี sub-expression 4 ตัว: <code>a[0]</code>, <code>b[0]</code>,
+<code>a[1]</code>, <code>b[1]</code> → แต่ละตัวต้องถูก hit <strong>ทั้งค่า 0
+และค่า 1</strong> และต้องให้ผลลัพธ์ของนิพจน์ใหญ่ เป็นทั้ง 0 และ 1 → นี่คือเหตุผลที่
+expression coverage มักเป็น <strong>ตัวที่ปิดยากที่สุด</strong> เพราะต้องควบคุม
+&quot;หน้าต่าง&quot; ของแต่ละบิต ให้ถูกต้องทั้งแบบที่นิพจน์ให้ผลเป็น 0 และ 1</p>
+<blockquote>
+<p><strong>เคล็ดลับในการปิด expression</strong> — ถ้านิพจน์ใหญ่เป็น
+<code>X &amp; Y</code> แล้ว <code>X</code> เป็น 0 ผลลัพธ์จะเป็น 0 เสมอไม่ว่า
+<code>Y</code> จะเป็นอะไร → <strong>ต้องทำให้ <code>X</code> เป็น 1
+ด้วย</strong> ไม่งั้น แถวของ <code>Y</code> จะไม่มีวันถูก hit ดูรายงาน detail
+บรรทัด &quot;Non-masking condition(s)&quot; เพื่อดูว่าต้องจัดค่าอะไรบ้าง</p>
+</blockquote>
+<h3 id="25-toggle-coverage-t--x">2.5 Toggle Coverage (<code>t</code> /
+<code>x</code>)</h3>
+<p>นับการเปลี่ยนค่าของสัญญาณแต่ละบิต</p>
+<ul>
+<li><strong>Standard toggle (2-state):</strong> นับ <code>0→1</code> และ
+<code>1→0</code></li>
+<li><strong>Extended toggle (3-state):</strong> นับเพิ่ม <code>Z→1</code>,
+<code>Z→0</code>, <code>1→Z</code>, <code>0→Z</code></li>
+</ul>
+<p>ตัวอย่าง: ถ้า <code>b[3]</code> เป็น 0 ตลอดการ simulate → ทั้ง
+<code>0→1</code> และ <code>1→0</code> ไม่เคยเกิด → สร้าง <strong>2 bins
+ที่ไม่มีทาง hit</strong> ขึ้นมา</p>
+<blockquote>
+<p><strong>Toggle coverage เป็นตัวที่สร้างความเจ็บปวดที่สุดในงานจริง</strong>
+สัญญาณอินพุตที่ testbench ไม่เคยขยี่ เช่น <code>cmd[3]</code> จะกลายเป็น bin
+ที่ค้างตลอด วิธีรับมือที่ถูกต้องคือ <strong>เขียน stimulus ให้ครบ</strong> หรือ
+<strong>exclude</strong> เฉพาะตัว node
+(<code>coverage exclude -togglenode</code>) — อย่า exclude ทั้ง
+instance</p>
+</blockquote>
+<h3 id="26-fsm-coverage-f">2.6 FSM Coverage (<code>f</code>)</h3>
+<p>วัด 2 อย่างของ state machine:</p>
+<table>
+<thead>
+<tr>
+<th>สิ่งที่วัด</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FSM States</strong></td>
+<td>สถานะแต่ละสถานะถูกเข้าถึงหรือยัง</td>
+</tr>
+<tr>
+<td><strong>FSM Transitions</strong></td>
+<td>การเปลี่ยนสถานะแต่ละเส้นถูกเดินผ่านหรือยัง</td>
+</tr>
+</tbody>
+</table>
+<p>FSM ถูก<strong>สกัดอัตโนมัติตอนคอมไพล์</strong> ด้วย <code>+cover=f</code>
+โดยเครื่องมือจะหา pattern ของ FSM ที่เขียนด้วย state register + next-state
+combinational logic</p>
+<blockquote>
+<p><strong>กรณีพิเศษที่ทำให้งง: reset นับเป็น transition ด้วย</strong> เมื่อออกแบบ
+FSM ที่มี asynchronous reset
+(<code>always @(posedge clk or negedge rst_n)</code>) การ assert reset
+ขณะ FSM อยู่ในสถานะใดก็ตาม จะถูกนับเป็น <strong>transition
+ออกจากสถานะนั้น</strong> → FSM ของแลปมี 4 สถานะ แต่มี <strong>6
+transitions</strong> เพราะมี <code>ST_EXEC → ST_IDLE</code> และ
+<code>ST_WAIT → ST_IDLE</code> ที่เกิดจาก reset</p>
+</blockquote>
+<h3 id="27-ตารางสรุป-metric-ทั้งหมด">2.7 ตารางสรุป metric ทั้งหมด</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>สวิตช์</th>
+<th>วัดที่อะไร</th>
+<th>จำนวน bin ใน DUT ของแลป</th>
+<th>ยากที่จะปิด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Statement</td>
+<td><code>s</code></td>
+<td>ทุกคำสั่ง assignment</td>
+<td>25</td>
+<td>ง่าย</td>
+</tr>
+<tr>
+<td>Branch</td>
+<td><code>b</code></td>
+<td>ทุกทางของ if/case</td>
+<td>25</td>
+<td>ปานกลาง</td>
+</tr>
+<tr>
+<td>Condition</td>
+<td><code>c</code></td>
+<td>ทุกแถวของเงื่อนไข boolean</td>
+<td>5</td>
+<td>ปานกลาง</td>
+</tr>
+<tr>
+<td>Expression</td>
+<td><code>e</code></td>
+<td>sub-expression ของ assignment</td>
+<td>5</td>
+<td><strong>ยาก</strong></td>
+</tr>
+<tr>
+<td>FSM States</td>
+<td><code>f</code></td>
+<td>สถานะ</td>
+<td>4</td>
+<td>ง่าย</td>
+</tr>
+<tr>
+<td>FSM Transitions</td>
+<td><code>f</code></td>
+<td>เส้นทางการเปลี่ยนสถานะ</td>
+<td>6</td>
+<td><strong>ยาก (reset)</strong></td>
+</tr>
+<tr>
+<td>Toggle</td>
+<td><code>t</code></td>
+<td>0→1 และ 1→0 ของแต่ละบิต</td>
+<td>56</td>
+<td><strong>ยาก</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>ตัวเลข &quot;จำนวน bin&quot; ข้างบนเป็นของ DUT ที่คอมไพล์ด้วย
+<code>+cover=bcesft</code> <strong>ถ้าเปลี่ยนวิธีเขียนโค้ดหรือเปลี่ยนภาษา
+ตัวเลขนี้จะเปลี่ยนไปด้วย</strong> (ภาคผนวก D แสดงตัวอย่างภาษา VHDL ซึ่งให้ 31
+branch / 33 statement)</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-3--using-code-coverage-in-questasim">บทที่ 3 — Using Code
+Coverage in QuestaSim</h2>
+<h3 id="31-flow-แบบ-2-ขั้นตอน-two-step-flow">3.1 Flow แบบ 2 ขั้นตอน
+(Two-step flow)</h3>
+<p>Code coverage <strong>ไม่สามารถเปิดใช้งานได้ด้วยการสั่งเพียงอย่างเดียว</strong>
+ต้องทำ 2 ขั้นตอน:</p>
+<pre><code>ขั้นที่ 1  COMPILE   vlog / vcom  +cover=&lt;spec&gt;      ← ฝังตัวนับลงในโค้ด
+ขั้นที่ 2  SIMULATE  vsim -coverage &lt;design&gt;         ← เปิดใช้การเก็บสถิติ</code></pre>
+<p>ถ้าขั้นที่ 1 ไม่ได้ทำ จะไม่มีอะไรให้วัดเลย (coverage จะเป็น 0% หรือไม่มีข้อมูลเลย)</p>
+<p><strong>จาก GUI</strong></p>
+<table>
+<thead>
+<tr>
+<th>ขั้นตอน</th>
+<th>เมนู</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ขั้นที่ 1</td>
+<td><code>Compile &gt; Compile Options &gt; Coverage tab</code> → เลือก
+metric ที่ต้องการ</td>
+</tr>
+<tr>
+<td>ขั้นที่ 2</td>
+<td><code>Simulate &gt; Start Simulation &gt; Others tab</code> → ติ๊ก
+<code>Enable code coverage</code></td>
+</tr>
+</tbody>
+</table>
+<p>ทางลัด: คลิกขวาที่ design unit ในหน้าต่าง Library →
+<code>Simulate with Coverage</code></p>
+<p><strong>จาก Command line</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vlog</span>  <span class="at">-work</span> work rtl/cmd_fsm.v +cover=bcesft</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-coverage</span> work.tb_cmd_fsm +TEST=basic</span></code></pre></div>
+<blockquote>
+<p><strong>ทางลัดที่ควรรู้:</strong>
+<code>vsim -c -coverage work.tb_cmd_fsm</code> จะ <strong>คง coverage
+ไว้ในหน่วยความจำ</strong> แล้วปิด session ทิ้งโดยไม่บันทึก → ถ้าจะบันทึก UCDB ต้องสั่ง
+<code>coverage save</code> <strong>ก่อน</strong> <code>quit -f</code>
+(ดูบทที่ 4.2)</p>
+</blockquote>
+<h3 id="32-แลป-0--compile-เตรียมก่อนทุกอย่าง">3.2 แลป 0 — Compile
+(เตรียมก่อนทุกอย่าง)</h3>
+<p><strong>GUI</strong></p>
+<ol type="1">
+<li><code>File &gt; Change Directory</code> → เลือกโฟลเดอร์
+<code>questa_code_coverage_lab</code></li>
+<li>คลิกขวาที่ <code>work</code> ในหน้าต่าง Library →
+<code>New &gt; Library</code> (ถ้ายังไม่มี)</li>
+<li><code>Compile &gt; Compile Options &gt; Coverage tab</code> → เลือก
+<code>s b c e f t</code></li>
+<li><code>Compile &gt; Compile</code> → เลือก <code>rtl/cmd_fsm.v</code>
+→ Compile</li>
+<li><code>Compile &gt; Compile</code> → เลือก
+<code>tb/tb_cmd_fsm.v</code> → Compile</li>
+</ol>
+<p><strong>CLI</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> questa_code_coverage_lab</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vlib</span> work</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vmap</span> work work</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">vlog</span> <span class="at">-work</span> work rtl/cmd_fsm.v +cover=bcesft</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">vlog</span> <span class="at">-work</span> work tb/tb_cmd_fsm.v</span></code></pre></div>
+<blockquote>
+<p><strong>เคล็ดลับที่ควรทำตั้งแต่ต้น:</strong> <strong>คอมไพล์เฉพาะ RTL ให้มี
+coverage</strong> และคอมไพล์ testbench <strong>โดยไม่ใส่
+<code>+cover</code></strong> → ตัวเลขทุกตัวในรายงานจะเป็นของ DUT ล้วน
+ไม่ถูกปนสัญญาณของโค้ด stimulus ถ้าคอมไพล์ทั้งหมดพร้อมกัน ตัวเลข statement ของแต่ละ
+test จะไม่เท่ากัน (เพราะ testbench ต่างกัน) และรายงานจะรวมสัญญาณของ TB ด้วย</p>
+</blockquote>
+<p><strong>ผลลัพธ์ที่ต้องเห็น</strong></p>
+<pre><code>-- Compiling module cmd_fsm
+** Note: (vlog-143) Recognized 1 FSM in module &quot;cmd_fsm(verilog)&quot;.</code></pre>
+<blockquote>
+<p>ข้อความ <code>Recognized 1 FSM</code> คือหลักฐานว่าเครื่องมือ <strong>หา FSM
+เจอ</strong> และจะเก็บ FSM coverage ให้ ถ้าไม่เห็นข้อความนี้ แปลว่าไม่ได้ใส่
+<code>+cover=f</code> หรือรูปแบบการเขียน FSM ไม่ถูกต้องตามที่เครื่องมือรองรับ
+(ในภาคผนวก D ภาษา VHDL จะได้ข้อความ
+<code>Recognized 1 FSM in architecture body &quot;cmd_fsm(rtl)&quot;</code>)</p>
+</blockquote>
+<h3 id="33-แลป-1--เปิดดูผล-coverage-สด">3.3 แลป 1 — เปิดดูผล coverage
+สด</h3>
+<ol type="1">
+<li><code>Simulate &gt; Start Simulation</code> → เลือก
+<code>tb_cmd_fsm</code> → ตั้งค่า <code>Enable code coverage</code> ในแท็บ
+<code>Others</code> → OK</li>
+<li><code>Simulate &gt; Run &gt; Run All</code> (หรือพิมพ์
+<code>run -all</code> ในหน้าต่าง Transcript)</li>
+<li><code>View &gt; Coverage &gt; Code Coverage Analysis</code> (CLI:
+<code>view canalysis</code>)</li>
+</ol>
+<p>หน้าต่าง <strong>Code Coverage Analysis</strong> จะแสดงตารางแยกตาม
+instance และแยกตาม metric:</p>
+<pre><code>     Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+     ----------------              ----      ----    ------    ------  --------
+     Branches                        25        18         7         1    72.00%
+     Conditions                       5         3         2         1    60.00%
+     Expressions                      5         2         3         1    40.00%
+     FSM States                       4         3         1         1    75.00%
+     FSM Transitions                  6         2         4         1    33.33%
+     Statements                      25        21         4         1    84.00%
+     Toggles                         56        42        14         1    75.00%
+ Total coverage (filtered view): 62.76%</code></pre>
+<blockquote>
+<p>เลขชุดนี้คือผลของ <strong>test <code>basic</code> เพียง test เดียว</strong>
+(บรรทัดที่ 2 ของภาคผนวก A)</p>
+</blockquote>
+<p><strong>สิ่งที่ต้องลองทำในหน้าต่างนี้</strong></p>
+<table>
+<thead>
+<tr>
+<th>การกระทำ</th>
+<th>ผลลัพธ์</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>คลิกที่แถวของ metric</td>
+<td>แสดงรายละเอียดของ metric นั้น</td>
+</tr>
+<tr>
+<td>ดับเบิลคลิกที่ item</td>
+<td>เปิดหน้าต่าง <strong>Coverage Details</strong> (CLI:
+<code>view details</code>)</td>
+</tr>
+<tr>
+<td>คลิกขวาที่ item → <code>Exclude</code></td>
+<td>ตัด item นั้นออกจากการคำนวณ (ดู 3.7)</td>
+</tr>
+<tr>
+<td>ดูแถว <code>Excluded</code></td>
+<td>รายการที่ถูก exclude จะแยกออกมาให้เห็นชัด</td>
+</tr>
+<tr>
+<td>กดไอคอน FSM</td>
+<td>เปิดหน้าต่าง FSM View</td>
+</tr>
+</tbody>
+</table>
+<h3 id="34-ดู-coverage-รายบรรทัดในหน้าต่าง-source">3.4 ดู coverage
+รายบรรทัดในหน้าต่าง Source</h3>
+<p>เปิดหน้าต่าง Source ที่ <code>rtl/cmd_fsm.v</code> แล้วมองที่คอลัมน์ coverage
+ทางขวา จะเห็นสัญลักษณ์ต่อบรรทัด:</p>
+<table>
+<thead>
+<tr>
+<th>สัญลักษณ์</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(เครื่องหมายถูก)</td>
+<td>บรรทัดนี้ถูกรันแล้ว / ถูก cover แล้ว</td>
+</tr>
+<tr>
+<td><code>X</code></td>
+<td>มี coverage หลายชนิดที่ยัง miss ในบรรทัดนี้</td>
+</tr>
+<tr>
+<td><code>XB</code></td>
+<td>มี branch ที่ยังไม่ถูก hit</td>
+</tr>
+<tr>
+<td><code>XC</code></td>
+<td>มี condition ที่ยังไม่ถูก hit</td>
+</tr>
+<tr>
+<td><code>XE</code></td>
+<td>มี expression ที่ยังไม่ถูก hit</td>
+</tr>
+<tr>
+<td><code>XS</code></td>
+<td>มี statement ที่ยังไม่ถูก hit</td>
+</tr>
+<tr>
+<td><code>XT</code></td>
+<td>สาข true ยังไม่เคยเกิด (คอลัมน์ BC)</td>
+</tr>
+<tr>
+<td><code>XF</code></td>
+<td>สาข false ยังไม่เคยเกิด (คอลัมน์ BC)</td>
+</tr>
+</tbody>
+</table>
+<p>บรรทัดที่ยังไม่ถูกรันจะถูก <strong>ไฮไลต์สีชมพู</strong>
+ให้กดเมาส์ทับบรรทัดเพื่อดูตัวเลข hit count ของแต่ละ metric</p>
+<h3 id="35-ดู-fsm-และ-toggle-แยก">3.5 ดู FSM และ Toggle แยก</h3>
+<p><strong>FSM View:</strong> คลิกไอคอนรูปเครื่องสถานะในหน้าต่าง Analysis หรือ
+<code>View &gt; Coverage &gt; FSM View</code> (CLI:
+<code>view fsmlist</code>)</p>
+<p>หน้าต่างนี้จะแสดง state machine เป็นกราฟ โดย:</p>
+<ul>
+<li>เครื่องหมายถูกสีเขียว = สถานะถูก cover แล้ว</li>
+<li><code>X</code> = transition ที่ยังไม่เคยเดินผ่าน</li>
+<li>คลิกที่ state เพื่อดู transition ที่ออกจาก state นั้น</li>
+</ul>
+<p><strong>Toggle Analysis:</strong> เลือกแท็บ <code>Toggle</code>
+ในหน้าต่าง Analysis จะเห็นรายการ node พร้อมคอลัมน์ <code>1H-&gt;0L</code> และ
+<code>0L-&gt;1H</code> ค่าที่ 0 ในคอลัมน์ใดคอลัมน์หนึ่ง แปลว่า
+<strong>สัญญาณนั้นยังไม่เคยเปลี่ยนค่าในทิศทางนั้น</strong></p>
+<h3 id="36-ตั้งเป้าหมาย-coverage-goal">3.6 ตั้งเป้าหมาย (Coverage Goal)</h3>
+<blockquote>
+<p><strong>ข้อจำกัดสำคัญ:</strong> คำสั่ง <code>coverage goal</code>
+<strong>ใช้ได้เฉพาะใน Coverage View mode</strong> (ดูบทที่ 5.4) — ถ้าสั่งระหว่าง
+simulation ปกติ จะได้ข้อความ
+<code>Coverage sub-command &#39;goal&#39; may be used in viewcov mode only.</code></p>
+</blockquote>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ต้องอยู่ใน Coverage View mode</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-viewcov</span> results/merged.ucdb</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># VSIM&gt; coverage goal -code b 95</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># VSIM&gt; coverage goal            &lt;- แสดงเป้าหมายทั้งหมดที่ตั้งไว้</span></span></code></pre></div>
+<p>ผลลัพธ์ที่วัดได้:</p>
+<pre><code>#     Goal: 95.0   Coverage Type: Branch coverage, per instance
+#     Goal: 95.0   Coverage Type: Branch coverage, per design unit</code></pre>
+<p>ใช้กับระบบ regression ที่ต้องการ &quot;เข้าเกณฑ์ขั้นต่ำ&quot; ก่อนปล่อยงาน</p>
+<h3 id="37-ตัดรายการที่ไม่สามารถ-cover-ออก-exclude">3.7 ตัดรายการที่ไม่สามารถ
+cover ออก (Exclude)</h3>
+<p>บาง item เป็น <strong>ไปไม่ได้</strong> ตามโครงสร้างของดีไซน์ (เช่น branch
+ที่เกิดไม่ได้) การ exclude อย่างเหมาะสมเป็นส่วนหนึ่งของกระบวนการ coverage ที่ดี แต่ต้อง
+<strong>มีเหตุผลประกอบเสมอ</strong></p>
+<p><strong>ทาง GUI</strong></p>
+<ul>
+<li>คลิกขวาที่ item ที่ miss ในหน้าต่าง Analysis →
+<code>Exclude Selection</code></li>
+<li>คลิกขวาที่บรรทัดในคอลัมน์ Hits ของหน้าต่าง Source →
+<code>Exclude Coverage Line xxx</code></li>
+<li>คลิกขวาที่ไฟล์ในหน้าต่าง Files →
+<code>Code Coverage &gt; Exclude Selected File</code></li>
+</ul>
+<p><strong>ทาง Command line</strong></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ตัดทั้งบรรทัดของไฟล์หนึ่ง</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> exclude <span class="at">-srcfile</span> rtl/cmd_fsm.v <span class="at">-linerange</span> 52</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ตัดเฉพาะ instance นั้น (instance-specific)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> exclude <span class="at">-scope</span> /tb_cmd_fsm/dut <span class="at">-srcfile</span> rtl/cmd_fsm.v <span class="at">-linerange</span> 52</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ตัดเฉพาะ toggle node</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> exclude <span class="at">-togglenode</span> {b<span class="pp">[</span><span class="ss">3</span><span class="pp">]</span>} <span class="at">-scope</span> /tb_cmd_fsm/dut</span></code></pre></div>
+<blockquote>
+<p><strong>ระวังเรื่องวงเล็บปีกกาใน Tcl:</strong> ชื่อ node ที่มีวงเล็บเหลี่ยม เช่น
+<code>b[3]</code> ต้องอยู่ในวงเล็บปีกกา <code>{ }</code> มิฉะนั้น Tcl จะพยายามรัน
+<code>b[3]</code> เป็นคำสั่งย่อยและจะเกิดข้อผิดพลาด
+(<code>coverage exclude -togglenode b[3] ...</code> → ผิดพลาด,
+<code>coverage exclude -togglenode {b[3]} ...</code> → ถูกต้อง)</p>
+</blockquote>
+<p><strong>ทาง source code (pragma)</strong> — เป็นวิธีที่เหมาะกับ regression
+มากที่สุด เพราะ exclusion ติดไปกับซอร์สโค้ด ไม่หลุดหายเมื่อเปลี่ยนเครื่อง</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>    <span class="co">// coverage off</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> <span class="op">(</span>unreachable_condition<span class="op">)</span> y <span class="op">=</span> <span class="bn">1&#39;b0</span><span class="op">;</span>   <span class="co">// ไม่ถูกนับ</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// coverage on</span></span></code></pre></div>
+<blockquote>
+<p><strong>ข้อจำกัดของ pragma ที่ต้องทราบ:</strong></p>
+<ol type="1">
+<li>ทำงาน <strong>ระดับ design unit</strong> เท่านั้น — วางไว้ก่อน
+architecture แล้ว architecture ทั้งก้อนจะถูก exclude</li>
+<li><strong>ใช้ exclude condition/expression
+ที่อยู่ภายในบรรทัดเดียวไม่ได้</strong> ถ้าต้องการจัดการระดับนั้นให้ใช้
+<code>coverage exclude</code> แทน</li>
+<li>ใน Verilog ใช้ <code>// coverage off</code> /
+<code>// coverage on</code> ใน VHDL ใช้ <code>-- coverage off</code> /
+<code>-- coverage on</code></li>
+</ol>
+</blockquote>
+<blockquote>
+<p><strong>สิ่งที่ไม่ควรทำ:</strong> exclude เพื่อ &quot;ทำให้ตัวเลขสวย&quot; — ถ้า exclude
+แล้วตัวเลขเพิ่ม แปลว่าเราซ่อนช่องว่างที่อาจเป็นบั๊กจริง ให้ใช้ exclude
+เฉพาะกรณีที่พิสูจน์แล้วว่า เป็นไปไม่ได้จริง และเขียนเหตุผลกำกับเสมอ</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-4--merging-code-coverage-from-different-tests">บทที่ 4 —
+Merging Code Coverage from different tests</h2>
+<h3 id="41-ทำไมต้อง-merge">4.1 ทำไมต้อง merge</h3>
+<p>ในการ verify จริง ไม่มี test เดียวที่ cover ทุกอย่างได้ — แต่ละ test มีหน้าที่เฉพาะ
+การรวมผลของทุก test เข้าด้วยกันจึงเป็น &quot;ความครอบคลุมของ regression ทั้งหมด&quot;</p>
+<pre><code>  test basic ──┐
+  test extra ──┼──►  merge  ──►  merged.ucdb  ──►  รายงานรวม
+  test edge  ──┘</code></pre>
+<h3 id="42-บันทึก-coverage-ของแต่ละ-test-เป็น-ucdb">4.2 บันทึก coverage
+ของแต่ละ test เป็น UCDB</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-coverage</span> <span class="at">-onfinish</span> stop work.tb_cmd_fsm +TEST=basic <span class="dt">\</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">-do</span> <span class="st">&quot;run -all; coverage save results/basic.ucdb -codeAll -testname basic; quit -f&quot;</span></span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>ส่วนของคำสั่ง</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-coverage</code></td>
+<td>เก็บสถิติ coverage ระหว่าง simulate</td>
+</tr>
+<tr>
+<td><code>-onfinish stop</code></td>
+<td><strong>สำคัญมาก</strong> — ดูคำเตือนด้านล่าง</td>
+</tr>
+<tr>
+<td><code>coverage save &lt;file&gt;</code></td>
+<td>บันทึกเป็นฐานข้อมูล UCDB</td>
+</tr>
+<tr>
+<td><code>-codeAll</code></td>
+<td>บันทึก coverage ทุกชนิด</td>
+</tr>
+<tr>
+<td><code>-testname &lt;name&gt;</code></td>
+<td>ติดป้ายชื่อ test ลงใน UCDB (ใช้รายงาน/จัดอันดับได้)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<h3 id="-กับดักที่พบบ่อยที่สุดของการรันแบบ-batch">⚠ กับดักที่พบบ่อยที่สุดของการรันแบบ
+batch</h3>
+<p>เมื่อ testbench จบด้วย <code>$finish</code> ในโหมด <code>vsim -c</code>
+(command line) <strong>simulator จะจบ session ทันที</strong>
+และคำสั่งที่เหลือใน <code>-do &quot;...&quot;</code> จะ <strong>ไม่ถูก execute
+เลย</strong> — เช่น <code>coverage save</code> จะไม่ทำงาน โดยไม่มีข้อความ
+error ใด ๆ</p>
+<p>ทางแก้: ใส่ <code>-onfinish stop</code> เพื่อให้ simulator กลับมาที่ prompt
+เมื่อเจอ <code>$finish</code> แล้วค่อยทำคำสั่งที่เหลือต่อ</p>
+<p><strong>ตรวจสอบว่าเสียง:</strong> ดูว่าไฟล์ <code>.ucdb</code>
+ถูกสร้างจริงหรือไม่ (<code>dir results\*.ucdb</code>) และดูว่า transcript
+มีข้อความ <code>Coverage database has been saved successfully.</code></p>
+</blockquote>
+<h3 id="43-merge-ด้วย-vcover">4.3 Merge ด้วย vcover</h3>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> merge results/merged.ucdb results/basic.ucdb results/extra.ucdb results/edge.ucdb</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>ตัวเลือก</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-du &lt;du_name&gt;</code></td>
+<td>merge โดยอ้างอิง <strong>design unit</strong> แทน instance path
+(ใช้แก้กรณี instance path ไม่ตรงกัน)</td>
+</tr>
+<tr>
+<td><code>-instance &lt;path&gt;</code></td>
+<td>merge เฉพาะ instance ที่ระบุ</td>
+</tr>
+<tr>
+<td><code>-recursive</code></td>
+<td>รวม instance ทั้ง subtree</td>
+</tr>
+<tr>
+<td><code>-totals</code> / <code>-combine</code></td>
+<td>วิธีรวมค่าของ bin (รวม / สูงสุด / ต่ำสุด)</td>
+</tr>
+<tr>
+<td><code>-preservetestcounts</code></td>
+<td>เก็บจำนวน hit ของแต่ละ test ไว้ (ใช้กับ <code>ranktest</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ผลลัพธ์ที่ได้</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>test basic</th>
+<th>test extra</th>
+<th><strong>หลัง merge</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branches</td>
+<td>72.00%</td>
+<td>88.00%</td>
+<td><strong>96.00%</strong></td>
+</tr>
+<tr>
+<td>Conditions</td>
+<td>60.00%</td>
+<td>80.00%</td>
+<td><strong>80.00%</strong></td>
+</tr>
+<tr>
+<td>Expressions</td>
+<td>40.00%</td>
+<td>20.00%</td>
+<td><strong>60.00%</strong></td>
+</tr>
+<tr>
+<td>FSM States</td>
+<td>75.00%</td>
+<td>100.00%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>FSM Transitions</td>
+<td>33.33%</td>
+<td>66.66%</td>
+<td><strong>66.66%</strong></td>
+</tr>
+<tr>
+<td>Statements</td>
+<td>84.00%</td>
+<td>92.00%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Toggles</td>
+<td>75.00%</td>
+<td>87.50%</td>
+<td><strong>91.07%</strong></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td>62.76%</td>
+<td>76.30%</td>
+<td><strong>84.81%</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>สังเกตว่า <strong>ไม่มี test ไหนได้ 100%</strong> แต่เมื่อ merge
+กันแล้วได้มากกว่าทั้งสอง test เพิ่มเติม และ <strong>จำนวน bin ไม่เพิ่มขึ้น</strong>
+(ยังเป็น 25 branches) → แปลว่าการ merge ทำงานถูกต้อง</p>
+</blockquote>
+<h3 id="44-merge-จาก-gui">4.4 Merge จาก GUI</h3>
+<ol type="1">
+<li><code>View &gt; Verification Management &gt; Browser</code> (CLI:
+<code>view browser</code>)</li>
+<li>คลิกขวาในหน้าต่าง Browser → <code>Add File</code> → เลือก
+<code>results/basic.ucdb</code> และ <code>results/extra.ucdb</code></li>
+<li>เลือกไฟล์ UCDB ทั้งสอง (Ctrl คลิก) → คลิกขวา → <code>Merge</code></li>
+<li>กรอกชื่อไฟล์ผลลัพธ์ (ค่า default คือ <code>merge.ucdb</code>) → OK</li>
+</ol>
+<h3 id="45--pitfall-instance-path-ไม่ตรงกัน">4.5 ⚠ PITFALL: instance path
+ไม่ตรงกัน</h3>
+<p><strong>นี่คือข้อผิดพลาดที่พบบ่อยที่สุดในงานจริง
+และเป็นเรื่องที่ควรสาธิตในชั้นเรียน</strong></p>
+<p>สมมติว่ามี testbench 2 ชุด คนละชื่อ — ซึ่งเป็นแนวปฏิบัติที่หลายคนใช้โดยไม่ทันระวัง</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> tb_cmd_fsm_basic<span class="op">;</span>   cmd_fsm dut <span class="op">(</span>...<span class="op">);</span>   <span class="co">// → /tb_cmd_fsm_basic/dut</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> tb_cmd_fsm_extra<span class="op">;</span>   cmd_fsm dut <span class="op">(</span>...<span class="op">);</span>   <span class="co">// → /tb_cmd_fsm_extra/dut</span></span></code></pre></div>
+<p>เมื่อ merge ไฟล์ UCDB ของสอง test นี้เข้าด้วยกัน <code>vcover merge</code>
+จะมองว่าเป็น <strong>คนละ instance</strong> จึง <strong>บวกจำนวน bin
+เข้าหากัน</strong> แทนที่จะรวม hit</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ผลลัพธ์ที่ถูกต้อง (testbench เดียว)</th>
+<th>ผลลัพธ์ที่ผิด (testbench สองชื่อ)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Number of Instances</td>
+<td>2</td>
+<td><strong>4</strong></td>
+</tr>
+<tr>
+<td>Branches (bins)</td>
+<td>25</td>
+<td><strong>50</strong> ← โตเป็น 2 เท่า</td>
+</tr>
+<tr>
+<td>Toggles (bins)</td>
+<td>56</td>
+<td><strong>112</strong> ← โตเป็น 2 เท่า</td>
+</tr>
+<tr>
+<td>Total coverage</td>
+<td>84.81%</td>
+<td><strong>69.53%</strong> ← <strong>ต่ำกว่า!</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>อ่านผลนี้ให้เข้าใจ:</strong> ตัวเลขที่ &quot;ดูเหมือนจะครบ&quot; จริง ๆ
+แล้วมีครึ่งหนึ่งที่ยังไม่ถูก hit เพราะเครื่องมือกำลังนับ &quot;สอง instance คนละตัว&quot; ไม่ใช่
+&quot;instance เดียวที่ถูกทดสอบครบ&quot;</p>
+</blockquote>
+<h3 id="46-วิธีแก้ไข">4.6 วิธีแก้ไข</h3>
+<p><strong>ทางเลือกที่ 1 (แนะนำ) — ใช้ testbench เดียว + plusarg</strong></p>
+<p>เก็บชื่อ testbench ให้เหมือนเดิมทุก test แล้วเลือก stimulus ด้วย plusarg →
+instance path เหมือนกันเสมอ → merge จะรวม hit ถูกต้อง</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">// tb/tb_cmd_fsm.v</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="dt">reg</span> <span class="op">[</span><span class="dv">8</span>*<span class="dv">16</span><span class="op">-</span><span class="dv">1</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> test_name<span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="dt">integer</span>        plusarg_ok<span class="op">;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>...</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>plusarg_ok <span class="op">=</span> <span class="dt">$value$plusargs</span><span class="op">(</span><span class="st">&quot;TEST=%s&quot;</span><span class="op">,</span> test_name<span class="op">);</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="kw">if</span>      <span class="op">(</span>test_name <span class="op">==</span> <span class="st">&quot;extra&quot;</span><span class="op">)</span> run_extra_test<span class="op">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span>test_name <span class="op">==</span> <span class="st">&quot;edge&quot;</span><span class="op">)</span>  run_edge_test<span class="op">;</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="kw">else</span>                           run_basic_test<span class="op">;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-coverage</span> work.tb_cmd_fsm +TEST=basic</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-coverage</span> work.tb_cmd_fsm +TEST=extra</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-coverage</span> work.tb_cmd_fsm +TEST=edge</span></code></pre></div>
+<blockquote>
+<p>นี่คือแนวปฏิบัติมาตรฐานของ regression — ใช้ testbench ชุดเดียวกับทุก test เพื่อให้
+coverage รวมกันได้ และเปลี่ยน stimulus ได้ตามต้องการ</p>
+</blockquote>
+<p><strong>ทางเลือกที่ 2 — บังคับ merge ตาม design unit</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> merge <span class="at">-du</span> work.cmd_fsm results/merged.ucdb results/pit_basic.ucdb results/pit_extra.ucdb</span></code></pre></div>
+<p>ผลลัพธ์ที่วัดได้: Number of Instances กลับเป็น 1, bins กลับเป็น 25 branches /
+56 toggles, Total กลับเป็น <strong>84.81%</strong> เท่ากับกรณีที่ใช้ testbench
+เดียวพอดี</p>
+<blockquote>
+<p>ทางเลือกนี้ใช้ได้ แต่ระวัง: <code>-du</code> จะรวม <strong>ทุก
+instance</strong> ของ design unit นั้นเข้าด้วยกัน ถ้ามีหลาย instance จริง (เช่น
+<code>dut_core</code>, <code>dut_periph</code>) ต้องระวังว่าจะถูกรวมเข้าหากัน
+ในกรณีนั้นควรใช้ <code>-instance</code> ร่วมด้วย</p>
+</blockquote>
+<h3 id="47-จัดอันดับว่า-test-ไหนคุ้มที่สุด-rank-test">4.7 จัดอันดับว่า test ไหนคุ้มที่สุด
+(Rank Test)</h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> ranktest <span class="at">-metric</span> aggregate <span class="at">-codeAll</span> results/basic.ucdb results/extra.ucdb results/edge.ucdb</span></code></pre></div>
+<pre><code>Rank   TotalCov  Testname              Branch  Cond    Expr    Stmt    FSM_ST  FSM_TR  Toggle
+-----  --------  --------------------  ------  ------  ------  ------  ------  ------  ------
+    1     76.30  extra                  88.00   80.00   20.00   92.00  100.00   66.66   87.50
+    2     97.20  edge                   92.00  100.00  100.00   92.00  100.00  100.00   96.42
+    3    100.00  basic                 100.00  100.00  100.00  100.00  100.00  100.00  100.00
+All 3 items have been ranked.
+
+Ranking summary:
+    Total Contributing Tests      = 3
+    Total Non-Contributing Tests  = 0
+    Total Coverage                = 100.00%</code></pre>
+<p>คอลัมน์ <code>TotalCov</code> เป็น <strong>coverage สะสม</strong> หลังรวม
+test ที่อยู่ในอันดับนั้น ตัวเลขนี้ตอบคำถามว่า <em>&quot;ถ้าจะตัด test ออกจาก regression
+ควรตัดตัวไหน&quot;</em> (ในตัวอย่างนี้ 3 test มีส่วนช่วยที่ไม่ซ้ำกัน จึงต้องใช้ทั้งสาม)</p>
+<p>ตรวจสอบรายชื่อ test ที่ถูก merge มา:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> testnames results/merged.ucdb</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">basic</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="ex">edge</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="ex">extra</span></span></code></pre></div>
+<blockquote>
+<p><strong>หมายเหตุ:</strong> คำสั่ง <code>vcover ranktest</code> จะเขียนไฟล์
+<code>ranktest.rank</code>, <code>ranktest.contrib</code> และ
+<code>ranktest.noncontrib</code> ไว้ใน <strong>โฟลเดอร์ปัจจุบัน</strong>
+ไฟล์เหล่านี้คือข้อมูลประกอบการจัดอันดับ ใช้ประกอบการวิเคราะห์ในรอบถัดไป</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-5--generating-code-coverage-reports">บทที่ 5 — Generating Code
+Coverage Reports</h2>
+<h3 id="51-รายงานแบบสรุป-summary-report">5.1 รายงานแบบสรุป (Summary
+report)</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> report <span class="at">-summary</span> <span class="at">-codeAll</span> results/merged.ucdb</span></code></pre></div>
+<pre><code>Coverage Report Totals BY INSTANCES: Number of Instances 2
+     Enabled Coverage              Bins      Hits    Misses    Weight  Coverage
+     ----------------              ----      ----    ------    ------  --------
+     Branches                        25        25         0         1   100.00%
+     Conditions                       5         5         0         1   100.00%
+     Expressions                      5         5         0         1   100.00%
+     FSM States                       4         4         0         1   100.00%
+     FSM Transitions                  6         6         0         1   100.00%
+     Statements                      25        25         0         1   100.00%
+     Toggles                         56        56         0         1   100.00%
+Total coverage (filtered view): 100.00%</code></pre>
+<p>ตัวเลือกที่ใช้บ่อย:</p>
+<table>
+<thead>
+<tr>
+<th>ตัวเลือก</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-summary</code></td>
+<td>สรุปหนึ่งบรรทัดต่อ metric</td>
+</tr>
+<tr>
+<td><code>-details</code></td>
+<td>รายละเอียดทุก bin (ใช้ตอนต้องรู้ว่าอะไรยัง miss)</td>
+</tr>
+<tr>
+<td><code>-codeAll</code></td>
+<td>รวม coverage ทุกชนิด</td>
+</tr>
+<tr>
+<td><code>-code bcesft</code></td>
+<td>เลือกเฉพาะชนิดที่ต้องการ</td>
+</tr>
+<tr>
+<td><code>-instance=&lt;path&gt;</code></td>
+<td>จำกัดขอบเขต (เช่น <code>-instance=/tb_cmd_fsm/dut</code>)</td>
+</tr>
+<tr>
+<td><code>-output &lt;file&gt;</code></td>
+<td>บันทึกลงไฟล์แทนการพิมพ์ออกจอ</td>
+</tr>
+<tr>
+<td><code>-verbose</code></td>
+<td>รายละเอียดของ hit count ในแต่ละ bin</td>
+</tr>
+<tr>
+<td><code>-showexcluded</code></td>
+<td>แสดงรายการที่ถูก exclude</td>
+</tr>
+<tr>
+<td><code>-rankfile</code>, <code>-testdetails</code></td>
+<td>รายงานเชิงลึกของแต่ละ test</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-รายงานแบบรายละเอียด-detailed-report">5.2 รายงานแบบรายละเอียด
+(Detailed report)</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> report <span class="at">-details</span> <span class="at">-codeAll</span> <span class="at">-output</span> results/merged_detail.txt results/merged.ucdb</span></code></pre></div>
+<p>รายงานนี้เป็นหัวใจของการหา &quot;อะไรยังไม่ถูก cover&quot; เพราะมันบอก
+<strong>บรรทัด</strong> ที่ยัง miss</p>
+<p>ตัวอย่างส่วนที่ยังไม่ถูก cover (หลัง merge แค่ 2 test) — โจทย์ของแบบฝึกหัดที่ 3:</p>
+<pre><code>------------------------------------IF Branch------------------------------------
+    50                                         2     Count coming in to IF
+    50              2                          2
+                                         ***0***     All False Count
+Branch totals: 1 hit of 2 branches = 50.00%</code></pre>
+<pre><code>----------------Focused Condition View-------------------
+Line       50 Item    1  (a == b)
+Condition totals: 0 of 1 input term covered = 0.00%
+  Input Term   Covered  Reason for no coverage   Hint
+    (a == b)         N  &#39;_0&#39; not hit             Hit &#39;_0&#39;
+     Rows:       Hits  FEC Target            Non-masking condition(s)
+ Row   1:    ***0***  (a == b)_0            -
+ Row   2:          2  (a == b)_1            -</code></pre>
+<pre><code>    Uncovered Transitions :
+Line            Trans_ID          Transition
+----            --------          ----------
+  60                   2          ST_EXEC -&gt; ST_IDLE
+  60                   4          ST_WAIT -&gt; ST_IDLE</code></pre>
+<pre><code>                                              Node      1H-&gt;0L      0L-&gt;1H  &quot;Coverage&quot;
+                                              ---------------------------------------
+                                              b[3]           0           0        0.00
+                                            cmd[3]           0           0        0.00
+                                             rst_n           0           2       50.00
+Total Node Count     =         28
+Toggled Node Count   =         25
+Untoggled Node Count =          3</code></pre>
+<h3 id="53-รายงานแบบ-html">5.3 รายงานแบบ HTML</h3>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> report <span class="at">-html</span> <span class="at">-codeAll</span> <span class="at">-output</span> results/html_report results/merged.ucdb</span></code></pre></div>
+<p>จะได้โฟลเดอร์ <code>results/html_report/</code>
+ที่เปิดด้วยเว็บเบราว์เซอร์ได้ทันที:</p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>เนื้อหา</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index.html</code></td>
+<td>หน้าแรกของรายงาน</td>
+</tr>
+<tr>
+<td><code>summary.html</code></td>
+<td>ตารางสรุปทั้งหมด</td>
+</tr>
+<tr>
+<td><code>statements.html</code>, <code>branches.html</code>,
+<code>condExp.html</code>, <code>toggles.html</code>,
+<code>fsm.html</code></td>
+<td>รายละเอียดราย metric</td>
+</tr>
+<tr>
+<td><code>sourceViewer.html</code></td>
+<td><strong>ตัวดูซอร์สเปคซอร์สโค้ด พร้อมคอลัมน์ hit</strong></td>
+</tr>
+<tr>
+<td><code>testRecords.html</code></td>
+<td>รายละเอียดของแต่ละ test ที่ merge มา</td>
+</tr>
+</tbody>
+</table>
+<p><strong>ทาง GUI</strong></p>
+<ul>
+<li><code>Verification Browser &gt; HTML Report</code> (เมนูหลัก) หรือ</li>
+<li>คลิกขวาที่ไฟล์ UCDB ในหน้าต่าง Browser → <code>HTML Report</code></li>
+<li>หรือ <code>Tools &gt; Coverage Report &gt; HTML</code></li>
+</ul>
+<h3 id="54-เปิดดูแบบ-coverage-view-mode">5.4 เปิดดูแบบ Coverage View
+mode</h3>
+<p>โหมดนี้โหลด UCDB เข้าไปใน simulator เพื่อ &quot;เปิดดู&quot; ข้อมูลที่ merge แล้ว โดยไม่ต้องมี
+simulation ที่กำลังทำงาน</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-viewcov</span> results/merged.ucdb</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co"># หรือในโหมด GUI:</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> open results/merged.ucdb</span></code></pre></div>
+<p>เมื่อเปิดในโหมดนี้ จะเห็นแท็บของไฟล์ UCDB ในหน้าต่าง และสามารถใช้
+<code>coverage report</code>, <code>coverage exclude</code> (พร้อมใส่
+comment ได้) และ <code>coverage goal</code> กับข้อมูลที่ merge แล้วได้ทั้งหมด</p>
+<p>ตรวจสอบว่าเปิดได้:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-viewcov</span> results/merged.ucdb <span class="at">-do</span> <span class="st">&quot;coverage report -summary -codeAll; quit -f&quot;</span></span></code></pre></div>
+<h3 id="55-รายงานจาก-gui">5.5 รายงานจาก GUI</h3>
+<ul>
+<li>คลิกขวาที่ item ในหน้าต่าง Instance Coverage →
+<code>Coverage Report</code></li>
+<li>คลิกขวาที่ไฟล์หรือ instance ในหน้าต่าง Files / Structure →
+<code>Code Coverage &gt; Code Coverage Reports</code></li>
+<li>CLI ที่สมนัย: <code>coverage report</code> (ทำงานกับ session ปัจจุบัน)</li>
+</ul>
+<hr />
+<h2 id="บทที่-6--ผลลัพธ์จริงทั้งหมด-reference-results">บทที่ 6 — ผลลัพธ์จริงทั้งหมด
+(Reference Results)</h2>
+<p>ตารางนี้เป็น <strong>ค่าที่วัดได้จริง</strong> บน ModelSim DE-64 / QuestaSim
+2026.1 ด้วยไฟล์ที่แนบมา ใช้เป็นค่าอ้างอิงตอนตรวจงานนักเรียน</p>
+<h3 id="61-ผลของแต่ละ-test-verilog">6.1 ผลของแต่ละ test (Verilog)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>test <code>basic</code></th>
+<th>test <code>extra</code></th>
+<th>test <code>edge</code></th>
+<th><strong>merged</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branches</td>
+<td>72.00%</td>
+<td>88.00%</td>
+<td>68.00%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Conditions</td>
+<td>60.00%</td>
+<td>80.00%</td>
+<td>80.00%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Expressions</td>
+<td>40.00%</td>
+<td>20.00%</td>
+<td>80.00%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>FSM States</td>
+<td>75.00%</td>
+<td>100.00%</td>
+<td>75.00%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>FSM Transitions</td>
+<td>33.33%</td>
+<td>66.66%</td>
+<td>66.66%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Statements</td>
+<td>84.00%</td>
+<td>92.00%</td>
+<td>76.00%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Toggles</td>
+<td>75.00%</td>
+<td>87.50%</td>
+<td>71.42%</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>62.76%</strong></td>
+<td><strong>76.30%</strong></td>
+<td><strong>73.87%</strong></td>
+<td><strong>100.00%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-ผลของภาษา-vhdl-ภาคผนวก-d">6.2 ผลของภาษา VHDL (ภาคผนวก D)</h3>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>test <code>basic</code></th>
+<th><strong>merged (3 test)</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branches</td>
+<td>70.96% (31 bins)</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Conditions</td>
+<td>75.00% (4 bins)</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Expressions</td>
+<td>50.00% (4 bins)</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>FSM States</td>
+<td>75.00% (4 bins)</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>FSM Transitions</td>
+<td>33.33% (6 bins)</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Statements</td>
+<td>84.84% (33 bins)</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td>Toggles</td>
+<td>77.94% (68 bins)</td>
+<td><strong>100.00%</strong></td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>66.72%</strong></td>
+<td><strong>100.00%</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ข้อสังเกตสำคัญ:</strong> จำนวน bin ของภาษา VHDL
+<strong>ไม่เท่ากับ</strong> ภาษา Verilog (31 branch เทียบกับ 25, 33 statement
+เทียบกับ 25) เพราะโครงสร้าง <code>if/elsif/else</code> และ
+<code>case ... when others</code> ของ VHDL ถูกนับเป็น branch ต่างจาก Verilog
+<strong>ตัวเลข bin ขึ้นกับภาษาและรูปแบบโค้ด ไม่ใช่ค่าคงที่สากล</strong></p>
+</blockquote>
+<hr />
+<h2 id="บทที่-7--แบบฝึกหัด-exercises">บทที่ 7 — แบบฝึกหัด (Exercises)</h2>
+<h3 id="แบบฝึกหัดที่-1--ทำนายจำนวน-bin">แบบฝึกหัดที่ 1 — ทำนายจำนวน bin</h3>
+<p><strong>โจทย์:</strong> จากซอร์สโค้ด <code>rtl/cmd_fsm.v</code> ที่ให้มา
+(โดยยังไม่เคยรัน) จงทำนายจำนวน bin ของแต่ละ metric แล้วเทียบกับผลจริงในตาราง
+6.1</p>
+<p><strong>เฉลย</strong></p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>ทำนาย</th>
+<th>จริง</th>
+<th>วิธีคิด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Statements</td>
+<td>25</td>
+<td>25</td>
+<td>นับทุก assignment ที่มีผลกระทบจริง (รวมบรรทัด
+<code>next_state = state</code>)</td>
+</tr>
+<tr>
+<td>Branches</td>
+<td>25</td>
+<td>25</td>
+<td><code>case(state)</code> 5 items + if 4 จุด×2 +
+<code>case(cmd)</code> 5 items + <code>if(en)</code> 2 + if ของ compare
+3 ทาง + if ของ register 2</td>
+</tr>
+<tr>
+<td>Conditions</td>
+<td>5</td>
+<td>5</td>
+<td>เงื่อนไขที่มีตัวแปรย่อย: <code>en</code> (บรรทัด 75), <code>a==b</code>
+(บรรทัด 50), <code>en &amp;&amp; a&gt;b</code> (92),
+<code>en &amp;&amp; a==b</code> (93), และเงื่อนไข FSM</td>
+</tr>
+<tr>
+<td>Expressions</td>
+<td>5</td>
+<td>5</td>
+<td><code>state==ST_DONE</code>, <code>a+b</code>, <code>a-b</code>,
+<code>a^b</code>, <code>(a[0]^b[0])&amp;(a[1]|b[1])</code></td>
+</tr>
+<tr>
+<td>FSM States</td>
+<td>4</td>
+<td>4</td>
+<td>ST_IDLE, ST_EXEC, ST_WAIT, ST_DONE</td>
+</tr>
+<tr>
+<td>FSM Transitions</td>
+<td>6</td>
+<td>6</td>
+<td>4 transition ตามการออกแบบ + 2 transition ที่เกิดจาก reset</td>
+</tr>
+<tr>
+<td>Toggles</td>
+<td>56</td>
+<td>56</td>
+<td>28 node × 2 ทิศทาง (0→1 และ 1→0)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>บทเรียน:</strong> จำนวน FSM transitions
+<strong>มากกว่า</strong> จำนวน states เสมอเมื่อมี reset และจำนวน toggle bins
+= จำนวนบิตที่สังเกตได้ × 2</p>
+</blockquote>
+<h3 id="แบบฝึกหัดที่-2--อ่านรายงานและหาสาเหตุ">แบบฝึกหัดที่ 2 —
+อ่านรายงานและหาสาเหตุ</h3>
+<p><strong>โจทย์:</strong> รันเฉพาะ <code>+TEST=basic</code>
+แล้วเปิดรายงานแบบ detail จงระบุว่า <strong>อะไรยังไม่ถูก cover
+และเพราะอะไร</strong> สำหรับรายการต่อไปนี้</p>
+<table>
+<thead>
+<tr>
+<th>รายการ</th>
+<th>คำตอบ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>บรรทัดใดของ <code>case (cmd)</code> ยังไม่ถูก hit</td>
+<td>บรรทัด 79 (<code>4&#39;h3</code>), 80 (<code>4&#39;h4</code>), 81
+(<code>default</code>) — เพราะ test basic ส่งเฉพาะ <code>4&#39;h1</code> และ
+<code>4&#39;h2</code></td>
+</tr>
+<tr>
+<td>FSM state ใดยังไม่ถูกเข้าถึง</td>
+<td><code>ST_DONE</code> — เพราะไม่มีการ trigger เงื่อนไข
+<code>a == b</code> ขณะอยู่ใน <code>ST_WAIT</code></td>
+</tr>
+<tr>
+<td>FSM transition ใดยังไม่เดินผ่าน</td>
+<td>ทั้ง 4 รายการที่เหลือ ได้แก่ <code>ST_EXEC→ST_WAIT</code>(บางส่วน),
+<code>ST_WAIT→ST_DONE</code>, <code>ST_EXEC→ST_IDLE</code>(reset),
+<code>ST_WAIT→ST_IDLE</code>(reset)</td>
+</tr>
+<tr>
+<td>toggle node ใดไม่เคยเปลี่ยนค่า</td>
+<td><code>b[3]</code>, <code>cmd[3]</code> (ไม่เคยถูกขับเป็น 1) และ
+<code>rst_n</code> (ไม่เคยกลับไปเป็น 0 หลังปล่อย reset)</td>
+</tr>
+<tr>
+<td>expression ใดปิดยากที่สุด</td>
+<td><code>parity = (a[0]^b[0]) &amp; (a[1]|b[1])</code> —
+เพราะต้องควบคุมให้ <code>a[0]^b[0]</code> เป็น 1 ไม่งั้นผลลัพธ์จะถูก mask เป็น 0
+ทั้งหมด</td>
+</tr>
+</tbody>
+</table>
+<h3 id="แบบฝึกหัดที่-3--เขียน-test-ที่-3-ให้ปิด-coverage-ให้ครบ">แบบฝึกหัดที่ 3 — เขียน
+test ที่ 3 ให้ปิด coverage ให้ครบ</h3>
+<p><strong>โจทย์:</strong> จากผล merge ของ <code>basic</code> +
+<code>extra</code> (ยังไม่ถึง 100%) จงเพิ่ม test ที่ 3 ให้ปิดช่องว่างที่เหลือทั้งหมด</p>
+<p><strong>เฉลย (ตรวจสอบด้วยการรันจริง — ผลลัพธ์ merged เป็น 100.00% ทุก
+metric)</strong></p>
+<table>
+<thead>
+<tr>
+<th>ช่องว่าง</th>
+<th>วิธีปิด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branch/Condition บรรทัด 50</td>
+<td>อยู่ในสถานะ <code>ST_WAIT</code> ขณะที่ <code>a ≠ b</code></td>
+</tr>
+<tr>
+<td>FSM <code>ST_EXEC→ST_IDLE</code></td>
+<td>สั่ง reset ขณะ FSM อยู่ใน <code>ST_EXEC</code></td>
+</tr>
+<tr>
+<td>FSM <code>ST_WAIT→ST_IDLE</code></td>
+<td>สั่ง reset ขณะ FSM อยู่ใน <code>ST_WAIT</code></td>
+</tr>
+<tr>
+<td>Toggle <code>b[3]</code></td>
+<td>ขับ <code>b</code> ให้มีบิต 3 เป็น 1 แล้วกลับเป็น 0</td>
+</tr>
+<tr>
+<td>Toggle <code>cmd[3]</code></td>
+<td>ขับ <code>cmd</code> เป็น <code>4&#39;h8</code> แล้วกลับเป็น
+<code>4&#39;h0</code></td>
+</tr>
+<tr>
+<td>Toggle <code>rst_n</code></td>
+<td>สั่ง reset ซ้ำ (1→0→1)</td>
+</tr>
+<tr>
+<td>Expression <code>a[1]</code>, <code>b[1]</code></td>
+<td>ใช้ค่าที่ <code>a[0] ≠ b[0]</code> (เช่น
+<code>a=4&#39;b0000, b=4&#39;b0001</code> และ <code>a=4&#39;b0010, b=4&#39;b0001</code>)
+เพื่อไม่ให้ผลลัพธ์ถูก mask</td>
+</tr>
+</tbody>
+</table>
+<p>โค้ดที่ใช้ (เพิ่มใน <code>tb/tb_cmd_fsm.v</code>):</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>    <span class="kw">task</span> pulse_reset<span class="op">;</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">begin</span></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>            <span class="op">@(</span><span class="kw">negedge</span> clk<span class="op">);</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>            rst_n <span class="op">=</span> <span class="bn">1&#39;b0</span><span class="op">;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>            <span class="op">@(</span><span class="kw">posedge</span> clk<span class="op">);</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>            <span class="op">@(</span><span class="kw">negedge</span> clk<span class="op">);</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>            rst_n <span class="op">=</span> <span class="bn">1&#39;b1</span><span class="op">;</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">endtask</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">task</span> run_edge_test<span class="op">;</span></span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">begin</span></span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>            <span class="co">// expression coverage : ต้องทำให้ a[0] != b[0]</span></span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h0</span><span class="op">,</span> <span class="bn">4&#39;b0000</span><span class="op">,</span> <span class="bn">4&#39;b0001</span><span class="op">,</span> <span class="bn">1&#39;b1</span><span class="op">);</span></span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h0</span><span class="op">,</span> <span class="bn">4&#39;b0010</span><span class="op">,</span> <span class="bn">4&#39;b0001</span><span class="op">,</span> <span class="bn">1&#39;b1</span><span class="op">);</span></span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>            <span class="co">// toggle coverage : cmd[3] และ b[3]</span></span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h8</span><span class="op">,</span> <span class="bn">4&#39;d8</span><span class="op">,</span>  <span class="bn">4&#39;d12</span><span class="op">,</span> <span class="bn">1&#39;b1</span><span class="op">);</span></span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h0</span><span class="op">,</span> <span class="bn">4&#39;d8</span><span class="op">,</span>  <span class="bn">4&#39;d0</span><span class="op">,</span>  <span class="bn">1&#39;b1</span><span class="op">);</span></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>            <span class="co">// reset ขณะอยู่ใน ST_EXEC</span></span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h0</span><span class="op">,</span> <span class="bn">4&#39;d1</span><span class="op">,</span>  <span class="bn">4&#39;d2</span><span class="op">,</span>  <span class="bn">1&#39;b1</span><span class="op">);</span></span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a>            pulse_reset<span class="op">;</span></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a>            <span class="co">// อยู่ใน ST_WAIT ขณะ a != b</span></span>
+<span id="cb36-23"><a href="#cb36-23" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h0</span><span class="op">,</span> <span class="bn">4&#39;d1</span><span class="op">,</span>  <span class="bn">4&#39;d2</span><span class="op">,</span>  <span class="bn">1&#39;b1</span><span class="op">);</span></span>
+<span id="cb36-24"><a href="#cb36-24" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h0</span><span class="op">,</span> <span class="bn">4&#39;d1</span><span class="op">,</span>  <span class="bn">4&#39;d2</span><span class="op">,</span>  <span class="bn">1&#39;b0</span><span class="op">);</span></span>
+<span id="cb36-25"><a href="#cb36-25" aria-hidden="true" tabindex="-1"></a>            step<span class="op">(</span><span class="bn">4&#39;h0</span><span class="op">,</span> <span class="bn">4&#39;d1</span><span class="op">,</span>  <span class="bn">4&#39;d2</span><span class="op">,</span>  <span class="bn">1&#39;b0</span><span class="op">);</span></span>
+<span id="cb36-26"><a href="#cb36-26" aria-hidden="true" tabindex="-1"></a>            <span class="co">// reset ขณะอยู่ใน ST_WAIT</span></span>
+<span id="cb36-27"><a href="#cb36-27" aria-hidden="true" tabindex="-1"></a>            pulse_reset<span class="op">;</span></span>
+<span id="cb36-28"><a href="#cb36-28" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
+<span id="cb36-29"><a href="#cb36-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">endtask</span></span></code></pre></div>
+<h3 id="แบบฝึกหัดที่-4--จัดการกรณี-instance-path-ไม่ตรง">แบบฝึกหัดที่ 4 — จัดการกรณี
+instance path ไม่ตรง</h3>
+<p><strong>โจทย์:</strong> จากโฟลเดอร์ <code>tb/pitfall/</code> มี
+testbench 2 ชุดที่ใช้ชื่อต่างกัน จง merge เข้าด้วยกัน จงอธิบายว่าเหตุใดตัวเลขที่ได้จึง
+&quot;ดูผิด&quot; และหาวิธีแก้ 2 วิธี</p>
+<p><strong>เฉลย</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>ผลที่ได้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>merge ตามปกติ</td>
+<td>Number of Instances = <strong>4</strong>, Branches = <strong>50
+bins</strong>, Total = <strong>69.53%</strong></td>
+</tr>
+<tr>
+<td>แก้โดยใช้ testbench เดียว + plusarg</td>
+<td>Instances = 2, Branches = 25 bins, Total =
+<strong>84.81%</strong></td>
+</tr>
+<tr>
+<td>แก้โดย <code>vcover merge -du work.cmd_fsm</code></td>
+<td>Instances = 1, Branches = 25 bins, Total =
+<strong>84.81%</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="แบบฝึกหัดที่-5--ออกแบบ-testbench-สำหรับงานจริง">แบบฝึกหัดที่ 5 — ออกแบบ
+testbench สำหรับงานจริง</h3>
+<p><strong>โจทย์:</strong> ออกแบบ regression ของโมดูล UART 8-bit ที่มี FSM
+(IDLE→RECV→PARITY→DONE) และ parity logic โดยตอบคำถามต่อไปนี้</p>
+<ol type="1">
+<li>จะใช้ testbench เดียวหรือหลายชุด? เพราะอะไร?</li>
+<li>จะเลือก stimulus ด้วยวิธีใด (plusarg / define / config)?</li>
+<li>FSM transition กี่เส้นที่ควรเป็น และจะมี transition จาก reset กี่เส้น?</li>
+<li>จะตั้ง coverage goal เท่าไร และจะ exclude อะไรบ้าง (พร้อมเหตุผล)?</li>
+</ol>
+<p><strong>เฉลยแนวทาง</strong></p>
+<ol type="1">
+<li><strong>testbench เดียว</strong> เพื่อให้ instance path คงที่ → merge
+ได้ถูกต้อง</li>
+<li>ใช้ <strong>plusarg</strong> (<code>+TEST=...</code>)
+เพราะไม่ต้องคอมไพล์ใหม่ → regression เร็วกว่า และยืนยันว่าใช้ binary
+ชุดเดียวกันทั้งหมด</li>
+<li>4 states → 4 transition ตามการออกแบบ + 3 transition จาก reset
+(ออกจากทุก state ยกเว้น IDLE) = <strong>7 transitions</strong></li>
+<li>ตั้ง goal: <code>coverage goal -code b 100</code> และ
+<code>-code s 100</code> exclude เฉพาะ: branch ที่เกิดจาก error path
+ที่ไม่มีในระบบจริง, toggle node ของสัญญาณที่ testbench ควบคุมโดยตรง</li>
+</ol>
+<hr />
+<h2 id="บทที่-8--ปัญหาที่พบบ่อย-troubleshooting">บทที่ 8 — ปัญหาที่พบบ่อย
+(Troubleshooting)</h2>
+<table>
+<thead>
+<tr>
+<th>อาการ</th>
+<th>สาเหตุ</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Coverage เป็น 0% ทั้งหมด</td>
+<td>คอมไพล์โดยไม่มี <code>+cover=</code></td>
+<td>คอมไพล์ใหม่ด้วย <code>+cover=bcesft</code></td>
+</tr>
+<tr>
+<td>Coverage เป็น 0% แม้คอมไพล์แล้ว</td>
+<td>simulate โดยไม่มี <code>-coverage</code></td>
+<td>เพิ่ม <code>-coverage</code> ตอน <code>vsim</code></td>
+</tr>
+<tr>
+<td>ไม่มีข้อความ <code>Recognized 1 FSM</code></td>
+<td>ไม่ได้ใส่ <code>+cover=f</code> หรือรูปแบบ FSM ไม่ถูกต้อง</td>
+<td>เพิ่ม <code>f</code> ใน <code>+cover=</code> และเขียน FSM ให้เป็น state
+register + next-state logic</td>
+</tr>
+<tr>
+<td>ไฟล์ <code>.ucdb</code> ไม่ถูกสร้าง</td>
+<td><code>$finish</code> จบ session ในโหมด <code>-c</code> ก่อนถึงคำสั่ง
+<code>coverage save</code></td>
+<td>ใส่ <code>-onfinish stop</code></td>
+</tr>
+<tr>
+<td>ตัวเลข bin โตเป็น 2 เท่าหลัง merge</td>
+<td>instance path ของ test ต่างกัน</td>
+<td>ใช้ testbench เดียว หรือ <code>vcover merge -du &lt;du&gt;</code></td>
+</tr>
+<tr>
+<td>ตัวเลขรวม <strong>ลดลง</strong> หลัง merge</td>
+<td>อาการเดียวกับข้างบน</td>
+<td>เช่นเดียวกัน</td>
+</tr>
+<tr>
+<td>ตัวเลขต่างกันทุกครั้งที่รัน</td>
+<td>คอมไพล์ testbench เข้าไปใน coverage ด้วย</td>
+<td>คอมไพล์ testbench โดยไม่ใส่ <code>+cover=</code></td>
+</tr>
+<tr>
+<td>รายงานไม่มี toggle ของสัญญาณบางตัว</td>
+<td>สัญญาณไม่เคยเปลี่ยนค่า</td>
+<td>ตรวจในรายงาน detail ว่าค่าไหนเป็น 0 แล้วเพิ่ม stimulus</td>
+</tr>
+<tr>
+<td><code>vcover report -html</code> ไม่ออกไฟล์</td>
+<td>ไม่ได้ใส่ <code>-output</code></td>
+<td><code>vcover report -html -codeAll -output &lt;dir&gt; &lt;file.ucdb&gt;</code></td>
+</tr>
+<tr>
+<td>ข้อความ
+<code>Personal Edition doesn&#39;t support verification plan</code></td>
+<td>ใบอนุญาตเป็นรุ่น Personal</td>
+<td>เป็นข้อความเตือน ไม่กระทบรายงาน code coverage</td>
+</tr>
+<tr>
+<td>คำสั่ง <code>coverage exclude</code> ไม่มีผล</td>
+<td>ต้องระบุ <code>-srcfile</code> เมื่อใช้ <code>-linerange</code></td>
+<td><code>coverage exclude -srcfile &lt;file&gt; -linerange &lt;n&gt;</code></td>
+</tr>
+<tr>
+<td><code>coverage exclude -togglenode b[3]</code> ผิดพลาด</td>
+<td>Tcl ตีความ <code>[3]</code> เป็นคำสั่งย่อย</td>
+<td>ใส่วงเล็บปีกกา: <code>-togglenode {b[3]}</code></td>
+</tr>
+<tr>
+<td><code>coverage goal</code> ขึ้นว่า <em>&quot;may be used in viewcov mode
+only&quot;</em></td>
+<td>คำสั่งนี้ใช้ได้เฉพาะใน Coverage View mode</td>
+<td><code>vsim -viewcov &lt;file&gt;.ucdb</code> แล้วสั่งซ้ำ</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ภาคผนวก-a--คำสั่งทั้งหมด-command-reference">ภาคผนวก A — คำสั่งทั้งหมด
+(Command Reference)</h2>
+<h3 id="a1-คอมไพล์">A.1 คอมไพล์</h3>
+<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vlib</span> work</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vmap</span> work work</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vlog</span> <span class="at">-work</span> work rtl/cmd_fsm.v +cover=bcesft      <span class="co"># DUT พร้อม coverage</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="ex">vlog</span> <span class="at">-work</span> work tb/tb_cmd_fsm.v                   <span class="co"># TB ไม่ต้องมี coverage</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="ex">vcom</span> <span class="at">-2008</span> <span class="at">-work</span> vhdl_work vhdl/cmd_fsm.vhd +cover=bcesft</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="ex">vcom</span> <span class="at">-2008</span> <span class="at">-work</span> vhdl_work vhdl/tb_cmd_fsm.vhd</span></code></pre></div>
+<h3 id="a2-รันและบันทึก">A.2 รันและบันทึก</h3>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-coverage</span> work.tb_cmd_fsm +TEST=basic</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-coverage</span> <span class="at">-onfinish</span> stop work.tb_cmd_fsm +TEST=basic <span class="dt">\</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">-do</span> <span class="st">&quot;run -all; coverage save results/basic.ucdb -codeAll -testname basic; quit -f&quot;</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-coverage</span> <span class="at">-onfinish</span> stop vhdl_work.tb_cmd_fsm <span class="at">-gTEST</span><span class="op">=</span>basic <span class="dt">\</span></span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">-do</span> <span class="st">&quot;run -all; coverage save results/vhdl_basic.ucdb -codeAll -testname vbasic; quit -f&quot;</span></span></code></pre></div>
+<h3 id="a3-รายงาน">A.3 รายงาน</h3>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> report <span class="at">-summary</span> <span class="at">-codeAll</span> <span class="at">-instance</span><span class="op">=</span>/tb_cmd_fsm/dut</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> report <span class="at">-details</span> <span class="at">-codeAll</span> <span class="at">-output</span> results/merged_detail.txt results/merged.ucdb</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> report <span class="at">-summary</span> <span class="at">-codeAll</span> results/merged.ucdb</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> report <span class="at">-details</span> <span class="at">-codeAll</span> <span class="at">-output</span> results/merged_detail.txt results/merged.ucdb</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> report <span class="at">-html</span> <span class="at">-codeAll</span> <span class="at">-output</span> results/html_report results/merged.ucdb</span></code></pre></div>
+<h3 id="a4-merge-และวิเคราะห์">A.4 Merge และวิเคราะห์</h3>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> merge results/merged.ucdb results/basic.ucdb results/extra.ucdb results/edge.ucdb</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> merge <span class="at">-du</span> work.cmd_fsm results/merged.ucdb results/a.ucdb results/b.ucdb</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> testnames results/merged.ucdb</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> ranktest <span class="at">-metric</span> aggregate <span class="at">-codeAll</span> results/basic.ucdb results/extra.ucdb results/edge.ucdb</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-viewcov</span> results/merged.ucdb</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> open results/merged.ucdb</span></code></pre></div>
+<h3 id="a5-exclude-และ-goal">A.5 Exclude และ Goal</h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> exclude <span class="at">-srcfile</span> rtl/cmd_fsm.v <span class="at">-linerange</span> 52</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> exclude <span class="at">-scope</span> /tb_cmd_fsm/dut <span class="at">-srcfile</span> rtl/cmd_fsm.v <span class="at">-linerange</span> 52</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> exclude <span class="at">-togglenode</span> {b<span class="pp">[</span><span class="ss">3</span><span class="pp">]</span>} <span class="at">-scope</span> /tb_cmd_fsm/dut</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> goal <span class="at">-code</span> b 95      <span class="co"># ต้องอยู่ใน Coverage View mode</span></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="ex">coverage</span> goal</span></code></pre></div>
+<h3 id="a6-เรียกดูหน้าต่างในโหมด-gui">A.6 เรียกดูหน้าต่างในโหมด GUI</h3>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">view</span> canalysis        <span class="co"># Code Coverage Analysis</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="ex">view</span> details         <span class="co"># Coverage Details</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="ex">view</span> fsmlist         <span class="co"># FSM List</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="ex">view</span> browser         <span class="co"># Verification Management Browser</span></span></code></pre></div>
+<hr />
+<h2 id="ภาคผนวก-b--เทียบ-gui-กับ-command-line">ภาคผนวก B — เทียบ GUI กับ
+Command line</h2>
+<table>
+<thead>
+<tr>
+<th>งาน</th>
+<th>GUI</th>
+<th>CLI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>เปิดใช้ coverage ตอนคอมไพล์</td>
+<td><code>Compile &gt; Compile Options &gt; Coverage tab</code></td>
+<td><code>vlog ... +cover=bcesft</code></td>
+</tr>
+<tr>
+<td>เปิดใช้ coverage ตอน simulate</td>
+<td><code>Simulate &gt; Start Simulation &gt; Others &gt; Enable code coverage</code></td>
+<td><code>vsim -coverage &lt;design&gt;</code></td>
+</tr>
+<tr>
+<td>เปิดหน้าต่าง Analysis</td>
+<td><code>View &gt; Coverage &gt; Code Coverage Analysis</code></td>
+<td><code>view canalysis</code></td>
+</tr>
+<tr>
+<td>เปิดหน้าต่าง Details</td>
+<td><code>View &gt; Coverage &gt; Details</code></td>
+<td><code>view details</code></td>
+</tr>
+<tr>
+<td>เปิดหน้าต่าง FSM</td>
+<td>คลิกไอคอน FSM ใน Analysis</td>
+<td><code>view fsmlist</code></td>
+</tr>
+<tr>
+<td>บันทึก UCDB</td>
+<td><code>Tools &gt; Coverage Save</code></td>
+<td><code>coverage save &lt;file&gt;.ucdb -codeAll</code></td>
+</tr>
+<tr>
+<td>โหลด UCDB</td>
+<td><code>View &gt; Verification Management &gt; Browser</code> →
+<code>Add File</code></td>
+<td><code>coverage open &lt;file&gt;.ucdb</code> /
+<code>vsim -viewcov &lt;file&gt;.ucdb</code></td>
+</tr>
+<tr>
+<td>Merge</td>
+<td>Browser → เลือกไฟล์ → <code>Merge</code></td>
+<td><code>vcover merge &lt;out&gt; &lt;in1&gt; &lt;in2&gt; ...</code></td>
+</tr>
+<tr>
+<td>สร้างรายงาน HTML</td>
+<td><code>Verification Browser &gt; HTML Report</code></td>
+<td><code>vcover report -html -output &lt;dir&gt; &lt;file&gt;.ucdb</code></td>
+</tr>
+<tr>
+<td>Exclude</td>
+<td>คลิกขวาที่ item → <code>Exclude Selection</code></td>
+<td><code>coverage exclude ...</code></td>
+</tr>
+<tr>
+<td>โหลดแบบพร้อม coverage</td>
+<td>คลิกขวาที่ design unit → <code>Simulate with Coverage</code></td>
+<td><code>vsim -coverage &lt;design&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="ภาคผนวก-c--การทำซ้ำทั้งหมด-reproduce">ภาคผนวก C — การทำซ้ำทั้งหมด
+(Reproduce)</h2>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> questa_code_coverage_lab</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> PATH=C:<span class="dt">\S</span>iemens<span class="dt">\m</span>odelsim_dlx64_2026.1<span class="dt">\w</span>in64pe<span class="kw">;</span><span class="ex">%PATH%</span>     <span class="co"># ปรับตามเครื่อง</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="ex">scripts\run_all.cmd</span>       <span class="co"># flow ของ Verilog  -&gt; results/merged.ucdb + รายงาน HTML</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="ex">scripts\run_vhdl.cmd</span>      <span class="co"># flow ของ VHDL     -&gt; results/vhdl_merged.ucdb + รายงาน HTML</span></span></code></pre></div>
+<p>หรือทีละขั้น (เหมาะกับการเรียนรู้):</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-do</span> <span class="st">&quot;do scripts/compile.do&quot;</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-coverage</span> <span class="at">-onfinish</span> stop work.tb_cmd_fsm +TEST=basic <span class="at">-do</span> <span class="st">&quot;do scripts/lab1_test_basic.do&quot;</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-coverage</span> <span class="at">-onfinish</span> stop work.tb_cmd_fsm +TEST=extra <span class="at">-do</span> <span class="st">&quot;do scripts/lab2_test_extra.do&quot;</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-do</span> <span class="st">&quot;do scripts/lab3_merge.do&quot;</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-do</span> <span class="st">&quot;do scripts/lab4_report.do&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="ภาคผนวก-d--เวอร์ชันภาษา-vhdl">ภาคผนวก D — เวอร์ชันภาษา VHDL</h2>
+<p>DUT และ testbench ภาษา VHDL อยู่ในโฟลเดอร์ <code>vhdl/</code>
+ใช้โครงสร้างเดียวกับเวอร์ชัน Verilog แต่มีข้อแตกต่างที่ต้องรู้:</p>
+<table>
+<thead>
+<tr>
+<th>หัวข้อ</th>
+<th>Verilog</th>
+<th>VHDL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>เลือก test</td>
+<td>plusarg <code>+TEST=basic</code></td>
+<td>generic <code>-gTEST=basic</code></td>
+</tr>
+<tr>
+<td>สร้าง library</td>
+<td><code>work</code></td>
+<td><code>vhdl_work</code> (แยก เพราะชื่อ entity ชนกัน)</td>
+</tr>
+<tr>
+<td>มาตรฐาน</td>
+<td>Verilog-2001</td>
+<td>VHDL-2008 (<code>vcom -2008</code>) เพื่อให้ใช้ <code>to_hstring</code>
+ได้</td>
+</tr>
+<tr>
+<td>FSM state</td>
+<td><code>reg [1:0]</code> + <code>localparam</code></td>
+<td><code>type state_t is (...)</code> (แนวปฏิบัติที่ดีกว่า)</td>
+</tr>
+<tr>
+<td>โครงสร้าง case</td>
+<td><code>case (cmd)</code></td>
+<td><code>case cmd is when &quot;0001&quot; =&gt; ...</code></td>
+</tr>
+<tr>
+<td>pragma exclude</td>
+<td><code>// coverage off</code></td>
+<td><code>-- coverage off</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>คำสั่งที่ใช้</strong></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="ex">vlib</span> vhdl_work</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="ex">vmap</span> vhdl_work vhdl_work</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="ex">vcom</span> <span class="at">-2008</span> <span class="at">-work</span> vhdl_work vhdl/cmd_fsm.vhd +cover=bcesft</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="ex">vcom</span> <span class="at">-2008</span> <span class="at">-work</span> vhdl_work vhdl/tb_cmd_fsm.vhd</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a><span class="ex">vsim</span> <span class="at">-c</span> <span class="at">-coverage</span> <span class="at">-onfinish</span> stop vhdl_work.tb_cmd_fsm <span class="at">-gTEST</span><span class="op">=</span>basic <span class="dt">\</span></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">-do</span> <span class="st">&quot;run -all; coverage save results/vhdl_basic.ucdb -codeAll -testname vbasic; quit -f&quot;</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> merge results/vhdl_merged.ucdb results/vhdl_basic.ucdb results/vhdl_extra.ucdb results/vhdl_edge.ucdb</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a><span class="ex">vcover</span> report <span class="at">-summary</span> <span class="at">-codeAll</span> results/vhdl_merged.ucdb</span></code></pre></div>
+<blockquote>
+<p><strong>ข้อสังเกตที่ต้องให้นักเรียนสังเกต:</strong> จำนวน bin ของ VHDL
+<strong>ไม่เท่ากับ</strong> Verilog (ดูตาราง 6.2) เพราะโครงสร้างภาษาต่างกัน —
+ไม่ควรเปรียบเทียบตัวเลขข้ามภาษาโดยตรง</p>
+</blockquote>
+<hr />
+<h2 id="ภาคผนวก-e--ข้อควรจำสรุป-checklist">ภาคผนวก E — ข้อควรจำสรุป
+(Checklist)</h2>
+<p>ก่อนปิดงาน ตรวจสอบว่า:</p>
+<ul class="task-list">
+<li><label><input type="checkbox"></input>คอมไพล์ RTL ด้วย
+<code>+cover=bcesft</code> และเห็นข้อความ
+<code>Recognized 1 FSM</code></label></li>
+<li><label><input type="checkbox"></input>simulate ด้วย
+<code>vsim -coverage</code></label></li>
+<li><label><input type="checkbox"></input>ใช้ <code>-onfinish stop</code>
+เมื่อรันแบบ batch</label></li>
+<li><label><input type="checkbox"></input>ตรวจสอบว่าไฟล์ <code>.ucdb</code>
+ถูกสร้างจริงหลัง <code>coverage save</code></label></li>
+<li><label><input type="checkbox"></input>ตรวจสอบ <strong>instance
+path</strong> เหมือนกันทุก test ก่อน merge</label></li>
+<li><label><input type="checkbox"></input>ตรวจสอบ
+<code>Number of Instances</code> ในรายงานหลัง merge ว่าไม่ได้เพิ่มขึ้นเป็น 2
+เท่า</label></li>
+<li><label><input type="checkbox"></input>ใช้
+<code>vcover report -details</code> เพื่อหาว่า <strong>อะไร</strong> ยังไม่ถูก
+cover ไม่ใช่แค่ดูเปอร์เซ็นต์</label></li>
+<li><label><input type="checkbox"></input>อ่านเหตุผลที่ miss ก่อนตัดสินใจ
+exclude</label></li>
+<li><label><input type="checkbox"></input>ทุก item ที่ exclude
+ต้องมีเหตุผลประกอบเสมอ</label></li>
+<li><label><input type="checkbox"></input>ยืนยันว่า code coverage 100% ควรไปคู่กับ
+functional coverage ที่ครบด้วย</label></li>
+</ul>
+</body>
+</html>
