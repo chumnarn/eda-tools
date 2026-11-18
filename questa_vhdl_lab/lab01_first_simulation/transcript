@@ -1,0 +1,83 @@
+# do run_batch.do
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:07 on Nov 18,2026
+# vcom -2008 src/counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity counter
+# -- Compiling architecture rtl of counter
+# End time: 15:11:07 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:08 on Nov 18,2026
+# vcom -2008 tb/tb_counter.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_counter
+# -- Compiling architecture sim of tb_counter
+# -- Loading entity counter
+# -- Loading package ENV
+# End time: 15:11:08 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim work.tb_counter 
+# Start time: 15:11:09 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_counter(sim)
+# Loading work.counter(rtl)
+# ** Note: tb_counter : start
+#    Time: 0 ns  Iteration: 0  Instance: /tb_counter
+# ** Note:   [mon] t=0 ns cnt = 00
+#    Time: 0 ns  Iteration: 1  Instance: /tb_counter
+# ** Note: tb_counter : reset released, cnt = 00
+#    Time: 26 ns  Iteration: 0  Instance: /tb_counter
+# ** Note:   [mon] t=35 ns cnt = 01
+#    Time: 35 ns  Iteration: 2  Instance: /tb_counter
+# ** Note:   [mon] t=45 ns cnt = 02
+#    Time: 45 ns  Iteration: 2  Instance: /tb_counter
+# ** Note:   [mon] t=55 ns cnt = 03
+#    Time: 55 ns  Iteration: 2  Instance: /tb_counter
+# ** Note:   [mon] t=65 ns cnt = 04
+#    Time: 65 ns  Iteration: 2  Instance: /tb_counter
+# ** Note:   [mon] t=75 ns cnt = 05
+#    Time: 75 ns  Iteration: 2  Instance: /tb_counter
+# ** Note: tb_counter : after 5 counts up, cnt = 05
+#    Time: 76 ns  Iteration: 0  Instance: /tb_counter
+# ** Note: tb_counter : while disabled, cnt = 05
+#    Time: 106 ns  Iteration: 0  Instance: /tb_counter
+# ** Note:   [mon] t=115 ns cnt = 04
+#    Time: 115 ns  Iteration: 2  Instance: /tb_counter
+# ** Note:   [mon] t=125 ns cnt = 03
+#    Time: 125 ns  Iteration: 2  Instance: /tb_counter
+# ** Note: tb_counter : after 2 counts down, cnt = 03
+#    Time: 126 ns  Iteration: 0  Instance: /tb_counter
+# ** Note: TEST_PASSED : tb_counter completed
+#    Time: 126 ns  Iteration: 0  Instance: /tb_counter
+# Break in Process stim at tb/tb_counter.vhd line 109
+# Stopped at tb/tb_counter.vhd line 109
+# End time: 15:11:11 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0

@@ -1,0 +1,69 @@
+# do run_batch.do
+# Model Technology ModelSim DE-64 vmap 2026.1 Lib Mapping Utility 2026.01 Jan 25 2026
+# vmap work work 
+# Modifying modelsim.ini
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:50 on Nov 18,2026
+# vcom -2008 src/fsm_timer.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity fsm_timer
+# -- Compiling architecture rtl of fsm_timer
+# End time: 15:11:50 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Model Technology ModelSim DE-64 vcom 2026.1 Compiler 2026.01 Jan 25 2026
+# Start time: 15:11:51 on Nov 18,2026
+# vcom -2008 tb/tb_timer.vhd 
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity tb_timer
+# -- Compiling architecture sim of tb_timer
+# -- Loading entity fsm_timer
+# -- Loading package ENV
+# End time: 15:11:51 on Nov 18,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim work.tb_timer 
+# Start time: 15:11:53 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_timer(sim)
+# Loading work.fsm_timer(rtl)
+# ** Note: --------------------------------------------------
+#    Time: 0 ns  Iteration: 0  Instance: /tb_timer
+# ** Note:  tb_timer : start
+#    Time: 0 ns  Iteration: 0  Instance: /tb_timer
+# ** Note: --------------------------------------------------
+#    Time: 0 ns  Iteration: 0  Instance: /tb_timer
+# ** Note: --------------------------------------------------
+#    Time: 66 ns  Iteration: 0  Instance: /tb_timer
+# ** Note:  checks = 7 , errors = 0
+#    Time: 66 ns  Iteration: 0  Instance: /tb_timer
+# ** Note: --------------------------------------------------
+#    Time: 66 ns  Iteration: 0  Instance: /tb_timer
+# ** Note: TEST_PASSED : lab03_selfchecking_tb
+#    Time: 66 ns  Iteration: 0  Instance: /tb_timer
+# Break in Process stim at tb/tb_timer.vhd line 144
+# Stopped at tb/tb_timer.vhd line 144
+# End time: 15:11:55 on Nov 18,2026, Elapsed time: 0:00:02
+# Errors: 0, Warnings: 0
