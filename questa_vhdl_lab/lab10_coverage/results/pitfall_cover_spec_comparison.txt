@@ -1,0 +1,24 @@
+====================================================================
+ PITFALL 1 : '+cover' with no spec  vs  '+cover=bcesft'
+====================================================================
+
+---- (a) compiled with  +cover=bcesft  (explicit) ----
+Branches                        61        57         4         1    93.44%
+Conditions                       2         2         0         1   100.00%
+FSM States                       5         5         0         1   100.00%
+FSM Transitions                  8         5         3         1    62.50%
+Statements                      60        56         4         1    93.33%
+Toggles                        146        93        53         1    63.69%
+Total coverage (filtered view): 85.49%
+
+---- (b) compiled with a plain  +cover  (tool default) ----
+Branches                        61        57         4         1    93.44%
+Conditions                       2         2         0         1   100.00%
+FSM States                       5         5         0         1   100.00%
+FSM Transitions                  8         5         3         1    62.50%
+Statements                      60        56         4         1    93.33%
+Toggles                        146        93        53         1    63.69%
+Total coverage (filtered view): 85.49%
+
+RESULT : IDENTICAL -- the default spec of +cover behaves exactly
+         like +cover=bcesft on this tool.

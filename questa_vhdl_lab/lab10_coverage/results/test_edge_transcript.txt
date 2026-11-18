@@ -1,0 +1,41 @@
+# do test_edge.do
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=edge 
+# Start time: 15:14:02 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'edge' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: abort transaction done, state=0
+#    Time: 66 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=FF b=01 -> dout=FC state=4
+#    Time: 106 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=3 a=00 b=FF -> dout=FF state=4
+#    Time: 156 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: reset in the middle of a transaction, state=0
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'edge' : finished ===
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'edge' finished without errors
+#    Time: 196 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9ef21c0

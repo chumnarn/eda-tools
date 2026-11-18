@@ -1,0 +1,39 @@
+# do test_basic.do
+# ** Note: (vsim-220) 'modelsim.ini' is used as the ini file.
+# vsim -coverage work.tb_alu_fsm -gTEST=basic 
+# Start time: 15:13:52 on Nov 18,2026
+# //  ModelSim DE-64 2026.1 Jan 25 2026
+# //
+# // Unpublished work. Copyright 2026 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading std.env(body)
+# Loading work.tb_alu_fsm(sim)
+# Loading work.alu_fsm(rtl)
+# ** Note: === TEST 'basic' : start ===
+#    Time: 40 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=05 b=03 -> dout=1C state=4
+#    Time: 76 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=1 a=0A b=02 -> dout=08 state=4
+#    Time: 126 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: op=0 a=01 b=F9 -> dout=FA state=4
+#    Time: 176 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: === TEST 'basic' : finished ===
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# ** Note: TEST_PASSED : test 'basic' finished without errors
+#    Time: 186 ns  Iteration: 0  Instance: /tb_alu_fsm
+# Break in Process stim at tb/tb_alu_fsm.vhd line 210
+# Stopped at tb/tb_alu_fsm.vhd line 210
+# file9f66a50

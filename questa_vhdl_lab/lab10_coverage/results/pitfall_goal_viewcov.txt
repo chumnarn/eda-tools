@@ -1,0 +1,47 @@
+Reading pref.tcl
+
+# 2026.1
+
+# coverage read -dataset merged results/merged.ucdb
+# results/merged.ucdb opened as coverage dataset "merged"
+# coverage goal
+#     Goal: 100.0	Coverage Type: Assertion directive passes, per instance
+#     Goal: 100.0	Coverage Type: Assertion directives that never failed, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive failures, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive vacuous passes, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive disabled, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive attempted, per instance
+#     Goal: 100.0	Coverage Type: Assertion directive active, per instance
+#     Goal: 100.0	Coverage Type: Branch coverage, per instance
+#     Goal: 100.0	Coverage Type: Branch coverage, per design unit
+#     Goal: 100.0	Coverage Type: UDP Condition coverage, per instance
+#     Goal: 100.0	Coverage Type: UDP Condition coverage, per design unit
+#     Goal: 100.0	Coverage Type: Focused Condition coverage, per instance
+#     Goal: 100.0	Coverage Type: Focused Condition coverage, per design unit
+#     Goal: 100.0	Coverage Type: Condition coverage, per instance
+#     Goal: 100.0	Coverage Type: Condition coverage, per design unit
+#     Goal: 100.0	Coverage Type: UDP Expression coverage, per instance
+#     Goal: 100.0	Coverage Type: UDP Expression coverage, per design unit
+#     Goal: 100.0	Coverage Type: Focused Expression coverage, per instance
+#     Goal: 100.0	Coverage Type: Focused Expression coverage, per design unit
+#     Goal: 100.0	Coverage Type: Expression coverage, per instance
+#     Goal: 100.0	Coverage Type: Expression coverage, per design unit
+#     Goal: 100.0	Coverage Type: Statement coverage, per instance
+#     Goal: 100.0	Coverage Type: Statement coverage, per design unit
+#     Goal: 100.0	Coverage Type: FSM state coverage, per instance
+#     Goal: 100.0	Coverage Type: FSM state coverage, per design unit
+#     Goal: 100.0	Coverage Type: FSM transition coverage, per instance
+#     Goal: 100.0	Coverage Type: FSM transition coverage, per design unit
+#     Goal: 100.0	Coverage Type: FSM coverage, per instance
+#     Goal: 100.0	Coverage Type: FSM coverage, per design unit
+#     Goal: 100.0	Coverage Type: Toggle coverage, per instance
+#     Goal: 100.0	Coverage Type: Toggle coverage, per design unit
+#     Goal: 100.0	Coverage Type: Covergroup per instance, if any, weighted average
+#     Goal: 100.0	Coverage Type: Covergroup type coverage
+#     Goal: 100.0	Coverage Type: Coverpoint per instance, if any, weighted average
+#     Goal: 100.0	Coverage Type: Cover directive, weighted average, per instance
+#     Goal: 100.0	Coverage Type: SystemC functional coverage, per instance
+#     Goal: 100.0	Coverage Type: User-defined coverage, per instance
+#     Goal: 100.0	Coverage Type: 0-In checkerware coverage, per instance
+# 
+#  quit -f

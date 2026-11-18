@@ -1,0 +1,76 @@
+====================================================================
+ LAB 10 : the four code coverage pitfalls, measured
+====================================================================
+
+--------------------------------------------------------------------
+ PITFALL 1 : '+cover' without a spec uses the default of the tool
+--------------------------------------------------------------------
+====================================================================
+ PITFALL 1 : '+cover' with no spec  vs  '+cover=bcesft'
+====================================================================
+
+---- (a) compiled with  +cover=bcesft  (explicit) ----
+Branches                        61        57         4         1    93.44%
+Conditions                       2         2         0         1   100.00%
+FSM States                       5         5         0         1   100.00%
+FSM Transitions                  8         5         3         1    62.50%
+Statements                      60        56         4         1    93.33%
+Toggles                        146        93        53         1    63.69%
+Total coverage (filtered view): 85.49%
+
+---- (b) compiled with a plain  +cover  (tool default) ----
+Branches                        61        57         4         1    93.44%
+Conditions                       2         2         0         1   100.00%
+FSM States                       5         5         0         1   100.00%
+FSM Transitions                  8         5         3         1    62.50%
+Statements                      60        56         4         1    93.33%
+Toggles                        146        93        53         1    63.69%
+Total coverage (filtered view): 85.49%
+
+RESULT : IDENTICAL -- the default spec of +cover behaves exactly
+         like +cover=bcesft on this tool.
+
+
+--------------------------------------------------------------------
+ PITFALL 2 : std.env.finish kills the whole 'vsim -c' session
+--------------------------------------------------------------------
+command : vsim -c -coverage work.tb_alu_fsm_finish -do "run -all; coverage save ..."
+without -onfinish stop : the UCDB was created = 0   (expected: no)
+   -> std.env.finish ended the session, 'coverage save' never ran
+with    -onfinish stop : the UCDB was created = 1   (expected: yes)
+   -> the simulation only stops, the session stays alive
+
+--------------------------------------------------------------------
+ PITFALL 3 : 'coverage goal' only works in the Coverage View
+--------------------------------------------------------------------
+normal simulation : # ** Error: Coverage sub-command 'goal' may be used in viewcov mode only.
+coverage view     : #     Goal: 100.0	Coverage Type: Assertion directive passes, per instance
+coverage view     : #     Goal: 100.0	Coverage Type: Assertion directives that never failed, per instance
+coverage view     : #     Goal: 100.0	Coverage Type: Assertion directive failures, per instance
+coverage view     : #     Goal: 100.0	Coverage Type: Assertion directive vacuous passes, per instance
+coverage view     : #     Goal: 100.0	Coverage Type: Assertion directive disabled, per instance
+coverage view     : ... (38 goal lines in total)
+
+--------------------------------------------------------------------
+ PITFALL 4 : merging two different instance paths
+--------------------------------------------------------------------
+---- RIGHT : ONE testbench (tb_alu_fsm), three generics ----
+Coverage Report Totals BY INSTANCES: Number of Instances 2
+Branches                        61        60         1         1    98.36%
+Conditions                       2         2         0         1   100.00%
+FSM States                       5         5         0         1   100.00%
+FSM Transitions                  8         6         2         1    75.00%
+Statements                      60        59         1         1    98.33%
+Toggles                        146       139         7         1    95.20%
+Total coverage (filtered view): 94.48%
+
+---- WRONG : TWO testbenches (tb_alu_fsm + tb_alu_fsm_alt) ----
+Coverage Report Totals BY INSTANCES: Number of Instances 4
+Branches                       122        70        52         1    57.37%
+Conditions                       4         2         2         1    50.00%
+FSM States                      10         6         4         1    60.00%
+FSM Transitions                 16         5        11         1    31.25%
+Statements                     120        88        32         1    73.33%
+Toggles                        292        95       197         1    32.53%
+Total coverage (filtered view): 50.74%
+

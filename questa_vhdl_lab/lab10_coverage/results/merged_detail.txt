@@ -1,0 +1,328 @@
+Coverage Report by instance with details
+
+=================================================================================
+=== Instance: /tb_alu_fsm/dut
+=== Design Unit: work.alu_fsm(rtl)
+=================================================================================
+Branch Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Branches                        61        60         1    98.36%
+
+================================Branch Details================================
+
+Branch Coverage for instance /tb_alu_fsm/dut
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File src/alu_fsm.vhd
+------------------------------------CASE Branch------------------------------------
+    58                                        54     Count coming in to CASE
+    59              1                         14     
+    60              1                         11     
+    61              1                         11     
+    62              1                          9     
+    63              1                          9     
+Branch totals: 5 hits of 5 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    76                                        74     Count coming in to CASE
+    77              1                         25     
+    82              1                         11     
+    85              1                         11     
+    92              1                          9     
+    95              1                         18     
+Branch totals: 5 hits of 5 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    78                                        25     Count coming in to IF
+    78              1                         13     
+                                              12     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    86                                        11     Count coming in to IF
+    86              1                          1     
+    88              1                         10     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    96                                        18     Count coming in to IF
+    96              1                          9     
+                                               9     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    108                                      130     Count coming in to IF
+    108             1                         24     
+    110             1                         53     
+                                              53     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    120                                      130     Count coming in to IF
+    120             1                         24     
+    123             1                         53     
+                                              53     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    124                                       53     Count coming in to IF
+    124             1                         11     
+                                              42     All False Count
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    136                                       24     Count coming in to CASE
+    137             1                         13     
+    138             1                          4     
+    139             1                          3     
+    140             1                          4     
+    141             1                    ***0***     
+Branch totals: 4 hits of 5 branches = 80.00%
+
+------------------------------------IF Branch------------------------------------
+    150                                       24     Count coming in to IF
+    150             1                          3     
+    152             1                         21     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    163                                      130     Count coming in to IF
+    163      1 (GI=0)                         24     
+    165      1 (GI=0)                         53     
+                                              53     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    163                                      130     Count coming in to IF
+    163      1 (GI=1)                         24     
+    165      1 (GI=1)                         53     
+                                              53     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    163                                      130     Count coming in to IF
+    163      1 (GI=2)                         24     
+    165      1 (GI=2)                         53     
+                                              53     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    163                                      130     Count coming in to IF
+    163      1 (GI=3)                         24     
+    165      1 (GI=3)                         53     
+                                              53     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    166                                       53     Count coming in to IF
+    166      1 (GI=0)                         10     
+    168      1 (GI=0)                         14     
+                                              29     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    166                                       53     Count coming in to IF
+    166      1 (GI=1)                         10     
+    168      1 (GI=1)                         14     
+                                              29     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    166                                       53     Count coming in to IF
+    166      1 (GI=2)                         10     
+    168      1 (GI=2)                         14     
+                                              29     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    166                                       53     Count coming in to IF
+    166      1 (GI=3)                         10     
+    168      1 (GI=3)                         14     
+                                              29     All False Count
+Branch totals: 3 hits of 3 branches = 100.00%
+
+------------------------------------CASE Branch------------------------------------
+    193                                       89     Count coming in to CASE
+    194             1                          9     
+    200             1                         80     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    195                                        9     Count coming in to IF
+    195             1                          2     
+    197             1                          7     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+------------------------------------IF Branch------------------------------------
+    205                                       54     Count coming in to IF
+    205             1                          9     
+    205             2                         45     
+Branch totals: 2 hits of 2 branches = 100.00%
+
+
+Condition Coverage:
+    Enabled Coverage              Bins   Covered    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Conditions                       2         2         0   100.00%
+
+================================Condition Details================================
+
+Condition Coverage for instance /tb_alu_fsm/dut --
+
+  File src/alu_fsm.vhd
+----------------Focused Condition View-------------------
+Line       150 Item    1  ((opcode = "000") and ((<type>)op_a > (<type>)op_b))
+Condition totals: 2 of 2 input terms covered = 100.00%
+
+
+FSM Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    FSM States                       5         5         0   100.00%
+    FSM Transitions                  8         6         2    75.00%
+
+================================FSM Details================================
+
+FSM Coverage for instance /tb_alu_fsm/dut --
+
+FSM_ID: state
+    Current State Object : state
+    ----------------------
+    State Value MapInfo :
+    ---------------------
+Line          State Name               Value
+----          ----------               -----
+  77             ST_IDLE                   0
+  82             ST_LOAD                   1
+  85             ST_EXEC                   2
+  92             ST_WAIT                   3
+  95             ST_DONE                   4
+    Covered States :
+    ----------------
+                   State           Hit_count
+                   -----           ---------
+                 ST_IDLE                  37          
+                 ST_LOAD                  11          
+                 ST_EXEC                  11          
+                 ST_WAIT                   9          
+                 ST_DONE                   9          
+    Covered Transitions :
+    ---------------------
+Line            Trans_ID           Hit_count          Transition          
+----            --------           ---------          ----------          
+  79                   0                  11          ST_IDLE -> ST_LOAD            
+  83                   1                  11          ST_LOAD -> ST_EXEC            
+  87                   3                   2          ST_EXEC -> ST_IDLE            
+  89                   4                   9          ST_EXEC -> ST_WAIT            
+  93                   5                   9          ST_WAIT -> ST_DONE            
+  97                   7                   9          ST_DONE -> ST_IDLE            
+    Uncovered Transitions :
+    -----------------------
+Line            Trans_ID          Transition          
+----            --------          ----------          
+ 109                   2          ST_LOAD -> ST_IDLE  
+ 109                   6          ST_WAIT -> ST_IDLE  
+
+
+    Summary                       Bins      Hits    Misses  Coverage
+    -------                       ----      ----    ------  --------
+        FSM States                   5         5         0   100.00%
+        FSM Transitions              8         6         2    75.00%
+Statement Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Statements                      60        59         1    98.33%
+
+================================Statement Details================================
+
+Statement Coverage for instance /tb_alu_fsm/dut --
+
+    Line         Item                      Count     Source 
+    ----         ----                      -----     ------ 
+  File src/alu_fsm.vhd
+    59              1                         14     
+    60              1                         11     
+    61              1                         11     
+    62              1                          9     
+    63              1                          9     
+    72              1                         74     
+    75              1                         74     
+    79              1                         13     
+    83              1                         11     
+    87              1                          1     
+    89              1                         10     
+    93              1                          9     
+    97              1                          9     
+    100             1                         74     
+    106             1                        130     
+    109             1                         24     
+    111             1                         53     
+    118             1                        130     
+    121             1                         24     
+    122             1                         24     
+    125             1                         11     
+    126             1                         11     
+    134             1                         24     
+    137             1                         13     
+    138             1                          4     
+    139             1                          3     
+    140             1                          4     
+    141             1                    ***0***     
+    148             1                         24     
+    151             1                          3     
+    153             1                         21     
+    161      1 (GI=0)                        130     
+    161      1 (GI=1)                        130     
+    161      1 (GI=2)                        130     
+    161      1 (GI=3)                        130     
+    164      1 (GI=0)                         24     
+    164      1 (GI=1)                         24     
+    164      1 (GI=2)                         24     
+    164      1 (GI=3)                         24     
+    167      1 (GI=0)                         10     
+    167      1 (GI=1)                         10     
+    167      1 (GI=2)                         10     
+    167      1 (GI=3)                         10     
+    169      1 (GI=0)                         14     
+    169      1 (GI=1)                         14     
+    169      1 (GI=2)                         14     
+    169      1 (GI=3)                         14     
+    178             1                         20     
+    181             1                         20     
+    182             1                         20     
+    182             2                         80     
+    183             1                         80     
+    184             1                         80     
+    185             1                         20     
+    191             1                         89     
+    196             1                          2     
+    198             1                          7     
+    201             1                         80     
+    205             1                         54     
+    206             1                         54     
+Toggle Coverage:
+    Enabled Coverage              Bins      Hits    Misses  Coverage
+    ----------------              ----      ----    ------  --------
+    Toggles                        146       139         7    95.20%
+
+================================Toggle Details================================
+
+Toggle Coverage for instance /tb_alu_fsm/dut --
+
+                                              Node      1H->0L      0L->1H                          "Coverage"
+                                              ---------------------------------------------------------------
+                                              b(7)           0           3                               50.00 
+                                     lane_sum(0-1)           0           0                                0.00 
+                                         opcode(2)           0           0                                0.00 
+
+Total Node Count     =         78 
+Toggled Node Count   =         74 
+Untoggled Node Count =          4 
+
+Toggle Coverage      =      95.20% (139 of 146 bins)
+
+
+Total Coverage By Instance (filtered view): 94.48%
+
