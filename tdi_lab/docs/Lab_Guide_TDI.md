@@ -154,12 +154,12 @@ TDI ไม่ใช่เครื่องมือเดียว แต่เ
    │   ├ วาด boundary           │            │   └ อ่าน LEF / Liberty / PTF  │
    │   ├ วาดพอร์ต                │            │   └ อ่าน RTL                  │
    │   └ โหลด design            │            │                              │
-   │                            │  คัดลอกไฟล์  │  Nitro AMS  (place & route) │
-   │  ┌──────────────────────┐  │ ──────────► │   └ floorplan, powerplan    │
-   │  │  Setup TDI (7 หน้า)   │  │   /tmp/     │   └ place, cts, route       │
-   │  │  ↓ เขียนไฟล์ตั้งค่า       │  │  <user>_   │   └ export                   │
-   │  │  nitro_settings.tcl  │  │  nitro_data│                              │
-   │  └──────────────────────┘  │            └──────────────────────────────┘
+   │                            │  คัดลอกไฟล์  │  Nitro AMS  (place & route)  │
+   │  ┌──────────────────────┐  │ ──────────► │   └ floorplan, powerplan     │
+   │  │  Setup TDI (7 หน้า)   │  │   /tmp/     │   └ place, cts, route        │
+   │  │  ↓ เขียนไฟล์ตั้งค่า       │  │  <user>_    │   └ export                   │
+   │  │  nitro_settings.tcl  │  │  nitro_data │                              │
+   │  └──────────────────────┘  │             └──────────────────────────────┘
    └────────────────────────────┘
 ```
 
