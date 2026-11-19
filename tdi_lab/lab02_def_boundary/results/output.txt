@@ -1,0 +1,32 @@
+========================================================================
+  LAB 02 : P&R boundary and pin geometry  (from_ledit.def)
+========================================================================
+  [INFO] def file        : from_ledit.def
+  [PASS] the DEF declares its distance unit
+         UNITS DISTANCE MICRONS 1000  (1 um = 1000 DBU)
+  [PASS] the DEF contains a DIEAREA
+         DIEAREA (0 0) (177800 53000) DBU
+  [PASS] the block has a non degenerate size
+         die area = 177.800 um x 53.000 um
+  [PASS] the DEF carries a full pin list
+         15 pins
+  [PASS] every pin has a FIXED location
+         all pins are fixed
+  [PASS] every pin lies inside the die area
+         all 15 pins are inside the boundary
+  [PASS] all pins are on one routable layer
+         pin layer = Metal4
+  [PASS] no two pins share the same location
+         15 unique locations
+  [PASS] the pins sit on the boundary edges, not in the middle of the block
+         bottom=6, top=9
+  [NOTE] bottom edge pins are 0.050 um above the die edge, top edge pins are 0.300 um below the die edge
+  [PASS] neighbouring pins on an edge are spaced apart
+         minimum pitch = 15.200 um on the top edge
+  [PASS] the DEF contains no placed components yet
+         COMPONENTS 0 -- this is the empty block that Nitro will fill
+  [NOTE] the tutorial text describes the boundary as (0,0) to (177.8, 49.0) um; the DEF that ships with Custom IC 2025.4 says 177.8 x 53.0 um. Measure your own layout.
+------------------------------------------------------------------------
+  11/11 checks passed
+  RESULT: PASS
+========================================================================

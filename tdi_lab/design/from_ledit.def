@@ -1,0 +1,137 @@
+# Z:\wv\jmeng\SiemensEDA\ShippingFiles\Designs\ADC8\ADC8\ADCCtrl\PNR_Data\from_ledit.def, written by L-Edit Version 2024.3 on Mon Nov 18 16:05:54 2024
+
+VERSION 5.8 ;
+DIVIDERCHAR "/" ;
+BUSBITCHARS "[]" ;
+
+DESIGN ADCCtrl ;
+UNITS DISTANCE MICRONS 1000 ;
+DIEAREA ( 0 0 ) ( 177800 53000 ) ;
+
+
+
+
+
+COMPONENTS 0 ;
+END COMPONENTS
+
+
+PINS 15 ;
+   - clk + NET clk
+      + DIRECTION INPUT
+      + PORT
+        + LAYER Metal4 
+        ( -144 -50 ) ( 206 300 )
+        + FIXED ( 45524 50 ) N  ;
+   - clr + NET clr
+      + DIRECTION INPUT
+      + PORT
+        + LAYER Metal4 
+        ( -144 -50 ) ( 206 300 )
+        + FIXED ( 65874 50 ) N  ;
+   - B[0] + NET B[0]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 27249 52700 ) N  ;
+   - B[1] + NET B[1]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 42449 52700 ) N  ;
+   - B[2] + NET B[2]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 57739 52700 ) N  ;
+   - B[3] + NET B[3]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 72979 52700 ) N  ;
+   - B[4] + NET B[4]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 88199 52700 ) N  ;
+   - B[5] + NET B[5]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 103474 52700 ) N  ;
+   - B[6] + NET B[6]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 118724 52700 ) N  ;
+   - B[7] + NET B[7]
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -194 -50 ) ( 156 300 )
+        + FIXED ( 133999 52700 ) N  ;
+   - Start + NET Start
+      + DIRECTION INPUT
+      + PORT
+        + LAYER Metal4 
+        ( -250 -50 ) ( 100 300 )
+        + FIXED ( 86330 50 ) N  ;
+   - Compare + NET Compare
+      + DIRECTION INPUT
+      + PORT
+        + LAYER Metal4 
+        ( -363 -50 ) ( -13 300 )
+        + FIXED ( 169278 52700 ) N  ;
+   - LoadReg + NET LoadReg
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -363 -50 ) ( -13 300 )
+        + FIXED ( 127143 50 ) N  ;
+   - DataMark + NET DataMark
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -419 -50 ) ( -69 300 )
+        + FIXED ( 106849 50 ) N  ;
+   - SerialOutput + NET SerialOutput
+      + DIRECTION OUTPUT
+      + PORT
+        + LAYER Metal4 
+        ( -644 -50 ) ( -294 300 )
+        + FIXED ( 147774 50 ) N  ;
+END PINS
+
+
+SPECIALNETS 0 ;
+END SPECIALNETS
+
+
+NETS 15 ;
+   - clk ( PIN clk )  ;
+   - clr ( PIN clr )  ;
+   - B[0] ( PIN B[0] )  ;
+   - B[1] ( PIN B[1] )  ;
+   - B[2] ( PIN B[2] )  ;
+   - B[3] ( PIN B[3] )  ;
+   - B[4] ( PIN B[4] )  ;
+   - B[5] ( PIN B[5] )  ;
+   - B[6] ( PIN B[6] )  ;
+   - B[7] ( PIN B[7] )  ;
+   - Start ( PIN Start )  ;
+   - Compare ( PIN Compare )  ;
+   - LoadReg ( PIN LoadReg )  ;
+   - DataMark ( PIN DataMark )  ;
+   - SerialOutput ( PIN SerialOutput )  ;
+END NETS
+
+
+END DESIGN
+

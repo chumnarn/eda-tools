@@ -1,0 +1,11 @@
+ECHO is off.
+===================================================================== 
+ TDI lab regression 
+ Thu 11/19/2026  5:56:10.94 
+===================================================================== 
+ lab01_rtl_ports : FAIL 
+ lab02_def_boundary : FAIL 
+ lab03_tech_libs : FAIL 
+ lab04_timing : FAIL 
+ lab05_scan : FAIL 
+ lab06_settings : FAIL 

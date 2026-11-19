@@ -1,0 +1,30 @@
+========================================================================
+  LAB 05 : scan configuration  (scanchain.tcl)
+========================================================================
+  [INFO] scan file       : scanchain.tcl
+  [INFO] twochains flag  : false (the "if" branch is not taken)
+  [PASS] the script configures exactly one scan chain
+         1 active chain(s)
+  [PASS] the chain names its scan in, scan out and scan enable
+         scan_in = Scan_In, scan_out = Scan_Out, scan_enable = Scan_Enable
+  [PASS] the chain asks the tool to create the ports it needs
+         -create_port is set, so Scan_In, Scan_Out and Scan_Enable will be added to the design
+  [PASS] the scan enable pin is created as a port
+         define_test_pin -pin Scan_Enable -scan 1 -create_port
+  [PASS] a test clock is defined on the functional clock
+         define_test_clock -name clk -pin clk
+  [PASS] the DEF does not contain a scan port that the configuration does not create
+         the DEF has no stray scan port
+  [INFO] the scan configuration creates 3 ports (Scan_In, Scan_Out, Scan_Enable)
+  [INFO] the exported DEF contains 0 of them
+  [NOTE] the DEF was exported before the scan flow was enabled. Add Scan_In, Scan_Out, Scan_Enable to the layout and export the DEF again before running TDI with the scan configuration turned on.
+  [PASS] the synthesis script switches to scan mapping when a scan file is given
+         synthesize -module $tanner_cell -map_to_scan
+  [PASS] the synthesis script writes a scan DEF into the results folder
+         write_scandef results/${tanner_cell}_scan.def
+  [PASS] the synthesis script connects and reports the scan chains
+         check_dft -> connect_scan_chains -> report_scan_chains -detail
+------------------------------------------------------------------------
+  9/9 checks passed
+  RESULT: PASS
+========================================================================

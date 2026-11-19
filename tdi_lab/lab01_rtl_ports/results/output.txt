@@ -1,0 +1,27 @@
+========================================================================
+  LAB 01 : RTL ports vs DEF pins  (ADC8 / ADCCtrl)
+========================================================================
+  [INFO] rtl file        : ADCCtrl_rtl.v
+  [INFO] def file        : from_ledit.def
+  [INFO] rtl module      : ADCCtrl
+  [INFO] rtl header ports: 8 (before bus expansion)
+  [INFO] def pins        : 15
+  [INFO] def nets        : 15
+  [PASS] RTL declares the 8 bit output bus B
+         B[0:7] -> width 8, direction output
+  [PASS] the expanded RTL port list and the DEF pin list are the same set
+         rtl = 15 ports, def = 15 pins
+  [PASS] every DEF pin carries a DIRECTION attribute
+         all 15 pins carry a direction
+  [PASS] every DEF pin has the same direction as the RTL port
+         all 15 pins agree (INPUT/OUTPUT)
+  [PASS] every pin is backed by a NET entry
+         15 pin nets / 15 net entries
+  [PASS] the DEF top cell name matches the RTL module name
+         DEF DESIGN = ADCCtrl, RTL module = ADCCtrl
+  [NOTE] port mix: 4 input / 11 output
+  [NOTE] the 8 bit bus B[7:0] is 8 of the 15 physical pins
+------------------------------------------------------------------------
+  6/6 checks passed
+  RESULT: PASS
+========================================================================

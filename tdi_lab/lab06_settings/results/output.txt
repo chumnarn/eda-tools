@@ -1,0 +1,95 @@
+========================================================================
+  LAB 06 : the TDI settings contract  (nitro_settings.tcl)
+========================================================================
+  [INFO] install         : C:\Siemens\Custom IC\Custom IC 2025.4\x64
+  [INFO] timing mode     : sdc
+  [PASS] every variable of the contract is read by a script that is installed
+         51 contract variables, all found in the installed flow
+  [PASS] the settings file defines every variable of the contract
+         all contract variables are defined (51 names in the file)
+  [PASS] the technology LEF is the first entry of the LEF list
+         order: files/Generic250nm_tech.lef -> files/Generic250nm_StdCells.lef
+  [PASS] every file the settings file refers to is present
+         8 referenced files, all present
+  [PASS] the top cell in the settings file matches the top cell of the DEF
+         settings tanner_cell = ADCCtrl, DEF DESIGN = ADCCtrl
+  [PASS] the number of ring widths matches the number of supplies
+         2 supplies (Vdd, Gnd), 2 widths
+  [PASS] the number of ring spacings matches the number of intervals between the supplies
+         2 supplies -> 1 interval(s), 1 spacing(s) given
+  [PASS] the power ring layers exist in the technology LEF
+         Metal4 (min spacing 0.5 um), Metal3 (min spacing 0.5 um)
+  [PASS] the power ring spacing is not tighter than the layer spacing
+         ring spacing 0.6 um vs layer spacing 0.5 um -- the flow stops with FLOW-ERROR otherwise
+  [NOTE] the geometry that the flow derives from the ring settings:
+  [INFO]   total ring width  = 3.5 + 0.6 = 4.1 um
+  [INFO]   width_contrib     = 3.5 um
+  [INFO]   spacing_contrib   = 1.2 um
+  [INFO]   macro_ring_spacing= 16.2 um  (2 x site height 8.1 um)
+  [INFO]   oversize_m2m      = 41.8 um
+  [INFO]   ring offsets      = 4.1 um on every side
+  [INFO]   oversize_b2m      = 45.9 um
+  [PASS] the core margins are larger than the power ring that surrounds them
+         core_yb_spacing 2.0 um + ring offset 4.1 um = the distance from the die edge to the first row
+  [PASS] the timing mode is one that the flow understands
+         tanner_timing_mode = sdc
+  [PASS] every analysis mode has an SDC file
+         modes: nominal | sdc arrays: nominal
+  [PASS] the run control is one of the three modes the flow understands
+         ams_run_control = synpnr
+  [NOTE] where the flow reads the contract variables:
+  [INFO]   $ams_run_control  <- 0_data_prep.tcl:109
+  [INFO]   $lef_file_list  <- tanner_oasys.tcl:23
+  [INFO]   $lib_file_list  <- tanner_oasys.tcl:13
+  [INFO]   $ptf_file_list  <- tanner_oasys.tcl:41
+  [INFO]   $tanner_ptf_file_corner_list  <- tanner_oasys.tcl:33
+  [INFO]   $tech_file_list  <- 0_data_prep.tcl:18
+  [INFO]   $cell_lef_file_list  <- 0_data_prep.tcl:100
+  [INFO]   $corner_list  <- 0_data_prep.tcl:37
+  [INFO]   $rlc_file_list  <- 0_data_prep.tcl:35
+  [INFO]   $top_cell  <- 0_data_prep.tcl:160
+  [INFO]   $tanner_cell  <- tanner_oasys.tcl:93
+  [INFO]   $verilog_file_list  <- tanner_oasys.tcl:65
+  [INFO]   $is_list_file  <- tanner_oasys.tcl:57
+  [INFO]   $is_Verilog  <- tanner_oasys.tcl:59
+  [INFO]   $list_file  <- tanner_oasys.tcl:60
+  [INFO]   $use_list_file  <- 0_data_prep.tcl:113
+  [INFO]   $enable_scan  <- 1_rtl_synthesis.tcl:50
+  [INFO]   $syn_netlist  <- 0_data_prep.tcl:159
+  [INFO]   $tanner_timing_mode  <- tanner_oasys.tcl:104
+  [INFO]   $MGC_modes  <- tanner_oasys.tcl:118
+  [INFO]   $oasys_importConstraintsFile  <- tanner_oasys.tcl:120
+  [INFO]   $floorplan_mode  <- 2_floorplan.tcl:42
+  [INFO]   $def_floorplan_file  <- 2_floorplan.tcl:82
+  [INFO]   $chip_width  <- 2_floorplan.tcl:48
+  [INFO]   $chip_height  <- 2_floorplan.tcl:48
+  [INFO]   $chip_origin_x  <- 2_floorplan.tcl:55
+  [INFO]   $chip_origin_y  <- 2_floorplan.tcl:55
+  [INFO]   $core_site  <- 2_floorplan.tcl:178
+  [INFO]   $core_yb_spacing  <- compute_floorplan_details.tcl:87
+  [INFO]   $core_xl_spacing  <- compute_floorplan_details.tcl:88
+  [INFO]   $core_yt_spacing  <- compute_floorplan_details.tcl:89
+  [INFO]   $core_xr_spacing  <- compute_floorplan_details.tcl:90
+  [INFO]   $highest_routing_layer  <- 2_floorplan.tcl:37
+  [INFO]   $fp_utilization  <- 2_floorplan.tcl:63
+  [INFO]   $fp_aspect_ratio  <- 2_floorplan.tcl:64
+  [INFO]   $power_nets  <- 2_floorplan.tcl:29
+  [INFO]   $ground_nets  <- 2_floorplan.tcl:29
+  [INFO]   $enable_pg_ring  <- 2_floorplan.tcl:104
+  [INFO]   $enable_pg_stripe  <- 3_powerplan.tcl:149
+  [INFO]   $pg_ring_vlayer  <- 2_floorplan.tcl:105
+  [INFO]   $pg_ring_hlayer  <- 2_floorplan.tcl:106
+  [INFO]   $pg_ring_net_order  <- 3_powerplan.tcl:71
+  [INFO]   $pg_ring_widths  <- 3_powerplan.tcl:73
+  [INFO]   $pg_ring_spacing  <- 3_powerplan.tcl:61
+  [INFO]   $pg_ring_offset_top  <- 3_powerplan.tcl:101
+  [INFO]   $pg_ring_offset_right  <- 3_powerplan.tcl:100
+  [INFO]   $pg_ring_offset_bottom  <- 3_powerplan.tcl:99
+  [INFO]   $pg_ring_offset_left  <- 3_powerplan.tcl:98
+  [INFO]   $pg_stripe_list  <- 3_powerplan.tcl:153
+  [INFO]   $num_of_stripes  <- 3_powerplan.tcl:195
+  [NOTE] a missing variable is not an error in TCL: it reads as an empty string, and the flow produces a wrong result instead of stopping.
+------------------------------------------------------------------------
+  13/13 checks passed
+  RESULT: PASS
+========================================================================

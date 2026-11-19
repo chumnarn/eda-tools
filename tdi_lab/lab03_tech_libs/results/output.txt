@@ -1,0 +1,40 @@
+========================================================================
+  LAB 03 : technology and standard cell libraries  (Generic 250 nm)
+========================================================================
+  [PASS] the tech LEF declares its database unit
+         DATABASE MICRONS 1000  (1 um = 1000 DBU)
+  [PASS] the tech LEF defines exactly the four routing layers Metal1..Metal4
+         routing layers: Metal1, Metal2, Metal3, Metal4 | cut layers: Via1, Via2, Via3
+  [PASS] the standard cell LEF contains MACRO definitions
+         22 macros
+  [PASS] the standard cell LEF uses the same database unit as the tech LEF
+         tech LEF = 1000, cell LEF = 1000
+  [PASS] the standard cell LEF defines the standard cell row site
+         SITE CORE, SIZE 1.15 BY 8.1 um
+  [PASS] the nominal Liberty parses and names its library
+         library "Generic250nm_TT_2P50V_25C", 22 cells, 2.5 V, 25 C
+  [PASS] the three Liberty files map to the three TDI corners
+         Generic250nm_FF_2P75V_M40C.lib -> fast; Generic250nm_TT_2P50V_25C.lib -> nominal; Generic250nm_SS_2P25V_125C.lib -> slow
+  [PASS] every Liberty cell that is not a tie or filler cell also exists in the LEF
+         timing-only cells (tie cells): TIELOW, TIEHIGH
+  [PASS] every LEF macro that is not a tie, a filler or a scan variant also exists in the Liberty
+         physical-only macros: FILLER, DFFPC
+  [PASS] the LEF and the Liberty describe the same number of cells
+         22 macros in the LEF, 22 cells in the Liberty
+  [NOTE] LEF macros without a Liberty model: FILLER, DFFPC  -- a filler cell needs no timing model; a scan flavoured macro needs one of its own
+  [NOTE] Liberty cells without a LEF macro: TIELOW, TIEHIGH  -- a tie cell cannot be tied if it has no physical macro
+  [PASS] the PTF parses and names its process technology
+         process_technology "Generic250_MET4_typ", capacitance unit ff, resistance unit ohm
+  [PASS] the PTF covers every routing layer of the technology
+         PTF covers Metal4, Metal3, Metal2, Metal1
+  [NOTE] files and sizes:
+  [INFO]   Generic250nm_tech.lef  (6900 bytes)
+  [INFO]   Generic250nm_StdCells.lef  (62591 bytes)
+  [INFO]   Generic250nm_TT_2P50V_25C.lib  (377228 bytes)
+  [INFO]   Generic250nm_typ.ptf  (159458 bytes)
+  [INFO]   Generic250nm_FF_2P75V_M40C.lib  (330089 bytes)
+  [INFO]   Generic250nm_SS_2P25V_125C.lib  (330351 bytes)
+------------------------------------------------------------------------
+  12/12 checks passed
+  RESULT: PASS
+========================================================================

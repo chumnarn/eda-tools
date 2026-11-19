@@ -1,0 +1,2686 @@
+# \Designs\ADC8\ADC8\Data\Generic250nm_StdCells.lef, written by L-Edit Version 2018.3 on Wed Aug 15 16:13:59 2018
+
+VERSION 5.8 ;
+BUSBITCHARS "[]" ; 
+DIVIDERCHAR "/" ; 
+UNITS 
+	DATABASE MICRONS 1000 ; 
+END UNITS 
+MANUFACTURINGGRID 0.005 ; 
+
+SITE CORE
+    CLASS CORE ;
+    SYMMETRY Y  ;
+    SIZE 1.15 BY 8.10 ;
+END CORE
+ 
+MACRO BUF4
+   SIZE 6.9 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN BUF4 ;
+   SITE CORE ;
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 6.9 0.85 ;
+      END
+   END Gnd
+
+   PIN IN
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.925 3.41 1.375 3.86 ;
+      END
+   END IN
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.4 1.4 2.85 2.555 ;
+            RECT 4.4 1.4 4.85 2.555 ;
+            RECT 2.85 2.202 4.4 2.555 ;
+            RECT 3.125 2.555 4.4 4.85 ;
+            RECT 2.4 4.85 2.9 6.55 ;
+            RECT 4.4 4.85 4.9 6.55 ;
+            RECT 2.9 4.85 4.4 5.25 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 6.9 8.1 ;
+      END
+   END Vdd
+
+
+END BUF4
+
+MACRO BUFI4
+   SIZE 5.75 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN BUFI4 ;
+   SITE CORE ;
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 5.75 0.8 ;
+      END
+   END Gnd
+
+   PIN IN
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.45 2.975 0.9 3.425 ;
+      END
+   END IN
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.35 6.05 1.8 6.5 ;
+            RECT 1.35 1.45 1.8 1.9 ;
+            RECT 1.4 1.9 1.75 6.05 ;
+            RECT 3.35 1.45 3.8 1.9 ;
+            RECT 3.4 1.9 3.75 6.05 ;
+            RECT 3.35 6.05 3.8 6.5 ;
+            RECT 1.75 3.075 3.4 3.425 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 5.75 8.1 ;
+      END
+   END Vdd
+
+
+END BUFI4
+
+MACRO AO22
+   SIZE 8.05 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN AO22 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.65 2.935 1.1 3.385 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.7 2.935 2.15 3.385 ;
+      END
+   END B
+
+   PIN C
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.85 2.93 3.3 3.38 ;
+      END
+   END C
+
+   PIN D
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 4.5 3.325 4.95 3.775 ;
+      END
+   END D
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 8.05 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 6.475 6.125 6.925 6.575 ;
+            RECT 6.475 1.475 6.925 1.925 ;
+            RECT 6.525 1.975 6.875 6.125 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 8.05 8.1 ;
+      END
+   END Vdd
+
+
+END AO22
+
+MACRO AOI22
+   SIZE 5.75 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN AOI22 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.55 2.375 1 2.825 ;
+            RECT 0.55 2.375 1 2.825 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.7 2.3 2.15 2.75 ;
+            RECT 1.7 2.3 2.15 2.75 ;
+      END
+   END B
+
+   PIN C
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.9 2.375 3.35 2.825 ;
+            RECT 2.9 2.375 3.35 2.825 ;
+      END
+   END C
+
+   PIN D
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 4.675 2.375 5.125 2.825 ;
+            RECT 4.675 2.375 5.125 2.825 ;
+      END
+   END D
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.375 0.75 0.725 1.425 ;
+            RECT 4.85 0.75 5.2 1.475 ;
+            POLYGON 5.75 0.8
+               0 0.8
+               0 0
+               5.75 0 ;
+            RECT 0.325 1.35 0.775 1.8 ;
+            RECT 4.8 1.4 5.25 1.85 ;
+            RECT 0.375 0.25 5.375 0.7 ;
+            RECT 0 0 5.75 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 3.81 5.975
+               3.81 1.725
+               2.8 1.725
+               2.8 1.375
+               4.16 1.375
+               4.16 5.975 ;
+            RECT 2.575 1.375 3.025 1.825 ;
+            RECT 3.725 5.6 4.175 6.05 ;
+            RECT 3.725 5.6 4.175 6.05 ;
+            RECT 3.81 1.725 4.16 5.6 ;
+            RECT 3.025 1.375 4.16 1.725 ;
+            RECT 2.575 1.375 3.025 1.825 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.475 6.65 1.825 7.35 ;
+            POLYGON 5.75 8.1
+               0 8.1
+               0 7.3
+               5.75 7.3 ;
+            RECT 1.425 6.275 1.875 6.725 ;
+            RECT 0 7.3 5.75 8.1 ;
+      END
+   END Vdd
+
+   OBS
+      LAYER Metal1 ;
+         RECT 0.325 6.075 0.775 6.525 ;
+         RECT 2.575 6.075 3.025 6.525 ;
+         RECT 4.8 6.05 5.25 6.5 ;
+         POLYGON 5.15 6.35
+           5.15 6.95
+           2.575 6.95
+           2.575 5.925
+           0.78 5.925
+           0.78 6.52
+           0.43 6.52
+           0.43 5.575
+           2.925 5.575
+           2.925 6.6
+           4.8 6.6
+           4.8 6.35 ;
+         RECT 2.88 6.525 3.025 6.61 ;
+   END
+END AOI22
+
+MACRO BUF1
+   SIZE 3.45 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN BUF1 ;
+   SITE CORE ;
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 3.45 0.8 ;
+      END
+   END Gnd
+
+   PIN IN
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.725 4.725 2.175 5.175 ;
+      END
+   END IN
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 0.775 6.525
+               0.325 6.525
+               0.325 6.075
+               0.375 6.075
+               0.375 1.925
+               0.325 1.925
+               0.325 1.475
+               0.775 1.475
+               0.775 1.925
+               0.725 1.925
+               0.725 6.075
+               0.775 6.075 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 3.45 8.1 ;
+      END
+   END Vdd
+
+ 
+END BUF1
+
+MACRO XOR2
+   SIZE 8.05 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN XOR2 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.63 2.515 3.08 2.965 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.5 4.595 0.95 5.045 ;
+            RECT 5.975 4.72 6.425 5.17 ;
+            RECT 0.5 4.595 0.95 5.045 ;
+            RECT 3.825 3.67 4.275 4.12 ;
+            POLYGON 6.025 4.945
+               6.025 4.19
+               0.9 4.19
+               0.9 4.82
+               0.55 4.82
+               0.55 3.84
+               6.375 3.84
+               6.375 4.945 ;
+      END
+   END B
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 8.05 0.8 ;
+            RECT 0.4 1.45 0.85 1.9 ;
+            RECT 2.55 1.45 3 1.9 ;
+            RECT 5.9 1.45 6.35 1.9 ;
+            RECT 5.95 0.75 6.3 1.525 ;
+            RECT 2.6 0.75 2.95 1.525 ;
+            RECT 0.45 0.75 0.8 1.525 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 4.75 2.725 5.4 3.375 ;
+         LAYER Metal1 ;
+             RECT 4.9 1.45 5.35 1.9 ;
+            RECT 4.475 6.075 4.925 6.525 ;
+            RECT 4.75 2.725 5.4 3.375 ;
+            RECT 4.375 5.975 5.025 6.625 ;
+            RECT 4.95 1.525 5.3 2.725 ;
+         LAYER Metal2 ;
+             RECT 4.75 2.725 5.4 3.375 ;
+            RECT 4.375 5.975 5.025 6.625 ;
+            POLYGON 4.575 5.975
+               4.575 4.125
+               4.9 4.125
+               4.9 3.055
+               5.25 3.055
+               5.25 4.475
+               4.925 4.475
+               4.925 5.975 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 8.05 8.1 ;
+            RECT 2.6 6.3 3.05 6.75 ;
+            RECT 6.3 6.3 6.75 6.75 ;
+            RECT 2.65 6.675 3 7.35 ;
+            RECT 6.35 6.675 6.7 7.35 ;
+      END
+   END Vdd
+
+   OBS
+      LAYER Metal1 ;
+         RECT 4.3 4.7 4.75 5.15 ;
+         RECT 1.425 1.425 1.875 1.875 ;
+         RECT 0.4 5.6 0.85 6.05 ;
+         RECT 1.325 1.325 1.975 1.975 ;
+         RECT 1.4 5.65 2.05 6.3 ;
+         POLYGON 4.75 5.5
+           2.05 5.5
+           2.05 6.15
+           0.4 6.15
+           0.4 5.8
+           1.7 5.8
+           1.7 5.15
+           4.75 5.15 ;
+      LAYER Metal2 ;
+         RECT 1.325 1.325 1.975 1.975 ;
+         RECT 1.4 5.65 2.05 6.3 ;
+         RECT 1.55 1.825 1.9 5.8 ;
+   END
+END XOR2
+
+MACRO XNOR2
+   SIZE 6.9 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN XNOR2 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 4.825 0.8 5.275 ;
+            POLYGON 0.525 4.925
+               5.825 4.925
+               5.825 2.415
+               6.175 2.415
+               6.175 5.275
+               0.525 5.275 ;
+            RECT 5.775 2.415 6.225 2.865 ;
+            RECT 3.95 4.85 4.4 5.3 ;
+            RECT 0.35 4.825 0.8 5.275 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.45 3.605 2.9 4.055 ;
+      END
+   END B
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 6.9 0.8 ;
+            RECT 5.925 1.425 6.375 1.875 ;
+            RECT 2.15 1.45 2.6 1.9 ;
+            RECT 5.975 0.75 6.325 1.5 ;
+            RECT 2.2 0.75 2.55 1.525 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 4.75 2.45 5.4 3.1 ;
+         LAYER Metal1 ;
+             RECT 4.25 5.775 4.9 6.425 ;
+            RECT 3.9 1.45 4.35 1.9 ;
+            RECT 4.325 5.875 4.775 6.325 ;
+            RECT 4.75 2.45 5.4 3.1 ;
+            POLYGON 4.125 1.55
+               5.25 1.55
+               5.25 2.775
+               4.9 2.775
+               4.9 1.9
+               4.125 1.9 ;
+         LAYER Metal2 ;
+             RECT 4.75 2.45 5.4 3.1 ;
+            RECT 4.25 5.775 4.9 6.425 ;
+            RECT 4.9 2.95 5.25 6.425 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 6.9 8.1 ;
+            RECT 5.475 6.275 5.925 6.725 ;
+            RECT 2.55 6.25 3 6.7 ;
+            RECT 0.3 6.25 0.75 6.7 ;
+            POLYGON 6.9 8.1
+               0 8.1
+               0 7.3
+               6.9 7.3 ;
+            RECT 0.35 6.625 0.7 7.35 ;
+            RECT 5.525 6.65 5.875 7.35 ;
+            RECT 2.6 6.625 2.95 7.35 ;
+      END
+   END Vdd
+
+   OBS
+      LAYER Metal1 ;
+         POLYGON 0.725 1.5
+           0.725 2.63
+           3.95 2.63
+           3.95 2.98
+           0.375 2.98
+           0.375 1.5 ;
+         RECT 0.325 1.425 0.775 1.875 ;
+         RECT 1.475 6.025 1.925 6.475 ;
+         RECT 3.725 2.55 4.175 3 ;
+         RECT 1.3 2.65 1.95 3.3 ;
+         RECT 1.375 5.925 2.025 6.575 ;
+      LAYER Metal2 ;
+         RECT 1.3 2.65 1.95 3.3 ;
+         RECT 1.375 5.925 2.025 6.575 ;
+         RECT 1.45 2.975 1.8 6.4 ;
+   END
+END XNOR2
+
+
+MACRO DFF
+   SIZE 20.7 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN DFF ;
+   SITE CORE ;
+   PIN CLK
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.925 3.325 1.375 3.775 ;
+      END
+   END CLK
+
+   PIN DATA
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 4.85 3.525 5.3 3.975 ;
+      END
+   END DATA
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 20.7 0.8 ;
+      END
+   END Gnd
+
+   PIN Q
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 15.125 1.335 15.95 1.985 ;
+            RECT 15.05 5.825 15.95 6.475 ;
+            RECT 15.6 1.985 15.95 5.825 ;
+      END
+   END Q
+
+   PIN QB
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 18.675 1.475 19.125 1.925 ;
+            RECT 18.675 5.925 19.125 6.375 ;
+            RECT 18.725 1.925 19.075 5.925 ;
+      END
+   END QB
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 20.7 8.1 ;
+      END
+   END Vdd
+
+  
+END DFF
+
+MACRO DFFC
+   SIZE 25.3 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN DFFC ;
+   SITE CORE ;
+   PIN CLK
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 1.5 3.975
+               1.05 3.975
+               1.05 3.525
+               1.5 3.525 ;
+            RECT 1.05 3.525 1.5 3.975 ;
+      END
+   END CLK
+
+   PIN CLR
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             POLYGON 9.75 2.955
+               9.1 2.955
+               9.1 2.8
+               8.585 2.8
+               8.025 3.36
+               8.025 4.5
+               7.375 4.5
+               7.375 3.85
+               7.675 3.85
+               7.675 3.216
+               8.441 2.45
+               9.1 2.45
+               9.1 2.305
+               9.75 2.305 ;
+         LAYER Metal1 ;
+             POLYGON 17.725 2.75
+               17.275 2.75
+               17.275 2.65
+               9.75 2.65
+               9.75 2.955
+               9.1 2.955
+               9.1 2.3
+               17.725 2.3 ;
+            RECT 9.1 2.305 9.75 2.955 ;
+      END
+   END CLR
+
+   PIN DATA
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             POLYGON 7.25 2.9
+               6.95 2.9
+               6.95 3.5
+               5.4 3.5
+               5.4 3.8
+               4.75 3.8
+               4.75 3.15
+               6.6 3.15
+               6.6 2.25
+               7.25 2.25 ;
+         LAYER Metal1 ;
+             POLYGON 5.4 3.8
+               4.75 3.8
+               4.75 3.15
+               5.4 3.15 ;
+            POLYGON 7.25 2.9
+               6.6 2.9
+               6.6 2.25
+               7.25 2.25 ;
+         LAYER Metal2 ;
+             RECT 4.75 3.15 5.4 3.8 ;
+      END
+   END DATA
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 25.3 0.8
+               23.35 0.8
+               23.35 1.55
+               23.4 1.55
+               23.4 2
+               22.95 2
+               22.95 1.55
+               23 1.55
+               23 0.8
+               21.35 0.8
+               21.35 1.5
+               21.4 1.5
+               21.4 1.95
+               20.95 1.95
+               20.95 1.5
+               21 1.5
+               21 0.8
+               19.35 0.8
+               19.35 1.45
+               19.4 1.45
+               19.4 1.9
+               18.95 1.9
+               18.95 1.45
+               19 1.45
+               19 0.8
+               12.2 0.8
+               12.2 1.45
+               12.25 1.45
+               12.25 1.9
+               11.8 1.9
+               11.8 1.45
+               11.85 1.45
+               11.85 0.8
+               6.8 0.8
+               6.8 1.45
+               6.85 1.45
+               6.85 1.9
+               6.4 1.9
+               6.4 1.45
+               6.45 1.45
+               6.45 0.8
+               1.8 0.8
+               1.8 1.45
+               1.85 1.45
+               1.85 1.9
+               1.4 1.9
+               1.4 1.45
+               1.45 1.45
+               1.45 0.8
+               0 0.8
+               0 0
+               25.3 0 ;
+            RECT 0 0 25.3 0.8 ;
+      END
+   END Gnd
+
+   PIN Q
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 24.425 6.725
+               23.975 6.725
+               23.975 6.275
+               24.025 6.275
+               24.025 2
+               23.975 2
+               23.975 1.55
+               24.425 1.55
+               24.425 2
+               24.375 2
+               24.375 6.275
+               24.425 6.275 ;
+            RECT 23.975 1.55 24.425 2 ;
+      END
+   END Q
+
+   PIN QB
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             POLYGON 23.375 3
+               23.225 3
+               23.225 6.475
+               21.725 6.475
+               21.725 5.825
+               22.875 5.825
+               22.875 3
+               22.725 3
+               22.725 2.35
+               23.375 2.35 ;
+         LAYER Metal1 ;
+             POLYGON 22.375 6.475
+               21.725 6.475
+               21.725 5.825
+               22.375 5.825 ;
+            POLYGON 23.375 3
+               22.725 3
+               22.725 2.7
+               22.025 2.7
+               22.025 1.94
+               21.975 1.94
+               21.975 1.49
+               22.425 1.49
+               22.425 1.94
+               22.375 1.94
+               22.375 2.35
+               23.375 2.35 ;
+         LAYER Metal2 ;
+             RECT 22.725 2.35 23.375 3 ;
+      END
+   END QB
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 25.3 8.1
+               0 8.1
+               0 7.3
+               1.45 7.3
+               1.45 6.725
+               1.4 6.725
+               1.4 6.275
+               1.85 6.275
+               1.85 6.725
+               1.8 6.725
+               1.8 7.3
+               5.225 7.3
+               5.225 6.75
+               5.175 6.75
+               5.175 6.3
+               5.625 6.3
+               5.625 6.75
+               5.575 6.75
+               5.575 7.3
+               8.15 7.3
+               8.15 6.65
+               8.1 6.65
+               8.1 6.2
+               8.55 6.2
+               8.55 6.65
+               8.5 6.65
+               8.5 7.3
+               12.25 7.3
+               12.25 6.5
+               12.2 6.5
+               12.2 6.05
+               12.65 6.05
+               12.65 6.5
+               12.6 6.5
+               12.6 7.3
+               16.85 7.3
+               16.85 6.275
+               17.95 6.275
+               17.95 7.3
+               20.75 7.3
+               20.75 6.55
+               20.8 6.55
+               20.8 6.3
+               21.25 6.3
+               21.25 7.3
+               22.95 7.3
+               22.95 6.3
+               23.4 6.3
+               23.4 6.55
+               23.45 6.55
+               23.45 7.3
+               25.3 7.3 ;
+            RECT 0 7.3 25.3 8.1 ;
+      END
+   END Vdd
+
+   OBS
+      LAYER Metal1 ;
+         POLYGON 23.525 4.225
+           23.075 4.225
+           23.075 4.175
+           20.173 4.175
+           19.03 5.318
+           19.03 6.275
+           19.075 6.275
+           19.075 6.725
+           18.625 6.725
+           18.625 6.275
+           18.68 6.275
+           18.68 5.65
+           16.135 5.65
+           16.135 6.55
+           15.485 6.55
+           15.485 5.9
+           15.785 5.9
+           15.785 5.3
+           18.68 5.3
+           18.68 5.174
+           20.029 3.825
+           23.075 3.825
+           23.075 3.775
+           23.525 3.775 ;
+         POLYGON 20.975 3.175
+           20.325 3.175
+           20.325 2.65
+           18.7 2.65
+           18.7 2.75
+           18.25 2.75
+           18.25 2.3
+           19.95 2.3
+           19.95 1.35
+           20.45 1.35
+           20.45 2.3
+           20.95 2.3
+           20.95 2.525
+           20.975 2.525 ;
+         POLYGON 20.275 6.475
+           19.625 6.475
+           19.625 5.825
+           20.275 5.825 ;
+         POLYGON 19.725 3.525
+           19.275 3.525
+           19.275 3.475
+           17.522 3.475
+           16.697 4.3
+           14.435 4.3
+           14.435 5.925
+           14.575 5.925
+           14.575 6.575
+           13.925 6.575
+           13.925 5.925
+           14.085 5.925
+           14.085 3.95
+           16.553 3.95
+           17.378 3.125
+           19.275 3.125
+           19.275 3.075
+           19.725 3.075 ;
+         POLYGON 16.975 1.95
+           16.325 1.95
+           16.325 1.3
+           16.975 1.3 ;
+         POLYGON 16.5 3.5
+           16.475 3.5
+           16.475 3.525
+           16.025 3.525
+           16.025 3.5
+           13.725 3.5
+           13.725 3.575
+           13.275 3.575
+           13.275 3.125
+           13.7 3.125
+           13.7 3.1
+           16.025 3.1
+           16.025 3.075
+           16.475 3.075
+           16.475 3.1
+           16.5 3.1 ;
+         POLYGON 15.65 1.9
+           14.425 1.9
+           14.425 1.95
+           13.775 1.95
+           13.775 1.3
+           14.425 1.3
+           14.425 1.5
+           15.2 1.5
+           15.2 1.45
+           15.65 1.45 ;
+         POLYGON 12.525 3.525
+           12.475 3.525
+           12.475 5.2
+           11.4 5.2
+           11.4 5.9
+           11.7 5.9
+           11.7 6.55
+           11.05 6.55
+           11.05 5.2
+           8.9 5.2
+           8.9 5.25
+           8.45 5.25
+           8.45 5.2
+           5.77 5.2
+           5.77 2.65
+           5.175 2.65
+           5.175 2.75
+           4.725 2.75
+           4.725 2.3
+           6.12 2.3
+           6.12 4.85
+           8.45 4.85
+           8.45 4.8
+           8.9 4.8
+           8.9 4.85
+           12.125 4.85
+           12.125 3.525
+           12.075 3.525
+           12.075 3.075
+           12.525 3.075 ;
+         POLYGON 11.525 4.19
+           11.075 4.19
+           11.075 4.13
+           10.475 4.13
+           10.475 4.25
+           9.825 4.25
+           9.825 4.13
+           9.133 4.13
+           8.225 3.222
+           8.225 1.925
+           8.175 1.925
+           8.175 1.475
+           8.625 1.475
+           8.625 1.925
+           8.575 1.925
+           8.575 3.078
+           9.277 3.78
+           9.825 3.78
+           9.825 3.6
+           10.475 3.6
+           10.475 3.78
+           11.075 3.78
+           11.075 3.74
+           11.525 3.74 ;
+         POLYGON 11.325 1.95
+           10.675 1.95
+           10.675 1.3
+           11.325 1.3 ;
+         POLYGON 10.475 6.475
+           9.825 6.475
+           9.825 5.825
+           10.475 5.825 ;
+         POLYGON 8.025 4.5
+           7.375 4.5
+           7.375 3.85
+           8.025 3.85 ;
+         POLYGON 6.825 6.375
+           6.175 6.375
+           6.175 5.9
+           3.85 5.9
+           3.85 6.625
+           3.5 6.625
+           3.5 6.6
+           3.4 6.6
+           3.4 6.15
+           3.45 6.15
+           3.45 5.55
+           3.5 5.55
+           3.5 1.9
+           3.4 1.9
+           3.4 1.45
+           3.85 1.45
+           3.85 5.55
+           6.825 5.55 ;
+         POLYGON 3.1 3.825
+           2.875 3.825
+           2.875 6.75
+           2.425 6.75
+           2.425 6.3
+           2.525 6.3
+           2.525 1.875
+           2.425 1.875
+           2.425 1.425
+           2.875 1.425
+           2.875 3.375
+           3.1 3.375 ;
+         POLYGON 2.175 2.85
+           1.725 2.85
+           1.725 2.6
+           0.85 2.6
+           0.85 2.972
+           0.45 3.372
+           0.45 4.148
+           0.805 4.503
+           0.805 6.275
+           0.85 6.275
+           0.85 6.725
+           0.4 6.725
+           0.4 6.275
+           0.455 6.275
+           0.455 4.647
+           0.1 4.292
+           0.1 3.228
+           0.5 2.828
+           0.5 1.9
+           0.4 1.9
+           0.4 1.45
+           0.85 1.45
+           0.85 2.25
+           2.175 2.25 ;
+      LAYER Metal2 ;
+         POLYGON 20.975 3.175
+           20.125 3.175
+           20.125 5.825
+           20.275 5.825
+           20.275 6.475
+           19.625 6.475
+           19.625 5.825
+           19.775 5.825
+           19.775 2.825
+           20.325 2.825
+           20.325 2.525
+           20.975 2.525 ;
+         POLYGON 16.975 1.95
+           16.5 1.95
+           16.5 6.25
+           16.135 6.25
+           16.135 6.55
+           15.485 6.55
+           15.485 5.9
+           16.15 5.9
+           16.15 1.3
+           16.975 1.3 ;
+         POLYGON 14.575 6.575
+           13.925 6.575
+           13.925 5.925
+           14.075 5.925
+           14.075 1.95
+           13.775 1.95
+           13.775 1.3
+           14.425 1.3
+           14.425 5.925
+           14.575 5.925 ;
+         POLYGON 11.7 6.55
+           11.05 6.55
+           11.05 1.95
+           10.675 1.95
+           10.675 1.3
+           11.4 1.3
+           11.4 5.9
+           11.7 5.9 ;
+         POLYGON 10.475 6.475
+           10.325 6.475
+           10.325 6.575
+           6.175 6.575
+           6.175 5.725
+           6.825 5.725
+           6.825 6.225
+           9.825 6.225
+           9.825 5.825
+           9.975 5.825
+           9.975 4.25
+           9.825 4.25
+           9.825 3.6
+           10.475 3.6
+           10.475 4.25
+           10.325 4.25
+           10.325 5.825
+           10.475 5.825 ;
+   END
+END DFFC
+
+
+MACRO FILLER
+   CLASS CORE SPACER ;
+   SYMMETRY X Y ;
+   SIZE 1.15 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN FILLER ;
+   SITE CORE ;
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 1.15 0.8 ;
+      END
+   END Gnd
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 1.15 8.1 ;
+      END
+   END Vdd
+
+
+END FILLER
+
+MACRO INV
+   SIZE 2.3 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN INV ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.275 2.325 1.725 2.775 ;
+            RECT 1.275 2.325 1.725 2.775 ;
+      END
+   END A
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.475 0.75 1.825 1.5 ;
+            POLYGON 2.3 0.8
+               0 0.8
+               0 0
+               2.3 0 ;
+            RECT 1.425 1.425 1.875 1.875 ;
+            RECT 0.6 0.25 1.7 0.7 ;
+            RECT 0 0 2.3 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.45 1.475 0.8 6.5 ;
+            RECT 0.4 6.125 0.85 6.575 ;
+            RECT 0.4 1.4 0.85 1.85 ;
+            RECT 0.4 1.4 0.85 1.85 ;
+            RECT 0.4 6.125 0.85 6.575 ;
+            RECT 0.45 1.85 0.8 6.125 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.475 6.55 1.825 7.355 ;
+            POLYGON 2.3 8.1
+               0 8.1
+               0 7.3
+               2.3 7.3 ;
+            RECT 1.425 6.175 1.875 6.625 ;
+            RECT 0.6 7.4 1.7 7.85 ;
+            RECT 0 7.3 2.3 8.1 ;
+      END
+   END Vdd
+
+   OBS
+   END
+END INV
+
+MACRO DFFP
+   SIZE 23 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN DFFP ;
+   SITE CORE ;
+   PIN CLK
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.525 3.725 0.975 4.175 ;
+      END
+   END CLK
+
+   PIN DATA
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 4.875 4.675 5.325 5.125 ;
+      END
+   END DATA
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 23 0.8 ;
+      END
+   END Gnd
+
+   PIN PRB
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 17.85 2.64 18.5 3.29 ;
+         LAYER Metal1 ;
+             RECT 13.325 2.225 13.975 2.875 ;
+         LAYER Metal2 ;
+             RECT 13.975 2.225 18.2 2.575 ;
+            RECT 17.85 2.575 18.2 2.64 ;
+      END
+   END PRB
+
+   PIN Q
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 21.775 1.475 22.225 1.925 ;
+            RECT 21.775 6.025 22.225 6.475 ;
+            RECT 21.825 1.925 22.175 6.025 ;
+      END
+   END Q
+
+   PIN QB
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 19.415 1.415 20.065 2.065 ;
+            RECT 19.565 2.065 19.915 5.96 ;
+            RECT 19.415 5.96 20.065 6.61 ;
+      END
+   END QB
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 23 8.1 ;
+      END
+   END Vdd
+
+  
+END DFFP
+
+MACRO DFFPC
+   SIZE 27.6 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN DFFPC ;
+   SITE CORE ;
+   PIN CLB
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 16.4 4.225 16.85 4.675 ;
+            RECT 8.675 3.95 9.125 4.4 ;
+            RECT 9.125 3.95 9.825 4.3 ;
+            RECT 9.825 4.15 16.85 4.5 ;
+      END
+   END CLB
+
+   PIN CLK
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.7 3.54 1.15 3.99 ;
+      END
+   END CLK
+
+   PIN DATA
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 4.75 4.6 5.4 5.25 ;
+            RECT 6.35 2.75 7 3.4 ;
+         LAYER Metal1 ;
+             RECT 6.5 2.275 7 2.775 ;
+         LAYER Metal2 ;
+             RECT 6.65 3.4 7 4.075 ;
+            RECT 5.4 4.734 5.994 5.085 ;
+            POLYGON 7 4.22
+               7 4.075
+               6.65 4.075
+               5.991 4.734
+               5.991 5.085
+               6.135 5.085 ;
+      END
+   END DATA
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 27.6 0.8 ;
+      END
+   END Gnd
+
+   PIN PRB
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 24.3 3.575 24.75 4.025 ;
+      END
+   END PRB
+
+   PIN Q
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 21.075 1.4 21.895 2.05 ;
+            RECT 21.545 2.05 21.895 4.805 ;
+            RECT 21.425 4.805 22.075 5.455 ;
+      END
+   END Q
+
+   PIN QB
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 26.075 1.425 26.525 1.875 ;
+            RECT 25.6 6.125 26.05 6.575 ;
+            RECT 25.695 5.085 26.05 6.125 ;
+            RECT 26.05 5.085 26.605 5.435 ;
+            RECT 26.865 2.245 27.215 4.825 ;
+      END
+   END QB
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 27.6 8.1 ;
+      END
+   END Vdd
+
+  
+END DFFPC
+
+MACRO NOR4
+   SIZE 5.75 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN NOR4 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 3.55 0.8 4 ;
+            RECT 0.35 3.55 0.8 4 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.74 3.235 2.19 3.685 ;
+            RECT 1.74 3.235 2.19 3.685 ;
+      END
+   END B
+
+   PIN C
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.875 4.165 3.325 4.615 ;
+            RECT 2.875 4.165 3.325 4.615 ;
+      END
+   END C
+
+   PIN D
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 3.8 3.075 4.25 3.525 ;
+            RECT 3.8 3.075 4.25 3.525 ;
+      END
+   END D
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.45 0.75 0.8 1.525 ;
+            RECT 2.45 0.75 2.8 1.525 ;
+            RECT 4.475 0.75 4.825 1.5 ;
+            POLYGON 5.75 0.8
+               0 0.8
+               0 0
+               5.75 0 ;
+            RECT 0.375 0.25 5.375 0.7 ;
+            RECT 2.4 1.45 2.85 1.9 ;
+            RECT 0.4 1.45 0.85 1.9 ;
+            RECT 4.425 1.425 4.875 1.875 ;
+            RECT 0 0 5.75 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 3.45 1.625 3.8 2.3 ;
+            POLYGON 4.59 6.075
+               4.59 5.338
+               4.91 5.018
+               4.91 2.757
+               4.778 2.625
+               1.45 2.625
+               1.45 1.475
+               1.8 1.475
+               1.8 2.275
+               4.922 2.275
+               5.26 2.613
+               5.26 5.162
+               4.94 5.482
+               4.94 6.075 ;
+            RECT 4.4 5.625 4.85 6.075 ;
+            RECT 3.4 1.4 3.85 1.85 ;
+            RECT 1.4 1.4 1.85 1.85 ;
+            RECT 4.4 5.63 4.94 6.075 ;
+            RECT 3.4 1.4 3.85 1.85 ;
+            RECT 1.4 1.4 1.85 1.85 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.45 6.625 0.8 7.35 ;
+            POLYGON 5.75 8.1
+               0 8.1
+               0 7.3
+               5.75 7.3 ;
+            RECT 0.375 7.4 5.375 7.85 ;
+            RECT 0.4 6.25 0.85 6.7 ;
+            RECT 0 7.3 5.75 8.1 ;
+      END
+   END Vdd
+
+   OBS
+   END
+END NOR4
+
+
+MACRO NAND3
+   SIZE 4.6 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN NAND3 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 2.8 0.8 3.25 ;
+            RECT 0.35 2.8 0.8 3.25 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.75 2.805 2.2 3.255 ;
+            RECT 1.75 2.805 2.2 3.255 ;
+      END
+   END B
+
+   PIN C
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.85 2.83 3.3 3.28 ;
+            RECT 2.85 2.83 3.3 3.28 ;
+      END
+   END C
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.45 0.75 0.8 1.525 ;
+            POLYGON 4.6 0.8
+               0 0.8
+               0 0
+               4.6 0 ;
+            RECT 0.45 0.25 4.15 0.7 ;
+            RECT 0.4 1.45 0.85 1.9 ;
+            RECT 0 0 4.6 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 1.4 6.675
+               1.4 4.838
+               1.963 4.275
+               3.583 4.275
+               3.82 4.038
+               3.82 1.85
+               3.39 1.85
+               3.39 1.5
+               4.17 1.5
+               4.17 4.182
+               3.727 4.625
+               2.107 4.625
+               1.75 4.982
+               1.75 6.675 ;
+            RECT 3.475 4.45 3.825 6.65 ;
+            RECT 1.4 6.3 1.85 6.75 ;
+            RECT 3.425 6.275 3.875 6.725 ;
+            RECT 3.15 1.4 3.6 1.85 ;
+            RECT 3.15 1.4 3.6 1.85 ;
+            RECT 3.6 1.5 4.17 1.85 ;
+            RECT 3.82 1.85 4.17 4.18 ;
+            RECT 3.425 6.275 3.875 6.725 ;
+            RECT 3.475 4.277 3.827 6.275 ;
+            RECT 1.965 4.275 3.475 4.625 ;
+            RECT 1.4 6.3 1.85 6.75 ;
+            RECT 1.4 4.86 1.75 6.3 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.45 6.625 2.8 7.35 ;
+            RECT 0.45 6.625 0.8 7.35 ;
+            POLYGON 4.6 8.1
+               0 8.1
+               0 7.3
+               4.6 7.3 ;
+            RECT 0.45 7.4 4.15 7.85 ;
+            RECT 2.4 6.25 2.85 6.7 ;
+            RECT 0.4 6.25 0.85 6.7 ;
+            RECT 0 7.3 4.6 8.1 ;
+      END
+   END Vdd
+
+   OBS
+   END
+END NAND3
+
+
+MACRO INV2
+   SIZE 4.6 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN INV2 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.45 3.45 1.9 3.9 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.65 2.795 3.1 3.245 ;
+      END
+   END B
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 0 4.6 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT1
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.3 1.4 0.75 1.85 ;
+            RECT 0.35 1.9 0.7 6.125 ;
+            RECT 0.325 6.125 0.775 6.575 ;
+      END
+   END OUT1
+
+   PIN OUT2
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 3.725 1.425 4.175 1.875 ;
+            RECT 3.725 6.125 4.175 6.575 ;
+            RECT 3.775 1.875 4.125 6.125 ;
+      END
+   END OUT2
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0 7.3 4.6 8.1 ;
+      END
+   END Vdd
+
+  
+END INV2
+
+
+MACRO NAND4
+   SIZE 5.75 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN NAND4 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.3 2.8 0.75 3.25 ;
+            RECT 0.3 2.8 0.75 3.25 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.7 3.02 2.15 3.47 ;
+            RECT 1.7 3.02 2.15 3.47 ;
+      END
+   END B
+
+   PIN C
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.8 3.02 3.2 3.47 ;
+            RECT 2.8 3.02 3.25 3.47 ;
+            RECT 2.8 3.02 3.25 3.47 ;
+      END
+   END C
+
+   PIN D
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 3.95 2.855 4.4 3.305 ;
+            RECT 3.95 2.855 4.4 3.305 ;
+      END
+   END D
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 0.75 0.7 1.525 ;
+            POLYGON 5.75 0.8
+               0 0.8
+               0 0
+               5.75 0 ;
+            RECT 0.375 0.25 5.375 0.7 ;
+            RECT 0.3 1.45 0.75 1.9 ;
+            RECT 0 0 5.75 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 1.45 6.675
+               1.45 5.17
+               4.875 5.17
+               4.875 1.475
+               5.225 1.475
+               5.225 5.52
+               1.8 5.52
+               1.8 6.675 ;
+            RECT 3.815 5.195 4.165 6.5 ;
+            RECT 1.4 6.3 1.85 6.75 ;
+            RECT 3.775 6.275 4.225 6.725 ;
+            RECT 4.825 1.4 5.275 1.85 ;
+            RECT 4.825 1.4 5.275 1.85 ;
+            RECT 4.875 1.85 5.225 5.52 ;
+            RECT 1.45 5.17 4.875 5.52 ;
+            RECT 3.775 6.275 4.225 6.725 ;
+            RECT 3.815 5.52 4.165 6.275 ;
+            RECT 1.4 6.3 1.85 6.75 ;
+            RECT 1.45 5.52 1.8 6.3 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.375 6.65 0.725 7.35 ;
+            RECT 2.625 6.65 2.975 7.35 ;
+            RECT 4.875 6.65 5.225 7.35 ;
+            POLYGON 5.75 8.1
+               0 8.1
+               0 7.3
+               5.75 7.3 ;
+            RECT 0.375 7.4 5.375 7.85 ;
+            RECT 4.825 6.275 5.275 6.725 ;
+            RECT 2.575 6.275 3.025 6.725 ;
+            RECT 0.325 6.275 0.775 6.725 ;
+            RECT 0 7.3 5.75 8.1 ;
+      END
+   END Vdd
+
+   OBS
+   END
+END NAND4
+
+MACRO NAND2
+   SIZE 3.45 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN NAND2 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 2.8 0.8 3.25 ;
+            RECT 0.35 2.8 0.8 3.25 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.435 2.83 2.885 3.28 ;
+            RECT 2.435 2.83 2.885 3.28 ;
+      END
+   END B
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 0.75 0.7 1.525 ;
+            POLYGON 3.45 0.8
+               0 0.8
+               0 0
+               3.45 0 ;
+            RECT 0.5 0.25 2.9 0.7 ;
+            RECT 0.3 1.45 0.75 1.9 ;
+            RECT 0 0 3.45 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 1.45 6
+               1.45 1.45
+               2.775 1.45
+               2.775 1.8
+               1.8 1.8
+               1.8 6 ;
+            RECT 1.4 5.625 1.85 6.075 ;
+            RECT 2.55 1.45 3 1.9 ;
+            RECT 2.55 1.45 3 1.9 ;
+            RECT 1.45 1.45 2.55 1.8 ;
+            RECT 1.45 1.8 1.8 5.625 ;
+            RECT 1.4 5.625 1.85 6.075 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 3.45 8.1
+               0 8.1
+               0 7.3
+               3.45 7.3 ;
+            RECT 0.375 6.725 0.725 7.35 ;
+            RECT 2.475 6.72 2.825 7.35 ;
+            RECT 0.5 7.4 2.9 7.85 ;
+            RECT 2.425 6.275 2.875 6.725 ;
+            RECT 0.325 6.275 0.775 6.725 ;
+            RECT 0 7.3 3.45 8.1 ;
+      END
+   END Vdd
+
+   OBS
+   END
+END NAND2
+
+MACRO MUX2
+   SIZE 8.05 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN MUX2 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 4.45 4.455 4.9 4.905 ;
+            RECT 4.45 4.455 4.9 4.905 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.7 2.3 3.15 2.75 ;
+            RECT 2.7 2.3 3.15 2.75 ;
+      END
+   END B
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 8.05 0.8
+               0 0.8
+               0 0
+               8.05 0 ;
+            RECT 1.45 0.77 1.8 1.65 ;
+            RECT 5.6 0.78 5.95 1.675 ;
+            RECT 0.55 0.25 7.5 0.7 ;
+            RECT 5.55 1.45 6 1.9 ;
+            RECT 1.4 1.425 1.85 1.875 ;
+            RECT 0 0 8.05 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT 
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 7.1 6.65
+               7.1 1.75
+               7 1.75
+               7 1.4
+               7.45 1.4
+               7.45 6.65 ;
+            RECT 7.05 6.275 7.5 6.725 ;
+            RECT 6.775 1.4 7.225 1.85 ;
+            RECT 6.775 1.4 7.45 1.85 ;
+      END
+   END OUT 
+
+   PIN SEL
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.2 4.15 1.85 4.8 ;
+            RECT 4.93 3.09 5.58 3.74 ;
+            RECT 1.3 4.25 1.75 4.7 ;
+         LAYER Metal2 ;
+             POLYGON 5.3 3.44
+               4.104 3.44
+               2.894 4.65
+               1.54 4.65
+               1.54 4.3
+               2.75 4.3
+               3.96 3.09
+               5.3 3.09 ;
+            RECT 4.93 3.09 5.58 3.74 ;
+            RECT 1.2 4.15 1.85 4.8 ;
+            RECT 4.93 3.09 5.58 3.74 ;
+      END
+   END SEL
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 6.1 6.625 6.45 7.35 ;
+            RECT 1.45 6.675 1.8 7.35 ;
+            POLYGON 8.05 8.1
+               0 8.1
+               0 7.3
+               8.05 7.3 ;
+            RECT 0.55 7.4 7.5 7.85 ;
+            RECT 6.05 6.25 6.5 6.7 ;
+            RECT 1.4 6.3 1.85 6.75 ;
+            RECT 0 7.3 8.05 8.1 ;
+      END
+   END Vdd
+
+   OBS
+      LAYER Metal1 ;
+         RECT 5.975 2.325 6.425 2.775 ;
+         RECT 5.495 4.75 5.945 5.2 ;
+         RECT 1.65 2.3 2.1 2.75 ;
+         RECT 0.4 1.425 0.85 1.875 ;
+         RECT 3.7 1.425 4.15 1.875 ;
+         RECT 0.4 6.275 0.85 6.725 ;
+         RECT 3.65 5.6 4.1 6.05 ;
+         POLYGON 5.845 4.975
+           5.845 5.342
+           5.1 6.087
+           5.1 6.95
+           2.53 6.95
+           2.53 5.95
+           0.625 5.95
+           0.625 5.6
+           2.88 5.6
+           2.88 6.6
+           4.75 6.6
+           4.75 5.943
+           5.495 5.198
+           5.495 4.975 ;
+         RECT 3.825 2.375 6.2 2.725 ;
+         RECT 0.675 2.35 1.725 2.7 ;
+         RECT 0.5 1.5 0.85 6.65 ;
+         RECT 3.65 1.275 4 5.975 ;
+   END
+END MUX2
+
+
+MACRO NOR2
+   SIZE 3.45 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN NOR2 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 3.4 0.8 3.85 ;
+            RECT 0.35 3.4 0.8 3.85 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.35 4.625 2.8 5.075 ;
+            RECT 2.25 4.525 2.9 5.175 ;
+         LAYER Metal2 ;
+             RECT 2.25 4.525 2.9 5.175 ;
+            RECT 2.25 4.525 2.9 5.175 ;
+      END
+   END B
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 0.75 0.7 1.525 ;
+            RECT 2.6 0.75 2.95 1.525 ;
+            POLYGON 3.45 0.8
+               0 0.8
+               0 0
+               3.45 0 ;
+            RECT 2.55 1.45 3 1.9 ;
+            RECT 0.3 1.45 0.75 1.9 ;
+            RECT 0.525 0.25 2.925 0.7 ;
+            RECT 0 0 3.45 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 2.65 6.125
+               2.103 6.125
+               1.55 5.572
+               1.55 1.55
+               1.9 1.55
+               1.9 5.428
+               2.247 5.775
+               2.65 5.775 ;
+            RECT 2.425 5.775 2.875 6.225 ;
+            RECT 1.475 1.425 1.925 1.875 ;
+            RECT 1.475 1.425 1.925 1.875 ;
+            RECT 2.425 5.775 2.875 6.225 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.375 6.65 0.725 7.35 ;
+            POLYGON 3.45 8.1
+               0 8.1
+               0 7.3
+               3.45 7.3 ;
+            RECT 0.325 6.275 0.775 6.725 ;
+            RECT 0.525 7.4 2.925 7.85 ;
+            RECT 0 7.3 3.45 8.1 ;
+      END
+   END Vdd
+
+   OBS
+   END
+END NOR2
+
+MACRO NOR3
+   SIZE 4.6 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN NOR3 ;
+   SITE CORE ;
+   PIN A
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.35 4.415 0.8 4.865 ;
+            RECT 0.35 4.415 0.8 4.865 ;
+      END
+   END A
+
+   PIN B
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 1.65 3.345 2.1 3.795 ;
+            RECT 1.65 3.345 2.1 3.795 ;
+      END
+   END B
+
+   PIN C
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.65 3.195 3.1 3.645 ;
+            RECT 2.65 3.195 3.1 3.645 ;
+      END
+   END C
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.45 0.75 0.8 1.525 ;
+            RECT 2.45 0.75 2.8 1.525 ;
+            POLYGON 4.6 0.8
+               0 0.8
+               0 0
+               4.6 0 ;
+            RECT 0.45 0.25 4.15 0.7 ;
+            RECT 2.4 1.45 2.85 1.9 ;
+            RECT 0.4 1.45 0.85 1.9 ;
+            RECT 0 0 4.6 0.8 ;
+      END
+   END Gnd
+
+   PIN OUT
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 3.275 6
+               3.275 5.163
+               3.7 4.738
+               3.7 2.25
+               4.05 2.25
+               4.05 4.882
+               3.625 5.307
+               3.625 6 ;
+            POLYGON 4.05 1.425
+               4.05 2.6
+               1.495 2.6
+               1.495 1.415
+               1.845 1.415
+               1.845 2.25
+               3.7 2.25
+               3.7 1.425 ;
+            RECT 3.175 5.625 3.625 6.075 ;
+            RECT 1.4 1.4 1.85 1.85 ;
+            RECT 3.525 1.425 3.975 1.875 ;
+            RECT 3.175 5.625 3.625 6.075 ;
+            RECT 3.525 1.415 4.05 1.875 ;
+            RECT 1.4 1.4 1.85 1.85 ;
+      END
+   END OUT
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 0.45 6.625 0.8 7.35 ;
+            POLYGON 4.6 8.1
+               0 8.1
+               0 7.3
+               4.6 7.3 ;
+            RECT 0.45 7.4 4.15 7.85 ;
+            RECT 0.4 6.25 0.85 6.7 ;
+            RECT 0 7.3 4.6 8.1 ;
+      END
+   END Vdd
+
+   OBS
+   END
+END NOR3
+
+MACRO SDFFC
+   SIZE 33.35 BY 8.1 ;
+   ORIGIN 0 0 ;
+   FOREIGN SDFFC ;
+   SITE CORE ;
+   PIN CLK
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             POLYGON 12.925 3.15
+               14.65 3.15
+               14.65 2.25
+               15 2.25
+               15 3.5
+               12.925 3.5 ;
+            RECT 7.275 3.325 13.15 3.675 ;
+            RECT 6.95 3.16 7.6 3.81 ;
+            RECT 14.65 2.25 15.3 2.9 ;
+         LAYER Metal1 ;
+             POLYGON 7.1 6.65
+               7.1 1.75
+               7 1.75
+               7 1.4
+               7.45 1.4
+               7.45 6.65 ;
+            RECT 6.95 3.16 7.6 3.81 ;
+            RECT 14.8 2.35 15.25 2.8 ;
+            RECT 9.1 3.525 9.55 3.975 ;
+            RECT 7.05 6.275 7.5 6.725 ;
+            RECT 6.775 1.4 7.225 1.85 ;
+            RECT 14.65 2.25 15.3 2.9 ;
+            RECT 12.8 3.15 13.45 3.8 ;
+            RECT 9.1 3.525 9.55 3.975 ;
+      END
+   END CLK
+
+   PIN CLR
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             POLYGON 17.3 2.8
+               16.635 2.8
+               16.075 3.36
+               16.075 4.345
+               15.725 4.345
+               15.725 3.216
+               16.491 2.45
+               17.3 2.45 ;
+            RECT 17.15 2.305 17.8 2.955 ;
+            RECT 15.425 3.85 16.075 4.5 ;
+         LAYER Metal1 ;
+             RECT 17.15 2.3 25.77 2.65 ;
+            RECT 25.325 2.3 25.775 2.75 ;
+            RECT 15.525 3.97 15.975 4.42 ;
+            RECT 17.25 2.375 17.7 2.825 ;
+            RECT 17.15 2.305 17.8 2.955 ;
+            RECT 15.425 3.85 16.075 4.5 ;
+            RECT 17.15 2.305 17.8 2.955 ;
+      END
+   END CLR
+
+   PIN Gnd
+      DIRECTION OUTPUT ;
+      USE GROUND ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 19.9 0.75 20.25 1.525 ;
+            RECT 27.05 0.75 27.4 1.525 ;
+            RECT 29.05 0.75 29.4 1.625 ;
+            RECT 31.05 0.75 31.4 1.625 ;
+            RECT 9.5 0.75 9.85 1.525 ;
+            RECT 14.5 0.75 14.85 1.525 ;
+            RECT 1.45 0.77 1.8 1.65 ;
+            RECT 5.6 0.78 5.95 1.675 ;
+            RECT 5.55 1.45 6 1.9 ;
+            RECT 1.4 1.425 1.85 1.875 ;
+            RECT 29 1.5 29.45 1.95 ;
+            RECT 31 1.55 31.45 2 ;
+            RECT 27 1.45 27.45 1.9 ;
+            RECT 19.85 1.45 20.3 1.9 ;
+            RECT 9.45 1.45 9.9 1.9 ;
+            RECT 14.45 1.45 14.9 1.9 ;
+            RECT 0 0 33.35 0.8 ;
+      END
+   END Gnd
+
+   PIN Q
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 32.075 1.65 32.425 6.65 ;
+            RECT 32.025 6.275 32.475 6.725 ;
+            RECT 32.025 1.55 32.475 2 ;
+            RECT 32.025 1.55 32.475 2 ;
+      END
+   END Q
+
+   PIN QB
+      DIRECTION OUTPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal2 ;
+             RECT 29.775 5.825 31.275 6.475 ;
+            RECT 30.925 2.53 31.275 6.475 ;
+            RECT 30.775 2.35 31.425 3 ;
+         LAYER Metal1 ;
+             POLYGON 31.425 2.7
+               30.075 2.7
+               30.075 1.565
+               30.425 1.565
+               30.425 2.35
+               31.425 2.35 ;
+            RECT 30.025 1.49 30.475 1.94 ;
+            RECT 30.775 2.35 31.425 3 ;
+            RECT 29.775 5.825 30.425 6.475 ;
+         LAYER Metal2 ;
+             RECT 30.775 2.35 31.425 3 ;
+      END
+   END QB
+
+   PIN SD
+      DIRECTION INPUT ;
+      USE SIGNAL ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 2.7 2.3 3.15 2.75 ;
+            RECT 2.7 2.3 3.15 2.75 ;
+      END
+   END SD
+
+   PIN SE
+      DIRECTION INPUT ;
+      PORT 
+         LAYER Metal2 ;
+             POLYGON 5.3 3.44
+               4.104 3.44
+               2.894 4.65
+               1.54 4.65
+               1.54 4.3
+               2.75 4.3
+               3.96 3.09
+               5.3 3.09 ;
+            RECT 4.93 3.09 5.58 3.74 ;
+            RECT 1.2 4.15 1.85 4.8 ;
+         LAYER Metal1 ;
+             RECT 4.93 3.09 5.58 3.74 ;
+            RECT 1.2 4.15 1.85 4.8 ;
+         LAYER Metal2 ;
+             RECT 1.2 4.15 1.85 4.8 ;
+      END
+   END SE
+
+   PIN SI
+      DIRECTION INPUT ;
+      PORT 
+         LAYER Metal1 ;
+             RECT 4.45 4.455 4.9 4.905 ;
+            RECT 4.45 4.455 4.9 4.905 ;
+      END
+   END SI
+
+   PIN Vdd
+      DIRECTION OUTPUT ;
+      USE POWER ;
+      SHAPE ABUTMENT ;
+      PORT 
+         LAYER Metal1 ;
+             POLYGON 29.3 7.35
+               28.8 7.35
+               28.8 6.55
+               29.3 6.55 ;
+            POLYGON 31.5 7.35
+               31 7.35
+               31 6.55
+               31.5 6.55 ;
+            RECT 9.5 6.65 9.85 7.35 ;
+            RECT 13.275 6.65 13.625 7.35 ;
+            RECT 20.3 6.325 20.65 7.35 ;
+            RECT 16.2 6.65 16.55 7.325 ;
+            RECT 6.1 6.625 6.45 7.35 ;
+            RECT 1.45 6.675 1.8 7.35 ;
+            RECT 6.05 6.25 6.5 6.7 ;
+            RECT 1.4 6.3 1.85 6.75 ;
+            RECT 13.225 6.3 13.675 6.75 ;
+            RECT 16.15 6.2 16.6 6.65 ;
+            RECT 9.45 6.275 9.9 6.725 ;
+            RECT 31 6.3 31.45 6.75 ;
+            RECT 28.85 6.3 29.3 6.75 ;
+            RECT 20.25 6.05 20.7 6.5 ;
+            RECT 24.9 6.275 26 6.725 ;
+            POLYGON 26 7.35
+               24.9 7.35
+               24.9 6.425
+               26 6.425 ;
+            RECT 0 7.3 33.35 8.1 ;
+      END
+   END Vdd
+
+   OBS
+      LAYER Metal1 ;
+         RECT 28.375 2.525 29.025 3.175 ;
+         RECT 17.875 3.6 18.525 4.25 ;
+         RECT 21.975 5.925 22.625 6.575 ;
+         RECT 27.675 5.825 28.325 6.475 ;
+         RECT 19.1 5.9 19.75 6.55 ;
+         RECT 18.725 1.3 19.375 1.95 ;
+         RECT 21.825 1.3 22.475 1.95 ;
+         RECT 24.375 1.3 25.025 1.95 ;
+         RECT 23.535 5.9 24.185 6.55 ;
+         RECT 14.225 5.725 14.875 6.375 ;
+         RECT 17.875 5.825 18.525 6.475 ;
+         RECT 10.475 1.425 10.925 1.875 ;
+         RECT 16.225 1.475 16.675 1.925 ;
+         RECT 8.45 1.45 8.9 1.9 ;
+         RECT 11.45 1.45 11.9 1.9 ;
+         RECT 28.025 1.5 28.475 1.95 ;
+         RECT 26.675 6.275 27.125 6.725 ;
+         RECT 22.075 6.025 22.525 6.475 ;
+         RECT 27.775 5.925 28.225 6.375 ;
+         RECT 19.2 6.025 19.65 6.475 ;
+         RECT 10.475 6.3 10.925 6.75 ;
+         RECT 8.45 6.275 8.9 6.725 ;
+         RECT 18.825 1.4 19.275 1.85 ;
+         RECT 23.25 1.45 23.7 1.9 ;
+         RECT 24.475 1.4 24.925 1.85 ;
+         RECT 23.625 5.95 24.075 6.4 ;
+         RECT 14.325 5.825 14.775 6.275 ;
+         RECT 17.975 5.925 18.425 6.375 ;
+         RECT 11.45 6.15 11.9 6.6 ;
+         RECT 0.4 1.425 0.85 1.875 ;
+         RECT 3.7 1.425 4.15 1.875 ;
+         RECT 0.4 6.275 0.85 6.725 ;
+         RECT 3.65 5.6 4.1 6.05 ;
+         RECT 28.475 2.625 28.925 3.075 ;
+         RECT 20.125 3.075 20.575 3.525 ;
+         RECT 24.075 3.075 24.525 3.525 ;
+         RECT 27.325 3.075 27.775 3.525 ;
+         RECT 31.125 3.775 31.575 4.225 ;
+         RECT 26.3 2.3 26.75 2.75 ;
+         RECT 19.125 3.74 19.575 4.19 ;
+         RECT 10.7 3.375 11.15 3.825 ;
+         RECT 21.325 3.125 21.775 3.575 ;
+         RECT 16.5 4.8 16.95 5.25 ;
+         RECT 9.775 2.4 10.225 2.85 ;
+         RECT 12.775 2.3 13.225 2.75 ;
+         RECT 5.975 2.325 6.425 2.775 ;
+         RECT 5.495 4.75 5.945 5.2 ;
+         RECT 1.65 2.3 2.1 2.75 ;
+         POLYGON 5.845 4.975
+           5.845 5.342
+           5.1 6.087
+           5.1 6.95
+           2.53 6.95
+           2.53 5.95
+           0.625 5.95
+           0.625 5.6
+           2.88 5.6
+           2.88 6.6
+           4.75 6.6
+           4.75 5.943
+           5.495 5.198
+           5.495 4.975 ;
+         RECT 3.825 2.375 6.2 2.725 ;
+         RECT 0.675 2.35 1.725 2.7 ;
+         RECT 0.5 1.5 0.85 6.65 ;
+         RECT 3.65 1.275 4 5.975 ;
+         RECT 19.1 5.025 19.45 5.9 ;
+         RECT 8.675 2.25 10.225 2.6 ;
+         POLYGON 26.94 5.65
+           24.185 5.65
+           24.185 6.175
+           23.835 6.175
+           23.835 5.3
+           26.94 5.3 ;
+         POLYGON 12.95 2.3
+           14.17 2.3
+           14.17 4.85
+           20.175 4.85
+           20.175 3.3
+           20.525 3.3
+           20.525 5.2
+           13.82 5.2
+           13.82 2.65
+           12.95 2.65 ;
+         POLYGON 14.875 5.9
+           11.85 5.9
+           11.85 6.375
+           11.5 6.375
+           11.5 5.55
+           14.875 5.55 ;
+         POLYGON 8.505 6.65
+           8.505 4.647
+           8.15 4.292
+           8.15 3.228
+           8.55 2.828
+           8.55 1.56
+           8.9 1.56
+           8.9 2.972
+           8.5 3.372
+           8.5 4.148
+           8.855 4.503
+           8.855 6.65 ;
+         RECT 22.2 1.5 23.55 1.9 ;
+         POLYGON 26.73 6.65
+           26.73 5.174
+           28.079 3.825
+           31.35 3.825
+           31.35 4.175
+           28.223 4.175
+           27.08 5.318
+           27.08 6.65 ;
+         RECT 11.55 1.525 11.9 6.625 ;
+         RECT 21.75 3.1 24.55 3.5 ;
+         RECT 10.575 1.5 10.925 6.675 ;
+         POLYGON 22.135 6.4
+           22.135 3.95
+           24.603 3.95
+           25.428 3.125
+           27.55 3.125
+           27.55 3.475
+           25.572 3.475
+           24.747 4.3
+           22.485 4.3
+           22.485 6.4 ;
+         POLYGON 19.35 4.13
+           17.183 4.13
+           16.275 3.222
+           16.275 1.55
+           16.625 1.55
+           16.625 3.078
+           17.327 3.78
+           19.35 3.78 ;
+         POLYGON 26.75 2.65
+           29 2.65
+           29 2.3
+           28.5 2.3
+           28.5 1.35
+           28 1.35
+           28 2.3
+           26.75 2.3 ;
+      LAYER Metal2 ;
+         RECT 28.375 2.525 29.025 3.175 ;
+         RECT 12.8 3.15 13.45 3.8 ;
+         RECT 17.875 3.6 18.525 4.25 ;
+         RECT 21.975 5.925 22.625 6.575 ;
+         RECT 27.675 5.825 28.325 6.475 ;
+         RECT 19.1 5.9 19.75 6.55 ;
+         RECT 18.725 1.3 19.375 1.95 ;
+         RECT 21.825 1.3 22.475 1.95 ;
+         RECT 24.375 1.3 25.025 1.95 ;
+         RECT 23.535 5.9 24.185 6.55 ;
+         RECT 14.225 5.725 14.875 6.375 ;
+         RECT 17.875 5.825 18.525 6.475 ;
+         POLYGON 23.85 5.9
+           24.2 5.9
+           24.2 1.3
+           24.55 1.3
+           24.55 6.25
+           23.85 6.25 ;
+         RECT 19.1 1.3 19.45 6.54 ;
+         POLYGON 14.225 6.225
+           18.025 6.225
+           18.025 3.87
+           18.375 3.87
+           18.375 6.575
+           14.225 6.575 ;
+         POLYGON 27.825 6.3
+           27.825 2.825
+           28.7 2.825
+           28.7 3.175
+           28.175 3.175
+           28.175 6.3 ;
+         RECT 22.125 1.55 22.475 6.4 ;
+   END
+END SDFFC
+
+END LIBRARY

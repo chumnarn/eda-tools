@@ -1,0 +1,35 @@
+========================================================================
+  LAB 04 : timing constraints  (SDC and the two TDI modes)
+========================================================================
+  [INFO] sdc file        : timing_constraints.sdc
+  [INFO] def file        : from_ledit.def
+  [PASS] the shipped SDC defines exactly one clock
+         1 clock(s): clk
+  [PASS] the clock period is positive and the waveform is a valid duty cycle
+         period = 10000 ns (10.000 us), waveform = {0 5000} -> duty 50.0%
+  [PASS] the port the clock is attached to exists in the layout
+         get_ports clk -> found in the DEF pin list
+  [PASS] the port the clock is attached to exists in the RTL
+         get_ports clk -> found in the RTL port list
+  [INFO] rtl timescale   : 100ns per 1ps  (1 time unit = 100 ns)
+  [PASS] the SDC clock period is a whole number of RTL clock cycles
+         10000 ns / 100 ns = 100 clock cycles
+  [PASS] the complete SDC defines the same clock as the shipped one
+         clk on clk, period 10000 ns
+  [PASS] the complete SDC states the input and the output delays
+         set_input_delay present, set_output_delay present
+  [NOTE] the shipped SDC has no interface delays: the clock alone does not constrain the inputs or the outputs
+  [PASS] every port that the complete SDC constrains exists in the layout
+         7 constrained port references, all present
+  [INFO] install         : C:\Siemens\Custom IC\Custom IC 2025.4\x64
+  [PASS] the installed synthesis script offers both timing modes
+         tanner_timing_mode = "clocks" | "sdc"
+  [PASS] the "Define clocks" mode applies a fixed input and output delay
+         set_input_delay 1 / set_output_delay 1 -- a placeholder, not a real budget
+  [PASS] the "sdc" mode reads one SDC file per analysis mode
+         read_sdc $sdc_file -mode $mode, for every mode in MGC_modes
+  [NOTE] "Define clocks" is a shortcut for exploration. For a tape out run, use the SDC page so that the delays, loads and false paths are real.
+------------------------------------------------------------------------
+  11/11 checks passed
+  RESULT: PASS
+========================================================================

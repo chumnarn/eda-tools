@@ -1,0 +1,3089 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="th" xml:lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Tanner Digital Implementer (TDI) - Lab Guide</title>
+  <style>
+
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+  <style type="text/css">
+@page {
+size: A4;
+margin: 18mm 16mm;
+}
+:root {
+--ink: #1b1f24;
+--muted: #5a6570;
+--rule: #d7dde3;
+--accent: #0b5fa5;
+--accent2: #8a4b08;
+--code-bg: #f4f6f8;
+--head-bg: #eef2f6;
+--note-bg: #fff8e6;
+--warn-bg: #fdecec;
+}
+html {
+font-size: 11pt;
+}
+body {
+max-width: 210mm;
+margin: 0 auto;
+padding: 12mm 8mm 20mm;
+color: var(--ink);
+background: #fff;
+font-family: "Leelawadee UI", "Sarabun", "Noto Sans Thai", "Tahoma",
+"Segoe UI", system-ui, sans-serif;
+line-height: 1.65;
+-webkit-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4 {
+font-weight: 700;
+line-height: 1.3;
+color: var(--accent);
+margin: 1.6em 0 0.6em;
+page-break-after: avoid;
+}
+h1 {
+font-size: 1.85rem;
+margin-top: 0;
+padding-bottom: .35em;
+border-bottom: 3px solid var(--accent);
+}
+h2 {
+font-size: 1.45rem;
+margin-top: 1.9em;
+padding-bottom: .25em;
+border-bottom: 1px solid var(--rule);
+}
+h3 { font-size: 1.18rem; color: var(--accent2); }
+h4 { font-size: 1.05rem; color: var(--ink); }
+p { margin: .55em 0; }
+
+#TOC, nav#TOC {
+background: var(--head-bg);
+border: 1px solid var(--rule);
+border-radius: 6px;
+padding: 1em 1.4em;
+margin: 1.4em 0 2em;
+font-size: .95rem;
+}
+#TOC ul { margin: .25em 0; padding-left: 1.2em; }
+#TOC > ul > li > a { font-weight: 600; }
+
+table {
+border-collapse: collapse;
+width: 100%;
+margin: 1em 0 1.3em;
+font-size: .93rem;
+page-break-inside: avoid;
+}
+thead { background: var(--head-bg); }
+th, td {
+border: 1px solid var(--rule);
+padding: .42em .6em;
+text-align: left;
+vertical-align: top;
+}
+th {
+font-weight: 700;
+color: var(--accent);
+white-space: nowrap;
+}
+tbody tr:nth-child(even) { background: #fafbfc; }
+
+code {
+font-family: "Cascadia Mono", "Consolas", "DejaVu Sans Mono", monospace;
+font-size: .88em;
+background: var(--code-bg);
+padding: .1em .32em;
+border-radius: 3px;
+color: #0a3d62;
+}
+pre {
+background: var(--code-bg);
+border: 1px solid var(--rule);
+border-left: 4px solid var(--accent);
+border-radius: 4px;
+padding: .75em 1em;
+overflow-x: auto;
+page-break-inside: avoid;
+font-size: .86rem;
+line-height: 1.5;
+}
+pre code {
+background: none;
+padding: 0;
+color: #1b1f24;
+font-size: 1em;
+}
+
+blockquote {
+margin: 1em 0;
+padding: .7em 1.1em;
+background: var(--note-bg);
+border-left: 4px solid var(--accent2);
+color: #3d3226;
+}
+blockquote p { margin: .35em 0; }
+blockquote > p:first-child strong { color: var(--accent2); }
+
+ul, ol { margin: .5em 0 .8em; padding-left: 1.6em; }
+li { margin: .22em 0; }
+li > ul, li > ol { margin: .25em 0; }
+
+hr {
+border: none;
+border-top: 1px solid var(--rule);
+margin: 2em 0;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+@media print {
+body {
+max-width: none;
+padding: 0;
+font-size: 10pt;
+}
+h1 { page-break-before: always; }
+h1:first-of-type { page-break-before: avoid; }
+pre, table, blockquote { page-break-inside: avoid; }
+a { color: var(--ink); }
+}
+</style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Tanner Digital Implementer (TDI) - Lab Guide</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#ภาคนำ" id="toc-ภาคนำ">ภาคนำ</a>
+<ul>
+<li><a href="#คู่มือนี้คืออะไร" id="toc-คู่มือนี้คืออะไร">คู่มือนี้คืออะไร</a></li>
+<li><a href="#ผู้เรียนจะได้อะไร" id="toc-ผู้เรียนจะได้อะไร">ผู้เรียนจะได้อะไร</a></li>
+<li><a href="#ขอบเขตของคู่มือนี้" id="toc-ขอบเขตของคู่มือนี้">ขอบเขตของคู่มือนี้</a></li>
+<li><a href="#สิ่งที่ต้องมี" id="toc-สิ่งที่ต้องมี">สิ่งที่ต้องมี</a></li>
+<li><a href="#โครงสร้างโปรเจกต์" id="toc-โครงสร้างโปรเจกต์">โครงสร้างโปรเจกต์</a></li>
+<li><a href="#วิธีใช้คู่มือนี้" id="toc-วิธีใช้คู่มือนี้">วิธีใช้คู่มือนี้</a></li>
+<li><a href="#ข้อตกลงเบื้องต้น" id="toc-ข้อตกลงเบื้องต้น">ข้อตกลงเบื้องต้น</a></li>
+</ul></li>
+<li><a href="#บทที่-1--tdi-อยู่ตรงไหนของกระบวนการ" id="toc-บทที่-1--tdi-อยู่ตรงไหนของกระบวนการ">บทที่ 1 — TDI
+อยู่ตรงไหนของกระบวนการ</a>
+<ul>
+<li><a href="#11-ภาพรวมสามชั้น" id="toc-11-ภาพรวมสามชั้น">1.1
+ภาพรวมสามชั้น</a></li>
+<li><a href="#12-โปรโตคอลการส่งไฟล์" id="toc-12-โปรโตคอลการส่งไฟล์">1.2
+โปรโตคอลการส่งไฟล์</a></li>
+<li><a href="#13-สิบขั้นตอนของ-flow" id="toc-13-สิบขั้นตอนของ-flow">1.3
+สิบขั้นตอนของ flow</a></li>
+<li><a href="#14-ไฟล์ที่-flow-เขียนออกมา" id="toc-14-ไฟล์ที่-flow-เขียนออกมา">1.4 ไฟล์ที่ flow เขียนออกมา</a></li>
+<li><a href="#15-ไฟล์ติดตั้งของผลิตภัณฑ์ที่คู่มือนี้อ้างถึง" id="toc-15-ไฟล์ติดตั้งของผลิตภัณฑ์ที่คู่มือนี้อ้างถึง">1.5
+ไฟล์ติดตั้งของผลิตภัณฑ์ที่คู่มือนี้อ้างถึง</a></li>
+</ul></li>
+<li><a href="#บทที่-2--หน้าต่าง-setup-tdi-ทั้ง-7-หน้า" id="toc-บทที่-2--หน้าต่าง-setup-tdi-ทั้ง-7-หน้า">บทที่ 2 — หน้าต่าง Setup TDI ทั้ง 7
+หน้า</a>
+<ul>
+<li><a href="#21-หน้า-run-file" id="toc-21-หน้า-run-file">2.1 หน้า Run
+File</a></li>
+<li><a href="#22-หน้า-tech-and-lib" id="toc-22-หน้า-tech-and-lib">2.2 หน้า
+Tech and Lib</a></li>
+<li><a href="#23-หน้า-netlistrtl" id="toc-23-หน้า-netlistrtl">2.3 หน้า
+Netlist/RTL</a></li>
+<li><a href="#24-หน้า-timing" id="toc-24-หน้า-timing">2.4 หน้า
+Timing</a></li>
+<li><a href="#25-หน้า-floorplan" id="toc-25-หน้า-floorplan">2.5 หน้า
+Floorplan</a></li>
+<li><a href="#26-หน้า-power-plan" id="toc-26-หน้า-power-plan">2.6 หน้า
+Power Plan</a></li>
+<li><a href="#27-หน้า-additional-commands" id="toc-27-หน้า-additional-commands">2.7 หน้า Additional Commands</a></li>
+</ul></li>
+<li><a href="#บทที่-3--lab-01-ถึง-lab-03-อินพุตของ-flow" id="toc-บทที่-3--lab-01-ถึง-lab-03-อินพุตของ-flow">บทที่ 3 — Lab 01 ถึง Lab 03:
+อินพุตของ flow</a>
+<ul>
+<li><a href="#lab-01--rtl-กับพอร์ตใน-def-ต้องตรงกัน" id="toc-lab-01--rtl-กับพอร์ตใน-def-ต้องตรงกัน">Lab 01 — RTL กับพอร์ตใน DEF
+ต้องตรงกัน</a></li>
+<li><a href="#lab-02--boundary-และตำแหน่งพอร์ต" id="toc-lab-02--boundary-และตำแหน่งพอร์ต">Lab 02 — Boundary
+และตำแหน่งพอร์ต</a></li>
+<li><a href="#lab-03--เทคโนโลยีและชุดเซลล์มาตรฐาน" id="toc-lab-03--เทคโนโลยีและชุดเซลล์มาตรฐาน">Lab 03 —
+เทคโนโลยีและชุดเซลล์มาตรฐาน</a></li>
+</ul></li>
+<li><a href="#บทที่-4--lab-04-ถึง-lab-06-เงื่อนไขเวลา-scan-และสัญญาของไฟล์ตั้งค่า" id="toc-บทที่-4--lab-04-ถึง-lab-06-เงื่อนไขเวลา-scan-และสัญญาของไฟล์ตั้งค่า">บทที่ 4
+— Lab 04 ถึง Lab 06: เงื่อนไขเวลา scan และสัญญาของไฟล์ตั้งค่า</a>
+<ul>
+<li><a href="#lab-04--เงื่อนไขเวลา-และสองโหมดของหน้า-timing" id="toc-lab-04--เงื่อนไขเวลา-และสองโหมดของหน้า-timing">Lab 04 — เงื่อนไขเวลา
+และสองโหมดของหน้า Timing</a></li>
+<li><a href="#lab-05--การตั้งค่า-scan" id="toc-lab-05--การตั้งค่า-scan">Lab 05
+— การตั้งค่า scan</a></li>
+<li><a href="#lab-06--สัญญาระหว่างหน้า-setup-tdi-กับ-flow" id="toc-lab-06--สัญญาระหว่างหน้า-setup-tdi-กับ-flow">Lab 06 — สัญญาระหว่างหน้า
+Setup TDI กับ flow</a></li>
+</ul></li>
+<li><a href="#บทที่-5--การรัน-tdi-จริง-และการแก้ปัญหา" id="toc-บทที่-5--การรัน-tdi-จริง-และการแก้ปัญหา">บทที่ 5 — การรัน TDI จริง
+และการแก้ปัญหา</a>
+<ul>
+<li><a href="#51-ขั้นตอนใน-l-edit-ตั้งแต่ต้นจนจบ" id="toc-51-ขั้นตอนใน-l-edit-ตั้งแต่ต้นจนจบ">5.1 ขั้นตอนใน L-Edit
+ตั้งแต่ต้นจนจบ</a></li>
+<li><a href="#52-สิ่งที่เกิดขึ้นบนเครื่อง-linux" id="toc-52-สิ่งที่เกิดขึ้นบนเครื่อง-linux">5.2 สิ่งที่เกิดขึ้นบนเครื่อง Linux</a></li>
+<li><a href="#53-ผลลัพธ์ที่ได้กลับมา" id="toc-53-ผลลัพธ์ที่ได้กลับมา">5.3
+ผลลัพธ์ที่ได้กลับมา</a></li>
+<li><a href="#54-ตารางแก้ปัญหา" id="toc-54-ตารางแก้ปัญหา">5.4
+ตารางแก้ปัญหา</a></li>
+<li><a href="#55-ลำดับที่แนะนำในการทำงานจริง" id="toc-55-ลำดับที่แนะนำในการทำงานจริง">5.5 ลำดับที่แนะนำในการทำงานจริง</a></li>
+</ul></li>
+<li><a href="#ภาคผนวก" id="toc-ภาคผนวก">ภาคผนวก</a>
+<ul>
+<li><a href="#61-สัญญาตัวแปรฉบับเต็ม" id="toc-61-สัญญาตัวแปรฉบับเต็ม">6.1
+สัญญาตัวแปรฉบับเต็ม</a></li>
+<li><a href="#62-ตัวแปรของ-flow-ที่ตั้งค่าได้จากหน้า-additional-commands" id="toc-62-ตัวแปรของ-flow-ที่ตั้งค่าได้จากหน้า-additional-commands">6.2 ตัวแปรของ
+flow ที่ตั้งค่าได้จากหน้า Additional Commands</a></li>
+<li><a href="#63-ตัวแปรของ-engine-ที่ตั้งได้ด้วย-set_param" id="toc-63-ตัวแปรของ-engine-ที่ตั้งได้ด้วย-set_param">6.3 ตัวแปรของ engine
+ที่ตั้งได้ด้วย <code>set_param</code></a></li>
+<li><a href="#64-ข้อมูลตัวอย่าง-adc8-ที่วัดได้จริง" id="toc-64-ข้อมูลตัวอย่าง-adc8-ที่วัดได้จริง">6.4 ข้อมูลตัวอย่าง ADC8
+ที่วัดได้จริง</a></li>
+<li><a href="#65-สูตรที่-flow-ใช้คำนวณแผน-power" id="toc-65-สูตรที่-flow-ใช้คำนวณแผน-power">6.5 สูตรที่ flow ใช้คำนวณแผน
+power</a></li>
+<li><a href="#66-ไฟล์ทั้งหมดที่คัดลอกมาในโปรเจกต์นี้" id="toc-66-ไฟล์ทั้งหมดที่คัดลอกมาในโปรเจกต์นี้">6.6
+ไฟล์ทั้งหมดที่คัดลอกมาในโปรเจกต์นี้</a></li>
+<li><a href="#67-ที่มาและลิขสิทธิ์" id="toc-67-ที่มาและลิขสิทธิ์">6.7
+ที่มาและลิขสิทธิ์</a></li>
+<li><a href="#68-สร้างเอกสารใหม่" id="toc-68-สร้างเอกสารใหม่">6.8
+สร้างเอกสารใหม่</a></li>
+</ul></li>
+</ul>
+</nav>
+<h2 id="ภาคนำ">ภาคนำ</h2>
+<h3 id="คู่มือนี้คืออะไร">คู่มือนี้คืออะไร</h3>
+<p>คู่มือนี้สอน <strong>Tanner Digital Implementer (TDI)</strong> —
+เครื่องมือที่นำ RTL ดิจิทัล เข้าไปวางและเดินสาย (place and route)
+ภายในเลย์เอาต์ของวงจรอนุกรม-อนาล็อกที่ออกแบบ ด้วย L-Edit</p>
+<p>TDI ประกอบด้วยเครื่องยนต์สองตัวที่ทำงานอยู่คนละฝั่งกัน</p>
+<table>
+<thead>
+<tr>
+<th>ส่วน</th>
+<th>เครื่องยนต์</th>
+<th>ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>การสังเคราะห์ (synthesis)</td>
+<td><strong>Oasys AMS</strong></td>
+<td>RTL → netlist ระดับ gate</td>
+</tr>
+<tr>
+<td>การวางและเดินสาย (P&amp;R)</td>
+<td><strong>Nitro AMS</strong></td>
+<td>netlist ระดับ gate → เลย์เอาต์</td>
+</tr>
+</tbody>
+</table>
+<p>ส่วนที่คุณตั้งค่าอยู่ในหน้าต่าง <strong>Setup TDI</strong> ของ L-Edit
+เป็นแค่ตัวกรอกข้อมูล หน้าต่างนี้ <strong>ไม่ได้รันอะไรเอง</strong> —
+มันเขียนไฟล์ตั้งค่าออกมาเป็น TCL แล้วส่งไฟล์นั้นไปยังเครื่อง Linux ที่ติดตั้ง Nitro
+เพื่อให้ไปรันที่นั่น</p>
+<blockquote>
+<p><strong>สิ่งที่ทำให้คู่มือนี้ต่างจากคู่มือทั่วไป</strong></p>
+<p>คู่มือนี้เขียนจากการ <strong>อ่านสคริปต์จริงในเครื่อง</strong> ไม่ใช่จากการเล่าเรื่อง
+ไฟล์ที่อ้างอิงทุกอย่างอยู่ใน
+<code>C:\Siemens\Custom IC\Custom IC 2025.4\x64</code> และตัวอย่าง ADC8
+ที่ติดตั้งมาพร้อมผลิตภัณฑ์</p>
+<p>ตัวเลขทุกตัวในคู่มือนี้มาจากการรันบนเครื่องนี้จริง ตัวอย่างเช่น ขนาดบล็อก 177.800 ×
+53.000 µm ความหนาแน่นพอร์ต 15.200 µm และความกว้าง power ring ที่ flow คำนวณได้
+4.1 µm</p>
+</blockquote>
+<h3 id="ผู้เรียนจะได้อะไร">ผู้เรียนจะได้อะไร</h3>
+<p>เมื่อทำครบทุก lab ผู้เรียนจะทำสิ่งเหล่านี้ได้ด้วยตัวเอง</p>
+<ol type="1">
+<li>อธิบายได้ว่า <strong>TDI, Oasys และ Nitro อยู่ตรงไหนของกระบวนการ</strong>
+และไฟล์ไหนถูกส่งข้ามไปยังเครื่อง Linux</li>
+<li>ตั้งค่า <strong>หน้า Setup TDI ทั้ง 7 หน้า</strong> ได้อย่างถูกต้อง
+ตั้งแต่ไฟล์เทคโนโลยี ไปจนถึงแผน power และ floorplan</li>
+<li>อ่าน <strong>สัญญาระหว่างหน้าต่าง Setup TDI กับ flow</strong> ได้
+คือรู้ว่าค่าที่กรอกในแต่ละช่องไปอยู่ในตัวแปร TCL ตัวไหน และถูกสคริปต์ไฟล์ไหนอ่าน</li>
+<li><strong>ตรวจความถูกต้องของอินพุตทั้งหมดก่อนรันจริง</strong> ได้ด้วยตัวเอง
+โดยไม่ต้องรอให้ flow พังแล้วค่อยหาสาเหตุ</li>
+<li>แก้ปัญหาที่พบบ่อยของการรัน TDI ได้ ทั้งจากฝั่งข้อมูลนำเข้า (LEF/Liberty/PTF
+ไม่ตรงกัน, DEF ไม่ตรงกับ RTL) และจากฝั่งแผนที่ (power ring ชิดเกิน spacing, จำนวน
+spacing ของ ring ไม่ถูกต้อง)</li>
+<li>อ่าน <strong>ผลลัพธ์ของการวางและเดินสาย</strong> ได้
+และรู้ว่าไฟล์ไหนอยู่ตรงไหน</li>
+</ol>
+<h3 id="ขอบเขตของคู่มือนี้">ขอบเขตของคู่มือนี้</h3>
+<p>คู่มือนี้ครอบคลุม <strong>การเตรียมอินพุต การตั้งค่า และการตรวจสอบ</strong>
+ของกระบวนการ TDI ตั้งแต่ไฟล์ LEF/Liberty/PTF จนถึงการอ่านรายงานผลลัพธ์</p>
+<p>สิ่งที่ <strong>อยู่นอกขอบเขต</strong> เพราะต้องมีเครื่อง Linux ที่ติดตั้ง Nitro
+และมี license:</p>
+<ul>
+<li>การสังเคราะห์และวางเดินสายจริง ๆ (บทที่ 5
+อธิบายขั้นตอนและผลลัพธ์ที่คาดว่าจะได้)</li>
+<li>การแก้ ECO หลังวางเดินสาย และการทำ LVS / DRC / signoff</li>
+</ul>
+<p>เนื่องจากเครื่องนี้ไม่มี Nitro ทุก lab ในคู่มือนี้จึงทำงานในส่วนที่
+<strong>ตรวจสอบได้จริงบนเครื่อง Windows</strong> โดยไม่ต้องใช้ Nitro เลย
+ผลของแต่ละ lab คือ PASS/FAIL จริง ไม่ใช่ตัวอย่างที่แต่งขึ้น</p>
+<h3 id="สิ่งที่ต้องมี">สิ่งที่ต้องมี</h3>
+<table>
+<thead>
+<tr>
+<th>ต้องมี</th>
+<th>หมายเหตุ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Custom IC Platform 2025.4</strong></td>
+<td>ติดตั้งอยู่ที่ <code>C:\Siemens\Custom IC\Custom IC 2025.4\x64</code>
+แล้ว</td>
+</tr>
+<tr>
+<td><strong>ไฟล์ตัวอย่าง ADC8</strong></td>
+<td>อยู่ที่
+<code>...\Documents\SiemensEDA\CustomIC_2025.4\Designs\ADC8</code>
+แล้ว</td>
+</tr>
+<tr>
+<td><strong>Node.js 18 ขึ้นไป</strong></td>
+<td>ใช้รันตัวตรวจสอบใน lab — ตรวจ <code>node -v</code></td>
+</tr>
+<tr>
+<td><strong>Generic 250 nm libraries</strong></td>
+<td>คัดลอกมาไว้ใน <code>design/files/</code> แล้ว ไม่ต้องติดตั้ง PDK เพิ่ม</td>
+</tr>
+<tr>
+<td><strong>pandoc + Google Chrome</strong></td>
+<td>ใช้สร้าง HTML/PDF ของคู่มือ — ต้องมีเฉพาะตอนจะสร้างเอกสารใหม่</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>เรื่องการรัน Nitro จริง</strong></p>
+<p>Nitro เป็นเครื่องยนต์ของ Mentor/Siemens ที่ทำงานบน Linux เท่านั้น
+ไฟล์ตัวอย่างทั้งหมดในคู่มือนี้เตรียมไว้ครบแล้ว ส่วนที่เหลือคือการส่งไฟล์ไปรันบนเครื่อง Linux
+ของคุณ ซึ่งอธิบายไว้ในบทที่ 5</p>
+</blockquote>
+<h3 id="โครงสร้างโปรเจกต์">โครงสร้างโปรเจกต์</h3>
+<pre class="text"><code>tdi_lab/
+├── README.md                     หน้าหน้าแรกของโปรเจกต์
+├── docs/
+│   ├── parts/                    ต้นฉบับที่แยกเป็นส่วน ๆ
+│   ├── Lab_Guide_TDI.md          คู่มือฉบับเต็ม (Markdown)
+│   ├── Lab_Guide_TDI.html        คู่มือฉบับเต็ม (HTML)
+│   └── Lab_Guide_TDI.pdf         คู่มือฉบับเต็ม (PDF)
+├── tools/
+│   ├── checks/                   ตัวตรวจสอบที่ lab 01..06 เรียกใช้ (Node.js)
+│   ├── run_template.cmd          เทมเพลต run.cmd ของแต่ละ lab
+│   ├── make-runners.ps1          ตัวสร้าง run.cmd ของทุก lab
+│   ├── build-docs.ps1            รวม Markdown แล้วสร้าง HTML + PDF
+│   └── make-zip.ps1              สร้างไฟล์ ZIP ส่งมอบ
+├── design/
+│   ├── from_ledit.def            boundary + พอร์ตที่ L-Edit export ออกมา
+│   ├── scanchain.tcl             สคริปต์ตั้งค่า scan chain
+│   ├── nitro_settings_ADCCtrl.tcl  ตัวอย่างไฟล์ตั้งค่าที่ Setup TDI เขียนออกมา
+│   └── files/                    LEF / Liberty / PTF / SDC / RTL ที่ต้องส่งไป Linux
+├── lab01_rtl_ports/    ...  lab06_settings/
+└── lab07_regression/            รันทุก lab พร้อมกันและสรุปผล</code></pre>
+<h3 id="วิธีใช้คู่มือนี้">วิธีใช้คู่มือนี้</h3>
+<p>รัน lab เดียวด้วย</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab01_rtl_ports</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p>รันทั้งชุดด้วย</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab07_regression</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p>แล้วดูรหัสจบของ <code>cmd.exe</code></p>
+<table>
+<thead>
+<tr>
+<th>รหัส</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>ผ่าน (PASS)</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>ไม่ผ่าน (FAIL)</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>หาเครื่องมือหรือโฟลเดอร์ไม่เจอ</td>
+</tr>
+</tbody>
+</table>
+<p>ผลลัพธ์ของแต่ละ lab จะอยู่ใน <code>&lt;lab&gt;/results/output.txt</code>
+และไฟล์ <code>result.txt</code> จะมีคำว่า <code>PASS</code> หรือ
+<code>FAIL</code></p>
+<h3 id="ข้อตกลงเบื้องต้น">ข้อตกลงเบื้องต้น</h3>
+<ul>
+<li><strong>ตัวเลขทุกตัวในคู่มือนี้มาจากการรันจริง</strong> ถ้าคุณทำตามแล้วได้ตัวเลข
+ที่ต่างจากที่เขียนไว้ แปลว่ามีอะไรเปลี่ยนไป — ให้ตรวจสอบก่อน</li>
+<li><strong>ลำดับของไฟล์ LEF สำคัญ</strong>: tech LEF ต้องมาก่อน standard
+cell LEF เสมอ (หัวข้อ 2.2)</li>
+<li><strong>ตัวแปร TCL ที่หายไปไม่ใช่ข้อผิดพลาด</strong>: TCL
+อ่านตัวแปรที่ไม่มีได้เป็นค่าว่าง flow จะไม่หยุด แต่จะผลิตผลลัพธ์ที่ผิด (lab 06)</li>
+<li><strong>ไฟล์ <code>.cmd</code> ในโปรเจกต์นี้เป็น ASCII ล้วน</strong> เพราะ
+Thai หรือ UTF-8 ในไฟล์ <code>.cmd</code> ทำให้ <code>cmd.exe</code>
+อ่านโครงสร้างบรรทัดผิด</li>
+</ul>
+<hr />
+<h2 id="บทที่-1--tdi-อยู่ตรงไหนของกระบวนการ">บทที่ 1 — TDI
+อยู่ตรงไหนของกระบวนการ</h2>
+<h3 id="11-ภาพรวมสามชั้น">1.1 ภาพรวมสามชั้น</h3>
+<p>TDI ไม่ใช่เครื่องมือเดียว แต่เป็น <strong>กลไกเชื่อม</strong>
+ระหว่างเครื่องมือสองฝั่ง</p>
+<pre class="text"><code>   เครื่อง Windows (L-Edit)                  เครื่อง Linux (Nitro / Oasys)
+   ┌────────────────────────────┐            ┌──────────────────────────────┐
+   │  S-Edit / L-Edit           │            │  Oasys AMS   (synthesis)     │
+   │   ├ วาด boundary           │            │   └ อ่าน LEF / Liberty / PTF │
+   │   ├ วาดพอร์ต              │            │   └ อ่าน RTL               │
+   │   └ โหลด design            │            │                              │
+   │                            │  คัดลอกไฟล์  │  Nitro AMS   (place &amp; route) │
+   │  ┌──────────────────────┐  │ ──────────► │   └ floorplan, powerplan   │
+   │  │  Setup TDI (7 หน้า)  │  │   /tmp/     │   └ place, cts, route      │
+   │  │  ↓ เขียนไฟล์ตั้งค่า   │  │  &lt;user&gt;_   │   └ export                 │
+   │  │  nitro_settings.tcl  │  │  nitro_data│                              │
+   │  └──────────────────────┘  │            └──────────────────────────────┘
+   └────────────────────────────┘</code></pre>
+<p><strong>สิ่งที่ต้องจำ</strong></p>
+<ol type="1">
+<li>หน้าต่าง Setup TDI อยู่ฝั่ง Windows แต่ <strong>เครื่องยนต์รันอยู่ฝั่ง
+Linux</strong></li>
+<li>ไฟล์ทั้งหมดในโฟลเดอร์ข้อมูลของ TDI จะถูกคัดลอกไปที่
+<code>/tmp/&lt;ชื่อผู้ใช้&gt;_nitro_data</code> บนเครื่อง Linux</li>
+<li>ผลลัพธ์จะถูกดึงกลับมาที่โฟลเดอร์ <code>results/</code>
+ของโฟลเดอร์ข้อมูลเดิม</li>
+</ol>
+<p>หลักการข้อ 2 ไม่ใช่ข้อสันนิษฐาน แต่มาจากสคริปต์จริง
+<code>LinuxUtils/nitro_worker</code> ในตัวผลิตภัณฑ์:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.defaultWorkDir <span class="op">=</span> getpass.getuser() <span class="op">+</span> <span class="st">&quot;_nitro_data&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">self</span>.jobpath <span class="op">=</span> os.path.abspath(os.path.join(basejobpath, <span class="va">self</span>.defaultWorkDir))</span></code></pre></div>
+<p>โดย <code>basejobpath = tempfile.gettempdir()</code> บน Linux ก็คือ
+<code>/tmp</code></p>
+<h3 id="12-โปรโตคอลการส่งไฟล์">1.2 โปรโตคอลการส่งไฟล์</h3>
+<p>สคริปต์ <code>nitro_worker</code> เป็นตัวกลางที่ L-Edit ใช้คุยกับเครื่อง Linux
+คำสั่งที่รองรับ (ดูจากโค้ดจริงในไฟล์):</p>
+<table>
+<thead>
+<tr>
+<th>คำสั่ง</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NITRO_INITJOB</code></td>
+<td>สร้างโฟลเดอร์ทำงาน</td>
+</tr>
+<tr>
+<td><code>ATTACHJOB</code></td>
+<td>เข้าต่อกับงานที่ค้างอยู่ด้วย job id</td>
+</tr>
+<tr>
+<td><code>PUT</code> / <code>GET</code> / <code>GETFILE</code></td>
+<td>ส่งและดึงไฟล์</td>
+</tr>
+<tr>
+<td><code>MKDIR</code> / <code>DELDIR</code> /
+<code>DEL_FILE_REC</code></td>
+<td>จัดการโฟลเดอร์</td>
+</tr>
+<tr>
+<td><code>GSTAT</code> / <code>STAT</code></td>
+<td>ดูขนาดไฟล์เพื่อเทียบว่าอัปเดตแล้วหรือยัง</td>
+</tr>
+<tr>
+<td><code>POSTP</code></td>
+<td>งานหลังประมวลผล เช่น รวมรายงานและย้ายไฟล์ KPI</td>
+</tr>
+</tbody>
+</table>
+<p>งานหลังประมวลผล <code>POSTP</code> มีสามแบบที่ต้องรู้ เพราะเป็นเหตุผลว่า
+<strong>ทำไมถึงหาไฟล์รายงานไม่เจอในบางครั้ง</strong></p>
+<table>
+<thead>
+<tr>
+<th>คำสั่งย่อย</th>
+<th>ผลลัพธ์ที่ได้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>merge_reports</code></td>
+<td>โฟลเดอร์ <code>reports/</code> ถูกคัดลอกเข้า
+<code>results/reports/</code></td>
+</tr>
+<tr>
+<td><code>kpi_reports</code></td>
+<td>โฟลเดอร์ <code>.kpi_files/</code> และไฟล์ <code>Kpi.html</code>
+ถูกย้ายเข้า <code>results/</code></td>
+</tr>
+<tr>
+<td><code>synthesized_sdc</code></td>
+<td>ไฟล์ SDC ที่ synthesis เขียนได้ถูกคัดลอกเข้า <code>results/</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>เคล็ดลับในการหาไฟล์ที่หาย</strong></p>
+<p>ถ้าคุณหาไฟล์รายงานไม่เจอ ให้ดู <code>results/reports/</code> ก่อนเสมอ
+เพราะรายงานหลักจะอยู่ในโฟลเดอร์ <code>reports/</code> บนเครื่อง Linux
+แล้วถึงถูกคัดลอกมาอยู่ <code>results/reports/</code> ตอนปิดงาน</p>
+</blockquote>
+<h3 id="13-สิบขั้นตอนของ-flow">1.3 สิบขั้นตอนของ flow</h3>
+<p>สคริปต์ตัวขับคือ <code>ap_ref_flows/aprisa_ams.tcl</code> ในตัวผลิตภัณฑ์
+มันเลือกขั้นตอนจากตัวแปร <code>ams_run_control</code></p>
+<table>
+<thead>
+<tr>
+<th>ค่า</th>
+<th>ขั้นตอนที่ทำ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>synpnr</code></td>
+<td>ทั้งสิบขั้นตอน</td>
+</tr>
+<tr>
+<td><code>syn</code></td>
+<td><code>data_prep</code> → <code>rtl_synthesis</code> →
+<code>floorplan</code> → <code>powerplan</code> →
+<code>physical_synthesis</code></td>
+</tr>
+<tr>
+<td><code>pnr</code></td>
+<td>ตั้งแต่ <code>data_prep</code> จนถึง <code>export</code> (รวมขั้น
+<code>rtl_synthesis</code> ด้วย)</td>
+</tr>
+</tbody>
+</table>
+<p>รายชื่อขั้นตอนตามลำดับ:</p>
+<pre class="text"><code>data_prep → rtl_synthesis → floorplan → powerplan → physical_synthesis
+          → place → cts → post_cts → route → export</code></pre>
+<blockquote>
+<p><strong>ข้อสังเกตที่ต้องระวัง</strong></p>
+<p>โหมด <code>pnr</code> ก็ยังรันขั้น <code>rtl_synthesis</code> อยู่
+ดังนั้นถ้าคุณเตรียม netlist ระดับ gate ไว้แล้วแล้วเลือก <code>pnr</code>
+ขั้นนี้จะทำงานกับ netlist ที่คุณให้ ไม่ใช่ RTL เดิม</p>
+</blockquote>
+<h3 id="14-ไฟล์ที่-flow-เขียนออกมา">1.4 ไฟล์ที่ flow เขียนออกมา</h3>
+<p>จาก <code>tanner_oasys.tcl</code> (ขั้น synthesis) และ
+<code>ap_ref_flows/9_export.tcl</code> (ขั้น export) ไฟล์ผลลัพธ์หลักคือ</p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>มาจาก</th>
+<th>ใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results/&lt;top&gt;_syn.v</code></td>
+<td>ขั้น synthesis</td>
+<td>netlist ระดับ gate</td>
+</tr>
+<tr>
+<td><code>dbs/&lt;top&gt;_syn</code></td>
+<td>ขั้น synthesis</td>
+<td>ฐานข้อมูลของ Oasys (ไว้ต่อยอด)</td>
+</tr>
+<tr>
+<td><code>&lt;top&gt;_syn.sdc</code></td>
+<td>ขั้น synthesis</td>
+<td>SDC ที่ synthesis เขียนกลับมา</td>
+</tr>
+<tr>
+<td><code>results/&lt;top&gt;_scan.def</code></td>
+<td>ขั้น synthesis</td>
+<td>นิยาม scan chain (มีเมื่อเปิด scan)</td>
+</tr>
+<tr>
+<td><code>results/reports/</code></td>
+<td>ทุกขั้น</td>
+<td>รายงานทั้งหมด</td>
+</tr>
+<tr>
+<td><code>results/Kpi.html</code></td>
+<td>ขั้น export</td>
+<td>สรุปตัวชี้วัดหลัก</td>
+</tr>
+</tbody>
+</table>
+<h3 id="15-ไฟล์ติดตั้งของผลิตภัณฑ์ที่คู่มือนี้อ้างถึง">1.5
+ไฟล์ติดตั้งของผลิตภัณฑ์ที่คู่มือนี้อ้างถึง</h3>
+<p>ทั้งหมดอยู่ที่ <code>C:\Siemens\Custom IC\Custom IC 2025.4\x64</code></p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>หน้าที่</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tanner_oasys.tcl</code></td>
+<td>สคริปต์ขั้น synthesis — อ่าน LEF/Liberty/PTF/RTL แล้วสังเคราะห์</td>
+</tr>
+<tr>
+<td><code>nitro.tcl</code></td>
+<td>จุดเข้าสู่ flow ของ Nitro</td>
+</tr>
+<tr>
+<td><code>ap_ref_flows/aprisa_ams.tcl</code></td>
+<td>ตัวขับ flow สิบขั้นตอน</td>
+</tr>
+<tr>
+<td><code>ap_ref_flows/flow_variables.tcl</code></td>
+<td>ค่าปริยายของตัวแปรทั้งหมดของ flow</td>
+</tr>
+<tr>
+<td><code>ap_ref_flows/0..9_*.tcl</code></td>
+<td>สคริปต์ของแต่ละขั้นตอน</td>
+</tr>
+<tr>
+<td><code>ap_ref_flows/tcl_procs/</code></td>
+<td>กระบวนการช่วยเหลือของ flow</td>
+</tr>
+<tr>
+<td><code>LinuxUtils/nitro_worker</code></td>
+<td>ตัวกลางส่งไฟล์ไปยังเครื่อง Linux</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="บทที่-2--หน้าต่าง-setup-tdi-ทั้ง-7-หน้า">บทที่ 2 — หน้าต่าง Setup TDI ทั้ง 7
+หน้า</h2>
+<p>หน้าต่าง Setup TDI มี 7 หน้า แต่ละหน้าคือการกรอกกลุ่มของตัวแปรที่ flow อ่าน
+หัวข้อนี้อธิบายแต่ละหน้าว่า <strong>ถามอะไร เก็บลงตัวแปรอะไร และ flow
+เอาไปทำอะไร</strong></p>
+<p>หมายเหตุเรื่องชื่อ: ในตัวเครื่องมือชื่อเลเยอร์ที่ใช้ทำ P&amp;R boundary เขียนว่า
+<code>prBoundray:drawing</code> (พิมพ์ผิดจาก Boundary) —
+ให้จำไว้เพราะต้องกำหนด เป็น Icon Layer ให้ตรงชื่อพอดี</p>
+<h3 id="21-หน้า-run-file">2.1 หน้า Run File</h3>
+<table>
+<thead>
+<tr>
+<th>ช่อง</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Data Directory</td>
+<td>โฟลเดอร์ที่เก็บผลลัพธ์ของแต่ละรอบ (มี timestamp)</td>
+</tr>
+<tr>
+<td>Use Custom Run Script</td>
+<td>ใช้สคริปต์ TCL ของตัวเองแทนสคริปต์ที่ TDI สร้างให้</td>
+</tr>
+</tbody>
+</table>
+<p><strong>สิ่งที่ flow เอาไปทำ</strong></p>
+<ul>
+<li>โฟลเดอร์ข้อมูลจะถูกคัดลอกไปที่ <code>/tmp/&lt;user&gt;_nitro_data</code>
+บนเครื่อง Linux (ยกเว้นโฟลเดอร์ <code>results/</code>
+ที่เก็บผลลัพธ์ที่ดึงกลับมา)</li>
+<li>ถ้าไม่เลือก Custom Run Script TDI จะสร้างสคริปต์ขับ Nitro จากค่าที่กรอก
+คุณจึงไม่ต้องเขียน TCL เอง — แต่ถ้าอยากควบคุมลำดับขั้นตอนเอง ให้เขียนสคริปต์แล้วชี้ที่นี่</li>
+</ul>
+<p><strong>ตัวแปรที่เกี่ยวข้อง</strong></p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>อ่านที่</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ams_run_control</code></td>
+<td><code>aprisa_ams.tcl:42</code></td>
+<td><code>synpnr</code> / <code>syn</code> / <code>pnr</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-หน้า-tech-and-lib">2.2 หน้า Tech and Lib</h3>
+<p>หน้านี้รวบรวมไฟล์สี่ชนิดที่ต้องให้กับ flow</p>
+<table>
+<thead>
+<tr>
+<th>ชนิดไฟล์</th>
+<th>สกุล</th>
+<th>ให้ข้อมูลอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>LEF</strong></td>
+<td><code>.lef</code></td>
+<td>รูปทรงและ layout ของเซลล์ + ชั้นโลหะของเทคโนโลยี</td>
+</tr>
+<tr>
+<td><strong>Liberty</strong></td>
+<td><code>.lib</code></td>
+<td>เวลา กำลัง และพื้นที่ของเซลล์</td>
+</tr>
+<tr>
+<td><strong>PTF</strong></td>
+<td><code>.ptf</code></td>
+<td>ความต้านทานและความจุของชั้นโลหะ (Nitro ใช้เท่านั้น)</td>
+</tr>
+<tr>
+<td><strong>Corner</strong></td>
+<td>—</td>
+<td>มุมของกระบวนการ ได้สูงสุด 3: <code>fast</code> / <code>nominal</code> /
+<code>slow</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>สิ่งที่ flow เอาไปทำ — และนี่คือจุดที่ทำให้สับสน</strong></p>
+<p>หน้าเดียวกันนี้ถูกอ่านโดย <strong>สองชุดสคริปต์ที่ใช้ชื่อตัวแปรต่างกัน</strong></p>
+<table>
+<thead>
+<tr>
+<th>ผู้อ่าน</th>
+<th>ตัวแปรที่อ่าน</th>
+<th>ใช้ทำอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tanner_oasys.tcl</code> (synthesis)</td>
+<td><code>lef_file_list</code></td>
+<td><code>read_lef</code> ทีละไฟล์</td>
+</tr>
+<tr>
+<td><code>tanner_oasys.tcl</code> (synthesis)</td>
+<td><code>lib_file_list</code></td>
+<td><code>read_library</code> ทีละไฟล์</td>
+</tr>
+<tr>
+<td><code>tanner_oasys.tcl</code> (synthesis)</td>
+<td><code>ptf_file_list</code> +
+<code>tanner_ptf_file_corner_list</code></td>
+<td><code>read_ptf</code></td>
+</tr>
+<tr>
+<td><code>0_data_prep.tcl</code> (P&amp;R)</td>
+<td><code>tech_file_list</code></td>
+<td>นำเข้าเทคโนโลยี</td>
+</tr>
+<tr>
+<td><code>0_data_prep.tcl</code> (P&amp;R)</td>
+<td><code>cell_lef_file_list</code></td>
+<td><code>import_lef -lib_cell_only</code></td>
+</tr>
+<tr>
+<td><code>0_data_prep.tcl</code> (P&amp;R)</td>
+<td><code>corner_list</code></td>
+<td>ลูปผ่านมุมของกระบวนการ</td>
+</tr>
+<tr>
+<td><code>0_data_prep.tcl</code> (P&amp;R)</td>
+<td><code>rlc_file_list</code></td>
+<td>โมเดล RLC (เว้นว่างได้ถ้าใช้ PTF)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>บันทึกไว้เลย</strong></p>
+<p>ไฟล์ LEF เดียวกันถูกส่งเข้า flow <strong>สองชื่อที่ต่างกัน</strong>
+<code>lef_file_list</code> สำหรับขั้นสังเคราะห์ และ
+<code>tech_file_list</code> + <code>cell_lef_file_list</code>
+สำหรับขั้นวางเดินสาย ถ้าตั้งแต่ในหน้าต่างแล้วสองชุดนี้จะถูกเขียนให้อัตโนมัติ
+แต่ถ้าคุณเขียนไฟล์ตั้งค่าเอง (ดู lab 06) ต้องใส่ให้ครบทั้งสองชุด</p>
+</blockquote>
+<p><strong>กฎสามข้อที่ต้องไม่ผิด</strong></p>
+<ol type="1">
+<li><strong>tech LEF ต้องมาก่อน standard cell LEF เสมอ</strong> เพราะ tech
+LEF เป็นตัวกำหนดชั้นโลหะและ via ที่เซลล์ LEF อ้างถึง ผิดลำดับแล้ว LEF
+ที่สองจะอ่านไม่ผ่าน</li>
+<li><strong>PTF อ่านเข้าได้แค่ไฟล์เดียว</strong> ดู
+<code>tanner_oasys.tcl:33-50</code> — flow จะเลือกไฟล์ PTF ไฟล์เดียว
+ตามลำดับความสำคัญ <code>slow</code> → <code>nominal</code> →
+<code>fast</code> แล้วอ่านเฉพาะไฟล์นั้น (ถ้าตั้ง PTF ไว้สามไฟล์
+ก็ยังถูกอ่านแค่ไฟล์เดียว)</li>
+<li><strong>LEF กับ Liberty ต้องตรงกัน</strong> ไม่ตรงกันแล้วจะพังตอนสังเคราะห์
+และข้อความแจ้งเตือนมักไม่ชี้ว่าเป็นเรื่องนี้ (lab 03 มีตัวอย่างจริงที่เจอในชุด Generic 250
+nm)</li>
+</ol>
+<h3 id="23-หน้า-netlistrtl">2.3 หน้า Netlist/RTL</h3>
+<table>
+<thead>
+<tr>
+<th>ช่อง</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run control</td>
+<td>สังเคราะห์+วางเดินสายพร้อมกัน หรือแยกทีละขั้น</td>
+</tr>
+<tr>
+<td>Netlist/RTL files for synthesis</td>
+<td>ไฟล์ RTL ที่จะสังเคราะห์</td>
+</tr>
+<tr>
+<td>Top Cell</td>
+<td>ชื่อโมดูลบนสุด</td>
+</tr>
+<tr>
+<td>Power Net / Ground Net</td>
+<td>ชื่อเน็ตของแหล่งจ่ายและกราวด์</td>
+</tr>
+</tbody>
+</table>
+<p><strong>สิ่งที่ flow เอาไปทำ</strong></p>
+<ul>
+<li><code>tanner_oasys.tcl</code> อ่านไฟล์ตามนามสกุลอัตโนมัติ:
+<code>.vhd</code>/<code>.vhdl</code> → <code>read_vhdl</code>,
+<code>.sv</code> → <code>read_verilog -sv</code>, อื่น ๆ →
+<code>read_verilog</code></li>
+<li>ถ้ามีไฟล์ scan configuration ก็จะสังเคราะห์แบบ
+<code>-map_to_scan</code></li>
+<li>ผลลัพธ์คือ <code>results/&lt;top&gt;_syn.v</code></li>
+</ul>
+<p><strong>ตัวแปรที่เกี่ยวข้อง</strong></p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>อ่านที่</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tanner_cell</code></td>
+<td><code>tanner_oasys.tcl:96</code></td>
+<td>โมดูลเป้าหมายของการสังเคราะห์</td>
+</tr>
+<tr>
+<td><code>top_cell</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>โมดูลเป้าหมายของการวางเดินสาย</td>
+</tr>
+<tr>
+<td><code>verilog_file_list</code></td>
+<td><code>tanner_oasys.tcl:65</code></td>
+<td>รายการไฟล์ RTL</td>
+</tr>
+<tr>
+<td><code>is_list_file</code> / <code>list_file</code></td>
+<td><code>tanner_oasys.tcl:57</code></td>
+<td>โหมดอ่านไฟล์จาก list file</td>
+</tr>
+<tr>
+<td><code>is_Verilog</code></td>
+<td><code>tanner_oasys.tcl:59</code></td>
+<td>list file นั้นเป็น Verilog หรือ VHDL</td>
+</tr>
+<tr>
+<td><code>use_list_file</code></td>
+<td><code>0_data_prep.tcl:113</code></td>
+<td>สลับโหมด list file ของขั้น data prep</td>
+</tr>
+<tr>
+<td><code>enable_scan</code></td>
+<td><code>1_rtl_synthesis.tcl:50</code></td>
+<td>เปิดการทำ scan หรือไม่</td>
+</tr>
+<tr>
+<td><code>syn_netlist</code></td>
+<td>ขั้น export</td>
+<td>ที่เก็บ netlist ระดับ gate</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Top Cell ต้องตรงกับชื่อใน DEF</strong></p>
+<p>ในตัวอย่าง ADC8 ทั้ง RTL (<code>module ADCCtrl</code>) และ DEF
+(<code>DESIGN ADCCtrl;</code>) ต้องเป็นชื่อเดียวกัน lab 01 ตรวจเรื่องนี้โดยตรง</p>
+</blockquote>
+<h3 id="24-หน้า-timing">2.4 หน้า Timing</h3>
+<p>หน้านี้มีสองทางเลือก และความต่างระหว่างมัน <strong>สำคัญมาก</strong></p>
+<table>
+<thead>
+<tr>
+<th>ทางเลือก</th>
+<th>ข้อมูลที่มี</th>
+<th>เหมาะกับ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Define clocks</strong></td>
+<td>มีแค่นามคล็อกและคาบเวลา ไม่มี delay, load, fanout</td>
+<td>ลองเล่น สำรวจ flow</td>
+</tr>
+<tr>
+<td><strong>SDC file</strong></td>
+<td>ข้อจำกัดเวลา กำลัง และพื้นที่ครบ</td>
+<td>งานที่จะส่งผลิต</td>
+</tr>
+</tbody>
+</table>
+<p><strong>สิ่งที่ flow เอาไปทำ — อ่านจากโค้ดจริง</strong></p>
+<p>โหมด <code>clocks</code> (<code>tanner_oasys.tcl:104-116</code>):</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>create_clock -name <span class="dt">$clk</span> -period <span class="dt">$period</span> -waveform <span class="dt">$waveform</span> <span class="kw">[</span>get_ports <span class="dt">$clk</span><span class="kw">]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>set_input_delay  -clock <span class="dt">$clk</span> <span class="dv">1</span> <span class="kw">[</span>all_inputs<span class="kw">]</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>set_output_delay -clock <span class="dt">$clk</span> <span class="dv">1</span> <span class="kw">[</span>all_outputs<span class="kw">]</span></span></code></pre></div>
+<p>สังเกตว่า delay ที่ใส่ให้คือ <strong>ค่า 1 หน่วยเวลา</strong> ไม่ใช่งบประมาณจริง
+คือการบอก flow ว่า &quot;ตัวเลขนี้เอาไปคิด&quot; ไม่ใช่ความต้องการจริงของดีไซน์</p>
+<p>โหมด <code>sdc</code> (<code>tanner_oasys.tcl:117-125</code>):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">foreach</span> mode <span class="dt">$MGC_modes</span> <span class="kw">{</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    set_timing_mode <span class="dt">$mode</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">foreach</span> sdc_file <span class="dt">$oasys_importConstraintsFile</span>(<span class="dt">$mode</span>) <span class="kw">{</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        read_sdc <span class="dt">$sdc_file</span> -mode <span class="dt">$mode</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p>โหมดนี้อ่าน SDC ได้หลายไฟล์ต่อหนึ่ง mode จึงรองรับการตั้งหลายมุมได้</p>
+<blockquote>
+<p><strong>สำหรับงานจริง ให้ใช้หน้า SDC เสมอ</strong></p>
+<p>ตัวอย่างที่แนบมามี SDC แบบครบแล้วที่
+<code>design/files/timing_constraints_full.sdc</code> และ lab 04
+จะเปรียบเทียบกับแบบที่มากับตัวอย่างให้</p>
+</blockquote>
+<p><strong>ตัวแปรที่เกี่ยวข้อง</strong></p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>อ่านที่</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tanner_timing_mode</code></td>
+<td><code>tanner_oasys.tcl:104</code></td>
+<td><code>clocks</code> หรือ <code>sdc</code></td>
+</tr>
+<tr>
+<td><code>tanner_clock_spec</code></td>
+<td><code>tanner_oasys.tcl:105</code></td>
+<td>รายการคล็อก ในโหมด clocks</td>
+</tr>
+<tr>
+<td><code>MGC_modes</code></td>
+<td><code>tanner_oasys.tcl:118</code></td>
+<td>รายการ mode วิเคราะห์ ในโหมด sdc</td>
+</tr>
+<tr>
+<td><code>oasys_importConstraintsFile</code></td>
+<td><code>tanner_oasys.tcl:120</code></td>
+<td>ไฟล์ SDC ของแต่ละ mode</td>
+</tr>
+</tbody>
+</table>
+<h3 id="25-หน้า-floorplan">2.5 หน้า Floorplan</h3>
+<p>TDI ให้เลือก floorplan ได้สามวิธี</p>
+<table>
+<thead>
+<tr>
+<th>วิธี</th>
+<th>ตัวแปร</th>
+<th>ลักษณะ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specify Block Details</td>
+<td><code>floorplan_mode</code> = <code>block</code></td>
+<td>กำหนด Die Area และ Row Margins ด้วยตัวเลข</td>
+</tr>
+<tr>
+<td>Export from layout</td>
+<td><code>floorplan_mode</code> = <code>layout</code></td>
+<td>ดึง boundary และตำแหน่งพอร์ตจากเลย์เอาต์ใน L-Edit</td>
+</tr>
+<tr>
+<td>Use Def floorplan file</td>
+<td><code>floorplan_mode</code> = <code>def</code></td>
+<td>อ่านจากไฟล์ DEF</td>
+</tr>
+</tbody>
+</table>
+<p><strong>สิ่งที่ flow เอาไปทำ</strong></p>
+<ul>
+<li><code>2_floorplan.tcl</code> เลือกวิธีตาม <code>floorplan_mode</code>
+แล้วสร้างรายการ layer ที่จะวาง</li>
+<li>ถ้าเป็นโหมด <code>layout</code> หรือ <code>def</code> flow จะ
+<strong>วางพอร์ตให้ตรงตำแหน่งที่กำหนดไว้</strong>
+ซึ่งเป็นสิ่งที่ต้องการเมื่อนำบล็อกดิจิทัลไปต่อกับส่วนอนาล็อก</li>
+</ul>
+<p><strong>ตัวแปรที่เกี่ยวข้อง</strong></p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>อ่านที่</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>floorplan_mode</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td><code>block</code> / <code>layout</code> / <code>def</code></td>
+</tr>
+<tr>
+<td><code>def_floorplan_file</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>ไฟล์ DEF ในโหมด <code>def</code></td>
+</tr>
+<tr>
+<td><code>chip_width</code> / <code>chip_height</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>ขนาด die ในหน่วย DBU</td>
+</tr>
+<tr>
+<td><code>chip_origin_x</code> / <code>chip_origin_y</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>จุดเริ่มของ die</td>
+</tr>
+<tr>
+<td><code>core_site</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>ชื่อ site ของแถวเซลล์มาตรฐาน</td>
+</tr>
+<tr>
+<td><code>core_yb_spacing</code> / <code>core_xl_spacing</code> /
+<code>core_yt_spacing</code> / <code>core_xr_spacing</code></td>
+<td><code>compute_floorplan_details.tcl:87</code></td>
+<td><strong>ระยะจาก power ring ถึงแถวเซลล์แรก</strong></td>
+</tr>
+<tr>
+<td><code>highest_routing_layer</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>ชั้นโลหะสูงสุดที่อนุญาตให้เดินสาย</td>
+</tr>
+<tr>
+<td><code>fp_utilization</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>เป้าหมายความหนาแน่น</td>
+</tr>
+<tr>
+<td><code>fp_aspect_ratio</code></td>
+<td><code>2_floorplan.tcl</code></td>
+<td>อัตราส่วนกว้าง:ยาวของบล็อก</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Row Margins ไม่ใช่ระยะจากขอบ die</strong></p>
+<p>ค่าที่ TDI เรียกว่า Row Margins ถูกส่งไปเป็น <code>core_*_spacing</code> ซึ่งคือ
+<strong>ระยะจากขอบของ power ring ถึงแถวเซลล์แรก</strong> ส่วนระยะจากขอบ die
+จริง ๆ จะถูกคำนวณโดย flow เอง:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> core_to_bottom <span class="kw">[expr</span> <span class="dt">$ring_offset_bottom</span> <span class="op">+</span> <span class="dt">$core_yb_spacing</span><span class="kw">]</span></span></code></pre></div>
+<p>โดย <code>ring_offset_*</code> มาจากความกว้างของ ring ที่คำนวณจากแผน
+power (ดูหัวข้อ 2.6)</p>
+</blockquote>
+<h3 id="26-หน้า-power-plan">2.6 หน้า Power Plan</h3>
+<p>หน้านี้ตั้งค่าแหวนและแถบจ่ายไฟ</p>
+<p><strong>สิ่งที่ flow เอาไปทำ — อ่านจาก
+<code>3_powerplan.tcl</code></strong></p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>power_nets</code></td>
+<td>รายชื่อแหล่งจ่าย <strong>อันแรกคือแหล่งจ่ายหลัก</strong></td>
+</tr>
+<tr>
+<td><code>ground_nets</code></td>
+<td>รายชื่อกราวด์ <strong>อันแรกคือกราวด์หลัก</strong></td>
+</tr>
+<tr>
+<td><code>enable_pg_ring</code></td>
+<td>เปิด/ปิดแหวนจ่ายไฟ</td>
+</tr>
+<tr>
+<td><code>enable_pg_stripe</code></td>
+<td>เปิด/ปิดแถบจ่ายไฟ</td>
+</tr>
+<tr>
+<td><code>pg_ring_vlayer</code> / <code>pg_ring_hlayer</code></td>
+<td>ชั้นโลหะของเส้นแนวตั้ง / แนวนอน</td>
+</tr>
+<tr>
+<td><code>pg_ring_net_order</code></td>
+<td><strong>ลำดับวงแหวนจากนอกเข้าใน</strong></td>
+</tr>
+<tr>
+<td><code>pg_ring_widths</code></td>
+<td>ความกว้างของแต่ละวง</td>
+</tr>
+<tr>
+<td><code>pg_ring_spacing</code></td>
+<td>ระยะห่างระหว่างวง</td>
+</tr>
+<tr>
+<td><code>pg_ring_offset_top/right/bottom/left</code></td>
+<td>ระยะเพิ่มจาก ring ถึงขอบ die</td>
+</tr>
+<tr>
+<td><code>pg_stripe_list</code> / <code>num_of_stripes</code></td>
+<td>รายการแถบจ่ายไฟ</td>
+</tr>
+</tbody>
+</table>
+<p><strong>กฎสองข้อที่ flow บังคับ</strong> (จาก
+<code>compute_floorplan_details.tcl:36-45</code>)</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># จำนวน spacing ต้องเป็น 1 หรือ (จำนวนแหล่งจ่าย - 1)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{</span><span class="dt">$size_of_ring_spacing</span> <span class="op">!=</span> <span class="st">&quot;1&quot;</span> <span class="op">&amp;&amp;</span> (<span class="dt">$size_of_ring_spacing</span> <span class="op">!=</span> <span class="kw">[expr</span> <span class="dt">$nb_of_supplies</span> -<span class="dv">1</span><span class="kw">]</span>)<span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">puts</span> <span class="st">&quot;FLOW-ERROR : Nb of ring spacing values does not match number of intervals between supplies&quot;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># จำนวน width ต้องเป็น 1 หรือ จำนวนแหล่งจ่าย</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{</span><span class="dt">$size_of_ring_width</span> <span class="op">!=</span> <span class="st">&quot;1&quot;</span> <span class="op">&amp;&amp;</span> (<span class="dt">$size_of_ring_width</span> <span class="op">!=</span> <span class="dt">$nb_of_supplies</span>)<span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">puts</span> <span class="st">&quot;FLOW-ERROR : Nb of ring width values does not match number of supplies&quot;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<blockquote>
+<p><strong>ตัวอย่างที่พลาดง่าย</strong></p>
+<p>มีแหล่งจ่าย 2 ตัว (Vdd, Gnd) และใส่ spacing ไป 2 ค่า ค่าที่สองไม่จำเป็นต้องมี
+เพราะมีแค่ช่องว่างระหว่างวงเพียงช่องเดียว ถ้าใส่เกิน flow จะหยุดพร้อมข้อความ
+<code>FLOW-ERROR</code> lab 06 ตรวจกฎนี้ด้วย</p>
+</blockquote>
+<p><strong>ข้อจำกัดที่ flow ตรวจเองอีกข้อ</strong> (จาก
+<code>3_powerplan.tcl</code>)</p>
+<p>spacing ของ ring ต้องไม่น้อยกว่า min spacing ของชั้นโลหะที่ใช้ ไม่อย่างนั้น flow
+จะพิมพ์</p>
+<pre class="text"><code>FLOW-ERROR : PG ring spacing constraint is smaller than Metal4 or Metal3
+min_spacing DRC constraint. Please revisit your constraint...</code></pre>
+<p><strong>ตัวอย่างจริงจากชุด Generic 250 nm</strong></p>
+<table>
+<thead>
+<tr>
+<th>ค่า</th>
+<th>ตัวเลข</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>แหล่งจ่าย</td>
+<td>Vdd (นอกสุด), Gnd (ข้างใน)</td>
+</tr>
+<tr>
+<td>เส้นแนวตั้ง / แนวนอน</td>
+<td>Metal4 / Metal3</td>
+</tr>
+<tr>
+<td>ความกว้าง</td>
+<td>2.0 µm (Vdd), 1.5 µm (Gnd)</td>
+</tr>
+<tr>
+<td>spacing</td>
+<td>0.6 µm (ค่าเดียว)</td>
+</tr>
+<tr>
+<td>min spacing ของ Metal4 / Metal3</td>
+<td>0.5 µm</td>
+</tr>
+</tbody>
+</table>
+<p>และเมื่อคำนวณด้วยสูตรของ flow จะได้</p>
+<table>
+<thead>
+<tr>
+<th>ปริมาณ</th>
+<th>ค่า</th>
+<th>สูตร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ความกว้าง ring รวม</td>
+<td>4.1 µm</td>
+<td>ผลรวม width (3.5) + spacing (0.6)</td>
+</tr>
+<tr>
+<td><code>width_contrib</code></td>
+<td>3.5 µm</td>
+<td>width ของ Vdd + width ของ Gnd</td>
+</tr>
+<tr>
+<td><code>spacing_contrib</code></td>
+<td>1.2 µm</td>
+<td>2 × spacing</td>
+</tr>
+<tr>
+<td><code>macro_ring_spacing</code></td>
+<td>16.2 µm</td>
+<td>2 × ความสูง site (8.10 µm)</td>
+</tr>
+<tr>
+<td><code>oversize_m2m</code></td>
+<td>41.8 µm</td>
+<td>2 × (width_contrib + spacing_contrib + macro_ring_spacing)</td>
+</tr>
+<tr>
+<td><code>oversize_b2m</code></td>
+<td>45.9 µm</td>
+<td>max(offset ทั้งสี่ด้าน) + oversize_m2m</td>
+</tr>
+</tbody>
+</table>
+<h3 id="27-หน้า-additional-commands">2.7 หน้า Additional Commands</h3>
+<p>ช่องแก้ไขในหน้านี้คือ <strong>ตัวแปรที่เขียนทับค่าเริ่มต้นของ flow</strong></p>
+<p>ค่าที่ตั้งไว้ในนี้จะถูกเขียนลงไฟล์ <code>additional_commands.tcl</code> แล้วถูก
+<code>source</code> เข้าไปใน flow ตามโค้ดใน
+<code>aprisa_ams.tcl</code>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Source Customization</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{[file</span> <span class="ot">exists</span> additional_commands.tcl<span class="kw">]}</span> <span class="kw">{</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">puts</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">FLOW-INFO: Loading Aprisa customization&quot;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">source</span> additional_commands.tcl</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p><strong>ตัวแปรที่ควรรู้</strong> (จาก <code>flow_variables.tcl</code>)</p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>ค่าเริ่มต้น</th>
+<th>ผลของการเปลี่ยน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rtl_max_util</code></td>
+<td>85</td>
+<td>เปอร์เซ็นต์ความหนาแน่นสูงสุดของ netlist ที่สังเคราะห์</td>
+</tr>
+<tr>
+<td><code>enable_clock_gating</code></td>
+<td>0</td>
+<td>เปิดการใส่ clock gating ให้อัตโนมัติ</td>
+</tr>
+<tr>
+<td><code>DFT_flow</code></td>
+<td><code>native</code></td>
+<td>วิธีทำ scan (<code>native</code> / <code>tessent</code>)</td>
+</tr>
+<tr>
+<td><code>force_io_placement</code></td>
+<td>1</td>
+<td>บังคับให้วางพอร์ตตามตำแหน่งที่กำหนด</td>
+</tr>
+<tr>
+<td><code>delete_unconnected_phys_pins</code></td>
+<td>0</td>
+<td>ลบรูปพอร์ตที่ไม่ได้ต่อ</td>
+</tr>
+<tr>
+<td><code>well_tap_cell</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ well tap</td>
+</tr>
+<tr>
+<td><code>physical_effort</code></td>
+<td><code>low</code></td>
+<td>ความพยายามของ physical synthesis</td>
+</tr>
+<tr>
+<td><code>tie_high_libcell</code> / <code>tie_low_libcell</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์สำหรับ tie logic</td>
+</tr>
+<tr>
+<td><code>delay_cells</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ delay</td>
+</tr>
+<tr>
+<td><code>filler_libcells</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ filler</td>
+</tr>
+<tr>
+<td><code>decap_libcells</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ decap</td>
+</tr>
+<tr>
+<td><code>antenna_diodes</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ antenna diode</td>
+</tr>
+<tr>
+<td><code>route_optimize_effort</code></td>
+<td><code>low</code></td>
+<td>ความพยายามของ router</td>
+</tr>
+<tr>
+<td><code>repair_after_filler</code></td>
+<td>1</td>
+<td>ซ่อม DRC หลังใส่ filler</td>
+</tr>
+<tr>
+<td><code>exit_on_flow_error</code></td>
+<td>0</td>
+<td>หยุดทันทีเมื่อเจอ error</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ข้อควรระวัง</strong></p>
+<p>การตั้งค่า <code>tie_high_libcell</code> หรือ
+<code>tie_low_libcell</code> ต้องดูว่าเซลล์นั้น <strong>มี LEF ด้วย</strong>
+ไม่ใช่มีแค่ใน Liberty ในชุด Generic 250 nm ที่แนบมา <code>TIELOW</code> และ
+<code>TIEHIGH</code> มีอยู่ใน Liberty แต่ <strong>ไม่มีใน LEF</strong> (lab
+03) ถ้าตั้งค่านี้แล้ว flow จะพังตอนใส่ tie cell</p>
+</blockquote>
+<hr />
+<h2 id="บทที่-3--lab-01-ถึง-lab-03-อินพุตของ-flow">บทที่ 3 — Lab 01 ถึง Lab 03:
+อินพุตของ flow</h2>
+<p>สาม lab แรกตรวจ <strong>อินพุต</strong> ทั้งหมดที่ต้องไปถึง Nitro ทุก lab
+รันได้บน Windows ล้วน ๆ ไม่ต้องใช้ Nitro</p>
+<hr />
+<h3 id="lab-01--rtl-กับพอร์ตใน-def-ต้องตรงกัน">Lab 01 — RTL กับพอร์ตใน DEF
+ต้องตรงกัน</h3>
+<p><strong>เป้าหมาย</strong></p>
+<p>พิสูจน์ว่า interface ของบล็อกที่ L-Edit export ออกมาเป็น DEF ตรงกับ RTL
+ที่จะส่งเข้า synthesis ทุกประการ</p>
+<p><strong>ทำไมต้องตรวจ</strong></p>
+<p>TDI ไม่เห็นพอร์ตของ RTL โดยตรง สิ่งที่ Nitro เห็นคือ <strong>DEF</strong>
+ถ้าสองอย่างไม่ตรงกัน flow จะพังตอนวางเซลล์หรือตอนต่อสายสัญญาณ
+และข้อความแจ้งเตือนมักไม่ได้บอกว่าต้นเหตุคือ interface ไม่ตรงกัน</p>
+<p><strong>วิธีรัน</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab01_rtl_ports</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p><strong>ผลที่คาดหวัง</strong></p>
+<pre class="text"><code>========================================================================
+  LAB 01 : RTL ports vs DEF pins  (ADC8 / ADCCtrl)
+========================================================================
+  [INFO] rtl file        : ADCCtrl_rtl.v
+  [INFO] def file        : from_ledit.def
+  [INFO] rtl module      : ADCCtrl
+  [INFO] rtl header ports: 8 (before bus expansion)
+  [INFO] def pins        : 15
+  [INFO] def nets        : 15
+  [PASS] RTL declares the 8 bit output bus B
+         B[0:7] -&gt; width 8, direction output
+  [PASS] the expanded RTL port list and the DEF pin list are the same set
+         rtl = 15 ports, def = 15 pins
+  [PASS] every DEF pin carries a DIRECTION attribute
+         all 15 pins carry a direction
+  [PASS] every DEF pin has the same direction as the RTL port
+         all 15 pins agree (INPUT/OUTPUT)
+  [PASS] every pin is backed by a NET entry
+         15 pin nets / 15 net entries
+  [PASS] the DEF top cell name matches the RTL module name
+         DEF DESIGN = ADCCtrl, RTL module = ADCCtrl
+  [NOTE] port mix: 4 input / 11 output
+  [NOTE] the 8 bit bus B[7:0] is 8 of the 15 physical pins
+------------------------------------------------------------------------
+  6/6 checks passed
+  RESULT: PASS
+========================================================================</code></pre>
+<p><strong>สิ่งที่ผลนี้บอกเรา</strong></p>
+<ul>
+<li>RTL เขียนพอร์ตไว้ 8 ชื่อ แต่ <code>B</code> เป็นบัส 8 บิต
+เมื่อกระจายออกเป็นรายบิตจะได้ <strong>15 พอร์ต</strong> ตรงกับ DEF พอดี</li>
+<li>สัดส่วนทิศทาง: input 4 (clr, clk, Compare, Start) output 11 (LoadReg,
+DataMark, SerialOutput และ B[0]..B[7])</li>
+<li>ชื่อโมดูลต้องตรงกับ <code>DESIGN</code> ใน DEF</li>
+</ul>
+<blockquote>
+<p><strong>บันทึกที่ได้จากการอ่านไฟล์จริง</strong></p>
+<p>ในโค้ด RTL พอร์ตถูกประกาศแยกเป็นชุด:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> ADCCtrl <span class="op">(</span>clr<span class="op">,</span>clk<span class="op">,</span>Compare<span class="op">,</span>Start<span class="op">,</span>DataMark<span class="op">,</span>B<span class="op">,</span>LoadReg<span class="op">,</span>SerialOutput<span class="op">);</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="dt">input</span> clr<span class="op">,</span>clk<span class="op">,</span>Compare<span class="op">,</span>Start<span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="dt">output</span> LoadReg<span class="op">,</span>DataMark<span class="op">,</span>SerialOutput<span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="dt">output</span> <span class="op">[</span><span class="dv">7</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> B<span class="op">;</span></span></code></pre></div>
+<p>โปรดสังเกตว่า <strong>บัส <code>B</code> ไม่ได้อยู่ในรายการ input</strong>
+ถ้าคุณมองผิดวิธี อาจนับพอร์ตได้ 15 แต่สรุปผิดว่าเป็นบัสอินพุต</p>
+</blockquote>
+<p><strong>ถ้าไม่ผ่าน</strong></p>
+<table>
+<thead>
+<tr>
+<th>อาการ</th>
+<th>สาเหตุที่เป็นไปได้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>only in RTL</code> มีชื่อ</td>
+<td>เพิ่มพอร์ตในเลย์เอาต์แล้ว export DEF ใหม่</td>
+</tr>
+<tr>
+<td><code>only in DEF</code> มีชื่อ</td>
+<td>ยังไม่ได้ export ใหม่ หรือ export ผิดเซลล์</td>
+</tr>
+<tr>
+<td><code>direction</code> ไม่ตรง</td>
+<td>ทิศทางพอร์ตใน layout ไม่ตรงกับ RTL — ตรวจที่เลย์เอาต์</td>
+</tr>
+<tr>
+<td><code>DEF DESIGN</code> ไม่ตรง</td>
+<td>สลับเซลล์ผิดตอน export</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="lab-02--boundary-และตำแหน่งพอร์ต">Lab 02 — Boundary
+และตำแหน่งพอร์ต</h3>
+<p><strong>เป้าหมาย</strong></p>
+<p>พิสูจน์ว่า P&amp;R boundary ที่ export มาเป็นรูปทรงที่ Nitro ใช้วางได้จริง
+และทุกพอร์ตอยู่ในขอบเขตบนชั้นที่เดินสายได้</p>
+<p><strong>วิธีรัน</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab02_def_boundary</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p><strong>ผลที่คาดหวัง</strong></p>
+<pre class="text"><code>========================================================================
+  LAB 02 : P&amp;R boundary and pin geometry  (from_ledit.def)
+========================================================================
+  [INFO] def file        : from_ledit.def
+  [PASS] the DEF declares its distance unit
+         UNITS DISTANCE MICRONS 1000  (1 um = 1000 DBU)
+  [PASS] the DEF contains a DIEAREA
+         DIEAREA (0 0) (177800 53000) DBU
+  [PASS] the block has a non degenerate size
+         die area = 177.800 um x 53.000 um
+  [PASS] the DEF carries a full pin list
+         15 pins
+  [PASS] every pin has a FIXED location
+         all pins are fixed
+  [PASS] every pin lies inside the die area
+         all 15 pins are inside the boundary
+  [PASS] all pins are on one routable layer
+         pin layer = Metal4
+  [PASS] no two pins share the same location
+         15 unique locations
+  [PASS] the pins sit on the boundary edges, not in the middle of the block
+         bottom=6, top=9
+  [NOTE] bottom edge pins are 0.050 um above the die edge, top edge pins are 0.300 um below the die edge
+  [PASS] neighbouring pins on an edge are spaced apart
+         minimum pitch = 15.200 um on the top edge
+  [PASS] the DEF contains no placed components yet
+         COMPONENTS 0 -- this is the empty block that Nitro will fill
+------------------------------------------------------------------------
+  11/11 checks passed
+  RESULT: PASS
+========================================================================</code></pre>
+<p><strong>สิ่งที่ผลนี้บอกเรา</strong></p>
+<ul>
+<li>บล็อกนี้กว้าง <strong>177.800 µm</strong> สูง <strong>53.000 µm</strong>
+(ไฟล์ DEF ใช้หน่วย 1000 DBU = 1 µm)</li>
+<li>พอร์ตทั้ง 15 ตัวอยู่บน <strong>Metal4</strong> ชั้นเดียวกันทั้งหมด โดยขอบล่างมี 6
+พอร์ต ขอบบนมี 9 พอร์ต</li>
+<li>ระยะห่างต่ำสุดระหว่างพอร์ตที่อยู่ติดกันคือ <strong>15.200 µm</strong>
+บนขอบบน</li>
+<li><code>COMPONENTS 0</code> แปลว่านี่คือบล็อกว่างที่ Nitro จะเติมเซลล์เข้าไป</li>
+</ul>
+<p><strong>เรื่องที่ควรสังเกต</strong></p>
+<blockquote>
+<p><strong>ตัวเลขในคู่มือกับไฟล์จริงไม่ตรงกัน</strong></p>
+<p>คู่มือของผลิตภัณฑ์บอกว่า boundary ของ ADCCtrl อยู่ที่ (0,0) ถึง (177.8, 49.0) µm
+แต่ไฟล์ DEF ที่มาพร้อม Custom IC 2025.4 ระบุว่า <strong>177.800 × 53.000
+µm</strong></p>
+<p>เหตุผลที่เป็นไปได้คือเลย์เอาต์ถูกแก้ไขหลังคู่มือเขียนเสร็จ <strong>ข้อสรุปที่ใช้ได้:
+อย่าเชื่อตัวเลขในคู่มือ ต้องวัดจากเลย์เอาต์ของตัวเอง</strong> คู่มือนี้ยึดหลักเดียวกันทุกครั้ง —
+ทุกตัวเลขมาจากการรันจริง</p>
+</blockquote>
+<p><strong>ถ้าไม่ผ่าน</strong></p>
+<table>
+<thead>
+<tr>
+<th>อาการ</th>
+<th>สาเหตุที่เป็นไปได้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ไม่มี <code>DIEAREA</code></td>
+<td>ยังไม่ได้วาด boundary ในเลย์เอาต์</td>
+</tr>
+<tr>
+<td>พอร์ตอยู่นอกขอบเขต</td>
+<td>วาด boundary ไม่ครอบพอร์ต</td>
+</tr>
+<tr>
+<td>พอร์ตบนชั้นที่ไม่ใช่โลหะ</td>
+<td>เลือกชั้นโลหะให้พอร์ต</td>
+</tr>
+<tr>
+<td><code>COMPONENTS</code> ไม่ใช่ 0</td>
+<td>export จากเซลล์ที่วางเซลล์ไว้แล้ว</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h3 id="lab-03--เทคโนโลยีและชุดเซลล์มาตรฐาน">Lab 03 —
+เทคโนโลยีและชุดเซลล์มาตรฐาน</h3>
+<p><strong>เป้าหมาย</strong></p>
+<p>ตรวจว่าไฟล์ LEF, Liberty และ PTF ที่จะส่งเข้า flow
+สอดคล้องกันและครบถ้วนพอที่จะเริ่มงานได้</p>
+<p><strong>วิธีรัน</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab03_tech_libs</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p><strong>ผลที่คาดหวัง</strong></p>
+<pre class="text"><code>========================================================================
+  LAB 03 : technology and standard cell libraries  (Generic 250 nm)
+========================================================================
+  [PASS] the tech LEF declares its database unit
+         DATABASE MICRONS 1000  (1 um = 1000 DBU)
+  [PASS] the tech LEF defines exactly the four routing layers Metal1..Metal4
+         routing layers: Metal1, Metal2, Metal3, Metal4 | cut layers: Via1, Via2, Via3
+  [PASS] the standard cell LEF contains MACRO definitions
+         22 macros
+  [PASS] the standard cell LEF uses the same database unit as the tech LEF
+         tech LEF = 1000, cell LEF = 1000
+  [PASS] the standard cell LEF defines the standard cell row site
+         SITE CORE, SIZE 1.15 BY 8.1 um
+  [PASS] the nominal Liberty parses and names its library
+         library &quot;Generic250nm_TT_2P50V_25C&quot;, 22 cells, 2.5 V, 25 C
+  [PASS] the three Liberty files map to the three TDI corners
+         Generic250nm_FF_2P75V_M40C.lib -&gt; fast; Generic250nm_TT_2P50V_25C.lib -&gt; nominal; Generic250nm_SS_2P25V_125C.lib -&gt; slow
+  [PASS] every Liberty cell that is not a tie or filler cell also exists in the LEF
+         timing-only cells (tie cells): TIELOW, TIEHIGH
+  [PASS] every LEF macro that is not a tie, a filler or a scan variant also exists in the Liberty
+         physical-only macros: FILLER, DFFPC
+  [PASS] the LEF and the Liberty describe the same number of cells
+         22 macros in the LEF, 22 cells in the Liberty
+  [NOTE] LEF macros without a Liberty model: FILLER, DFFPC  -- a filler cell needs no timing model; a scan flavoured macro needs one of its own
+  [NOTE] Liberty cells without a LEF macro: TIELOW, TIEHIGH  -- a tie cell cannot be tied if it has no physical macro
+  [PASS] the PTF parses and names its process technology
+         process_technology &quot;Generic250_MET4_typ&quot;, capacitance unit ff, resistance unit ohm
+  [PASS] the PTF covers every routing layer of the technology
+         PTF covers Metal4, Metal3, Metal2, Metal1
+  [NOTE] files and sizes:
+  [INFO]   Generic250nm_tech.lef  (6900 bytes)
+  [INFO]   Generic250nm_StdCells.lef  (62591 bytes)
+  [INFO]   Generic250nm_TT_2P50V_25C.lib  (377228 bytes)
+  [INFO]   Generic250nm_typ.ptf  (159458 bytes)
+  [INFO]   Generic250nm_FF_2P75V_M40C.lib  (330089 bytes)
+  [INFO]   Generic250nm_SS_2P25V_125C.lib  (330351 bytes)
+------------------------------------------------------------------------
+  12/12 checks passed
+  RESULT: PASS
+========================================================================</code></pre>
+<p><strong>สิ่งที่ผลนี้บอกเรา</strong></p>
+<ol type="1">
+<li>เทคโนโลยีมีชั้นโลหะ 4 ชั้น (Metal1..Metal4) และ via 3 ชั้น</li>
+<li>แถวเซลล์มาตรฐานคือ <strong>SITE CORE</strong> ขนาด 1.15 × 8.10 µm ค่า
+8.10 µm นี้ถูกใช้ต่อไปในการคำนวณ power ring (หัวข้อ 2.6)</li>
+<li>Liberty ทั้งสามไฟล์แยกกันเป็นมุม fast / nominal / slow ได้ถูกต้อง</li>
+</ol>
+<p><strong>ข้อค้นพบที่สำคัญ — LEF กับ Liberty ไม่ได้ตรงกันทุกตัว</strong></p>
+<p>ทั้งสองไฟล์มี 22 เซลล์ เท่ากัน แต่ไม่ใช่ชุดเดียวกัน</p>
+<table>
+<thead>
+<tr>
+<th>เซลล์</th>
+<th>มีใน LEF</th>
+<th>มีใน Liberty</th>
+<th>ผลของมัน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FILLER</code></td>
+<td>✔</td>
+<td>✘</td>
+<td>ปกติ — filler ไม่ต้องมี timing model</td>
+</tr>
+<tr>
+<td><code>DFFPC</code></td>
+<td>✔</td>
+<td>✘</td>
+<td><strong>ต้องระวัง</strong> — เป็น scan flop ที่ไม่มี timing model</td>
+</tr>
+<tr>
+<td><code>TIELOW</code></td>
+<td>✘</td>
+<td>✔</td>
+<td><strong>ต้องระวัง</strong> — tie cell ที่ไม่มีรูปใน LEF</td>
+</tr>
+<tr>
+<td><code>TIEHIGH</code></td>
+<td>✘</td>
+<td>✔</td>
+<td><strong>ต้องระวัง</strong> — tie cell ที่ไม่มีรูปใน LEF</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>ทำไมต้องสนใจ</strong></p>
+<ol type="1">
+<li>ถ้าตั้ง <code>tie_high_libcell</code> หรือ <code>tie_low_libcell</code>
+เป็น <code>TIELOW</code>/<code>TIEHIGH</code> ในหน้า Additional Commands
+flow จะหาเซลล์นี้ใน LEF ไม่เจอ แล้วพังตอนใส่ tie cell</li>
+<li>ถ้า scan flow map ไปที่ <code>DFFPC</code> จะไม่มี timing model
+ให้วิเคราะห์เวลา เซลล์ scan ต้องมี Liberty ของตัวเองเสมอ</li>
+</ol>
+<p>ทั้งสองกรณีเป็นข้อผิดพลาดระดับชุดไฟล์ที่มาพร้อมผลิตภัณฑ์
+<strong>การตรวจแบบนี้ก่อนรันช่วยเวลาได้มากกว่าการรอให้ flow พัง</strong></p>
+</blockquote>
+<hr />
+<h2 id="บทที่-4--lab-04-ถึง-lab-06-เงื่อนไขเวลา-scan-และสัญญาของไฟล์ตั้งค่า">บทที่ 4
+— Lab 04 ถึง Lab 06: เงื่อนไขเวลา scan และสัญญาของไฟล์ตั้งค่า</h2>
+<hr />
+<h3 id="lab-04--เงื่อนไขเวลา-และสองโหมดของหน้า-timing">Lab 04 — เงื่อนไขเวลา
+และสองโหมดของหน้า Timing</h3>
+<p><strong>เป้าหมาย</strong></p>
+<p>ตรวจว่าไฟล์ SDC ที่จะใช้อ้างถึงพอร์ตที่มีอยู่จริง และเข้าใจว่า flow
+ทำอะไรกับข้อมูลในแต่ละโหมดของหน้า Timing</p>
+<p><strong>ไฟล์ที่เกี่ยวข้อง</strong></p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>ที่มา</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>design/files/timing_constraints.sdc</code></td>
+<td>มาพร้อมตัวอย่าง ADC8 — มีบรรทัดเดียว</td>
+</tr>
+<tr>
+<td><code>design/files/timing_constraints_full.sdc</code></td>
+<td>ฉบับครบที่คู่มือนี้เขียนเพิ่มให้</td>
+</tr>
+</tbody>
+</table>
+<p><strong>วิธีรัน</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab04_timing</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p><strong>ผลที่คาดหวัง</strong></p>
+<pre class="text"><code>========================================================================
+  LAB 04 : timing constraints  (SDC and the two TDI modes)
+========================================================================
+  [INFO] sdc file        : timing_constraints.sdc
+  [INFO] def file        : from_ledit.def
+  [PASS] the shipped SDC defines exactly one clock
+         1 clock(s): clk
+  [PASS] the clock period is positive and the waveform is a valid duty cycle
+         period = 10000 ns (10.000 us), waveform = {0 5000} -&gt; duty 50.0%
+  [PASS] the port the clock is attached to exists in the layout
+         get_ports clk -&gt; found in the DEF pin list
+  [PASS] the port the clock is attached to exists in the RTL
+         get_ports clk -&gt; found in the RTL port list
+  [INFO] rtl timescale   : 100ns per 1ps  (1 time unit = 100 ns)
+  [PASS] the SDC clock period is a whole number of RTL clock cycles
+         10000 ns / 100 ns = 100 clock cycles
+  [PASS] the complete SDC defines the same clock as the shipped one
+         clk on clk, period 10000 ns
+  [PASS] the complete SDC states the input and the output delays
+         set_input_delay present, set_output_delay present
+  [NOTE] the shipped SDC has no interface delays: the clock alone does not constrain the inputs or the outputs
+  [PASS] every port that the complete SDC constrains exists in the layout
+         7 constrained port references, all present
+  [INFO] install         : C:\Siemens\Custom IC\Custom IC 2025.4\x64
+  [PASS] the installed synthesis script offers both timing modes
+         tanner_timing_mode = &quot;clocks&quot; | &quot;sdc&quot;
+  [PASS] the &quot;Define clocks&quot; mode applies a fixed input and output delay
+         set_input_delay 1 / set_output_delay 1 -- a placeholder, not a real budget
+  [PASS] the &quot;sdc&quot; mode reads one SDC file per analysis mode
+         read_sdc $sdc_file -mode $mode, for every mode in MGC_modes
+  [NOTE] &quot;Define clocks&quot; is a shortcut for exploration. For a tape out run, use the SDC page so that the delays, loads and false paths are real.
+------------------------------------------------------------------------
+  11/11 checks passed
+  RESULT: PASS
+========================================================================</code></pre>
+<p><strong>สิ่งที่ผลนี้บอกเรา</strong></p>
+<ol type="1">
+<li>คล็อกมีคาบเวลา 10000 ns = 10 µs duty cycle 50%</li>
+<li>พอร์ต <code>clk</code> ที่ SDC อ้างถึงมีอยู่จริง ทั้งใน DEF และใน RTL</li>
+<li>RTL ประกาศ <code>`timescale 100ns/1ps</code> แปลว่า 1 time unit = 100
+ns และคาบเวลาคล็อกคือ <strong>100 รอบของเวลา</strong></li>
+<li>SDC ที่มาพร้อมตัวอย่าง <strong>ไม่มี</strong> input/output delay คือมีแต่คล็อก
+ส่วนอินพุตและเอาต์พุตยังไม่ถูกจำกัดเวลาเลย</li>
+<li>โหมด Define clocks ของ TDI ใส่ delay ให้เท่ากับ <strong>1
+หน่วยเวลา</strong> ซึ่งเป็นค่าแทน ไม่ใช่งบประมาณจริง</li>
+</ol>
+<p><strong>ไฟล์ SDC ฉบับครบที่คู่มือนี้เพิ่มให้</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>create_clock -name clk -period <span class="dv">10000</span> -waveform <span class="kw">{</span><span class="dv">0</span> <span class="dv">5000</span><span class="kw">}</span> <span class="kw">[</span>get_ports clk<span class="kw">]</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>set_input_delay  -clock clk <span class="dv">2500</span> <span class="kw">[</span>get_ports <span class="kw">{</span>clr Compare Start<span class="kw">}]</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>set_output_delay -clock clk <span class="dv">2500</span> <span class="kw">[</span>get_ports <span class="kw">{</span>LoadReg DataMark SerialOutput B<span class="kw">[</span><span class="op">*</span><span class="kw">]}]</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co"># the asynchronous clear is not timed against the clock</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>set_false_path -from <span class="kw">[</span>get_ports clr<span class="kw">]</span></span></code></pre></div>
+<blockquote>
+<p><strong>ข้อควรระวังเรื่องหน่วย</strong></p>
+<p>คาบเวลาใน SDC คือ <strong>นาโนวินาที</strong> ไม่ว่าหน่วยเวลาของ RTL
+<code>10000</code> ในไฟล์นี้จึงเท่ากับ 10 µs ไม่ใช่ 10000 รอบเวลาของ RTL ซึ่งใช้
+100 ns ต่อหน่วย lab นี้ตรวจให้ว่าค่าที่ใส่เป็นจำนวนรอบเวลาของ RTL พอดี (100 รอบ)
+เพื่อจับกรณีที่หน่วยไม่ตรงกัน</p>
+</blockquote>
+<hr />
+<h3 id="lab-05--การตั้งค่า-scan">Lab 05 — การตั้งค่า scan</h3>
+<p><strong>เป้าหมาย</strong></p>
+<p>อ่านและตรวจสคริปต์ตั้งค่า scan chain ของตัวอย่าง
+และเข้าใจผลกระทบของมันที่มีต่อฝั่งเลย์เอาต์</p>
+<p><strong>วิธีรัน</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab05_scan</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p><strong>ผลที่คาดหวัง</strong></p>
+<pre class="text"><code>========================================================================
+  LAB 05 : scan configuration  (scanchain.tcl)
+========================================================================
+  [INFO] scan file       : scanchain.tcl
+  [INFO] twochains flag  : false (the &quot;if&quot; branch is not taken)
+  [PASS] the script configures exactly one scan chain
+         1 active chain(s)
+  [PASS] the chain names its scan in, scan out and scan enable
+         scan_in = Scan_In, scan_out = Scan_Out, scan_enable = Scan_Enable
+  [PASS] the chain asks the tool to create the ports it needs
+         -create_port is set, so Scan_In, Scan_Out and Scan_Enable will be added to the design
+  [PASS] the scan enable pin is created as a port
+         define_test_pin -pin Scan_Enable -scan 1 -create_port
+  [PASS] a test clock is defined on the functional clock
+         define_test_clock -name clk -pin clk
+  [PASS] the DEF does not contain a scan port that the configuration does not create
+         the DEF has no stray scan port
+  [INFO] the scan configuration creates 3 ports (Scan_In, Scan_Out, Scan_Enable)
+  [INFO] the exported DEF contains 0 of them
+  [NOTE] the DEF was exported before the scan flow was enabled. Add Scan_In, Scan_Out, Scan_Enable to the layout and export the DEF again before running TDI with the scan configuration turned on.
+  [PASS] the synthesis script switches to scan mapping when a scan file is given
+         synthesize -module $tanner_cell -map_to_scan
+  [PASS] the synthesis script writes a scan DEF into the results folder
+         write_scandef results/${tanner_cell}_scan.def
+  [PASS] the synthesis script connects and reports the scan chains
+         check_dft -&gt; connect_scan_chains -&gt; report_scan_chains -detail
+------------------------------------------------------------------------
+  9/9 checks passed
+  RESULT: PASS
+========================================================================</code></pre>
+<p><strong>สิ่งที่ผลนี้บอกเรา — และเป็นประเด็นสำคัญของบทนี้</strong></p>
+<p>สคริปต์ scan ของตัวอย่างเขียนแบบนี้</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># false: create one scan chain, true: create two scan chains</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> twochains false</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>define_test_clock -name clk -pin clk</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>define_test_pin  -pin Scan_Enable -scan <span class="dv">1</span> -create_port</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>define_test_pin  -pin clr -scan_mode <span class="dv">1</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="kw">{</span><span class="dt">$twochains</span><span class="kw">}</span> then <span class="kw">{</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="kw">{set</span> i <span class="dv">1</span><span class="kw">}</span> <span class="kw">{</span><span class="dt">$i</span> <span class="op">&lt;=</span> <span class="dv">2</span><span class="kw">}</span> <span class="kw">{incr</span> i<span class="kw">}</span> <span class="kw">{</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>        define_scan_chain -name C<span class="dt">$i</span> -scan_in SI_<span class="dt">$i</span> -scan_out SO_<span class="dt">$i</span> <span class="ch">\</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>            -scan_enable Scan_Enable -create_port -max_length <span class="dv">8</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">}</span></span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span> <span class="cf">else</span> <span class="kw">{</span></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    define_scan_chain -scan_in Scan_In -scan_out Scan_Out <span class="ch">\</span></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>        -scan_enable Scan_Enable -create_port</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="kw">}</span></span></code></pre></div>
+<p>lab นี้จะ <strong>ตีความสคริปต์ตามค่าของตัวแปรจริง</strong> ไม่ใช่นับบรรทัด
+เพราะฉบับนี้มีการกำหนด chain ไว้สองชุดในไฟล์เดียว เมื่อ <code>twochains</code> เป็น
+<code>false</code> สคริปต์ที่ทำงานจริงคือสาขา <code>else</code> ซึ่งเป็น chain
+เดียว</p>
+<p><strong>ผลกระทบต่อฝั่งเลย์เอาต์</strong></p>
+<p>การทำ scan สร้างพอร์ตใหม่ 3 ตัว — <code>Scan_In</code>,
+<code>Scan_Out</code>, <code>Scan_Enable</code> แต่ DEF ที่มาพร้อมตัวอย่าง
+<strong>ไม่มีพอร์ตเหล่านี้</strong></p>
+<blockquote>
+<p><strong>ขั้นตอนที่ต้องทำก่อนรัน TDI ด้วย scan</strong></p>
+<ol type="1">
+<li>เปิดการทำ scan ในหน้า Netlist/RTL หรือชี้
+<code>tanner_scan_configuration_file</code></li>
+<li><strong>เพิ่มพอร์ต Scan_In, Scan_Out, Scan_Enable ลงในเลย์เอาต์ของ
+ADCCtrl</strong></li>
+<li>export DEF ใหม่</li>
+<li>ค่อยกด Run</li>
+</ol>
+<p>ถ้าข้ามขั้นตอน 2-3 flow จะเจอ DEF ที่ไม่มีพอร์ตเหล่านี้
+และจะล้มที่ขั้นการเชื่อมต่อพอร์ต</p>
+</blockquote>
+<p><strong>เรื่องที่ต้องระวังอีกเรื่อง</strong></p>
+<p>จาก lab 03 เรารู้ว่า <code>DFFPC</code> มีใน LEF แต่ไม่มีใน Liberty ถ้า scan
+flow ของคุณ map ไปที่เซลล์ตัวนี้ จะไม่มี timing model ให้วิเคราะห์เวลาของเซลล์
+scan</p>
+<hr />
+<h3 id="lab-06--สัญญาระหว่างหน้า-setup-tdi-กับ-flow">Lab 06 — สัญญาระหว่างหน้า
+Setup TDI กับ flow</h3>
+<p><strong>เป้าหมาย</strong></p>
+<p>นี่คือ lab ที่สำคัญที่สุดของคู่มือนี้ เพราะมันเผยให้เห็นว่า
+<strong>ค่าที่กรอกในหน้าต่างไปอยู่ที่ไหนใน flow จริง</strong></p>
+<p><strong>เป้าหมายรอง</strong></p>
+<ol type="1">
+<li>พิสูจน์ว่าตัวแปรทุกตัวในสัญญาถูกอ่านโดยสคริปต์ที่ติดตั้งอยู่จริง พร้อมแสดง
+<strong>ไฟล์และบรรทัด</strong> ที่อ่าน</li>
+<li>ตรวจว่าไฟล์ตั้งค่าตัวอย่างกำหนดตัวแปรครบ</li>
+<li>ตรวจค่าของแผน power ตามกฎที่ flow ใช้จริง รวมถึงคำนวณ geometric ที่ flow
+จะคำนวณ</li>
+</ol>
+<p><strong>วิธีรัน</strong></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> tdi_lab\lab06_settings</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>run.cmd</span></code></pre></div>
+<p><strong>ผลที่คาดหวัง</strong></p>
+<pre class="text"><code>========================================================================
+  LAB 06 : the TDI settings contract  (nitro_settings.tcl)
+========================================================================
+  [INFO] install         : C:\Siemens\Custom IC\Custom IC 2025.4\x64
+  [INFO] timing mode     : sdc
+  [PASS] every variable of the contract is read by a script that is installed
+         51 contract variables, all found in the installed flow
+  [PASS] the settings file defines every variable the contract
+         all contract variables are defined (51 names in the file)
+  [PASS] the technology LEF is the first entry of the LEF list
+         order: files/Generic250nm_tech.lef -&gt; files/Generic250nm_StdCells.lef
+  [PASS] every file the settings file refers to is present
+         8 referenced files, all present
+  [PASS] the top cell in the settings file matches the top cell of the DEF
+         settings tanner_cell = ADCCtrl, DEF DESIGN = ADCCtrl
+  [PASS] the number of ring widths matches the number of supplies
+         2 supplies (Vdd, Gnd), 2 widths
+  [PASS] the number of ring spacings matches the number of intervals between the supplies
+         2 supplies -&gt; 1 interval(s), 1 spacing(s) given
+  [PASS] the power ring layers exist in the technology LEF
+         Metal4 (min spacing 0.5 um), Metal3 (min spacing 0.5 um)
+  [PASS] the power ring spacing is not tighter than the layer spacing
+         ring spacing 0.6 um vs layer spacing 0.5 um -- the flow stops with FLOW-ERROR otherwise
+  [NOTE] the geometry that the flow derives from the ring settings:
+  [INFO]   total ring width  = 3.5 + 0.6 = 4.1 um
+  [INFO]   width_contrib     = 3.5 um
+  [INFO]   spacing_contrib   = 1.2 um
+  [INFO]   macro_ring_spacing= 16.2 um  (2 x site height 8.1 um)
+  [INFO]   oversize_m2m      = 41.8 um
+  [INFO]   ring offsets      = 4.1 um on every side
+  [INFO]   oversize_b2m      = 45.9 um
+  [PASS] the core margins are larger than the power ring that surrounds them
+         core_yb_spacing 2.0 um + ring offset 4.1 um = the distance from the die edge to the first row
+  [PASS] the timing mode is one that the flow understands
+         tanner_timing_mode = sdc
+  [PASS] every analysis mode has an SDC file
+         modes: nominal | sdc arrays: nominal
+  [PASS] the run control is one of the three modes the flow understands
+         ams_run_control = synpnr
+  [NOTE] where the flow reads the contract variables:
+  [INFO]   $ams_run_control  &lt;- 0_data_prep.tcl:109
+  [INFO]   $lef_file_list  &lt;- tanner_oasys.tcl:23
+  [INFO]   $lib_file_list  &lt;- tanner_oasys.tcl:13
+  ...</code></pre>
+<p>ท้ายด้วยข้อความสำคัญ</p>
+<pre class="text"><code>  [NOTE] a missing variable is not an error in TCL: it reads as an empty string,
+         and the flow produces a wrong result instead of stopping.</code></pre>
+<p><strong>ทำไม lab นี้สำคัญ</strong></p>
+<p>เพราะใน TCL <strong>ตัวแปรที่ไม่มีอยู่ไม่ใช่ข้อผิดพลาด</strong>
+มันอ่านได้เป็นค่าว่างโดยไม่เตือนอะไรเลย</p>
+<p>ตัวอย่าง: ถ้าพลาดไปตั้ง <code>pg_ring_spacing</code> เป็นชื่ออื่น flow จะเห็น
+<code>pg_ring_spacing</code> เป็นค่าว่าง แล้วเดินต่อไปจนพังที่จุดที่ไม่เกี่ยวกับต้นเหตุเลย
+หรือแย่กว่านั้นคือ <strong>ไม่พังเลย แต่ได้ผลลัพธ์ที่ผิด</strong></p>
+<p>lab นี้จึงทำสองอย่าง</p>
+<ol type="1">
+<li>พิสูจน์ว่าตัวแปรที่เราใช้ <strong>มีคนอ่านจริง</strong> พร้อมชี้ตำแหน่ง</li>
+<li>ตรวจว่าไฟล์ตั้งค่าตัวอย่าง <strong>ครบตามสัญญา</strong></li>
+</ol>
+<p><strong>ไฟล์ตั้งค่าตัวอย่าง</strong></p>
+<p>อยู่ที่ <code>design/nitro_settings_ADCCtrl.tcl</code>
+เป็นตัวแทนของสิ่งที่หน้าต่าง Setup TDI เขียนออกมา
+มีคำอธิบายทีละกลุ่มว่าตัวแปรแต่ละตัวอยู่หน้าไหนของ Setup TDI</p>
+<blockquote>
+<p><strong>ทำไมถึงต้องมีไฟล์ตั้งค่าเป็นลายลักษณ์อักษร</strong></p>
+<ol type="1">
+<li>ถ้า flow พังและข้อความบอกแค่ &quot;missing variable&quot;
+คุณจะหาไม่เจอว่าตัวแปรชื่ออะไร</li>
+<li>เมื่อคุณต้องทำงานกับเครื่องที่ใช้ flow เวอร์ชันอื่น หรือเขียนสคริปต์เอง
+คุณต้องรู้ชื่อตัวแปรอยู่แล้ว</li>
+<li>ใช้เป็น <strong>เอกสารประกอบ</strong> ของหน้าต่าง Setup TDI ได้เลย
+ตารางเต็มอยู่ในภาคผนวก หัวข้อ 6</li>
+</ol>
+</blockquote>
+<hr />
+<h2 id="บทที่-5--การรัน-tdi-จริง-และการแก้ปัญหา">บทที่ 5 — การรัน TDI จริง
+และการแก้ปัญหา</h2>
+<p>บทนี้เป็นส่วนที่ต้องมีเครื่อง Linux ที่ติดตั้ง Nitro แต่ขั้นตอนการเตรียมทั้งหมดก่อนกด Run
+สามารถทำบนเครื่อง Windows ได้</p>
+<h3 id="51-ขั้นตอนใน-l-edit-ตั้งแต่ต้นจนจบ">5.1 ขั้นตอนใน L-Edit ตั้งแต่ต้นจนจบ</h3>
+<h4 id="ขั้นที่-1--เปิดดีไซน์และดู-rtl">ขั้นที่ 1 — เปิดดีไซน์และดู RTL</h4>
+<ol type="1">
+<li>เปิด S-Edit</li>
+<li><code>File &gt; Open &gt; Open Design...</code> แล้วเลือกไฟล์
+<code>Documents\SiemensEDA\CustomIC_2025.4\Designs\ADC8\lib.defs</code></li>
+<li>เปิด view ชื่อ <code>verilog_rtl</code> ของ cell <code>ADCCtrl</code>
+ใน library <code>ADC8</code></li>
+<li>ตรวจดูพอร์ตของโมดูล — สังเกตว่า <code>B</code> เป็นบัส 8 บิต</li>
+</ol>
+<blockquote>
+<p>ขั้นนี้เป็นแค่การดู ไม่ต้องทำอะไรกับไฟล์ ใช้เพื่อยืนยันว่า interface ที่คุณเห็นตรงกับที่ lab
+01 ตรวจได้</p>
+</blockquote>
+<h4 id="ขั้นที่-2--เตรียม-boundary-และพอร์ตในเลย์เอาต์">ขั้นที่ 2 — เตรียม boundary
+และพอร์ตในเลย์เอาต์</h4>
+<ol type="1">
+<li>เปิด L-Edit แล้วเปิดดีไซน์เดิม (<code>Designs\ADC8\lib.defs</code>)</li>
+<li>เปิด view ชื่อ <code>layout</code> ของ cell <code>ADCCtrl</code></li>
+<li>กด <code>Ctrl+A</code> เพื่อเลือกทั้งหมด จะเห็นกรอบสี่เหลี่ยมบนเลเยอร์
+<code>prBoundray:drawing</code> คือ boundary ของบล็อก</li>
+<li>ยืนยันว่าเลเยอร์นี้ถูกตั้งเป็น <strong>Icon Layer</strong> โดยไปที่
+<code>Setup &gt; Special Layers...</code> ดูค่า Icon Layer</li>
+<li>หาพอร์ต: กด <code>Ctrl+F</code> (Find) ให้ติ๊กที่ <code>Port</code>
+และเว้นช่องว่าง แล้วกด <code>Find Next</code> จะซูมไปที่พอร์ต
+<code>clk</code></li>
+</ol>
+<blockquote>
+<p><strong>ทำไมต้องเป็น Icon Layer</strong></p>
+<p>เพราะนี่คือสัญญาที่บอก L-Edit ว่า &quot;รูปนี้คือขอบเขตที่ให้วางได้&quot;
+ไม่ใช่แค่เส้นหรือรูปที่วาดไว้เฉย ๆ ถ้าเปลี่ยนชื่อเลเยอร์ ต้องไปแก้ค่า Icon Layer
+ตามด้วยเสมอ</p>
+</blockquote>
+<h4 id="ขั้นที่-3--เปิดหน้าต่าง-setup-tdi">ขั้นที่ 3 — เปิดหน้าต่าง Setup TDI</h4>
+<p>กดปุ่ม <strong>Setup TDI</strong> บนแถบเครื่องมือ Nitro ใน L-Edit
+จะเปิดหน้าต่างที่มี 7 หน้า ดูรายละเอียดของแต่ละหน้าในบทที่ 2</p>
+<h4 id="ขั้นที่-4--กรอกค่า">ขั้นที่ 4 — กรอกค่า</h4>
+<p>สรุปค่าที่ต้องใส่สำหรับตัวอย่าง ADC8 / ADCCtrl</p>
+<table>
+<thead>
+<tr>
+<th>หน้า</th>
+<th>ค่า</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Run File</strong></td>
+<td>Data Directory = โฟลเดอร์ข้อมูลของ run</td>
+</tr>
+<tr>
+<td><strong>Tech and Lib</strong></td>
+<td>LEF: <code>Generic250nm_tech.lef</code> แล้วค่อย
+<code>Generic250nm_StdCells.lef</code><br>Liberty:
+<code>Generic250nm_TT_2P50V_25C.lib</code><br>PTF:
+<code>Generic250nm_typ.ptf</code></td>
+</tr>
+<tr>
+<td><strong>Netlist/RTL</strong></td>
+<td>RTL: <code>ADCCtrl_rtl.v</code><br>Top Cell:
+<code>ADCCtrl</code><br>Power Net: <code>Vdd</code> / Ground Net:
+<code>Gnd</code></td>
+</tr>
+<tr>
+<td><strong>Timing</strong></td>
+<td>โหมด SDC พร้อมไฟล์ <code>timing_constraints_full.sdc</code></td>
+</tr>
+<tr>
+<td><strong>Floorplan</strong></td>
+<td>Export from layout (ใช้ boundary ที่วาดไว้)</td>
+</tr>
+<tr>
+<td><strong>Power Plan</strong></td>
+<td>แนวตั้ง Metal4, แนวนอน Metal3<br>ลำดับวง: Vdd นอก, Gnd ใน<br>width 2.0
+/ 1.5 µm, spacing 0.6 µm</td>
+</tr>
+<tr>
+<td><strong>Additional Commands</strong></td>
+<td>ว่างไว้ก่อน (ค่าเริ่มต้นของ flow ใช้ได้)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="ขั้นที่-5--กด-run">ขั้นที่ 5 — กด Run</h4>
+<p>กดปุ่ม <strong>Run</strong> จะมีหน้าต่างแสดง log ความคืบหน้า เมื่อเสร็จแล้วกด
+<strong>Close</strong> แล้วเลย์เอาต์ที่วางเสร็จจะปรากฏ</p>
+<h3 id="52-สิ่งที่เกิดขึ้นบนเครื่อง-linux">5.2 สิ่งที่เกิดขึ้นบนเครื่อง Linux</h3>
+<p>หลังกด Run ไฟล์ทั้งหมดในโฟลเดอร์ข้อมูลจะถูกคัดลอกไปที่</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">/tmp/</span><span class="op">&lt;</span>ชื่อผู้ใช้<span class="op">&gt;</span>_nitro_data</span></code></pre></div>
+<p>จากนั้น flow จะทำงานตามขั้นตอนนี้</p>
+<pre class="text"><code>data_prep → rtl_synthesis → floorplan → powerplan → physical_synthesis
+          → place → cts → post_cts → route → export</code></pre>
+<p>ตรวจสอบงานบนเครื่อง Linux ได้ด้วย</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /tmp/<span class="va">$USER_nitro_data</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-la</span> /tmp/<span class="va">$USER_nitro_data</span>/results</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /tmp/<span class="va">$USER_nitro_data</span>/results/reports/<span class="pp">*</span>.rpt <span class="kw">|</span> <span class="fu">head</span> <span class="at">-50</span></span></code></pre></div>
+<h3 id="53-ผลลัพธ์ที่ได้กลับมา">5.3 ผลลัพธ์ที่ได้กลับมา</h3>
+<table>
+<thead>
+<tr>
+<th>ไฟล์ใน <code>results/</code></th>
+<th>เนื้อหา</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;top&gt;_syn.v</code></td>
+<td>netlist ระดับ gate ที่ synthesis สร้าง</td>
+</tr>
+<tr>
+<td><code>&lt;top&gt;_scan.def</code></td>
+<td>นิยาม scan chain (เมื่อเปิด scan)</td>
+</tr>
+<tr>
+<td><code>reports/</code></td>
+<td>รายงานของทุกขั้นตอน</td>
+</tr>
+<tr>
+<td><code>Kpi.html</code></td>
+<td>สรุปตัวชี้วัดหลัก เปิดด้วยเบราว์เซอร์ได้</td>
+</tr>
+</tbody>
+</table>
+<p><strong>รายงานที่ควรดูก่อนเสมอ</strong></p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>บอกอะไร</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>results/reports/*timing*.rpt</code></td>
+<td>slack ของเส้นทางเวลาที่แย่ที่สุด</td>
+</tr>
+<tr>
+<td><code>results/reports/*place*.rpt</code></td>
+<td>ผลวางเซลล์ ความหนาแน่นจริงที่ได้</td>
+</tr>
+<tr>
+<td><code>results/reports/*route*.rpt</code></td>
+<td>ผลเดินสาย จำนวน violation</td>
+</tr>
+<tr>
+<td><code>results/reports/*power*.rpt</code></td>
+<td>รายงานแผนจ่ายไฟและ IR drop</td>
+</tr>
+</tbody>
+</table>
+<h3 id="54-ตารางแก้ปัญหา">5.4 ตารางแก้ปัญหา</h3>
+<p>อาการ → สาเหตุที่เป็นไปได้ → ทำอะไร</p>
+<table>
+<thead>
+<tr>
+<th>อาการ</th>
+<th>สาเหตุที่เป็นไปได้</th>
+<th>วิธีแก้</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FLOW-ERROR : Nb of ring spacing values does not match number of intervals between supplies</code></td>
+<td>ใส่ <code>pg_ring_spacing</code> ผิดจำนวน</td>
+<td>ใส่ 1 ค่า หรือ จำนวนแหล่งจ่าย − 1 (หัวข้อ 2.6)</td>
+</tr>
+<tr>
+<td><code>FLOW-ERROR : Nb of ring width values does not match number of supplies</code></td>
+<td>ใส่ <code>pg_ring_widths</code> ผิดจำนวน</td>
+<td>ใส่ 1 ค่า หรือ จำนวนแหล่งจ่าย</td>
+</tr>
+<tr>
+<td><code>FLOW-ERROR : PG ring spacing constraint is smaller than ... min_spacing</code></td>
+<td>spacing ของ ring ชิดเกินกฎของชั้นโลหะ</td>
+<td>เพิ่ม <code>pg_ring_spacing</code> ให้มากกว่า min spacing ใน LEF (lab
+03)</td>
+</tr>
+<tr>
+<td><code>FLOW-ERROR: Number of RLC models ... does not match number of RLC files</code></td>
+<td><code>rlc_file_list</code> กับไฟล์ RLC ไม่ตรงกัน</td>
+<td>ล้าง <code>rlc_file_list</code> ให้ว่าง ถ้าใช้ PTF อยู่แล้ว</td>
+</tr>
+<tr>
+<td>flow อ่าน LEF ล้มเหลว</td>
+<td>tech LEF ไม่ได้มาก่อน standard cell LEF</td>
+<td>สลับลำดับในหน้า Tech and Lib (lab 06)</td>
+</tr>
+<tr>
+<td>synthesis หาเซลล์ไม่เจอ</td>
+<td>Liberty กับ LEF ไม่ตรงกัน</td>
+<td>เทียบรายชื่อเซลล์ทั้งสองไฟล์ (lab 03)</td>
+</tr>
+<tr>
+<td>พังตอนใส่ tie cell</td>
+<td><code>tie_high_libcell</code> / <code>tie_low_libcell</code>
+ชี้เซลล์ที่ไม่มีใน LEF</td>
+<td>ตรวจว่าเซลล์ tie มีทั้งใน LEF และ Liberty</td>
+</tr>
+<tr>
+<td>flow ทำงานแต่ผลลัพธ์ผิด</td>
+<td>ตัวแปรหายไป → TCL อ่านเป็นค่าว่าง</td>
+<td>รัน lab 06 เพื่อเช็กสัญญา</td>
+</tr>
+<tr>
+<td>หาไฟล์รายงานไม่เจอ</td>
+<td>รายงานอยู่ใน <code>reports/</code> แล้วถูกย้ายตอนปิดงาน</td>
+<td>ดูทั้ง <code>results/reports/</code> และ <code>reports/</code></td>
+</tr>
+<tr>
+<td>ไม่เจอพอร์ตของ scan</td>
+<td>DEF ถูก export ก่อนเพิ่มพอร์ต scan</td>
+<td>เพิ่มพอร์ตแล้ว export DEF ใหม่ (lab 05)</td>
+</tr>
+<tr>
+<td><code>nit_write.lock</code> ค้าง</td>
+<td>งานก่อนหน้าถูกปิดไม่สะอาด</td>
+<td>ลบไฟล์ lock ใน <code>/tmp/&lt;user&gt;_nitro_data</code>
+แล้วรันใหม่</td>
+</tr>
+</tbody>
+</table>
+<h3 id="55-ลำดับที่แนะนำในการทำงานจริง">5.5 ลำดับที่แนะนำในการทำงานจริง</h3>
+<pre class="text"><code>  1. แก้ RTL ให้เสร็จ
+        ↓
+  2. วาง boundary + พอร์ตในเลย์เอาต์ แล้ว export DEF
+        ↓
+  3. รัน lab 01–05 เพื่อตรวจอินพุตทั้งหมด   ← ตรงนี้ที่เสียเวลาน้อยที่สุด
+        ↓
+  4. ตั้งค่า Setup TDI ตามบทที่ 2
+        ↓
+  5. ตรวจอีกครั้งด้วย lab 06 (ถ้าแก้ไฟล์ตั้งค่าเอง)
+        ↓
+  6. กด Run แล้วรอ
+        ↓
+  7. อ่านรายงาน: timing → place → route → power
+        ↓
+  8. แก้แล้ววนกลับไปที่ข้อ 2 (ต้อง export DEF ใหม่ทุกครั้ง)</code></pre>
+<blockquote>
+<p><strong>ข้อควรจำข้อสุดท้าย</strong></p>
+<p>ทุกครั้งที่แก้เลย์เอาต์ ต้อง <strong>export DEF ใหม่</strong> ก่อนกด Run DEF
+คือสัญญาระหว่างเลย์เอาต์กับ flow ถ้าไม่ export ใหม่ flow
+จะทำงานกับเลย์เอาต์เก่าโดยไม่บอก</p>
+</blockquote>
+<hr />
+<h2 id="ภาคผนวก">ภาคผนวก</h2>
+<h3 id="61-สัญญาตัวแปรฉบับเต็ม">6.1 สัญญาตัวแปรฉบับเต็ม</h3>
+<p>ตารางนี้ได้จากการรัน lab 06 บนเครื่องนี้ คอลัมน์ &quot;อ่านที่&quot; คือ
+<strong>ไฟล์และบรรทัดจริง</strong> ที่อ่านตัวแปรนั้น</p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>หน้า Setup TDI</th>
+<th>อ่านที่</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ams_run_control</code></td>
+<td>Run File</td>
+<td><code>0_data_prep.tcl:109</code></td>
+<td><code>synpnr</code> / <code>syn</code> / <code>pnr</code></td>
+</tr>
+<tr>
+<td><code>lef_file_list</code></td>
+<td>Tech and Lib</td>
+<td><code>tanner_oasys.tcl:23</code></td>
+<td>รายการ LEF ของขั้นสังเคราะห์</td>
+</tr>
+<tr>
+<td><code>lib_file_list</code></td>
+<td>Tech and Lib</td>
+<td><code>tanner_oasys.tcl:13</code></td>
+<td>รายการ Liberty</td>
+</tr>
+<tr>
+<td><code>ptf_file_list</code></td>
+<td>Tech and Lib</td>
+<td><code>tanner_oasys.tcl:41</code></td>
+<td>รายการ PTF</td>
+</tr>
+<tr>
+<td><code>tanner_ptf_file_corner_list</code></td>
+<td>Tech and Lib</td>
+<td><code>tanner_oasys.tcl:33</code></td>
+<td>ชื่อมุมของแต่ละ PTF</td>
+</tr>
+<tr>
+<td><code>tech_file_list</code></td>
+<td>Tech and Lib</td>
+<td><code>0_data_prep.tcl:18</code></td>
+<td>เทคโนโลยี LEF ของขั้นวางเดินสาย</td>
+</tr>
+<tr>
+<td><code>cell_lef_file_list</code></td>
+<td>Tech and Lib</td>
+<td><code>0_data_prep.tcl:100</code></td>
+<td>standard cell LEF ของขั้นวางเดินสาย</td>
+</tr>
+<tr>
+<td><code>corner_list</code></td>
+<td>Tech and Lib</td>
+<td><code>0_data_prep.tcl:37</code></td>
+<td>รายการมุมของกระบวนการ</td>
+</tr>
+<tr>
+<td><code>rlc_file_list</code></td>
+<td>Tech and Lib</td>
+<td><code>0_data_prep.tcl:35</code></td>
+<td>ไฟล์โมเดล RLC</td>
+</tr>
+<tr>
+<td><code>top_cell</code></td>
+<td>Netlist/RTL</td>
+<td><code>0_data_prep.tcl:160</code></td>
+<td>โมดูลเป้าหมายของขั้นวางเดินสาย</td>
+</tr>
+<tr>
+<td><code>tanner_cell</code></td>
+<td>Netlist/RTL</td>
+<td><code>tanner_oasys.tcl:93</code></td>
+<td>โมดูลเป้าหมายของขั้นสังเคราะห์</td>
+</tr>
+<tr>
+<td><code>verilog_file_list</code></td>
+<td>Netlist/RTL</td>
+<td><code>tanner_oasys.tcl:65</code></td>
+<td>รายการไฟล์ RTL</td>
+</tr>
+<tr>
+<td><code>is_list_file</code></td>
+<td>Netlist/RTL</td>
+<td><code>tanner_oasys.tcl:57</code></td>
+<td>อ่านรายการไฟล์จาก list file</td>
+</tr>
+<tr>
+<td><code>is_Verilog</code></td>
+<td>Netlist/RTL</td>
+<td><code>tanner_oasys.tcl:59</code></td>
+<td>list file เป็น Verilog หรือ VHDL</td>
+</tr>
+<tr>
+<td><code>list_file</code></td>
+<td>Netlist/RTL</td>
+<td><code>tanner_oasys.tcl:60</code></td>
+<td>พาธของ list file</td>
+</tr>
+<tr>
+<td><code>use_list_file</code></td>
+<td>Netlist/RTL</td>
+<td><code>0_data_prep.tcl:113</code></td>
+<td>สลับโหมด list file ของขั้น data prep</td>
+</tr>
+<tr>
+<td><code>enable_scan</code></td>
+<td>Netlist/RTL</td>
+<td><code>1_rtl_synthesis.tcl:50</code></td>
+<td>เปิดการทำ scan</td>
+</tr>
+<tr>
+<td><code>syn_netlist</code></td>
+<td>Netlist/RTL</td>
+<td><code>0_data_prep.tcl:159</code></td>
+<td>ที่เก็บ netlist ระดับ gate</td>
+</tr>
+<tr>
+<td><code>tanner_timing_mode</code></td>
+<td>Timing</td>
+<td><code>tanner_oasys.tcl:104</code></td>
+<td><code>clocks</code> หรือ <code>sdc</code></td>
+</tr>
+<tr>
+<td><code>tanner_clock_spec</code></td>
+<td>Timing</td>
+<td><code>tanner_oasys.tcl:105</code></td>
+<td>รายการคล็อก — <strong>ใช้เฉพาะโหมด <code>clocks</code></strong></td>
+</tr>
+<tr>
+<td><code>MGC_modes</code></td>
+<td>Timing</td>
+<td><code>tanner_oasys.tcl:118</code></td>
+<td>รายการ mode — <strong>ใช้เฉพาะโหมด <code>sdc</code></strong></td>
+</tr>
+<tr>
+<td><code>oasys_importConstraintsFile</code></td>
+<td>Timing</td>
+<td><code>tanner_oasys.tcl:120</code></td>
+<td>ไฟล์ SDC ของแต่ละ mode — <strong>โหมด <code>sdc</code></strong></td>
+</tr>
+<tr>
+<td><code>floorplan_mode</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:42</code></td>
+<td><code>block</code> / <code>layout</code> / <code>def</code></td>
+</tr>
+<tr>
+<td><code>def_floorplan_file</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:82</code></td>
+<td>ไฟล์ DEF ในโหมด <code>def</code></td>
+</tr>
+<tr>
+<td><code>chip_width</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:48</code></td>
+<td>ความกว้างของ die (DBU)</td>
+</tr>
+<tr>
+<td><code>chip_height</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:48</code></td>
+<td>ความสูงของ die (DBU)</td>
+</tr>
+<tr>
+<td><code>chip_origin_x</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:55</code></td>
+<td>จุดเริ่ม X ของ die</td>
+</tr>
+<tr>
+<td><code>chip_origin_y</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:55</code></td>
+<td>จุดเริ่ม Y ของ die</td>
+</tr>
+<tr>
+<td><code>core_site</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:178</code></td>
+<td>ชื่อ site ของแถวเซลล์</td>
+</tr>
+<tr>
+<td><code>core_yb_spacing</code></td>
+<td>Floorplan</td>
+<td><code>compute_floorplan_details.tcl:87</code></td>
+<td>ระยะใต้แถวเซลล์จาก ring</td>
+</tr>
+<tr>
+<td><code>core_xl_spacing</code></td>
+<td>Floorplan</td>
+<td><code>compute_floorplan_details.tcl:88</code></td>
+<td>ระยะซ้ายแถวเซลล์จาก ring</td>
+</tr>
+<tr>
+<td><code>core_yt_spacing</code></td>
+<td>Floorplan</td>
+<td><code>compute_floorplan_details.tcl:89</code></td>
+<td>ระยะบนแถวเซลล์จาก ring</td>
+</tr>
+<tr>
+<td><code>core_xr_spacing</code></td>
+<td>Floorplan</td>
+<td><code>compute_floorplan_details.tcl:90</code></td>
+<td>ระยะขวาแถวเซลล์จาก ring</td>
+</tr>
+<tr>
+<td><code>highest_routing_layer</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:37</code></td>
+<td>ชั้นโลหะสูงสุดที่เดินสายได้</td>
+</tr>
+<tr>
+<td><code>fp_utilization</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:63</code></td>
+<td>เป้าหมายความหนาแน่น</td>
+</tr>
+<tr>
+<td><code>fp_aspect_ratio</code></td>
+<td>Floorplan</td>
+<td><code>2_floorplan.tcl:64</code></td>
+<td>อัตราส่วนกว้าง:ยาว</td>
+</tr>
+<tr>
+<td><code>power_nets</code></td>
+<td>Power Plan</td>
+<td><code>2_floorplan.tcl:29</code></td>
+<td>ชื่อแหล่งจ่าย</td>
+</tr>
+<tr>
+<td><code>ground_nets</code></td>
+<td>Power Plan</td>
+<td><code>2_floorplan.tcl:29</code></td>
+<td>ชื่อกราวด์</td>
+</tr>
+<tr>
+<td><code>enable_pg_ring</code></td>
+<td>Power Plan</td>
+<td><code>2_floorplan.tcl:104</code></td>
+<td>เปิด/ปิดแหวนจ่ายไฟ</td>
+</tr>
+<tr>
+<td><code>enable_pg_stripe</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:149</code></td>
+<td>เปิด/ปิดแถบจ่ายไฟ</td>
+</tr>
+<tr>
+<td><code>pg_ring_vlayer</code></td>
+<td>Power Plan</td>
+<td><code>2_floorplan.tcl:105</code></td>
+<td>ชั้นของเส้นแนวตั้งของ ring</td>
+</tr>
+<tr>
+<td><code>pg_ring_hlayer</code></td>
+<td>Power Plan</td>
+<td><code>2_floorplan.tcl:106</code></td>
+<td>ชั้นของเส้นแนวนอนของ ring</td>
+</tr>
+<tr>
+<td><code>pg_ring_net_order</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:71</code></td>
+<td>ลำดับวงจากนอกเข้าใน</td>
+</tr>
+<tr>
+<td><code>pg_ring_widths</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:73</code></td>
+<td>ความกว้างของแต่ละวง</td>
+</tr>
+<tr>
+<td><code>pg_ring_spacing</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:61</code></td>
+<td>ระยะห่างระหว่างวง</td>
+</tr>
+<tr>
+<td><code>pg_ring_offset_top</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:101</code></td>
+<td>ระยะเพิ่มด้านบน</td>
+</tr>
+<tr>
+<td><code>pg_ring_offset_right</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:100</code></td>
+<td>ระยะเพิ่มด้านขวา</td>
+</tr>
+<tr>
+<td><code>pg_ring_offset_bottom</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:99</code></td>
+<td>ระยะเพิ่มด้านล่าง</td>
+</tr>
+<tr>
+<td><code>pg_ring_offset_left</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:98</code></td>
+<td>ระยะเพิ่มด้านซ้าย</td>
+</tr>
+<tr>
+<td><code>pg_stripe_list</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:153</code></td>
+<td>รายการแถบจ่ายไฟ</td>
+</tr>
+<tr>
+<td><code>num_of_stripes</code></td>
+<td>Power Plan</td>
+<td><code>3_powerplan.tcl:195</code></td>
+<td>จำนวนแถบ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-ตัวแปรของ-flow-ที่ตั้งค่าได้จากหน้า-additional-commands">6.2 ตัวแปรของ
+flow ที่ตั้งค่าได้จากหน้า Additional Commands</h3>
+<p>จาก <code>ap_ref_flows/flow_variables.tcl</code></p>
+<table>
+<thead>
+<tr>
+<th>ตัวแปร</th>
+<th>ค่าเริ่มต้น</th>
+<th>ผลของการเปลี่ยน</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exit_on_flow_error</code></td>
+<td>0</td>
+<td>หยุดทันทีเมื่อเจอ error</td>
+</tr>
+<tr>
+<td><code>enable_no_clock_flow</code></td>
+<td>0</td>
+<td>อนุญาตให้ flow ทำงานโดยไม่มีคล็อก</td>
+</tr>
+<tr>
+<td><code>save_all_verilog</code></td>
+<td>0</td>
+<td>บันทึก Verilog ทุกเวอร์ชัน</td>
+</tr>
+<tr>
+<td><code>export_RDB</code></td>
+<td>1</td>
+<td>export ฐานข้อมูลรายงาน</td>
+</tr>
+<tr>
+<td><code>allow_incomplete_liberty_data</code></td>
+<td>0</td>
+<td>ยอมรับ Liberty ที่ไม่ครบ</td>
+</tr>
+<tr>
+<td><code>dont_use_libcells</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ที่ห้ามใช้</td>
+</tr>
+<tr>
+<td><code>HDL_format</code></td>
+<td><em>(ว่าง)</em></td>
+<td><code>verilog</code> / <code>systemverilog</code> /
+<code>vhdl87</code> / <code>vhdl93</code> / <code>vhdl2008</code></td>
+</tr>
+<tr>
+<td><code>rtl_max_util</code></td>
+<td>85</td>
+<td>ความหนาแน่นสูงสุดของ netlist ที่สังเคราะห์</td>
+</tr>
+<tr>
+<td><code>enable_clock_gating</code></td>
+<td>0</td>
+<td>ใส่ clock gating อัตโนมัติ</td>
+</tr>
+<tr>
+<td><code>DFT_flow</code></td>
+<td><code>native</code></td>
+<td>วิธีทำ scan: <code>native</code> / <code>tessent</code></td>
+</tr>
+<tr>
+<td><code>force_io_placement</code></td>
+<td>1</td>
+<td>บังคับวางพอร์ตตามตำแหน่งที่กำหนด</td>
+</tr>
+<tr>
+<td><code>delete_unconnected_phys_pins</code></td>
+<td>0</td>
+<td>ลบรูปพอร์ตที่ไม่ต่อ</td>
+</tr>
+<tr>
+<td><code>well_tap_cell</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ well tap</td>
+</tr>
+<tr>
+<td><code>well_tap_h_spread</code></td>
+<td><em>(ว่าง)</em></td>
+<td>ระยะแนวนอนระหว่างคอลัมน์ well tap</td>
+</tr>
+<tr>
+<td><code>well_tap_h_offset</code></td>
+<td>0</td>
+<td>ตำแหน่งเริ่มของ well tap แรก</td>
+</tr>
+<tr>
+<td><code>well_tap_pattern</code></td>
+<td><code>none</code></td>
+<td><code>none</code> / <code>stagger</code> / <code>even_rows</code> /
+<code>odd_rows</code></td>
+</tr>
+<tr>
+<td><code>pg_rail_method</code></td>
+<td><code>auto</code></td>
+<td><code>auto</code> / <code>lef</code> / <code>filler</code></td>
+</tr>
+<tr>
+<td><code>physical_effort</code></td>
+<td><code>low</code></td>
+<td>ความพยายามของ physical synthesis</td>
+</tr>
+<tr>
+<td><code>cts_repeaters</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ repeater ของ clock tree</td>
+</tr>
+<tr>
+<td><code>delay_cells</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ delay</td>
+</tr>
+<tr>
+<td><code>tie_high_libcell</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ tie logic ขั้นสูง</td>
+</tr>
+<tr>
+<td><code>tie_low_libcell</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ tie logic ขั้นต่ำ</td>
+</tr>
+<tr>
+<td><code>route_optimize_effort</code></td>
+<td><code>low</code></td>
+<td>ความพยายามของ router</td>
+</tr>
+<tr>
+<td><code>route_opt_via_effort</code></td>
+<td><code>low</code></td>
+<td>ความพยายามของการเพิ่ม via</td>
+</tr>
+<tr>
+<td><code>antenna_diodes</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ antenna diode</td>
+</tr>
+<tr>
+<td><code>auto_select_diodes</code></td>
+<td>1</td>
+<td>เลือกเซลล์ diode ให้อัตโนมัติ</td>
+</tr>
+<tr>
+<td><code>decap_libcells</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ decap</td>
+</tr>
+<tr>
+<td><code>filler_libcells</code></td>
+<td><em>(ว่าง)</em></td>
+<td>เซลล์ filler</td>
+</tr>
+<tr>
+<td><code>check_user_defined_filler_libcells</code></td>
+<td>0</td>
+<td>ตรวจเซลล์ filler ที่ผู้ใช้กำหนด</td>
+</tr>
+<tr>
+<td><code>filler_avoid_viol</code></td>
+<td>0</td>
+<td>ให้ filler หลีกเลี่ยง violation</td>
+</tr>
+<tr>
+<td><code>repair_after_filler</code></td>
+<td>1</td>
+<td>ซ่อม DRC หลังใส่ filler</td>
+</tr>
+</tbody>
+</table>
+<h3 id="63-ตัวแปรของ-engine-ที่ตั้งได้ด้วย-set_param">6.3 ตัวแปรของ engine
+ที่ตั้งได้ด้วย <code>set_param</code></h3>
+<p>จาก <code>flow_variables.tcl</code> ส่วนท้าย</p>
+<table>
+<thead>
+<tr>
+<th>พารามิเตอร์</th>
+<th>ค่าเริ่มต้น</th>
+<th>ความหมาย</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>basic verbose_level</code></td>
+<td>0</td>
+<td>ระดับความละเอียดของข้อความ</td>
+</tr>
+<tr>
+<td><code>basic timestamp</code></td>
+<td>0</td>
+<td>ใส่ timestamp ในข้อความ</td>
+</tr>
+<tr>
+<td><code>db no_brace_in_oblist</code></td>
+<td>true</td>
+<td>ไม่ใช้วงเล็บปีกกาในรายการ object</td>
+</tr>
+<tr>
+<td><code>db save_all_params</code></td>
+<td>true</td>
+<td>บันทึกพารามิเตอร์ทั้งหมด</td>
+</tr>
+<tr>
+<td><code>db trim_macro_blockage</code></td>
+<td>1</td>
+<td>ตัดรูป blockage ของ macro ให้พอดี</td>
+</tr>
+<tr>
+<td><code>ta setup_slack_margin</code></td>
+<td>0.0</td>
+<td>ขอบเขต slack ของ setup</td>
+</tr>
+<tr>
+<td><code>ta hold_slack_margin</code></td>
+<td>0.0</td>
+<td>ขอบเขต slack ของ hold</td>
+</tr>
+<tr>
+<td><code>ta enable_preset_and_clear_arcs</code></td>
+<td>true</td>
+<td>เปิดการตรวจ arc ของ preset/clear</td>
+</tr>
+<tr>
+<td><code>ta dont_check_clock_gating</code></td>
+<td>false</td>
+<td>ไม่ตรวจ clock gating</td>
+</tr>
+<tr>
+<td><code>ta dont_check_recovery_removal</code></td>
+<td>false</td>
+<td>ไม่ตรวจ recovery/removal</td>
+</tr>
+<tr>
+<td><code>ta default_clock_at_input_port</code></td>
+<td>false</td>
+<td>เดา clock ที่พอร์ต input หรือไม่</td>
+</tr>
+<tr>
+<td><code>place no_filler1</code></td>
+<td>false</td>
+<td>ไม่ใช้ filler ความกว้าง 1</td>
+</tr>
+<tr>
+<td><code>place use_min_spacing_rules</code></td>
+<td>true</td>
+<td>ใช้กฎระยะห่างขั้นต่ำ</td>
+</tr>
+<tr>
+<td><code>cts move_commit_table_verbosity</code></td>
+<td>0</td>
+<td>ความละเอียดของตาราง commit ของ CTS</td>
+</tr>
+<tr>
+<td><code>opt verbose_level</code></td>
+<td>0</td>
+<td>ระดับความละเอียดของ optimizer</td>
+</tr>
+<tr>
+<td><code>opt dont_create_assign</code></td>
+<td>true</td>
+<td>ไม่สร้าง assign ใหม่</td>
+</tr>
+<tr>
+<td><code>route dont_use_m1_wire</code></td>
+<td>0</td>
+<td>ไม่ใช้สาย Metal1</td>
+</tr>
+<tr>
+<td><code>route max_filler_cell_mask</code></td>
+<td>1</td>
+<td>ระดับโลหะสูงสุดในเซลล์ filler</td>
+</tr>
+<tr>
+<td><code>route allow_cell_off_grid</code></td>
+<td>false</td>
+<td>อนุญาตให้เซลล์ไม่ตรง grid</td>
+</tr>
+</tbody>
+</table>
+<h3 id="64-ข้อมูลตัวอย่าง-adc8-ที่วัดได้จริง">6.4 ข้อมูลตัวอย่าง ADC8 ที่วัดได้จริง</h3>
+<table>
+<thead>
+<tr>
+<th>รายการ</th>
+<th>ค่า</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>โมดูล</td>
+<td><code>ADCCtrl</code></td>
+</tr>
+<tr>
+<td>พอร์ตทั้งหมด</td>
+<td>15 (input 4 / output 11)</td>
+</tr>
+<tr>
+<td>บัสเอาต์พุต</td>
+<td><code>B[7:0]</code></td>
+</tr>
+<tr>
+<td>คล็อก</td>
+<td><code>clk</code>, คาบเวลา 10000 ns, duty 50%</td>
+</tr>
+<tr>
+<td><code>timescale</code> ของ RTL</td>
+<td><code>100ns/1ps</code> (1 time unit = 100 ns)</td>
+</tr>
+<tr>
+<td>เลย์เอาต์</td>
+<td><code>prBoundray:drawing</code> (Icon Layer)</td>
+</tr>
+<tr>
+<td>ขนาดบล็อก</td>
+<td>177.800 × 53.000 µm</td>
+</tr>
+<tr>
+<td>หน่วย DEF</td>
+<td>1000 DBU = 1 µm</td>
+</tr>
+<tr>
+<td>พอร์ตอยู่บน</td>
+<td>Metal4 — ขอบล่าง 6 / ขอบบน 9</td>
+</tr>
+<tr>
+<td>ระยะพอร์ตต่ำสุด</td>
+<td>15.200 µm</td>
+</tr>
+<tr>
+<td>เทคโนโลยี</td>
+<td>Generic 250 nm, Metal1..Metal4, Via1..Via3</td>
+</tr>
+<tr>
+<td>site</td>
+<td><code>CORE</code>, 1.15 × 8.10 µm</td>
+</tr>
+<tr>
+<td>เซลล์มาตรฐาน</td>
+<td>22 เซลล์ (LEF และ Liberty เท่ากันแต่ไม่ใช่ชุดเดียวกัน)</td>
+</tr>
+<tr>
+<td>มุมของกระบวนการ</td>
+<td>fast = FF 2.75 V −40 °C, nominal = TT 2.50 V 25 °C, slow = SS 2.25 V
+125 °C</td>
+</tr>
+<tr>
+<td>PTF</td>
+<td><code>Generic250_MET4_typ</code>, หน่วยความจุ ff, ความต้านทาน ohm</td>
+</tr>
+<tr>
+<td>min spacing</td>
+<td>Metal3 / Metal4 = 0.5 µm</td>
+</tr>
+</tbody>
+</table>
+<h3 id="65-สูตรที่-flow-ใช้คำนวณแผน-power">6.5 สูตรที่ flow ใช้คำนวณแผน
+power</h3>
+<p>จาก
+<code>ap_ref_flows/tcl_procs/compute_floorplan_details.tcl</code></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode tcl"><code class="sourceCode tcl"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> total_widths   <span class="kw">[expr</span> ผลรวมของ pg_ring_widths<span class="kw">]</span>        # หรือ <span class="ot">width</span> เดียว <span class="ot">x</span> จำนวนแหล่งจ่าย</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> total_spacing  <span class="kw">[expr</span> ผลรวมของ pg_ring_spacing<span class="kw">]</span>       # หรือ spacing เดียว <span class="ot">x</span> (จำนวนแหล่งจ่าย - <span class="dv">1</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> pg_ring_width  <span class="kw">[expr</span> <span class="dt">$total_widths</span> <span class="op">+</span> <span class="dt">$total_spacing</span><span class="kw">]</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> width_contrib    <span class="op">=</span> <span class="ot">width</span> ของ Vdd <span class="op">+</span> <span class="ot">width</span> ของ Gnd</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> spacing_contrib  <span class="op">=</span> <span class="dv">2</span> <span class="ot">x</span> spacing แรก</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> macro_ring_spacing <span class="op">=</span> <span class="dv">2</span> <span class="ot">x</span> ความสูงของ site          # ถ้าไม่ได้ตั้งไว้เอง</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> oversize_m2m     <span class="op">=</span> <span class="dv">2</span> <span class="ot">x</span> (width_contrib <span class="op">+</span> spacing_contrib <span class="op">+</span> macro_ring_spacing)</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> ring_offset_<span class="op">&lt;</span>side<span class="op">&gt;</span> <span class="op">=</span> pg_ring_offset_<span class="op">&lt;</span>side<span class="op">&gt;</span> <span class="op">+</span> pg_ring_width</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> core_to_<span class="op">&lt;</span>side<span class="op">&gt;</span>    <span class="op">=</span> ring_offset_<span class="op">&lt;</span>side<span class="op">&gt;</span> <span class="op">+</span> core_<span class="op">&lt;</span>side<span class="op">&gt;</span>_spacing</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> oversize_b2m      <span class="op">=</span> max(ring_offset ทั้งสี่ด้าน) <span class="op">+</span> oversize_m2m</span></code></pre></div>
+<p>ตัวอย่างที่คำนวณได้จากค่าในคู่มือนี้</p>
+<table>
+<thead>
+<tr>
+<th>ปริมาณ</th>
+<th>ค่า</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>total_widths</code></td>
+<td>3.5 µm</td>
+</tr>
+<tr>
+<td><code>total_spacing</code></td>
+<td>0.6 µm</td>
+</tr>
+<tr>
+<td><code>pg_ring_width</code></td>
+<td>4.1 µm</td>
+</tr>
+<tr>
+<td><code>width_contrib</code></td>
+<td>3.5 µm</td>
+</tr>
+<tr>
+<td><code>spacing_contrib</code></td>
+<td>1.2 µm</td>
+</tr>
+<tr>
+<td><code>macro_ring_spacing</code></td>
+<td>16.2 µm</td>
+</tr>
+<tr>
+<td><code>oversize_m2m</code></td>
+<td>41.8 µm</td>
+</tr>
+<tr>
+<td><code>ring_offset_*</code></td>
+<td>4.1 µm ทุกด้าน</td>
+</tr>
+<tr>
+<td><code>oversize_b2m</code></td>
+<td>45.9 µm</td>
+</tr>
+</tbody>
+</table>
+<h3 id="66-ไฟล์ทั้งหมดที่คัดลอกมาในโปรเจกต์นี้">6.6
+ไฟล์ทั้งหมดที่คัดลอกมาในโปรเจกต์นี้</h3>
+<p>ทั้งหมดมาจากการติดตั้ง Custom IC 2025.4 และชุดตัวอย่าง ADC8</p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์ต้นทาง</th>
+<th>ไฟล์ในโปรเจกต์</th>
+<th>ขนาด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>...\ADC8\ADC8\ADCCtrl\PNR_Data\from_ledit.def</code></td>
+<td><code>design/from_ledit.def</code></td>
+<td>3,287 B</td>
+</tr>
+<tr>
+<td><code>...\ADC8\ADC8\ADCCtrl\PNR_Data\scanchain.tcl</code></td>
+<td><code>design/scanchain.tcl</code></td>
+<td>779 B</td>
+</tr>
+<tr>
+<td><code>...\ADC8\ADC8\ADCCtrl\AP_Data\ADCCtrl_rtl.v</code></td>
+<td><code>design/files/ADCCtrl_rtl.v</code></td>
+<td>945 B</td>
+</tr>
+<tr>
+<td><code>...\ADCCtrl\STA_Data\files\Generic250nm_tech.lef</code></td>
+<td><code>design/files/…</code></td>
+<td>6,900 B</td>
+</tr>
+<tr>
+<td><code>...\ADCCtrl\STA_Data\files\Generic250nm_StdCells.lef</code></td>
+<td><code>design/files/…</code></td>
+<td>62,591 B</td>
+</tr>
+<tr>
+<td><code>...\ADCCtrl\STA_Data\files\Generic250nm_TT_2P50V_25C.lib</code></td>
+<td><code>design/files/…</code></td>
+<td>377,228 B</td>
+</tr>
+<tr>
+<td><code>...\ADCCtrl\STA_Data\files\Generic250nm_typ.ptf</code></td>
+<td><code>design/files/…</code></td>
+<td>159,458 B</td>
+</tr>
+<tr>
+<td><code>...\ADCCtrl\STA_Data\files\timing_constraints.sdc</code></td>
+<td><code>design/files/…</code></td>
+<td>73 B</td>
+</tr>
+<tr>
+<td><code>...\Generic_250nm\...\Liberty\Generic250nm_FF_2P75V_M40C.lib</code></td>
+<td><code>design/files/…</code></td>
+<td>330,089 B</td>
+</tr>
+<tr>
+<td><code>...\Generic_250nm\...\Liberty\Generic250nm_SS_2P25V_125C.lib</code></td>
+<td><code>design/files/…</code></td>
+<td>330,351 B</td>
+</tr>
+</tbody>
+</table>
+<p>ไฟล์ที่คู่มือนี้เขียนขึ้นเอง</p>
+<table>
+<thead>
+<tr>
+<th>ไฟล์</th>
+<th>รายละเอียด</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>design/nitro_settings_ADCCtrl.tcl</code></td>
+<td>ตัวอย่างไฟล์ตั้งค่าตามสัญญาในหัวข้อ 6.1</td>
+</tr>
+<tr>
+<td><code>design/files/timing_constraints_full.sdc</code></td>
+<td>SDC ฉบับครบที่เพิ่ม input/output delay</td>
+</tr>
+<tr>
+<td><code>tools/checks/*.js</code></td>
+<td>ตัวตรวจสอบของ lab 01..06 เขียนขึ้นใหม่ทั้งหมด</td>
+</tr>
+<tr>
+<td><code>tools/run_template.cmd</code>,
+<code>tools/make-runners.ps1</code></td>
+<td>ตัวสร้าง runner ของแต่ละ lab</td>
+</tr>
+<tr>
+<td><code>docs/parts/*.md</code></td>
+<td>ต้นฉบับคู่มือ</td>
+</tr>
+</tbody>
+</table>
+<h3 id="67-ที่มาและลิขสิทธิ์">6.7 ที่มาและลิขสิทธิ์</h3>
+<ul>
+<li>คู่มือ <strong>Tanner Digital Implementer (TDI) Self-Paced
+Tutorial</strong> ของ Siemens EDA (รุ่น 2024.3)
+เป็นเอกสารประกอบการใช้งานของหน้าต่าง Setup TDI เอกสารนี้เป็นเอกสารภายในของ
+Siemens ที่มีข้อกำหนดเรื่องการเผยแพร่
+<strong>คู่มือฉบับนี้จัดทำขึ้นเป็นเอกสารภายในขององค์กร ไม่ควรแจกจ่ายต่อ</strong></li>
+<li>ไฟล์ตัวอย่าง ADC8, LEF, Liberty, PTF และ SDC เป็นส่วนหนึ่งของ
+<strong>Siemens Custom IC Platform 2025.4</strong>
+ซึ่งใช้ภายใต้สัญญาอนุญาตของผู้ใช้</li>
+<li>โค้ดตัวตรวจสอบ, ไฟล์ตั้งค่าตัวอย่าง และเอกสารทั้งหมดในโปรเจกต์นี้
+<strong>เขียนขึ้นใหม่</strong> สำหรับคู่มือนี้</li>
+<li><code>Tanner</code>, <code>L-Edit</code>, <code>Nitro</code>,
+<code>Oasys</code> และ <code>Siemens EDA</code> เป็นเครื่องหมายการค้า ของ
+Siemens EDA</li>
+</ul>
+<h3 id="68-สร้างเอกสารใหม่">6.8 สร้างเอกสารใหม่</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>powershell <span class="at">-NoProfile</span> <span class="at">-ExecutionPolicy</span> Bypass <span class="at">-File</span> tools\build-docs.ps1</span></code></pre></div>
+<p>ต้องมี <strong>pandoc</strong> และ <strong>Google Chrome</strong>
+สคริปต์จะรวม <code>docs/parts/*.md</code> เป็น
+<code>docs/Lab_Guide_TDI.md</code> แล้วสร้าง HTML และ PDF ต่อ</p>
+<p>สร้างไฟล์ ZIP ส่งมอบ</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bat"><code class="sourceCode dosbat"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>powershell <span class="at">-NoProfile</span> <span class="at">-ExecutionPolicy</span> Bypass <span class="at">-File</span> tools\make-zip.ps1</span></code></pre></div>
+<hr />
+</body>
+</html>
